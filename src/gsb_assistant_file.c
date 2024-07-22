@@ -26,9 +26,7 @@
  */
 
 
-#ifdef HAVE_CONFIG_H
 #include "config.h"
-#endif
 
 #include "include.h"
 #include <glib/gi18n.h>
@@ -132,7 +130,7 @@ GtkResponseType gsb_assistant_file_run ( gboolean first_opening,
 		   "Next assistant will now help you to create and configure a new account file.\n"
 		   "Don't forget that you can change everything later in the 'Preferences' dialog.\n\n"
 		   "Once the file created, you will be able to create a new account "
-		   "or to import some previous datas");
+		   "or to import some previous data");
     }
     else
     {

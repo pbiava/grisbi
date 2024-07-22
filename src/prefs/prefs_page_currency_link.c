@@ -24,13 +24,7 @@
 /*                                                                               */
 /* *******************************************************************************/
 
-#ifdef HAVE_CONFIG_H
 #include "config.h"
-#endif
-
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
 
 #include <errno.h>
 #include <glib/gstdio.h>
@@ -655,7 +649,7 @@ test:
     }
     else if (devise_name)
 	{
-		markup = g_strdup_printf (_("Warning : The currency '%s' may be used for transactions.\n"
+		markup = g_strdup_printf (_("Warning: The currency '%s' may be used for transactions.\n"
 									"The next time you use it, you will need to enter a new exchange rate."),
 								  devise_name);
 		gtk_label_set_markup (GTK_LABEL (label_warning), markup);
