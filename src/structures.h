@@ -205,7 +205,7 @@ struct _GrisbiWinEtat
     gint		bet_type_taux;
 };
 
-/* structure conf variables configured by gsettings or grisbi.conf */
+/* structure conf variables configured by grisbi.conf */
 struct _GrisbiAppConf
 {
 /* root part*/
