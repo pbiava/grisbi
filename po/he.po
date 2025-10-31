@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: he\n"
 "Report-Msgid-Bugs-To: devel@listes.grisbi.org\n"
-"POT-Creation-Date: 2025-10-29 08:35+0100\n"
+"POT-Creation-Date: 2025-10-31 08:03+0100\n"
 "PO-Revision-Date: 2006-02-11 16:08+0200\n"
 "Last-Translator: dotan\n"
 "Language-Team: <en@li.org>\n"
@@ -101,8 +101,8 @@ msgstr ""
 
 #: src/etats/etats_page_payee.ui:107 src/ui/grisbi_menu.ui:154
 #: src/ui/grisbi_menu.ui:388 src/widgets/widget_search_tiers_categ_ib.ui:381
-#: src/widgets/widget_search_transaction.ui:34 src/etats_onglet.c:1095
-#: src/etats_onglet.c:1325 src/etats_onglet.c:1560
+#: src/widgets/widget_search_transaction.ui:34 src/etats_onglet.c:1137
+#: src/etats_onglet.c:1367 src/etats_onglet.c:1602
 #: src/gsb_transactions_list.c:545
 msgid "Search"
 msgstr "חיפוש"
@@ -468,7 +468,7 @@ msgstr "הוספת מטבע"
 #: src/bet_finance_ui.c:794 src/bet_future.c:1497 src/bet_hist.c:865
 #: src/bet_tab.c:384 src/categories_onglet.c:438 src/categories_onglet.c:497
 #: src/categories_onglet.c:554 src/categories_onglet.c:792
-#: src/etats_onglet.c:364 src/etats_onglet.c:467 src/etats_onglet.c:543
+#: src/etats_onglet.c:365 src/etats_onglet.c:468 src/etats_onglet.c:544
 #: src/file_obfuscate_qif.c:98 src/gsb_assistant.c:131
 #: src/gsb_assistant_file.c:660 src/gsb_assistant_reconcile_config.c:1273
 #: src/gsb_bank.c:134 src/gsb_currency.c:935
@@ -1460,7 +1460,7 @@ msgstr "מטבע של קווי תקציב:"
 msgid "Amount comparison currency: "
 msgstr "מטבע השוואת סכום:"
 
-#: src/ui/etats_prefs.ui:209 src/etats_onglet.c:753
+#: src/ui/etats_prefs.ui:209 src/etats_onglet.c:754
 #: src/gsb_assistant_archive_export.c:152 src/prefs/prefs_page_archives.c:477
 msgid "Report name"
 msgstr "שם דו\"ח"
@@ -1760,7 +1760,7 @@ msgstr "מאפייני המטבע"
 
 #: src/ui/etats_prefs.ui:2047 src/widgets/widget_reconcile.ui:406
 #: src/widgets/widget_transfer.ui:49 src/accueil.c:1257 src/bet_future.c:1501
-#: src/etats_onglet.c:546 src/gsb_assistant_file.c:664
+#: src/etats_onglet.c:547 src/gsb_assistant_file.c:664
 #: src/gsb_assistant_reconcile_config.c:1277 src/gsb_currency.c:939
 #: src/gsb_data_partial_balance.c:1846 src/gsb_data_partial_balance.c:1932
 #: src/gsb_select_icon.c:509 src/gsb_transactions_list.c:1137 src/import.c:3311
@@ -1882,7 +1882,7 @@ msgstr "קובץ חשבונות חדש"
 
 #: src/ui/grisbi_menu.ui:39 src/ui/grisbi_menu.ui:267
 #: src/categories_onglet.c:500 src/categories_onglet.c:557
-#: src/etats_onglet.c:470 src/file_obfuscate_qif.c:102 src/grisbi_app.c:117
+#: src/etats_onglet.c:471 src/file_obfuscate_qif.c:102 src/grisbi_app.c:117
 #: src/grisbi_app.c:133 src/grisbi_win.c:754 src/gsb_file.c:770
 #: src/gsb_select_icon.c:320 src/import.c:1256 src/imputation_budgetaire.c:523
 #: src/imputation_budgetaire.c:585 src/prefs/prefs_page_display_fonts.c:311
@@ -1897,7 +1897,7 @@ msgstr "קבצים שנפתחו לאחרונה"
 
 #: src/ui/grisbi_menu.ui:51 src/ui/grisbi_menu.ui:279 src/bet_finance_ui.c:798
 #: src/bet_hist.c:869 src/bet_tab.c:388 src/categories_onglet.c:441
-#: src/etats_onglet.c:367 src/grisbi_app.c:118 src/grisbi_app.c:134
+#: src/etats_onglet.c:368 src/grisbi_app.c:118 src/grisbi_app.c:134
 #: src/gsb_file.c:324 src/gsb_file.c:427 src/gsb_file.c:458
 #: src/imputation_budgetaire.c:459 src/tiers_onglet.c:133
 #, fuzzy
@@ -2845,13 +2845,11 @@ msgstr "התאמה"
 
 #: src/widgets/widget_search_tiers_categ_ib.ui:71
 #, fuzzy
-#| msgid "Select the transactions by amount"
 msgid "Search transactions by name"
 msgstr "בחירת העיסקאות לפי סכום"
 
 #: src/widgets/widget_search_tiers_categ_ib.ui:86
 #, fuzzy
-#| msgid "Select the transactions by amount"
 msgid "Search transactions by amount"
 msgstr "בחירת העיסקאות לפי סכום"
 
@@ -2871,7 +2869,7 @@ msgstr ""
 
 #: src/widgets/widget_search_tiers_categ_ib.ui:183
 #: src/widgets/widget_search_transaction.ui:266
-#: src/widgets/widget_search_tiers_categ_ib.c:255
+#: src/widgets/widget_search_tiers_categ_ib.c:183
 #: src/widgets/widget_search_transaction.c:767
 #: src/widgets/widget_search_transaction.c:773
 #: src/widgets/widget_search_transaction.c:779
@@ -2929,7 +2927,7 @@ msgid "Configuring a deferred debit account"
 msgstr "לא ניתן לבצע העברה בחשבון סגור."
 
 #: src/widgets/widget_transfer.ui:20 src/categories_onglet.c:645
-#: src/etats_onglet.c:621 src/gsb_scheduler_list.c:1187
+#: src/etats_onglet.c:622 src/gsb_scheduler_list.c:1187
 #: src/gsb_transactions_list.c:2534 src/imputation_budgetaire.c:676
 #: src/tiers_onglet.c:641
 #, fuzzy
@@ -3026,7 +3024,6 @@ msgstr ""
 
 #: share/grisbi.metainfo.xml.in:9
 #, fuzzy
-#| msgid "Grisbi"
 msgid "Grisbi Team"
 msgstr "גריסבי"
 
@@ -3051,7 +3048,7 @@ msgstr ""
 msgid "Budget"
 msgstr "קו תקציב חדש"
 
-#: share/grisbi.metainfo.xml.in:35 src/etats_onglet.c:1399 src/grisbi_win.c:492
+#: share/grisbi.metainfo.xml.in:35 src/etats_onglet.c:1441 src/grisbi_win.c:492
 #: src/navigation.c:646 src/navigation.c:2035
 msgid "Reports"
 msgstr "דו\"חות"
@@ -3408,12 +3405,12 @@ msgid "Credits"
 msgstr "זכות"
 
 #: src/bet_finance_ui.c:2127 src/bet_hist.c:953 src/bet_tab.c:2131
-#: src/etats_onglet.c:612 src/gsb_transactions_list.c:2561
+#: src/etats_onglet.c:613 src/gsb_transactions_list.c:2561
 msgid "Print"
 msgstr "הדפסה"
 
 #: src/bet_finance_ui.c:2136 src/bet_hist.c:959 src/bet_tab.c:2140
-#: src/categories_onglet.c:636 src/etats_onglet.c:602 src/export.c:504
+#: src/categories_onglet.c:636 src/etats_onglet.c:603 src/export.c:504
 #: src/imputation_budgetaire.c:666 src/tiers_onglet.c:632
 msgid "Export"
 msgstr "ייצוא"
@@ -3535,7 +3532,7 @@ msgstr "תדירות מותאמת אישית"
 
 #: src/bet_future.c:1323 src/bet_future.c:1645 src/etats_affiche.c:2507
 #: src/export_csv.c:676 src/export_csv.c:808 src/export_csv.c:820
-#: src/gsb_data_category.c:1089 src/gsb_data_payment.c:608
+#: src/gsb_data_category.c:1090 src/gsb_data_payment.c:608
 #: src/gsb_data_payment.c:697 src/gsb_data_payment.c:733 src/gsb_form.c:2982
 #: src/import.c:2578 src/import.c:2599 src/import_csv.c:1613
 #: src/plugins/ofx/ofx.c:408
@@ -3865,7 +3862,7 @@ msgid "No data by default"
 msgstr "חזרה אל הגדרות ברירת המחדל"
 
 #: src/bet_tab.c:987 src/bet_tab.c:1039 src/bet_tab.c:1100
-#: src/etats_affiche.c:2519 src/gsb_data_category.c:167
+#: src/etats_affiche.c:2519 src/gsb_data_category.c:168
 #: src/meta_categories.c:68 src/widgets/widget_list_metatree.c:534
 msgid "No category"
 msgstr "אין קטגוריה"
@@ -3942,7 +3939,7 @@ msgstr "תאריך אחרון"
 msgid "Balance at "
 msgstr "מאזן"
 
-#: src/bet_tab.c:2025 src/etats_onglet.c:1063
+#: src/bet_tab.c:2025 src/etats_onglet.c:1105
 msgid "Description"
 msgstr "תיאור"
 
@@ -4003,7 +4000,7 @@ msgstr "ייצוא קטגוריות"
 msgid "Grisbi category files (*.cgsb)"
 msgstr ""
 
-#: src/categories_onglet.c:515 src/etats_onglet.c:485
+#: src/categories_onglet.c:515 src/etats_onglet.c:486
 #: src/file_obfuscate_qif.c:116 src/gsb_file.c:785 src/import.c:1330
 #: src/imputation_budgetaire.c:543
 #, fuzzy
@@ -4058,7 +4055,7 @@ msgstr "תת-קטגוריה חדשה"
 msgid "Create a new sub-category"
 msgstr "נא להזין שם עבור תת-הקטגוריה החדשה"
 
-#: src/categories_onglet.c:627 src/etats_onglet.c:593 src/grisbi_prefs.c:411
+#: src/categories_onglet.c:627 src/etats_onglet.c:594 src/grisbi_prefs.c:411
 #: src/grisbi_win.c:767 src/import.c:1903 src/imputation_budgetaire.c:655
 #: src/prefs/prefs_page_import.c:82 src/utils_files.c:812
 msgid "Import"
@@ -4742,7 +4739,7 @@ msgstr[1] "סך הכל הכללי (%d עיסקה):"
 msgid "General total: "
 msgstr "סך הכל הכללי:"
 
-#: src/etats_affiche.c:2514 src/export_csv.c:647 src/gsb_data_category.c:1088
+#: src/etats_affiche.c:2514 src/export_csv.c:647 src/gsb_data_category.c:1089
 #: src/gsb_data_transaction.c:2688 src/gsb_form.c:243 src/gsb_form.c:916
 #: src/gsb_form.c:1619 src/gsb_form.c:2505 src/gsb_form_scheduler.c:805
 #: src/widgets/widget_loan.c:1158
@@ -4798,7 +4795,7 @@ msgstr "נא לוודא שקובץ זה אכן ניתן לכתיבה, גם מב�
 msgid "Cannot open file '%s' for writing"
 msgstr "לא ניתן לפתוח את הקובץ '%s' לכתיבה"
 
-#: src/etats_onglet.c:141
+#: src/etats_onglet.c:142
 msgid ""
 "This report displays totals for last month's transactions sorted by "
 "categories and sub-categories. You just need to select the account(s). By "
@@ -4807,7 +4804,7 @@ msgstr ""
 "דו\"ח זה מציג סיכומים עבור העיסקאות של החודש שעבר, ממוינות לפי קטגוריות "
 "ותתי-קטגוריות. יש לבחור את החשבון/ות. בברירת המחדל, כל החשבונות נבחרים."
 
-#: src/etats_onglet.c:150
+#: src/etats_onglet.c:151
 msgid ""
 "This report displays totals of current month's transactions sorted by "
 "categories and sub-categories. You just need to select the account(s). By "
@@ -4816,7 +4813,7 @@ msgstr ""
 "דו\"ח זה מציג סיכומים עבור העיסקאות של החודש הנוכחי, ממוינות לפי קטגוריות "
 "ותתי-קטגוריות. יש לבחור את החשבון/ות. בברירת המחדל, כל החשבונות נבחרים."
 
-#: src/etats_onglet.c:159
+#: src/etats_onglet.c:160
 msgid ""
 "This report displays annual budget. You just need to select the account(s). "
 "By default all accounts are selected."
@@ -4824,12 +4821,12 @@ msgstr ""
 "דו\"ח זה מציג תקציב שנתי. יש לבחור את החשבון/ות. בברירת המחדל, כל החשבונות "
 "נבחרים."
 
-#: src/etats_onglet.c:167
+#: src/etats_onglet.c:168
 #, fuzzy
 msgid "This report is an empty one. You need to customize it entirely."
 msgstr "דו\"ח זה ריק. יש להתאים את כולו."
 
-#: src/etats_onglet.c:174
+#: src/etats_onglet.c:175
 msgid ""
 "This report displays the cheques deposit. You just need to select the "
 "account(s). By default all accounts are selected."
@@ -4837,7 +4834,7 @@ msgstr ""
 "דו\"ח זה מציג את הפקדת ההמחאות. יש לבחור את החשבון/ות. בברירת המחדל, כל "
 "החשבונות נבחרים."
 
-#: src/etats_onglet.c:183
+#: src/etats_onglet.c:184
 #, fuzzy
 msgid ""
 "This report shows the month's expenses sorted by payees.You will just have "
@@ -4846,7 +4843,7 @@ msgstr ""
 "דו\"ח זה מציג את ההוצאות של החודש הנוכחי, ממוינות לפי צדדים שלישיים. יש "
 "לבחור את החשבון/ות. בברירת המחדל, כל החשבונות נבחרים."
 
-#: src/etats_onglet.c:187
+#: src/etats_onglet.c:188
 #, fuzzy
 msgid ""
 "This report displays current month's outgoings sorted by payees. You just "
@@ -4855,7 +4852,7 @@ msgstr ""
 "דו\"ח זה מציג את ההוצאות של החודש הנוכחי, ממוינות לפי צדדים שלישיים. יש "
 "לבחור את החשבון/ות. בברירת המחדל, כל החשבונות נבחרים."
 
-#: src/etats_onglet.c:195
+#: src/etats_onglet.c:196
 #, fuzzy
 msgid ""
 "This report displays all the information for all transactions of all "
@@ -4866,116 +4863,116 @@ msgstr ""
 "להוסיף את הסכום, התאריך, הצדדים השלישיים וכו', לפי הקריטריונים הרצויים. "
 "בברירת המחדל, כל העיסקאות ניתנות ללחיצה."
 
-#: src/etats_onglet.c:203
+#: src/etats_onglet.c:204
 msgid "No description available"
 msgstr ""
 
-#: src/etats_onglet.c:358
+#: src/etats_onglet.c:359
 msgid "Export report"
 msgstr "ייצוא דו\"ח"
 
-#: src/etats_onglet.c:381
+#: src/etats_onglet.c:382
 #, fuzzy
 msgid "File format: "
 msgstr "מידע:"
 
-#: src/etats_onglet.c:385
+#: src/etats_onglet.c:386
 msgid "Grisbi report file (egsb file)"
 msgstr ""
 
-#: src/etats_onglet.c:386
+#: src/etats_onglet.c:387
 msgid "HTML file"
 msgstr "קובץ HTML"
 
-#: src/etats_onglet.c:387
+#: src/etats_onglet.c:388
 #, fuzzy
 msgid "CSV file"
 msgstr "שמירת קובץ"
 
-#: src/etats_onglet.c:406
+#: src/etats_onglet.c:407
 #, fuzzy
 msgid "Exporting report..."
 msgstr "ייצוא הדו\"ח בתור CSV ..."
 
-#: src/etats_onglet.c:431 src/grisbi_prefs.c:792 src/grisbi_prefs.c:816
+#: src/etats_onglet.c:432 src/grisbi_prefs.c:792 src/grisbi_prefs.c:816
 #: src/gsb_debug.c:842 src/gsb_file.c:549 src/gsb_file.c:700
 #: src/gsb_file.c:1039
 #, fuzzy
 msgid "Done"
 msgstr "ללא"
 
-#: src/etats_onglet.c:461
+#: src/etats_onglet.c:462
 msgid "Import a report"
 msgstr "ייבוא דו\"ח"
 
-#: src/etats_onglet.c:479
+#: src/etats_onglet.c:480
 msgid "Grisbi report files (*.egsb)"
 msgstr ""
 
-#: src/etats_onglet.c:537
+#: src/etats_onglet.c:538
 #, fuzzy
 msgid "Create a pdf file of the report"
 msgstr "בראש הדו\"ח"
 
-#: src/etats_onglet.c:584 src/navigation.c:395
+#: src/etats_onglet.c:585 src/navigation.c:395
 msgid "New report"
 msgstr "דו\"ח חדש"
 
-#: src/etats_onglet.c:585
+#: src/etats_onglet.c:586
 #, fuzzy
 msgid "Create a new report"
 msgstr "יצירת חשבון חדש"
 
-#: src/etats_onglet.c:594
+#: src/etats_onglet.c:595
 #, fuzzy
 msgid "Import a Grisbi report file (.egsb)"
 msgstr "ייבוא קובץ דו\"ח"
 
-#: src/etats_onglet.c:604
+#: src/etats_onglet.c:605
 #, fuzzy
 msgid "Export selected report to egsb, HTML, CSV"
 msgstr "ייצוא הדו\"ח לקובץ HTML של אינטרנט"
 
-#: src/etats_onglet.c:613
+#: src/etats_onglet.c:614
 #, fuzzy
 msgid "Print selected report"
 msgstr "הדפסת דו\"ח"
 
-#: src/etats_onglet.c:622
+#: src/etats_onglet.c:623
 #, fuzzy
 msgid "Delete selected report"
 msgstr "מחיקת דו\"ח"
 
-#: src/etats_onglet.c:631 src/grisbi_win.c:457
+#: src/etats_onglet.c:632 src/grisbi_win.c:457
 #, fuzzy
 msgid "Properties"
 msgstr "מאפייני המטבע"
 
-#: src/etats_onglet.c:632
+#: src/etats_onglet.c:633
 #, fuzzy
 msgid "Edit selected report"
 msgstr "מחיקת דו\"ח"
 
-#: src/etats_onglet.c:640
+#: src/etats_onglet.c:641
 #, fuzzy
 msgid "Clone"
 msgstr "סגירת חלון החשבונות"
 
-#: src/etats_onglet.c:641
+#: src/etats_onglet.c:642
 #, fuzzy
 msgid "Clone selected report"
 msgstr "שכפול דו\"ח"
 
-#: src/etats_onglet.c:650
+#: src/etats_onglet.c:651
 #, fuzzy
 msgid "Create pdf file"
 msgstr "קובץ LaTeX"
 
-#: src/etats_onglet.c:651
+#: src/etats_onglet.c:652
 msgid "Creates a pdf file of the report in user directory"
 msgstr ""
 
-#: src/etats_onglet.c:1044
+#: src/etats_onglet.c:1086
 #, fuzzy
 msgid ""
 "You are about to create a new report. For convenience, you can choose "
@@ -4984,76 +4981,76 @@ msgstr ""
 "עומד להיווצר דו\"ח חדש. מטעמי נוחות, ניתן לבחור בין התבניות הבאות. הדו\"חות "
 "עצמם ניתנים להתאמה מאוחר יותר."
 
-#: src/etats_onglet.c:1048
+#: src/etats_onglet.c:1090
 msgid "Choose template for new report"
 msgstr "בחירת תבנית לדו\"ח החדש"
 
-#: src/etats_onglet.c:1051
+#: src/etats_onglet.c:1093
 msgid "Report type"
 msgstr "סוג הדו\"ח"
 
-#: src/etats_onglet.c:1058
+#: src/etats_onglet.c:1100
 #, fuzzy
 msgid "Do not show the report preferences"
 msgstr "לא להזהיר אודות הפניית התאמה קיימת"
 
-#: src/etats_onglet.c:1083 src/etats_onglet.c:1138
+#: src/etats_onglet.c:1125 src/etats_onglet.c:1180
 msgid "Last month incomes and outgoings"
 msgstr "הכנסות והוצאות של החודש האחרון"
 
-#: src/etats_onglet.c:1087 src/etats_onglet.c:1167
+#: src/etats_onglet.c:1129 src/etats_onglet.c:1209
 msgid "Current month incomes and outgoings"
 msgstr "הכנסות והוצאות של החודש הנוכחי"
 
-#: src/etats_onglet.c:1088 src/etats_onglet.c:1193
+#: src/etats_onglet.c:1130 src/etats_onglet.c:1235
 msgid "Annual budget"
 msgstr "תקציב שנתי"
 
-#: src/etats_onglet.c:1089 src/etats_onglet.c:1217
+#: src/etats_onglet.c:1131 src/etats_onglet.c:1259
 msgid "Blank report"
 msgstr "דו\"ח ריק"
 
-#: src/etats_onglet.c:1090 src/etats_onglet.c:1248
+#: src/etats_onglet.c:1132 src/etats_onglet.c:1290
 msgid "Cheques deposit"
 msgstr "הפקדת המחאות"
 
-#: src/etats_onglet.c:1094 src/etats_onglet.c:1289
+#: src/etats_onglet.c:1136 src/etats_onglet.c:1331
 #, fuzzy
 msgid "Monthly outgoings by payee"
 msgstr "הוצאות חודשיות לפי צדדים שלישיים"
 
-#: src/etats_onglet.c:1136
+#: src/etats_onglet.c:1178
 #, fuzzy
 msgid "Last month products and expenses"
 msgstr "הכנסות והוצאות של החודש האחרון"
 
-#: src/etats_onglet.c:1354
+#: src/etats_onglet.c:1396
 msgid "Unknown report type, creation cancelled"
 msgstr "סוג דו\"ח לא מוכר. יצירת הדו\"ח בוטלה"
 
-#: src/etats_onglet.c:1446
+#: src/etats_onglet.c:1488
 #, c-format
 msgid "Delete report \"%s\"?"
 msgstr "מחיקת דו\"ח \"%s\"?"
 
-#: src/etats_onglet.c:1448
+#: src/etats_onglet.c:1490
 msgid "This will irreversibly remove this report.  There is no undo for this."
 msgstr "פעולה זו תסיר את הדו\"ח באופן סופי. לא ניתן לבטל פעולה זו."
 
-#: src/etats_onglet.c:1588
+#: src/etats_onglet.c:1630
 #, fuzzy
 msgid "Searching"
 msgstr "חיפוש"
 
-#: src/etats_onglet.c:1634
+#: src/etats_onglet.c:1676
 msgid "Searching Category, Sub_category containing: "
 msgstr ""
 
-#: src/etats_onglet.c:1637
+#: src/etats_onglet.c:1680
 msgid "Searching IB, Sub_IB containing: "
 msgstr ""
 
-#: src/etats_onglet.c:1641
+#: src/etats_onglet.c:1684
 #, fuzzy
 msgid "Searching Payees containing: "
 msgstr "הצגת שמות צדדים שלישיים"
@@ -7121,7 +7118,7 @@ msgstr "חשבון מזומן"
 msgid "No budget line"
 msgstr "אין קו תקציב"
 
-#: src/gsb_data_budget.c:1440 src/gsb_data_category.c:1618
+#: src/gsb_data_budget.c:1440 src/gsb_data_category.c:1619
 #, c-format
 msgid "In <i>%s</i>, <i>%s</i> is a duplicate of <i>%s</i>.\n"
 msgstr "ב <i>%s</i>, <i>%s</i> זהה ל <i>%s</i>.\n"
@@ -11204,9 +11201,9 @@ msgstr "להשתמש בגופן מותאם אישית לצורך העיסקאו�
 msgid "You must select at least one search element"
 msgstr "בחירת חשבונות נכסים"
 
-#: src/metatree.c:3833 src/widgets/widget_search_tiers_categ_ib.c:349
-#: src/widgets/widget_search_tiers_categ_ib.c:370
-#: src/widgets/widget_search_tiers_categ_ib.c:451
+#: src/metatree.c:3833 src/widgets/widget_search_tiers_categ_ib.c:277
+#: src/widgets/widget_search_tiers_categ_ib.c:298
+#: src/widgets/widget_search_tiers_categ_ib.c:379
 #: src/widgets/widget_search_transaction.c:575
 #: src/widgets/widget_search_transaction.c:840
 msgid "WARNING"
@@ -13228,38 +13225,37 @@ msgstr "הצהרה אחרונה"
 msgid " <b>%s reconciliation</b> "
 msgstr "התאמה"
 
-#: src/widgets/widget_search_tiers_categ_ib.c:261
+#: src/widgets/widget_search_tiers_categ_ib.c:189
 #: src/widgets/widget_search_transaction.c:785
 msgid "Ignore sign"
 msgstr ""
 
-#: src/widgets/widget_search_tiers_categ_ib.c:348
-#: src/widgets/widget_search_tiers_categ_ib.c:450
+#: src/widgets/widget_search_tiers_categ_ib.c:276
+#: src/widgets/widget_search_tiers_categ_ib.c:378
 #: src/widgets/widget_search_transaction.c:574
 #: src/widgets/widget_search_transaction.c:839
 #, fuzzy
 msgid "You must enter a search text"
 msgstr "יש להכניס תאריך."
 
-#: src/widgets/widget_search_tiers_categ_ib.c:369
+#: src/widgets/widget_search_tiers_categ_ib.c:297
 #, fuzzy
 msgid "You must enter a valid amount"
 msgstr "יש להכניס תאריך."
 
-#: src/widgets/widget_search_tiers_categ_ib.c:554
+#: src/widgets/widget_search_tiers_categ_ib.c:482
 #, fuzzy
-#| msgid "Detail categories"
-msgid "Search categories"
+msgid "Search in categories"
 msgstr "פירוט קטגוריות"
 
-#: src/widgets/widget_search_tiers_categ_ib.c:566
+#: src/widgets/widget_search_tiers_categ_ib.c:494
 #, fuzzy
-msgid "Search budgetary lines"
+msgid "Search in budgetary lines"
 msgstr "קו תקציב חדש"
 
-#: src/widgets/widget_search_tiers_categ_ib.c:579
+#: src/widgets/widget_search_tiers_categ_ib.c:507
 #, fuzzy
-msgid "Search payees"
+msgid "Search in payees"
 msgstr "הצגת שמות צדדים שלישיים"
 
 #: src/widgets/widget_search_transaction.c:615
