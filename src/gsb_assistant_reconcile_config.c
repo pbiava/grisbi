@@ -369,7 +369,7 @@ static GtkWidget *gsb_assistant_reconcile_config_page_menu ( GtkWidget *assistan
 			 FALSE, FALSE, 0 );
 
     /* automatically associate the transactions without reconcile number */
-    button = gtk_radio_button_new_with_label ( gtk_radio_button_get_group (GTK_RADIO_BUTTON (button)),
+    button = gtk_radio_button_new_with_label ( gtkcheck_button_set_group (GTK_RADIO_BUTTON (button)),
 					       _("Automatically associate transactions without reconciliation number with the known reconciliations"));
     g_object_set_data ( G_OBJECT (button),
 			"next_page", GINT_TO_POINTER (RECONCILE_ASSISTANT_AUTOMATICALLY_ASSOCIATE));
@@ -391,7 +391,7 @@ static GtkWidget *gsb_assistant_reconcile_config_page_menu ( GtkWidget *assistan
 			 FALSE, FALSE, 0 );
 
     /* associate the transactions without reconcile number by hand */
-    button = gtk_radio_button_new_with_label ( gtk_radio_button_get_group (GTK_RADIO_BUTTON (button)),
+    button = gtk_radio_button_new_with_label ( gtkcheck_button_set_group (GTK_RADIO_BUTTON (button)),
                         _("Associate by hands the transactions without "
                         "reconciliation number with the known reconciliation"));
     g_object_set_data ( G_OBJECT (button),

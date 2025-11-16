@@ -910,19 +910,19 @@ GtkWidget *utils_widget_date_format_chosen (GtkWidget *parent,
 	format_date = g_strdup ("%d/%m/%Y");
 	g_object_set_data_full (G_OBJECT (button_1), "pointer", format_date, g_free);
 
-	button_2 = gtk_radio_button_new_with_label (gtk_radio_button_get_group (GTK_RADIO_BUTTON
+	button_2 = gtk_radio_button_new_with_label (gtkcheck_button_set_group (GTK_RADIO_BUTTON
 																			(button_1)),
 												"mm/dd/yyyy");
 	format_date = g_strdup ("%m/%d/%Y");
 	g_object_set_data_full (G_OBJECT (button_2), "pointer", format_date, g_free);
 
-	button_3 = gtk_radio_button_new_with_label (gtk_radio_button_get_group (GTK_RADIO_BUTTON
+	button_3 = gtk_radio_button_new_with_label (gtkcheck_button_set_group (GTK_RADIO_BUTTON
 																			(button_1)),
 												"dd.mm.yyyy");
 	format_date = g_strdup ("%d.%m.%Y");
 	g_object_set_data_full (G_OBJECT (button_3), "pointer", format_date, g_free);
 
-	button_4 = gtk_radio_button_new_with_label (gtk_radio_button_get_group (GTK_RADIO_BUTTON
+	button_4 = gtk_radio_button_new_with_label (gtkcheck_button_set_group (GTK_RADIO_BUTTON
 																			(button_1)),
 												"yyyy-mm-dd.");
 	format_date = g_strdup ("%Y-%m-%d");

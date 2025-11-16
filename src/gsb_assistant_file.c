@@ -541,7 +541,7 @@ static GtkWidget *gsb_assistant_file_page_finish ( GtkWidget *assistant,
 			 button_create_account_next,
 			 FALSE, FALSE, 0 );
 
-    button = gtk_radio_button_new_with_label ( gtk_radio_button_get_group (GTK_RADIO_BUTTON (button_create_account_next)),
+    button = gtk_radio_button_new_with_label ( gtkcheck_button_set_group (GTK_RADIO_BUTTON (button_create_account_next)),
 					       _("Import data from online bank services or from accounting software"));
     if (import)
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button),

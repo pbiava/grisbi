@@ -206,7 +206,7 @@ gint utils_radiobutton_get_active_index ( GtkWidget *radiobutton )
     GSList *tmp_list;
     gint index = 0;
 
-    liste = g_slist_copy ( gtk_radio_button_get_group ( GTK_RADIO_BUTTON ( radiobutton ) ) );
+    liste = g_slist_copy ( gtkcheck_button_set_group ( GTK_RADIO_BUTTON ( radiobutton ) ) );
     tmp_list = g_slist_reverse ( liste );
 
     while ( tmp_list )
@@ -241,7 +241,7 @@ void utils_radiobutton_set_active_index ( GtkWidget *radiobutton,
     GSList *liste;
     GSList *tmp_list;
 
-    liste = g_slist_copy ( gtk_radio_button_get_group ( GTK_RADIO_BUTTON ( radiobutton ) ) );
+    liste = g_slist_copy ( gtkcheck_button_set_group ( GTK_RADIO_BUTTON ( radiobutton ) ) );
     tmp_list = g_slist_reverse ( liste );
 
     gtk_toggle_button_set_active ( GTK_TOGGLE_BUTTON ( g_slist_nth_data ( tmp_list, index ) ), TRUE );

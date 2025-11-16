@@ -12,7 +12,7 @@ project('grisbi', 'c',
 conf_data = configuration_data({
   'VERSION' : '"' + meson.project_version() + '"',
   'PACKAGE' : '"grisbi"',
-  'HAVE_GOFFICE' : true,
+  'HAVE_GOFFICE' : false,
   'HAVE_OFX' : true,
   'HAVE_SSL' : true,
   'HAVE_XML2' : true,
@@ -40,7 +40,7 @@ endif
 
 # dependencies
 goffice_dep = dependency('libgoffice-0.10')
-gtk_dep = dependency('gtk+-3.0')
+gtk_dep = dependency('gtk4')
 libofx_dep = dependency('libofx')
 libxml2_dep = dependency('libxml-2.0')
 openssl_dep = dependency('openssl')

@@ -517,7 +517,7 @@ static GtkWidget *gsb_assistant_archive_page_menu (GtkWidget *assistant)
 	gtk_box_pack_start (GTK_BOX (hbox), final_date, FALSE, FALSE, 0);
 
 	/* archive by financial year */
-	button = gtk_radio_button_new_with_label (gtk_radio_button_get_group (GTK_RADIO_BUTTON (button)),
+	button = gtk_radio_button_new_with_label (gtkcheck_button_set_group (GTK_RADIO_BUTTON (button)),
 											  _("Archive by financial year"));
 	g_signal_connect_object (G_OBJECT (button),
 							 "toggled",
@@ -553,7 +553,7 @@ static GtkWidget *gsb_assistant_archive_page_menu (GtkWidget *assistant)
 	gtk_widget_set_sensitive (hbox, FALSE);
 
 	/* archive by report */
-	button = gtk_radio_button_new_with_label (gtk_radio_button_get_group (GTK_RADIO_BUTTON (button)),
+	button = gtk_radio_button_new_with_label (gtkcheck_button_set_group (GTK_RADIO_BUTTON (button)),
 											  _("Archive by report"));
 	g_signal_connect_object (G_OBJECT (button),
 							 "toggled",

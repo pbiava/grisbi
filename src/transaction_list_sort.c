@@ -145,16 +145,11 @@ void transaction_list_sort (void)
 		gsb_transactions_list_set_secondary_sort (a_conf->transactions_list_secondary_sorting);
 
 		/* sort of the list */
-#ifdef HAVE_G_SORT_ARRAY
-		g_sort_array
-#else
-		g_qsort_with_data
-#endif
-						 (custom_list->visibles_rows,
-						  custom_list->num_visibles_rows,
-						  sizeof(CustomRecord*),
-						  (GCompareDataFunc) gsb_transactions_list_sort,
-						  custom_list);
+		g_qsort_with_data (custom_list->visibles_rows,
+						   custom_list->num_visibles_rows,
+						   sizeof(CustomRecord*),
+						   (GCompareDataFunc) gsb_transactions_list_sort,
+						   custom_list);
 	}
 
 	/* fixes bug 1875 */

@@ -422,7 +422,7 @@ GtkWidget *gsb_automem_radiobutton_new ( const gchar *choice1,
 
     button1 = gtk_radio_button_new_with_mnemonic ( NULL, choice1 );
     gtk_box_pack_start (GTK_BOX(vbox), button1, FALSE, FALSE, 0 );
-    button2 = gtk_radio_button_new_with_mnemonic ( gtk_radio_button_get_group (GTK_RADIO_BUTTON(button1)),
+    button2 = gtk_radio_button_new_with_mnemonic ( gtkcheck_button_set_group (GTK_RADIO_BUTTON(button1)),
 						   choice2 );
     gtk_box_pack_start (GTK_BOX(vbox), button2, FALSE, FALSE, 0 );
 
@@ -481,7 +481,7 @@ GtkWidget *gsb_automem_radiobutton_gsettings_new (const gchar *choice1,
     gtk_container_add (GTK_CONTAINER (button1), label);
     gtk_box_pack_start (GTK_BOX (vbox), button1, FALSE, FALSE, 0);
 
-    button2 = gtk_radio_button_new (gtk_radio_button_get_group (GTK_RADIO_BUTTON (button1)));
+    button2 = gtk_radio_button_new (gtkcheck_button_set_group (GTK_RADIO_BUTTON (button1)));
 	label = gtk_label_new (choice2);
 	gtk_widget_set_name (label, "label_gsetting_option");
 	gtk_widget_show (label);
@@ -582,14 +582,14 @@ GtkWidget *gsb_automem_radiobutton3_new ( const gchar *choice1,
     button1 = gtk_radio_button_new_with_mnemonic ( NULL, choice1 );
     gtk_box_pack_start ( GTK_BOX ( box ), button1, FALSE, FALSE, 0 );
 
-    button2 = gtk_radio_button_new_with_mnemonic ( gtk_radio_button_get_group (
+    button2 = gtk_radio_button_new_with_mnemonic ( gtkcheck_button_set_group (
                         GTK_RADIO_BUTTON ( button1 ) ),
 						choice2 );
     gtk_box_pack_start ( GTK_BOX ( box ), button2, FALSE, FALSE, 0 );
 
     if ( choice3 && strlen ( choice3 ) )
     {
-        button3 = gtk_radio_button_new_with_mnemonic ( gtk_radio_button_get_group (
+        button3 = gtk_radio_button_new_with_mnemonic ( gtkcheck_button_set_group (
                         GTK_RADIO_BUTTON ( button1 ) ),
 						choice3 );
         gtk_box_pack_start ( GTK_BOX ( box ), button3, FALSE, FALSE, 0 );
@@ -673,7 +673,7 @@ GtkWidget *gsb_automem_radiobutton3_gsettings_new (const gchar *choice1,
     gtk_box_pack_start (GTK_BOX (box), button1, FALSE, FALSE, 0);
 
 	/* button 2 */
-    button2 = gtk_radio_button_new (gtk_radio_button_get_group (GTK_RADIO_BUTTON (button1)));
+    button2 = gtk_radio_button_new (gtkcheck_button_set_group (GTK_RADIO_BUTTON (button1)));
 	label = gtk_label_new (choice2);
 	gtk_widget_set_name (label, "label_gsetting_option");
 	gtk_widget_show (label);
@@ -683,7 +683,7 @@ GtkWidget *gsb_automem_radiobutton3_gsettings_new (const gchar *choice1,
 	/* button 3 */
     if (choice3 && strlen (choice3))
     {
-        button3 = gtk_radio_button_new (gtk_radio_button_get_group (GTK_RADIO_BUTTON (button1)));
+        button3 = gtk_radio_button_new (gtkcheck_button_set_group (GTK_RADIO_BUTTON (button1)));
 		label = gtk_label_new (choice3);
 		gtk_widget_set_name (label, "label_gsetting_option");
 		gtk_widget_show (label);

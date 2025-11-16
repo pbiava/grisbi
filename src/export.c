@@ -196,7 +196,7 @@ static GtkWidget *export_options_widget_new (GtkWidget *assistant)
 	button1 = gtk_radio_button_new_with_label (NULL, _("QIF format"));
 	gtk_grid_attach (GTK_GRID (grid), button1, 0, 0, 1, 1);
 
-    button2 = gtk_radio_button_new_with_label (gtk_radio_button_get_group (GTK_RADIO_BUTTON (button1)),
+    button2 = gtk_radio_button_new_with_label (gtk_check_button_set_group _button_set_group (GTK_RADIO_BUTTON (button1)),
 											   _("CSV format"));
 	gtk_grid_attach (GTK_GRID (grid), button2, 0, 1, 1, 1);
 

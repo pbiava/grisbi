@@ -47,8 +47,8 @@
 /*END_INCLUDE*/
 
 /*START_STATIC*/
-static gint start_drag_column;		/* tmp for drag'n drop */
-static gint start_drag_row;			/* tmp for drag'n drop */
+//~ static gint start_drag_column;		/* tmp for drag'n drop */
+//~ static gint start_drag_row;			/* tmp for drag'n drop */
 /*END_STATIC*/
 
 /*START_EXTERN*/
@@ -689,38 +689,38 @@ static gboolean prefs_page_display_form_remove_row (GtkButton *button,
  *
  * \return FALSE
  * */
-static gboolean prefs_page_display_form_drag_begin (GtkWidget *tree_view,
-													GdkDragContext *drag_context,
-													gpointer null)
-{
-    GdkDevice *device;
-    gint x, y;
-    GtkTreePath *path;
-    GtkTreeViewColumn *tree_column;
+//~ static gboolean prefs_page_display_form_drag_begin (GtkWidget *tree_view,
+													//~ GdkDragContext *drag_context,
+													//~ gpointer null)
+//~ {
+    //~ GdkDevice *device;
+    //~ gint x, y;
+    //~ GtkTreePath *path;
+    //~ GtkTreeViewColumn *tree_column;
 
-    /* get the cell coord */
-    device = gdk_drag_context_get_device (drag_context);
-    gdk_window_get_device_position (gtk_tree_view_get_bin_window (GTK_TREE_VIEW (tree_view)),
-                                    device,
-                                    &x,
-                                    &y,
-                                    NULL);
-    gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (tree_view),
-                                   x,
-                                   y,
-                                   &path,
-                                   &tree_column,
-                                   NULL,
-                                   NULL);
+    //~ /* get the cell coord */
+    //~ device = gdk_drag_context_get_device (drag_context);
+    //~ gdk_window_get_device_position (gtk_tree_view_get_bin_window (GTK_TREE_VIEW (tree_view)),
+                                    //~ device,
+                                    //~ &x,
+                                    //~ &y,
+                                    //~ NULL);
+    //~ gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (tree_view),
+                                   //~ x,
+                                   //~ y,
+                                   //~ &path,
+                                   //~ &tree_column,
+                                   //~ NULL,
+                                   //~ NULL);
 
-	if (!path || !tree_column)
-		return FALSE;
+	//~ if (!path || !tree_column)
+		//~ return FALSE;
 
-    start_drag_column = g_list_index (gtk_tree_view_get_columns (GTK_TREE_VIEW (tree_view)), tree_column);
-    start_drag_row = utils_str_atoi (gtk_tree_path_to_string (path));
+    //~ start_drag_column = g_list_index (gtk_tree_view_get_columns (GTK_TREE_VIEW (tree_view)), tree_column);
+    //~ start_drag_row = utils_str_atoi (gtk_tree_path_to_string (path));
 
-    return FALSE;
-}
+    //~ return FALSE;
+//~ }
 
 
 /**
@@ -733,66 +733,66 @@ static gboolean prefs_page_display_form_drag_begin (GtkWidget *tree_view,
  *
  * \return FALSE
  **/
-static gboolean prefs_page_display_form_drag_end (GtkWidget *tree_view,
-												  GdkDragContext *drag_context,
-												  PrefsPageDisplayForm *page)
-{
-    GdkDevice *device;
-    gint x, y;
-    GtkTreeModel *store;
-    GtkTreePath *path;
-    GtkTreeViewColumn *tree_column;
-    gint end_drag_row;
-    gint end_drag_column;
-    gint buffer;
+//~ static gboolean prefs_page_display_form_drag_end (GtkWidget *tree_view,
+												  //~ GdkDragContext *drag_context,
+												  //~ PrefsPageDisplayForm *page)
+//~ {
+    //~ GdkDevice *device;
+    //~ gint x, y;
+    //~ GtkTreeModel *store;
+    //~ GtkTreePath *path;
+    //~ GtkTreeViewColumn *tree_column;
+    //~ gint end_drag_row;
+    //~ gint end_drag_column;
+    //~ gint buffer;
 
-	PrefsPageDisplayFormPrivate *priv;
+	//~ PrefsPageDisplayFormPrivate *priv;
 
-	priv = prefs_page_display_form_get_instance_private (page);
+	//~ priv = prefs_page_display_form_get_instance_private (page);
 
-    /* get the cell position */
-    device = gdk_drag_context_get_device (drag_context);
-    gdk_window_get_device_position (gtk_tree_view_get_bin_window (GTK_TREE_VIEW (tree_view)),
-                                    device,
-                                    &x,
-                                    &y,
-                                    NULL);
-    gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (tree_view),
-                                   x,
-                                   y,
-                                   &path,
-                                   &tree_column,
-                                   NULL,
-                                   NULL);
+    //~ /* get the cell position */
+    //~ device = gdk_drag_context_get_device (drag_context);
+    //~ gdk_window_get_device_position (gtk_tree_view_get_bin_window (GTK_TREE_VIEW (tree_view)),
+                                    //~ device,
+                                    //~ &x,
+                                    //~ &y,
+                                    //~ NULL);
+    //~ gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (tree_view),
+                                   //~ x,
+                                   //~ y,
+                                   //~ &path,
+                                   //~ &tree_column,
+                                   //~ NULL,
+                                   //~ NULL);
 
-	if (!path || !tree_column)
-		return FALSE;
+	//~ if (!path || !tree_column)
+		//~ return FALSE;
 
-    end_drag_column = g_list_index (gtk_tree_view_get_columns (GTK_TREE_VIEW (tree_view)), tree_column);
-    end_drag_row = utils_str_atoi (gtk_tree_path_to_string (path));
+    //~ end_drag_column = g_list_index (gtk_tree_view_get_columns (GTK_TREE_VIEW (tree_view)), tree_column);
+    //~ end_drag_row = utils_str_atoi (gtk_tree_path_to_string (path));
 
-    /* if we are on the same cell, go away */
-	if (start_drag_row == end_drag_row && start_drag_column == end_drag_column)
-		return (FALSE);
+    //~ /* if we are on the same cell, go away */
+	//~ if (start_drag_row == end_drag_row && start_drag_column == end_drag_column)
+		//~ return (FALSE);
 
-    /* swap the cells in the tab */
-    buffer = gsb_data_form_get_value (start_drag_column, start_drag_row);
-    gsb_data_form_set_value (start_drag_column,
-							 start_drag_row,
-							 gsb_data_form_get_value (end_drag_column, end_drag_row));
-    gsb_data_form_set_value (end_drag_column, end_drag_row, buffer);
+    //~ /* swap the cells in the tab */
+    //~ buffer = gsb_data_form_get_value (start_drag_column, start_drag_row);
+    //~ gsb_data_form_set_value (start_drag_column,
+							 //~ start_drag_row,
+							 //~ gsb_data_form_get_value (end_drag_column, end_drag_row));
+    //~ gsb_data_form_set_value (end_drag_column, end_drag_row, buffer);
 
-    /* get the store */
-    store = gtk_tree_view_get_model (GTK_TREE_VIEW (priv->tree_view_list_form));
+    //~ /* get the store */
+    //~ store = gtk_tree_view_get_model (GTK_TREE_VIEW (priv->tree_view_list_form));
 
-	/* fill the list */
-    prefs_page_display_form_fill_store (GTK_LIST_STORE (store));
+	//~ /* fill the list */
+    //~ prefs_page_display_form_fill_store (GTK_LIST_STORE (store));
 
-	/* update form and list */
-	prefs_page_display_form_update_form_list (tree_view, TRUE);
+	//~ /* update form and list */
+	//~ prefs_page_display_form_update_form_list (tree_view, TRUE);
 
-	return (FALSE);
-}
+	//~ return (FALSE);
+//~ }
 
 /**
  *
@@ -808,7 +808,7 @@ static GtkWidget *prefs_page_display_form_create_tree_view (PrefsPageDisplayForm
 	GtkTreeSelection *selection;
     const gchar *columns_titles[6] = {N_("Col 1"), N_("Col 2"), N_("Col 3"), N_("Col 4"), N_("Col 5"), N_("Col 6")};
     gint column;
-    GtkTargetEntry target_entry[] = {{(gchar*) "text", GTK_TARGET_SAME_WIDGET, 0}};
+    //~ GtkTargetEntry target_entry[] = {{(gchar*) "text", GTK_TARGET_SAME_WIDGET, 0}};
 
 	devel_debug (NULL);
 
@@ -845,22 +845,22 @@ static GtkWidget *prefs_page_display_form_create_tree_view (PrefsPageDisplayForm
     /* enable the drag'n drop, we need to use low-level api because
      * gtk_tree_view api can only move the entire row, not only a cell
      * (at least, didn't find how...) */
-    gtk_drag_source_set (tree_view,
-						 GDK_BUTTON1_MASK,
-			 			 target_entry, 1,
-			 			 GDK_ACTION_MOVE);
-    g_signal_connect (G_OBJECT (tree_view),
-					  "drag-begin",
-					  G_CALLBACK (prefs_page_display_form_drag_begin),
-					  NULL);
-    gtk_drag_dest_set (tree_view,
-					   GTK_DEST_DEFAULT_ALL,
-					   target_entry, 1,
-					   GDK_ACTION_MOVE);
-	g_signal_connect (G_OBJECT (tree_view),
-					  "drag-end",
-					  G_CALLBACK (prefs_page_display_form_drag_end),
-					  page);
+    //~ gtk_drag_source_set (tree_view,
+						 //~ GDK_BUTTON1_MASK,
+			 			 //~ target_entry, 1,
+			 			 //~ GDK_ACTION_MOVE);
+    //~ g_signal_connect (G_OBJECT (tree_view),
+					  //~ "drag-begin",
+					  //~ G_CALLBACK (prefs_page_display_form_drag_begin),
+					  //~ NULL);
+    //~ gtk_drag_dest_set (tree_view,
+					   //~ GTK_DEST_DEFAULT_ALL,
+					   //~ target_entry, 1,
+					   //~ GDK_ACTION_MOVE);
+	//~ g_signal_connect (G_OBJECT (tree_view),
+					  //~ "drag-end",
+					  //~ G_CALLBACK (prefs_page_display_form_drag_end),
+					  //~ page);
 
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree_view));
     gtk_tree_selection_set_mode (GTK_TREE_SELECTION (selection), GTK_SELECTION_NONE);
