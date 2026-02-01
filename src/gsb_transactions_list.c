@@ -4461,6 +4461,10 @@ gboolean gsb_transactions_list_change_aspect_liste (gint demande)
         case 3 :
         case 4 :
             gsb_transactions_list_set_visible_rows_number (demande);
+
+            /* update menu */
+            gint account_number = gsb_gui_navigation_get_current_account ();
+            gsb_menu_update_view_menu (account_number);
             break;
 
         case 5 :
