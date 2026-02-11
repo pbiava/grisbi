@@ -110,7 +110,7 @@
                                 <property name="can-focus">True</property>
                                 <property name="max-width-chars">3</property>
                                 <property name="shadow-type">none</property>
-                                <property name="primary-icon-stock">gtk-about</property>
+                                <property name="primary-icon-name">dialog-information</property>
                                 <property name="primary-icon-tooltip-text" translatable="yes">one by default</property>
                                 <property name="adjustment">adjustment_completion_minimum_key_length</property>
                               </object>
