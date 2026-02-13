@@ -242,8 +242,17 @@ static AccountStruct *gsb_data_account_get_structure (gint no)
 {
     GSList *tmp;
 
-    if (no < 0)
+    if (no <= 0)
     {
+		gchar* tmp_str;
+
+		tmp_str = g_strdup_printf (_("The account number = % is <= 0. This is not normal.\n"
+									 "Please contact the Grisbi's team on devel@listes.grisbi.org "
+									 "to find what happened to your current file."),
+								   no);
+		dialogue_error (tmp_str);
+		g_free (tmp_str);
+
 		return NULL;
     }
 
@@ -829,7 +838,7 @@ gint gsb_data_account_get_account_by_id (const gchar *account_id)
 
         account = list_tmp->data;
         if (account_id
-			&& account->account_number >= 0
+			&& account->account_number > 0
 			&& !account->closed_account
 			&& account->account_id
 			&& strlen (account->account_id) > 0)
@@ -950,7 +959,12 @@ gint gsb_data_account_get_no_account_by_name (const gchar *account_name)
 
 		account = list_tmp->data;
 		if (!strcmp (account->account_name, account_name))
-			return account->account_number;
+		{
+			if (account->account_number > 0)
+				return account->account_number;
+			else
+				return -1;
+		}
 
 		list_tmp = list_tmp->next;
     }
@@ -3933,9 +3947,9 @@ void gsb_data_account_set_current_balance_from_transaction	(gint account_number,
  *
  * \return
  **/
-void gsb_data_account_set_marked_balance_from_transaction	(gint account_number,
-															 gint transaction_number,
-															 gint sens)
+void gsb_data_account_set_marked_balance_from_transaction (gint account_number,
+														   gint transaction_number,
+														   gint sens)
 {
     gint floating_point;
 	GsbReal adjusted_amout;
@@ -3943,7 +3957,10 @@ void gsb_data_account_set_marked_balance_from_transaction	(gint account_number,
     AccountStruct *account;
 
     account = gsb_data_account_get_structure (account_number);
-    floating_point = gsb_data_currency_get_floating_point (account->currency);
+	if (!account)
+		return;
+
+	floating_point = gsb_data_currency_get_floating_point (account->currency);
 	adjusted_amout = gsb_data_transaction_get_adjusted_amount (transaction_number, floating_point);
 	if (sens == OPERATION_POINTEE)
 		tmp_balance = gsb_real_add (account->marked_balance, adjusted_amout);

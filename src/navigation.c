@@ -1361,7 +1361,23 @@ gint gsb_gui_navigation_get_current_account (void)
 						-1);
 
 	if (page == GSB_ACCOUNT_PAGE)
-		return account_number;
+	{
+		if (account_number > 0)
+		{
+			return account_number;
+		}
+		else
+		{
+			gchar* tmp_str;
+
+			tmp_str = g_strdup_printf (_("The account number = % is <= 0. This is not normal.\n"
+										 "Please contact the Grisbi's team on devel@listes.grisbi.org "
+										 "to find what happened to your current file."),
+									   account_number);
+			dialogue_error (tmp_str);
+			g_free (tmp_str);
+		}
+	}
 
 	return -1;
 }
