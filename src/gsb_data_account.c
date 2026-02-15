@@ -246,7 +246,7 @@ static AccountStruct *gsb_data_account_get_structure (gint no)
     {
 		gchar* tmp_str;
 
-		tmp_str = g_strdup_printf (_("The account number = % is <= 0. This is not normal.\n"
+		tmp_str = g_strdup_printf (_("The account number = %d is <= 0. This is not normal.\n"
 									 "Please contact the Grisbi's team on devel@listes.grisbi.org "
 									 "to find what happened to your current file."),
 								   no);
