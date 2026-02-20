@@ -4257,17 +4257,13 @@ msgstr[0] "%s (%d opération)"
 msgstr[1] "%s (%d opérations)"
 
 #: src/etats_affiche.c:1071
-#, fuzzy, c-format
-#| msgid "Sub-categories total (%d transaction): "
-#| msgid_plural "Sub-categories total (%d transactions): "
+#, c-format
 msgid "Sub-category total (%d transaction): "
 msgid_plural "Sub-category total (%d transactions): "
 msgstr[0] "Total sous-catégories (%d opération) : "
 msgstr[1] "Total sous-catégories (%d opérations) : "
 
 #: src/etats_affiche.c:1077
-#, fuzzy
-#| msgid "Sub-categories total: "
 msgid "Sub-category total: "
 msgstr "Total sous-catégories : "
 
