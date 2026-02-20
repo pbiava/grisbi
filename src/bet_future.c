@@ -2045,7 +2045,7 @@ gboolean bet_transfert_new_line_dialog (GtkTreeModel *tab_model,
 
 	devel_debug (str_date);
     account_number = gsb_gui_navigation_get_current_account ();
-    if (account_number == -1)
+    if (account_number <= 0)
         return FALSE;
 
     /* Create the dialog */

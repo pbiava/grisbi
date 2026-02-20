@@ -159,6 +159,7 @@ static void gsb_file_load_account_part (const gchar **attribute_names,
     gint i=0;
     gint account_number = 0;
 	gint bet_months = 0;
+	gint new_account_number = 0;
 	gboolean is_loan = FALSE;
 	GDate *date = NULL;
 	LoanStruct *s_loan = NULL;
@@ -485,16 +486,18 @@ static void gsb_file_load_account_part (const gchar **attribute_names,
 
                 else if (!strcmp (attribute_names[i], "Number"))
                 {
-                    account_number = gsb_data_account_set_account_number (account_number,
-																		  utils_str_atoi
-																		  (attribute_values[i]));
-					if (account_number == 0)
+					new_account_number = utils_str_atoi (attribute_values[i]);
+					if (new_account_number > 0)
+						account_number = gsb_data_account_set_account_number (account_number, new_account_number);
+					else if (account_number == 0)
 					{
 						GrisbiWinRun *w_run;
 
 						w_run = grisbi_win_get_w_run ();
 						w_run->account_number_is_0 = TRUE;
 					}
+					else
+						return;
                 }
 
                 else if (!strcmp (attribute_names[i], "Neutrals_inside_method"))
@@ -3413,6 +3416,19 @@ static void gsb_file_load_transactions_part (const gchar **attribute_names,
                 if (!strcmp (attribute_names[i], "Ac"))
                 {
                     account_number = utils_str_atoi (attribute_values[i]);
+					if (account_number <= 0)
+					{
+						/* the transaction will not be imported */
+						gchar* tmp_str;
+
+						tmp_str = g_strdup_printf (_("The account number (%d) is < to 0. This is not normal.\n"
+													 "This transaction will not be imported"),
+												   account_number);
+						dialogue_error (tmp_str);
+						g_free (tmp_str);
+						gsb_file_set_modified (TRUE);
+						return;
+					}
                 }
 
                 else if (!strcmp (attribute_names[i], "Am"))

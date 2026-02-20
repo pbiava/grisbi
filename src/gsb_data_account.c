@@ -158,6 +158,7 @@ static GSList *list_accounts = NULL;
 static AccountStruct *account_buffer;
 /*END_STATIC*/
 
+/* Bug 2374 : Retour des fonctions : -1 erreur a traiter, 0 pas de compte trouvé */
 /******************************************************************************/
 /* Private functions                                                          */
 /******************************************************************************/
@@ -242,11 +243,12 @@ static AccountStruct *gsb_data_account_get_structure (gint no)
 {
     GSList *tmp;
 
-    if (no <= 0)
+	/* fix bug 2374: account number is < -1 */
+    if (no < -1)
     {
 		gchar* tmp_str;
 
-		tmp_str = g_strdup_printf (_("The account number = %d is <= 0. This is not normal.\n"
+		tmp_str = g_strdup_printf (_("The account number (%d) is < to 0. This is not normal.\n"
 									 "Please contact the Grisbi's team on devel@listes.grisbi.org "
 									 "to find what happened to your current file."),
 								   no);
@@ -255,6 +257,10 @@ static AccountStruct *gsb_data_account_get_structure (gint no)
 
 		return NULL;
     }
+	else if (no == 0)
+	{
+		return NULL;
+	}
 
     /* before checking all the accounts, we check the buffer */
     if (account_buffer && account_buffer->account_number == no)
@@ -560,14 +566,14 @@ gint gsb_data_account_get_number_of_accounts (void)
  *
  * \param none
  *
- * \return first number of account, -1 if no accounts
+ * \return first number of account, 0 if no accounts
  **/
 gint gsb_data_account_first_number (void)
 {
     AccountStruct *account;
 
     if (!list_accounts)
-        return -1;
+        return 0;
 
     account = list_accounts->data;
 
@@ -3216,14 +3222,14 @@ gint gsb_data_account_get_bet_use_budget (gint account_number)
             break;
         case GSB_TYPE_ASSET:
         case GSB_TYPE_BALANCE:
-            return -1;
+            return 0;
             break;
         default:
-            return -1;
+            return 0;
             break;
     }
 
-    return -1;
+    return 0;
 }
 
 /**

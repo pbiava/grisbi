@@ -1564,11 +1564,27 @@ static gulong gsb_file_save_transaction_part (gulong iterator,
 		gchar *exchange_fees;
 		gchar *date;
 		gchar *value_date;
+		gint account_number;
 		gint transaction_archive_number;
 		gint floating_point;
 		gint floating_fees;
 
 		transaction_number = gsb_data_transaction_get_transaction_number (list_tmp->data);
+
+		/* bug 2374 test account_number */
+		account_number = gsb_data_transaction_get_account_number (transaction_number);
+		if (account_number <= 0)
+		{
+			/* the transaction will not be exported */
+			gchar* tmp_str;
+
+			tmp_str = g_strdup_printf (_("The account number (%d) is < to 0. This is not normal.\n"
+										 "This transaction will not be exported"),
+									   account_number);
+			dialogue_error (tmp_str);
+			g_free (tmp_str);			list_tmp = list_tmp->next;
+			continue;
+		}
 
 		/* get the archive number for below */
 		transaction_archive_number = gsb_data_transaction_get_archive_number (transaction_number);
@@ -1611,7 +1627,7 @@ static gulong gsb_file_save_transaction_part (gulong iterator,
 											  "Pa=\"%d\" Ca=\"%d\" Sca=\"%d\" Br=\"%d\" No=\"%s\" Pn=\"%d\" "
 											  "Pc=\"%s\" Ma=\"%d\" Ar=\"%d\" Au=\"%d\" Re=\"%d\" Fi=\"%d\" "
 											  "Bu=\"%d\" Sbu=\"%d\" Vo=\"%s\" Ba=\"%s\" Trt=\"%d\" Mo=\"%d\" />\n",
-											  gsb_data_transaction_get_account_number (transaction_number),
+											  account_number,
 											  transaction_number,
 											  my_safe_null_str(gsb_data_transaction_get_transaction_id (transaction_number)),
 											  my_safe_null_str(date),
