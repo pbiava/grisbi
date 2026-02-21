@@ -150,6 +150,10 @@ gboolean file_obfuscate_run ( void )
                 gsb_data_account_set_bank_branch_code (account_number, NULL);
                 gsb_data_account_set_bank_account_number (account_number, NULL);
                 gsb_data_account_set_bank_account_key (account_number, NULL);
+
+                GrisbiWinEtat * w_etat = (GrisbiWinEtat *) grisbi_win_get_w_etat ();
+                w_etat->adr_common = NULL;
+                w_etat->adr_secondary = NULL;
             }
 
             if ( gtk_toggle_button_get_active ( GTK_TOGGLE_BUTTON ( button_accounts_names ) ) )
