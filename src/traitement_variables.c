@@ -186,6 +186,14 @@ void init_variables (void)
     w_etat->affichage_echeances_perso_nb_libre = 0;
     w_etat->affichage_echeances_perso_j_m_a = PERIODICITY_DAYS;
 
+    /* variables generales */
+    g_free (w_etat->accounting_entity);
+    w_etat->accounting_entity = NULL;
+    g_free (w_etat->adr_common);
+    w_etat->adr_common = NULL;
+    g_free (w_etat->adr_secondary);
+    w_etat->adr_secondary = NULL;
+
 	/* raz variables of etat */
     if (w_etat->name_logo && strlen (w_etat->name_logo))
         g_free (w_etat->name_logo);
