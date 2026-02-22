@@ -1890,7 +1890,13 @@ gboolean gsb_form_show (gboolean show)
 	grisbi_win_form_expander_show_frame ();
 
 	if (!grisbi_win_form_expander_is_expanded () && show)
+	{
 		gtk_expander_set_expanded (GTK_EXPANDER (form_expander), TRUE);
+
+		GrisbiAppConf *a_conf = grisbi_app_get_a_conf ();
+		a_conf->formulaire_toujours_affiche = TRUE;
+		gsb_menu_gui_toggle_show_form ();
+	}
 
     return FALSE;
 }
