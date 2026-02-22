@@ -1948,6 +1948,9 @@ gboolean gsb_gui_navigation_select_line (GtkTreeSelection *selection,
 			/* show menu InitwidthCol */
 			gsb_menu_gui_sensitive_win_menu_item ("reset-width-col", TRUE);
 
+			/* show menu "Show transaction form" */
+			gsb_menu_gui_sensitive_win_menu_item ("show-form", TRUE);
+
 			/* set last_selected_scheduler option */
 			gsb_scheduler_list_update_tree_view (gsb_scheduler_list_get_tree_view ());
 
