@@ -546,79 +546,79 @@ const gchar *gsb_form_widget_get_name (gint element_number)
 			break;
 
 		case TRANSACTION_FORM_DATE:
-			return (N_("Date"));
+			return _("Date");
 			break;
 
 		case TRANSACTION_FORM_DEBIT:
-			return (N_("Debit"));
+			return _("Debit");
 			break;
 
 		case TRANSACTION_FORM_CREDIT:
-			return (N_("Credit"));
+			return _("Credit");
 			break;
 
 		case TRANSACTION_FORM_VALUE_DATE:
-			return (N_("Value date"));
+			return _("Value date");
 			break;
 
 		case TRANSACTION_FORM_EXERCICE:
-			return (N_("Financial year"));
+			return _("Financial year");
 			break;
 
 		case TRANSACTION_FORM_PARTY:
-			return (N_("Payee"));
+			return _("Payee");
 			break;
 
 		case TRANSACTION_FORM_CATEGORY:
-			return (N_("Categories : Sub-categories"));
+			return _("Categories : Sub-categories");
 			break;
 
 		case TRANSACTION_FORM_FREE:
-			return (N_("Free"));
+			return _("Free");
 			break;
 
 		case TRANSACTION_FORM_BUDGET:
-			return (N_("Budgetary line"));
+			return _("Budgetary line");
 			break;
 
 		case TRANSACTION_FORM_NOTES:
-			return (N_("Notes"));
+			return _("Notes");
 			break;
 
 		case TRANSACTION_FORM_TYPE:
-			return (N_("Method of payment"));
+			return _("Method of payment");
 			break;
 
 		case TRANSACTION_FORM_CHEQUE:
-			return (N_("Cheque/Transfer number"));
+			return _("Cheque/Transfer number");
 			break;
 
 		case TRANSACTION_FORM_DEVISE:
-			return (N_("Currency"));
+			return _("Currency");
 			break;
 
 		case TRANSACTION_FORM_CHANGE:
-			return (N_("Change"));
+			return _("Change");
 			break;
 
 		case TRANSACTION_FORM_VOUCHER:
-			return (N_("Voucher"));
+			return _("Voucher");
 			break;
 
 		case TRANSACTION_FORM_BANK:
-			return (N_("Bank references"));
+			return _("Bank references");
 			break;
 
 		case TRANSACTION_FORM_CONTRA:
-			return (N_("Contra-transaction method of payment"));
+			return _("Contra-transaction method of payment");
 			break;
 
 		case TRANSACTION_FORM_OP_NB:
-			return (N_("Transaction number"));
+			return _("Transaction number");
 			break;
 
 		case TRANSACTION_FORM_MODE:
-			return (N_("Automatic/Manual"));
+			return _("Automatic/Manual");
 			break;
     }
     return NULL;
