@@ -1253,6 +1253,7 @@ void gsb_menu_set_menus_view_account_sensitive (gboolean sensitive)
         "show-archived",
         "show-ope",
         "reset-width-col",
+        "new-ope",
         NULL
     };
     const gchar **tmp = items;
