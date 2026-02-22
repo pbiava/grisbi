@@ -1062,9 +1062,16 @@ gboolean gsb_form_widget_get_valide_amout_entry (const gchar *string)
 
     ptr = string;
 
+    /* reject mix of * with + or - */
     if ((g_utf8_strchr (ptr, -1, '*') && g_utf8_strchr (ptr, -1, '+'))
      ||
      (g_utf8_strchr (ptr, -1, '*') && g_utf8_strchr (ptr, -1, '-')))
+        return FALSE;
+
+    /* reject mix of / with + or - */
+    if ((g_utf8_strchr (ptr, -1, '/') && g_utf8_strchr (ptr, -1, '+'))
+        ||
+        (g_utf8_strchr (ptr, -1, '/') && g_utf8_strchr (ptr, -1, '-')))
         return FALSE;
 
     mon_decimal_point = gsb_locale_get_mon_decimal_point ();
