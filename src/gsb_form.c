@@ -813,6 +813,12 @@ static gboolean gsb_form_validate_form_transaction (gint transaction_number,
     widget = gsb_form_widget_get_widget (TRANSACTION_FORM_DEBIT);
     if (widget)
     {
+        if (strcmp(gtk_widget_get_name(widget), "form_entry_error") == 0)
+        {
+            /* not a valid number or formula */
+            gtk_entry_set_text(GTK_ENTRY(widget), ERROR_REAL_STRING);
+            return FALSE;
+        }
         if (gsb_form_widget_check_empty (widget) == FALSE)
             number = gsb_real_opposite (utils_real_get_calculate_entry (widget));
 
@@ -821,6 +827,13 @@ static gboolean gsb_form_validate_form_transaction (gint transaction_number,
 			gint payment_number;
 
 			widget = gsb_form_widget_get_widget (TRANSACTION_FORM_CREDIT);
+			if (strcmp(gtk_widget_get_name(widget), "form_entry_error") == 0)
+			{
+			    /* not a valid number or formula */
+			    gtk_entry_set_text(GTK_ENTRY(widget), ERROR_REAL_STRING);
+			    return FALSE;
+			}
+
             number = utils_real_get_calculate_entry (widget);
 
             if ((gsb_form_widget_check_empty (widget) == TRUE || number.mantissa == 0)
