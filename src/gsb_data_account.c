@@ -3912,6 +3912,55 @@ gboolean gsb_data_account_renum_account_number_0 (const gchar *filename)
 }
 
 /**
+ * Renum an account with a negative number to an account number found in the transactions
+ *
+ * \param account_number		account number created when the file was loaded
+ * \param new_account_number	account number found in the transactions
+ *
+ * \return
+ **/
+void gsb_data_account_renum_non_existent_account (gint account_number,
+												  gint new_account_number)
+{
+	GSList *tmp_list;
+	gchar* tmp_str;
+	gint result;
+
+	devel_debug (NULL);
+
+	/* Avertissement avant renommage du compte */
+	tmp_str = g_strdup_printf (_("The account \"%s\" has the number %d.\n"
+								  "It will be renumbered and will have the number \"%d\"."),
+							   gsb_data_account_get_name (account_number),
+							   account_number,
+							   new_account_number);
+
+	result = dialogue_yes_no (tmp_str, _("Renumbered account"), GTK_RESPONSE_YES);
+    g_free (tmp_str);
+	if (!result)
+	{
+		return;
+    }
+	tmp_list = gsb_data_account_get_list_accounts ();
+	while (tmp_list)
+	{
+		AccountStruct *tmp_account;
+
+		tmp_account = tmp_list->data;
+		if (tmp_account->account_number == account_number)
+		{
+			tmp_account->account_number = new_account_number;
+			gsb_file_set_modified (TRUE);
+			gsb_gui_navigation_remove_account (account_number);
+			gsb_gui_navigation_add_account (new_account_number, TRUE);
+
+			return;
+		}
+		tmp_list = tmp_list->next;
+	}
+}
+
+/**
  * test simplification du calcul des soldes.
  *
  * \param

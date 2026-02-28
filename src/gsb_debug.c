@@ -46,14 +46,58 @@
 /*END_INCLUDE*/
 
 /*START_STATIC*/
+ static GSList *			non_existent_accounts = NULL;
+ static gint				account_nbre = 0;
 /*END_STATIC*/
 
 /*START_EXTERN*/
 /*END_EXTERN*/
 
+enum DebugAssistantPage
+{
+	DEBUG_ASSISTANT_INTRO= 0,
+	DEBUG_ASSISTANT_TEST_PAGE
+};
 /******************************************************************************/
 /* Private functions                                                          */
 /******************************************************************************/
+/**
+ *
+ *
+ * \param
+ *
+ * \return
+ **/
+static GtkWidget *gsb_debug_test_page (GtkWidget *assistant)
+{
+	GtkWidget *scrolled_window;
+	GtkWidget *text_view;
+	GtkTextBuffer *text_buffer;
+
+	scrolled_window = gtk_scrolled_window_new (FALSE, FALSE);
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
+									GTK_POLICY_AUTOMATIC,
+									GTK_POLICY_AUTOMATIC);
+
+	text_view = gtk_text_view_new ();
+	gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (text_view), GTK_WRAP_WORD);
+	gtk_text_view_set_editable (GTK_TEXT_VIEW(text_view), FALSE);
+	gtk_text_view_set_cursor_visible (GTK_TEXT_VIEW(text_view), FALSE);
+	gtk_text_view_set_left_margin (GTK_TEXT_VIEW(text_view), MARGIN_START);
+	gtk_text_view_set_right_margin (GTK_TEXT_VIEW(text_view), MARGIN_END);
+	gtk_container_add (GTK_CONTAINER (scrolled_window), text_view);
+
+	text_buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
+	g_object_set_data (G_OBJECT (assistant), "text-buffer-test", text_buffer);
+	gtk_text_buffer_create_tag (text_buffer, "bold", "weight", PANGO_WEIGHT_BOLD, NULL);
+	gtk_text_buffer_create_tag (text_buffer, "x-large", "scale", PANGO_SCALE_X_LARGE, NULL);
+	gtk_text_buffer_create_tag (text_buffer, "indented", "left-margin", 24, NULL);
+
+	gtk_widget_show_all (scrolled_window);
+
+	return scrolled_window;
+}
+
 /**
  * fix the default
  *
@@ -715,10 +759,118 @@ static gboolean gsb_debug_payee_test_fix (void)
 	}
 	return TRUE;
 }
+/**
+ * check if all the account into the transactions exist
+ *
+ * \param
+ *
+ * \return a gchar containing the transactions with problem or NULL
+ **/
+static gchar *gsb_debug_non_existent_account_test (void)
+{
+	GSList *tmp_list;
+	gchar *returned_text = NULL;
+	gint transaction_nbre = 0;
+	gboolean invalid = FALSE;
+
+	tmp_list = gsb_data_transaction_get_complete_transactions_list ();
+	while (tmp_list)
+	{
+		gint account_number;
+		gint transaction_number;
+
+		transaction_number = gsb_data_transaction_get_transaction_number (tmp_list->data);
+		account_number = gsb_data_transaction_get_account_number (transaction_number);
+		if (!gsb_data_account_exists (account_number))
+		{
+			/* account not found */
+			if (!g_slist_find (non_existent_accounts, GINT_TO_POINTER (account_number)))
+			{
+				non_existent_accounts = g_slist_append (non_existent_accounts, GINT_TO_POINTER (account_number));
+			}
+			transaction_nbre ++;
+			invalid = TRUE;
+		}
+		tmp_list = tmp_list->next;
+	}
+
+	if (invalid)
+	{
+		account_nbre = g_slist_length (non_existent_accounts);
+		if (account_nbre == 1)
+		{
+			returned_text = g_strdup_printf (_("%d transactions have account number %d, which does not exist.\n"),
+											 transaction_nbre,
+											 GPOINTER_TO_INT (non_existent_accounts->data));
+
+			return returned_text;
+		}
+		else if (account_nbre > 1)
+		{
+			gchar *tmp_str;
+			gchar *tmp_str1;
+			tmp_str = g_strdup_printf (_("%d transactions have %d accounts which does not exist. "
+										 "The accounts concerned are:\n"),
+									   transaction_nbre,
+									   account_nbre);
+			returned_text = g_strdup (tmp_str);
+
+			while (non_existent_accounts)
+			{
+				tmp_str = g_strdup_printf (_("	Account No.: %d\n"), GPOINTER_TO_INT (non_existent_accounts->data));
+				tmp_str1 = g_strconcat (returned_text, tmp_str, NULL);
+				g_free (returned_text);
+				g_free (tmp_str);
+				returned_text = tmp_str1;
+
+				non_existent_accounts = non_existent_accounts->next;
+			}
+			tmp_str = g_markup_printf_escaped ("<span color=\"red\" weight=\"bold\">%s</span>\n\n",
+											   (_("\nGrisbi cannot automatically resolve this issue. "
+												  "You must edit the file directly to reconcile the accounts.")));
+			tmp_str1 = g_strconcat (returned_text, tmp_str, NULL);
+			g_free (returned_text);
+			g_free (tmp_str);
+			returned_text = tmp_str1;
+
+			return returned_text;
+		}
+	}
+	else
+	{
+		g_free (returned_text);
+
+		return NULL;
+	}
+	return NULL;
+}
+
+/**
+ * fix the transactions with non-existent account,
+ * just remove the categories
+ *
+ * \param
+ *
+ * \return TRUE if ok
+ **/
+static gboolean gsb_debug_non_existent_account_test_fix (void)
+{
+	GrisbiWinRun *w_run;
+
+	w_run = grisbi_win_get_w_run ();
+	account_nbre = g_slist_length (non_existent_accounts);
+	if (account_nbre == 1)
+	{
+		gsb_data_account_renum_non_existent_account (w_run->negative_account_number,
+													 GPOINTER_TO_INT (non_existent_accounts->data));
+	}
+
+	return TRUE;
+}
 
 
-/** Tests  */
-static struct GsbDebugTest debug_tests [8] =
+/* <liste des structures tests  */
+static struct GsbDebugTest debug_tests [9] =
 {
 	/* Check for reconciliation inconcistency.  */
 	{ N_("Incorrect reconciliation totals"),
@@ -784,6 +936,11 @@ static struct GsbDebugTest debug_tests [8] =
 	 "remove them and that transactions will have no payee."),
 	  gsb_debug_payee_test, gsb_debug_payee_test_fix },
 
+	{ N_("Transactions linked to a non-existent account"),
+	  N_("This test will look for transactions which have non-existent account."),
+	  N_("If Grisbi has found transactions with a non-existent account, "
+		 "we must try to link them to an account."),
+		gsb_debug_non_existent_account_test, gsb_debug_non_existent_account_test_fix},
 
     { NULL, NULL, NULL, NULL, NULL }
 };
@@ -878,9 +1035,6 @@ static gboolean gsb_debug_enter_test_page (GtkWidget *assistant)
 gboolean gsb_debug (void)
 {
 	GtkWidget *assistant;
-    GtkWidget *scrolled_window;
-    GtkWidget *text_view;
-    GtkTextBuffer *text_buffer;
 
 	grisbi_win_status_bar_message (_("Checking file for possible corruption..."));
 
@@ -891,34 +1045,19 @@ gboolean gsb_debug (void)
 								   "gsb-bug-32.png",
 								   NULL);
 
-    scrolled_window = gtk_scrolled_window_new (FALSE, FALSE);
-    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
-									GTK_POLICY_AUTOMATIC,
-									GTK_POLICY_AUTOMATIC);
-
-    text_view = gtk_text_view_new ();
-    gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (text_view), GTK_WRAP_WORD);
-    gtk_text_view_set_editable (GTK_TEXT_VIEW(text_view), FALSE);
-    gtk_text_view_set_cursor_visible (GTK_TEXT_VIEW(text_view), FALSE);
-    gtk_text_view_set_left_margin (GTK_TEXT_VIEW(text_view), MARGIN_START);
-    gtk_text_view_set_right_margin (GTK_TEXT_VIEW(text_view), MARGIN_END);
-    gtk_container_add (GTK_CONTAINER (scrolled_window), text_view);
-
-    text_buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
-    g_object_set_data (G_OBJECT (assistant), "text-buffer", text_buffer);
-    gtk_text_buffer_create_tag (text_buffer, "bold", "weight", PANGO_WEIGHT_BOLD, NULL);
-    gtk_text_buffer_create_tag (text_buffer, "x-large", "scale", PANGO_SCALE_X_LARGE, NULL);
-    gtk_text_buffer_create_tag (text_buffer, "indented", "left-margin", 24, NULL);
-
-    gsb_assistant_add_page (assistant,
-							scrolled_window,
-							1,
-							0,
+	gsb_assistant_add_page (assistant,
+							gsb_debug_test_page (assistant),
+							DEBUG_ASSISTANT_TEST_PAGE,
+							DEBUG_ASSISTANT_INTRO,
 							-1,
 							G_CALLBACK (gsb_debug_enter_test_page));
 
-    gsb_assistant_run (assistant);
-    gtk_widget_destroy (assistant);
+	gsb_assistant_run (assistant);
+	gtk_widget_destroy (assistant);
+
+	/* free non_existent_accounts list */
+	g_slist_free (non_existent_accounts);
+	non_existent_accounts = NULL;
 
 	return FALSE;
 }

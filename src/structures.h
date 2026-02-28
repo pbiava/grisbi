@@ -341,6 +341,9 @@ struct _GrisbiWinRun
 	/* backup */
 	gboolean	remove_backup_files;						/* on ne fait cette sauvegarde qu'une fois par session */
 
+	/* Account < 0 */
+	gint 		negative_account_number;					/* > 0 si création nouveau compte en remplacement d'un compte negatif */
+
     /* file stuff */
     time_t		file_modification;
     time_t		file_backup_saved;
