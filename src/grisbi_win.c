@@ -2418,7 +2418,7 @@ void grisbi_win_status_bar_wait (gboolean force_update)
 	priv->wait_state = TRUE;
 
 	run_window = gtk_widget_get_window (GTK_WIDGET (win));
-	display = gdk_window_get_display (run_window);
+	display = gtk_widget_get_display (GTK_WIDGET (win));
 	cursor = gdk_cursor_new_from_name (display, "wait");
 	gdk_window_set_cursor (run_window, cursor);
 

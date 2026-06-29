@@ -689,7 +689,6 @@ static gboolean grisbi_app_window_delete_event (GrisbiWin *win,
  */
 static GrisbiWin *grisbi_app_create_window (GrisbiApp *app)
 {
-	GdkWindow *window;
 	GdkDisplay *display;
 	GdkMonitor *monitor;
 	GdkRectangle rectangle;
@@ -747,8 +746,7 @@ static GrisbiWin *grisbi_app_create_window (GrisbiApp *app)
 	/* on teste s'il faut changer de résolution */
 	if (!(priv->a_conf)->low_definition_screen) /* GTK4: partie a reprendre */
 	{
-		window = gtk_widget_get_window (GTK_WIDGET (win));
-		display = gdk_window_get_display (GDK_WINDOW (window));
+		display = gtk_widget_get_display (GTK_WIDGET (win));
 		monitor = gdk_display_get_monitor_at_point (display, 0, 0);
 		gdk_monitor_get_geometry (monitor, &rectangle);
 
