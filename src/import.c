@@ -5431,6 +5431,7 @@ void gsb_import_by_rule (gint rule)
 	gint i=0;
 	GrisbiAppConf *a_conf;
 	GrisbiWinRun *w_run;
+	GrisbiWin *win;
 
 	devel_debug (NULL);
 	a_conf = (GrisbiAppConf *) grisbi_app_get_a_conf ();
@@ -5441,9 +5442,10 @@ void gsb_import_by_rule (gint rule)
 		return;
 
 	/* set cursor */
-	run_window = gtk_widget_get_window (GTK_WIDGET (grisbi_app_get_active_window (NULL)));
-	display = gdk_window_get_display (run_window);
+	win = grisbi_app_get_active_window (NULL);
+	display = gtk_widget_get_display (GTK_WIDGET (win));
 	cursor = gdk_cursor_new_from_name (display, "wait");
+	run_window = gtk_widget_get_window (GTK_WIDGET (win));
 	gdk_window_set_cursor (run_window, cursor);
 
 	account_number = gsb_data_import_rule_get_account (rule);

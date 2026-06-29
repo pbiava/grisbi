@@ -288,7 +288,7 @@ static GtkWidget *gsb_calendar_entry_popup (GtkWidget *entry)
 
 	/* pour la soustraire à la position de l'entrée date */
 	y -= popup_size.height;
-	display = gdk_window_get_display (window);
+	display = gtk_widget_get_display (GTK_WIDGET (entry));
 	monitor = gdk_display_get_monitor_at_point (display, x, y);
 	gdk_monitor_get_geometry (monitor, &rectangle);
 
