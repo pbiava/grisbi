@@ -894,50 +894,76 @@ GtkWidget *utils_menu_item_new_from_resource_label (const gchar *image_name,
 /**
  *
  *
- * \param	category, payee or IB tree_view 
+ * \param	category, payee or IB tree_view
  *
  * \return
  **/
 void utils_cursor_set_wait_cursor (GtkWidget *widget,
 								   gpointer  data)
 {
-	GdkWindow *run_window;
 	GrisbiWin *win;
 
 	/* set progress cursor */
 	win = grisbi_app_get_active_window (NULL);
-	run_window = gtk_widget_get_window (GTK_WIDGET (win));
-	utils_gdk_window_set_wait_cursor (run_window);
+	utils_gtk_widget_set_cursor_from_name (GTK_WIDGET (win), "wait");
 
 	/* update ui */
 	g_main_context_iteration (NULL, FALSE);
 
 	/* reset cursor */
-	gdk_window_set_cursor (run_window, NULL);
+	utils_gtk_widget_set_cursor (GTK_WIDGET (win), NULL);
 }
 
 /**
+ * fonction mirroir pour passer à gtk4
  *
- *
- * \param		GdkWindow run_window
+ * \param
+ * \param
  *
  * \return
  **/
-void utils_gdk_window_set_wait_cursor (GdkWindow *run_window)
+void utils_gtk_widget_set_cursor (GtkWidget *widget,
+								  GdkCursor *cursor)
 {
-	GdkCursor *cursor;
-	GdkDisplay *display;
+	GdkWindow *run_window;
 
-	/* set progress cursor */
-	display = gdk_window_get_display (run_window);
-
-	cursor = gdk_cursor_new_from_name (display, "wait");
+	run_window = gtk_widget_get_window (GTK_WIDGET (widget));
 	gdk_window_set_cursor (run_window, cursor);
 }
- 
+
+/**
+ * fonction mirroir pour passer à gtk4
+ *
+ * \param
+ * \param
+ *
+ * \return
+ **/
+void utils_gtk_widget_set_cursor_from_name (GtkWidget  *widget,
+											const char *name)
+{
+  g_return_if_fail (GTK_IS_WIDGET (widget));
+
+	if (name)
+	{
+		GdkDisplay *display;
+		GdkCursor *cursor;
+
+		display = gtk_widget_get_display (GTK_WIDGET (widget));
+		cursor = gdk_cursor_new_from_name (display, name);
+		utils_gtk_widget_set_cursor (widget, cursor);
+		g_object_unref (cursor);
+	}
+	else
+	{
+		utils_gtk_widget_set_cursor (widget, NULL);
+	}
+}
+
 /**
  *
  *
+ * \param
  * \param
  *
  * \return

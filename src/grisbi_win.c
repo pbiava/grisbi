@@ -2397,7 +2397,6 @@ void grisbi_win_status_bar_message (gchar *message)
  **/
 void grisbi_win_status_bar_wait (gboolean force_update)
 {
-	GdkCursor *cursor;
 	GdkDevice *device;
 	GdkDisplay *display;
 	GdkSeat *default_seat;
@@ -2417,25 +2416,28 @@ void grisbi_win_status_bar_wait (gboolean force_update)
 	/* set wait_state */
 	priv->wait_state = TRUE;
 
-	run_window = gtk_widget_get_window (GTK_WIDGET (win));
-	display = gtk_widget_get_display (GTK_WIDGET (win));
-	cursor = gdk_cursor_new_from_name (display, "wait");
-	gdk_window_set_cursor (run_window, cursor);
+	/* set wait cursor */
+	utils_gtk_widget_set_cursor_from_name (GTK_WIDGET (win), "wait");
 
+	/* get device */
+	display = gtk_widget_get_display (GTK_WIDGET (win));
 	default_seat = gdk_display_get_default_seat (display);
 	device = gdk_seat_get_pointer (default_seat);
 
+	run_window = gtk_widget_get_window (GTK_WIDGET (win));
 	current_window = gdk_device_get_window_at_position (device, NULL, NULL);
 	if (current_window && GDK_IS_WINDOW (current_window) && current_window != run_window)
 	{
 		GdkWindow *parent;
 
+		printf ("current_window != run_window\n");
+
 		parent = gdk_window_get_toplevel (current_window);
 		if (parent && parent != current_window)
 		{
+			printf ("current_window != parent_window\n");
 			current_window = parent;
 		}
-		gdk_window_set_cursor (current_window, cursor);
 
 		priv->tracked_window = current_window;
 	}

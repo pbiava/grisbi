@@ -3257,13 +3257,11 @@ static void gsb_import_confirmation_enregistrement_ope_import (ImportAccount *im
 															   GtkWindow *parent)
 {
 	GtkWidget *dialog;
-	GdkCursor *cursor;
 	GtkWidget *button_OK;
 	GtkWidget *button_select_all;
 	GtkWidget *button_unselect_all;
 	GtkWidget *vbox;
 	GtkWidget *hbox;
-	GdkWindow *run_window;
 	GtkWidget *scrolled_window;
 	GtkWidget *label;
 	GtkWidget *frame;
@@ -3524,9 +3522,7 @@ static void gsb_import_confirmation_enregistrement_ope_import (ImportAccount *im
 		gtk_widget_show_all (dialog);
 
 	/* set cursor */
-	run_window = gtk_widget_get_window (GTK_WIDGET (dialog));
-	cursor = gdk_cursor_new_from_name (gdk_window_get_display (run_window), "wait");
-	gdk_window_set_cursor (run_window, cursor);
+	utils_gtk_widget_set_cursor_from_name (GTK_WIDGET (dialog), "wait");
 
 	dialog_return:
 	result = gtk_dialog_run (GTK_DIALOG (dialog));
@@ -3591,7 +3587,7 @@ static void gsb_import_confirmation_enregistrement_ope_import (ImportAccount *im
 	if (list_ope_doublons)
 		g_slist_free (list_ope_doublons);
 
-	gdk_window_set_cursor (run_window, NULL);
+	utils_gtk_widget_set_cursor (GTK_WIDGET (dialog), NULL);
 	gtk_widget_destroy (dialog);
 }
 
@@ -5423,9 +5419,6 @@ static gchar **gsb_import_by_rule_ask_filename (gint rule,
  **/
 void gsb_import_by_rule (gint rule)
 {
-	GdkCursor *cursor;
-	GdkDisplay *display;
-	GdkWindow *run_window;
 	gint account_number;
 	gchar **array;
 	gint i=0;
@@ -5443,10 +5436,7 @@ void gsb_import_by_rule (gint rule)
 
 	/* set cursor */
 	win = grisbi_app_get_active_window (NULL);
-	display = gtk_widget_get_display (GTK_WIDGET (win));
-	cursor = gdk_cursor_new_from_name (display, "wait");
-	run_window = gtk_widget_get_window (GTK_WIDGET (win));
-	gdk_window_set_cursor (run_window, cursor);
+	utils_gtk_widget_set_cursor_from_name (GTK_WIDGET (win), "wait");
 
 	account_number = gsb_data_import_rule_get_account (rule);
 	while (array[i])
@@ -5581,7 +5571,7 @@ void gsb_import_by_rule (gint rule)
 	/* force the update module budget */
 	gsb_data_account_set_bet_maj (account_number, BET_MAJ_ALL);
 
-	gdk_window_set_cursor (run_window, NULL);
+	utils_gtk_widget_set_cursor (GTK_WIDGET (win), NULL);
 	gsb_file_set_modified (TRUE);
 }
 
