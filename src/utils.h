@@ -34,7 +34,6 @@ gboolean        sensitive_widget                                        (gpointe
 void            update_gui                                              (void);
 void			utils_cursor_set_wait_cursor							(GtkWidget *tree_view,
 																		 gpointer data);
-void			utils_gdk_window_set_wait_cursor						(GdkWindow *run_window);
 GtkWidget *		utils_menu_item_new_from_image_label 					(const gchar *image_name,
 																		 const gchar *label_name);
 GtkWidget *		utils_menu_item_new_from_resource_label 				(const gchar *image_name,
@@ -59,5 +58,12 @@ gboolean        utils_set_tree_store_background_color					(GtkWidget *tree_view,
 gboolean        utils_tree_view_all_rows_are_selected                   (GtkTreeView *tree_view);
 void            utils_tree_view_set_expand_all_and_select_path_realize  (GtkWidget *tree_view,
                                                                          const gchar *str_path);
+
+/* pseudo fonctions */
+void			utils_gtk_widget_set_cursor								(GtkWidget *widget,
+																		 GdkCursor *cursor);
+void			utils_gtk_widget_set_cursor_from_name					(GtkWidget  *widget,
+																		  const char *name);
+
 /* END_DECLARATION */
 #endif
