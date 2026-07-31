@@ -6,13 +6,12 @@
 # meson setup --reconfigure --wipe
 
 project('grisbi', 'c',
-  version : '3.92.0')
+  version : '3.90.0')
 
 # for config.h
 conf_data = configuration_data({
   'VERSION' : '"' + meson.project_version() + '"',
   'PACKAGE' : '"grisbi"',
-  'HAVE_GOFFICE' : get_option('goffice'),
   'HAVE_OFX' : true,
   'HAVE_SSL' : true,
   'HAVE_XML2' : true,
@@ -23,8 +22,8 @@ pixmaps_dir = join_paths(localdir, 'pixmaps', 'grisbi')
 conf_data.set_quoted('LOCALEDIR', join_paths(localdir, 'locale'))
 conf_data.set_quoted('PIXMAPS_DIR', pixmaps_dir)
 conf_data.set_quoted('DATA_PATH', join_paths(localdir, 'grisbi'))
-conf_data.set_quoted('HELP_PATH', join_paths(get_option('prefix'), 'share/doc/grisbi'))
-conf_data.set_quoted('UI_DIR', join_paths(localdir, 'grisbi/ui'))
+conf_data.set_quoted('HELP_PATH', join_paths(get_option('prefix'), 'doc', 'grisbi'))
+conf_data.set_quoted('UI_DIR', join_paths(localdir, 'grisbi', 'ui'))
 
 minor_version = meson.project_version().split('.')[1].to_int()
 if get_option('debug') or minor_version % 2 == 1
@@ -39,18 +38,13 @@ if get_option('debug') or minor_version % 2 == 1
 endif
 
 # dependencies
-if get_option('goffice')
-  goffice_dep = dependency('libgoffice-0.10')
-else
-  goffice_dep = dependency('libgsf-1')
-endif
-gtk_dep = dependency('gtk+-3.0')
+gtk_dep = dependency('gtk4')
 libofx_dep = dependency('libofx')
 libxml2_dep = dependency('libxml-2.0')
 openssl_dep = dependency('openssl')
 zlib_dep = dependency('zlib')
 
-grisbi_dep = [goffice_dep, gtk_dep, libofx_dep, libxml2_dep, openssl_dep, zlib_dep]
+grisbi_dep = [gtk_dep, libofx_dep, libxml2_dep, openssl_dep, zlib_dep]
 
 incdir = include_directories(['src', 'src/widgets', 'src/etats', 'src/prefs'])
 
@@ -60,12 +54,6 @@ subdir('po')
 compiler = meson.get_compiler('c')
 if compiler.has_function('backtrace')
   conf_data.set('HAVE_BACKTRACE', true)
-endif
-
-# Ubuntu 22.04 provides an old libglib without g_sort_array()
-if compiler.has_function('g_sort_array',
-  dependencies : gtk_dep)
-  conf_data.set('HAVE_G_SORT_ARRAY', true)
 endif
 
 gnome = import('gnome')
@@ -322,13 +310,12 @@ install_man('grisbi.1')
 install_data([
   'src/ui/csv_template_rule.ui',
   'src/ui/etats_prefs.ui',
-  'src/ui/grisbi_menu.ui',
-  'src/ui/grisbi_prefs.ui',
-  'src/ui/grisbi_report_default.css',
-  'src/ui/grisbi_win.ui',
   'src/ui/grisbi-dark.css',
   'src/ui/grisbi-widgets.css',
   'src/ui/grisbi.css',
+  'src/ui/grisbi_menu.ui',
+  'src/ui/grisbi_prefs.ui',
+  'src/ui/grisbi_win.ui',
   ],
   install_dir : join_paths (get_option ('datadir'), 'grisbi/ui')
   )
