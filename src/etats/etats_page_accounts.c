@@ -89,12 +89,11 @@ static void etats_page_accounts_setup_page (EtatsPageAccounts *page,
 
 	/* set head page */
 	head_page = utils_prefs_head_page_new_with_title_and_icon (_("Account selection"), "gsb-ac-bank-32.png");
-    gtk_box_pack_start (GTK_BOX (priv->vbox_etats_page_accounts), head_page, FALSE, FALSE, 0);
-    gtk_box_reorder_child (GTK_BOX (priv->vbox_etats_page_accounts), head_page, 0);
+    gtk_box_prepend (GTK_BOX (priv->vbox_etats_page_accounts), head_page);
 
 	/* init widget list */
 	priv->widget_list_accounts = GTK_WIDGET (widget_list_accounts_new (GTK_WIDGET (page)));
-	gtk_box_pack_start (GTK_BOX (priv->vbox_generale_comptes), priv->widget_list_accounts, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_generale_comptes), priv->widget_list_accounts);
 
 	/* on met la connection pour changer le style de la ligne du panneau de gauche */
 	g_object_set_data (G_OBJECT (priv->bouton_detaille_comptes), "etats_prefs", etats_prefs);

@@ -343,8 +343,7 @@ static void etats_page_period_setup_page (EtatsPagePeriod *page,
 
 	/* set head page */
 	head_page = utils_prefs_head_page_new_with_title_and_icon (_("Date selection"), "gsb-scheduler-32.png");
-    gtk_box_pack_start (GTK_BOX (priv->vbox_etats_page_period), head_page, FALSE, FALSE, 0);
-    gtk_box_reorder_child (GTK_BOX (priv->vbox_etats_page_period), head_page, 0);
+    gtk_box_prepend (GTK_BOX (priv->vbox_etats_page_period), head_page);
 
     /* on traite la partie gauche de l'onglet dates */
 	etats_page_period_setup_treeview_dates (page);

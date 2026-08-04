@@ -1851,16 +1851,16 @@ static void gtk_combofix_init (GtkComboFix *combofix)
 
     /* a hbox which contains the entry and the button */
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-    gtk_box_pack_start (GTK_BOX (vbox), hbox, TRUE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (vbox), hbox);
     gtk_widget_show (hbox);
 
     /* set the entry with completion */
 	gtk_combofix_create_entry (combofix);
-    gtk_box_pack_start (GTK_BOX (hbox), priv->entry, TRUE, TRUE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), priv->entry);
 
     /* set the button */
 	gtk_combofix_create_button (combofix);
-    gtk_box_pack_start (GTK_BOX (hbox), priv->button, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), priv->button);
 
     /* set the popup but don't show it */
 	gtk_combofix_create_popup (combofix);

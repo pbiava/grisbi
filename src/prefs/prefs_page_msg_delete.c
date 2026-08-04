@@ -247,8 +247,7 @@ static void prefs_page_msg_delete_setup_page (PrefsPageMsgDelete *page)
 
 	/* On récupère le nom de la page */
 	head_page = utils_prefs_head_page_new_with_title_and_icon (_("Messages before deleting"), "gtk-corbeille-32.png");
-	gtk_box_pack_start (GTK_BOX (priv->vbox_msg_delete), head_page, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->vbox_msg_delete), head_page, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_msg_delete), head_page);
 
 	/* set treeview */
 	priv->treeview_display_msg = prefs_page_msg_delete_create_tree_view (page);

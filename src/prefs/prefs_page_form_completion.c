@@ -239,8 +239,7 @@ static void prefs_page_form_completion_setup_form_completion_page (PrefsPageForm
 
 	/* On récupère le nom de la page */
 	head_page = utils_prefs_head_page_new_with_title_and_icon (_("Form completion"), "gsb-form-32.png");
-	gtk_box_pack_start (GTK_BOX (priv->vbox_form_completion), head_page, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->vbox_form_completion), head_page, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_form_completion), head_page);
 
 	/* initialise le bouton nombre minimal de caractères avant propositions dans les champs de saisie */
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (priv->spinbutton_completion_minimum_key_length),

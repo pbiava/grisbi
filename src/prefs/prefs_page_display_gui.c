@@ -210,8 +210,7 @@ static void prefs_page_display_gui_setup_page (PrefsPageDisplayGui *page,
 
 	/* On récupère le nom de la page */
 	head_page = utils_prefs_head_page_new_with_title_and_icon (_("Elements of interface"), "gsb-display-gui-32.png");
-	gtk_box_pack_start (GTK_BOX (priv->vbox_display_gui), head_page, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->vbox_display_gui), head_page, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_display_gui), head_page);
 
     /* set the variables for low_definition_screen */
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->checkbutton_low_definition_screen),

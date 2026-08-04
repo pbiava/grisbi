@@ -2,7 +2,7 @@
 /*                                                                            */
 /*     Copyright (C)    2000-2008 Cédric Auger (cedric@grisbi.org)            */
 /*          2003-2009 Benjamin Drieu (bdrieu@april.org)                       */
-/*          https://www.grisbi.org/                                            */
+/*          https://www.grisbi.org/                                           */
 /*                                                                            */
 /*  This program is free software; you can redistribute it and/or modify      */
 /*  it under the terms of the GNU General Public License as published by      */
@@ -204,13 +204,13 @@ static GtkWidget *gsb_assistant_first_page_2 ( GtkWidget *assistant )
 
     vbox = new_vbox_with_title_and_icon ( _("General configuration of Grisbi"),
 					  "gsb-generalities-32.png" );
-    gtk_box_pack_start ( GTK_BOX (page), vbox, TRUE, TRUE, 0 );
+    gtk_box_prepend ( GTK_BOX (page), vbox);
 
     /* configure the browser */
     paddingbox = new_paddingbox_with_title (vbox, FALSE, _("Web"));
 
     table = gtk_grid_new ();
-    gtk_box_pack_start ( GTK_BOX ( paddingbox ), table, FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX ( paddingbox ), table);
     gtk_grid_set_column_spacing (GTK_GRID (table), 6);
     gtk_grid_set_row_spacing (GTK_GRID (table), 6);
 
@@ -235,13 +235,12 @@ static GtkWidget *gsb_assistant_first_page_2 ( GtkWidget *assistant )
     /* Automatically load last file on startup? */
     button = gsb_automem_checkbutton_new (_("Automatically load last file on startup"),
 					  &a_conf->dernier_fichier_auto, NULL, NULL );
-    gtk_box_pack_start ( GTK_BOX ( paddingbox ), button, FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX ( paddingbox ), button);
 
     /* automatically save file at closing */
     button = gsb_automem_checkbutton_new (_("Automatically save on exit"),
 					  &a_conf->sauvegarde_auto, NULL, NULL);
-    gtk_box_pack_start ( GTK_BOX ( paddingbox ), button,
-			 FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX ( paddingbox ), button);
 
     /* Automatic backup ? */
 #ifdef HAVE_SSL
@@ -251,8 +250,7 @@ static GtkWidget *gsb_assistant_first_page_2 ( GtkWidget *assistant )
 											  &w_etat->crypt_file,
 											  G_CALLBACK (utils_prefs_encryption_toggled),
 											  NULL);
-        gtk_box_pack_start ( GTK_BOX ( paddingbox ), button,
-                             FALSE, FALSE, 0 );
+        gtk_box_prepend ( GTK_BOX ( paddingbox ), button);
 
         if ( w_etat->crypt_file )
             w_run->new_crypted_file = TRUE;
@@ -264,32 +262,31 @@ static GtkWidget *gsb_assistant_first_page_2 ( GtkWidget *assistant )
 #endif
     button = gsb_automem_checkbutton_new (_("Make a backup copy before saving files"),
 					  &a_conf->sauvegarde_fermeture, NULL, NULL);
-    gtk_box_pack_start ( GTK_BOX ( paddingbox ), button, FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX ( paddingbox ), button);
 
     /* Automatic backup every x minutes */
     hbox = gtk_box_new ( GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
-    gtk_box_pack_start ( GTK_BOX ( paddingbox ), hbox, FALSE, FALSE, 0);
+    gtk_box_prepend ( GTK_BOX ( paddingbox ), hbox);
 
     button = gsb_automem_checkbutton_new (_("Make a backup copy every "),
 					  &a_conf->make_backup_every_minutes,
 					  G_CALLBACK (gsb_file_automatic_backup_start), NULL);
-    gtk_box_pack_start ( GTK_BOX (hbox), button, FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX (hbox), button);
 
     button = gsb_automem_spin_button_new ( &a_conf->make_backup_nb_minutes,
 					   G_CALLBACK (gsb_file_automatic_backup_change_time), NULL );
 
-    gtk_box_pack_start ( GTK_BOX (hbox), button, FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX (hbox), button);
 
     label = gtk_label_new ( _(" minutes") );
-    gtk_box_pack_start ( GTK_BOX (hbox), label, FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX (hbox), label);
 
     /* if automatic backup, choose a dir */
     hbox = gtk_box_new ( GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX );
-    gtk_box_pack_start ( GTK_BOX ( paddingbox ), hbox,
-			 FALSE, FALSE, 0);
+    gtk_box_prepend ( GTK_BOX ( paddingbox ), hbox);
 
     label = gtk_label_new ( _("Backup directory: ") );
-    gtk_box_pack_start ( GTK_BOX ( hbox ), label, FALSE, FALSE, 0);
+    gtk_box_prepend ( GTK_BOX ( hbox ), label);
 
     dialog = utils_files_create_file_chooser (GTK_WIDGET (grisbi_app_get_active_window (NULL)),
                         _("Select/Create backup directory") );
@@ -300,7 +297,7 @@ static GtkWidget *gsb_assistant_first_page_2 ( GtkWidget *assistant )
                       "selection-changed",
                       G_CALLBACK (utils_prefs_page_dir_chosen),
                       (gpointer) "backup_path");
-    gtk_box_pack_start ( GTK_BOX ( hbox ), button, FALSE, FALSE, 0);
+    gtk_box_prepend ( GTK_BOX ( hbox ), button);
 
     gtk_widget_show_all (page);
     return page;
@@ -328,16 +325,16 @@ static GtkWidget *gsb_assistant_first_page_3 ( GtkWidget *assistant )
     gtk_container_set_border_width ( GTK_CONTAINER (page), BOX_BORDER_WIDTH );
 
     vbox = new_vbox_with_title_and_icon ( _("Reconciliation"), "gsb-reconciliation-32.png" );
-    gtk_box_pack_start ( GTK_BOX (page), vbox, TRUE, TRUE, 0 );
+    gtk_box_prepend ( GTK_BOX (page), vbox);
 
     paddingbox = new_paddingbox_with_title (vbox, FALSE,
 					    _("Error getting reconciliations"));
 
     hbox = gtk_box_new ( GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX );
-    gtk_box_pack_start ( GTK_BOX ( paddingbox ), hbox, FALSE, FALSE, 15 );
+    gtk_box_prepend ( GTK_BOX ( paddingbox ), hbox);
 
     image = gtk_image_new_from_icon_name ( "gtk-dialog-error", GTK_ICON_SIZE_DIALOG );
-    gtk_box_pack_start ( GTK_BOX ( hbox ), image, FALSE, FALSE, 0);
+    gtk_box_prepend ( GTK_BOX ( hbox ), image);
 
     label = gtk_label_new ( _("When importing the file from the previous version, "
                               "Grisbi has found inconsistencies\n"
@@ -346,7 +343,7 @@ static GtkWidget *gsb_assistant_first_page_3 ( GtkWidget *assistant )
                               "Although this has no impact on the integrity of data, "
                               "wrong values can be found.\n\n"
                               "Check in the \"Preferences\" for more information.") );
-    gtk_box_pack_start ( GTK_BOX ( hbox ), label, FALSE, FALSE, 0);
+    gtk_box_prepend ( GTK_BOX ( hbox ), label);
 
     gtk_widget_show_all (page);
     return page;

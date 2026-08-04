@@ -129,7 +129,7 @@ GtkWidget *categories_create_list (void)
 
     /* frame pour la barre d'outils */
     frame = gtk_frame_new (NULL);
-    gtk_box_pack_start (GTK_BOX (vbox), frame, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (vbox), frame);
 
     category_interface = category_get_metatree_interface ();
 
@@ -158,7 +158,7 @@ GtkWidget *categories_create_list (void)
 				     GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
     gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW(scroll_window),
 					  GTK_SHADOW_IN);
-    gtk_box_pack_start (GTK_BOX (vbox), scroll_window, TRUE, TRUE, 0);
+    gtk_box_prepend (GTK_BOX (vbox), scroll_window);
     gtk_widget_show (scroll_window);
 
     /* Create container + TreeView */
@@ -808,14 +808,14 @@ gboolean edit_category (GtkTreeView *tree_view)
 
     /* Ugly dance to avoid side effects on dialog's vbox. */
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-    gtk_box_pack_start (GTK_BOX (dialog_get_content_area (dialog)), hbox, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (dialog_get_content_area (dialog)), hbox);
     paddingbox = new_paddingbox_with_title (hbox, TRUE, title);
     gtk_container_set_border_width (GTK_CONTAINER(hbox), 6);
     gtk_container_set_border_width (GTK_CONTAINER(paddingbox), 6);
     g_free (title);
 
     table = gtk_grid_new ();
-    gtk_box_pack_start (GTK_BOX (paddingbox), table, FALSE, FALSE, 6);
+    gtk_box_prepend (GTK_BOX (paddingbox), table);
     gtk_grid_set_column_spacing (GTK_GRID (table), 6);
     gtk_grid_set_row_spacing (GTK_GRID (table), 6);
 

@@ -1254,7 +1254,7 @@ static GtkWidget *bet_hist_get_data_tree_view (GtkWidget *container)
 									GTK_POLICY_AUTOMATIC);
 	gtk_widget_set_size_request (scrolled_window, -1, 250);
 	gtk_container_add (GTK_CONTAINER (scrolled_window), tree_view);
-	gtk_box_pack_start (GTK_BOX (container), scrolled_window, TRUE, TRUE, 15);
+	gtk_box_prepend (GTK_BOX (container), scrolled_window);
 
 	/* create columns */
 	cell = gtk_cell_renderer_toggle_new ();
@@ -1639,25 +1639,25 @@ GtkWidget *bet_hist_create_page (void)
 
 	/* frame pour la barre d'outils */
 	frame = gtk_frame_new (NULL);
-	gtk_box_pack_start (GTK_BOX (page), frame, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (page), frame);
 
 	/* titre de la page */
 	label_title = gtk_label_new ("bet_hist_title");
 	gtk_widget_set_halign (label_title, GTK_ALIGN_CENTER);
-	gtk_box_pack_start (GTK_BOX (page), label_title, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (page), label_title);
 	g_object_set_data (G_OBJECT (grisbi_win_get_account_page ()), "bet_hist_title", label_title);
 
 	/* Choix des données sources */
 	hbox = utils_widget_origin_data_new (account_page, SPP_ORIGIN_HISTORICAL);
 	gtk_widget_set_halign (hbox, GTK_ALIGN_CENTER);
-	gtk_box_pack_start (GTK_BOX (page), hbox, FALSE, FALSE, 5);
+	gtk_box_prepend (GTK_BOX (page), hbox);
 	g_object_set_data (G_OBJECT (account_page), "bet_hist_data", hbox);
 
 	/* label pour la fusion des données des CB à débit différé */
 	label_use_data = gtk_label_new ("bet_hist_label_use_data");
 	gtk_widget_set_halign (label_use_data, GTK_ALIGN_CENTER);
 	gtk_label_set_selectable (GTK_LABEL (label_use_data), TRUE);
-	gtk_box_pack_start (GTK_BOX (page), label_use_data, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (page), label_use_data);
 	g_object_set_data (G_OBJECT (grisbi_win_get_account_page ()), "bet_hist_label_use_data", label_use_data);
 
 	/* création de la liste des données */

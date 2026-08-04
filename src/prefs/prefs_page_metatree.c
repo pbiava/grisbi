@@ -306,8 +306,7 @@ static void prefs_page_metatree_setup_metatree_page (PrefsPageMetatree *page)
 	/* On récupère le nom de la page */
 	head_page = utils_prefs_head_page_new_with_title_and_icon (_("Payees, categories and budgetaries"),
 															   "gsb-organization-32.png");
-	gtk_box_pack_start (GTK_BOX (priv->vbox_metatree), head_page, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->vbox_metatree), head_page, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_metatree), head_page);
 
 	/* tri des opérations */
 	vbox_button = gsb_automem_radiobutton3_new (_("by number"),
@@ -360,7 +359,7 @@ static void prefs_page_metatree_setup_metatree_page (PrefsPageMetatree *page)
     gtk_grid_attach (GTK_GRID (priv->grid_metatree_currencies), priv->combo_devise_totaux_tiers, 1, 0, 1, 1);
     gtk_grid_attach (GTK_GRID (priv->grid_metatree_currencies), priv->combo_devise_totaux_categ, 1, 1, 1, 1);
     gtk_grid_attach (GTK_GRID (priv->grid_metatree_currencies), priv->combo_devise_totaux_ib, 1, 2, 1, 1);
-	gtk_box_pack_start (GTK_BOX (priv->box_metatree_sort_transactions), vbox_button, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (priv->box_metatree_sort_transactions), vbox_button);
 
 	/* gestion des divisions*/
 	vbox_button = gsb_automem_radiobutton3_gsettings_new (_("Expand the line"),
@@ -370,7 +369,7 @@ static void prefs_page_metatree_setup_metatree_page (PrefsPageMetatree *page)
 													 	  G_CALLBACK (prefs_page_onglet_metatree_action_changed),
 													 	  &a_conf->metatree_action_2button_press,
 													 	  GTK_ORIENTATION_HORIZONTAL);
-	gtk_box_pack_start (GTK_BOX (priv->box_metatree_action_2button), vbox_button, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (priv->box_metatree_action_2button), vbox_button);
 
 	/* Connect signal */
     /* callback for checkbutton_metatree_assoc_mode */

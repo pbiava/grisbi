@@ -161,22 +161,22 @@ static gboolean gsb_scheduler_list_popup_custom_periodicity_dialog (void)
 
     /* Ugly dance to avoid side effects on dialog's vbox. */
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-    gtk_box_pack_start (GTK_BOX (dialog_get_content_area (dialog)), hbox, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (dialog_get_content_area (dialog)), hbox);
 	paddingbox = new_paddingbox_with_title (hbox, TRUE, _("Scheduler frequency"));
     gtk_container_set_border_width (GTK_CONTAINER (hbox), MARGIN_BOX);
     gtk_container_set_border_width (GTK_CONTAINER (paddingbox), MARGIN_BOX);
 
     hbox2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-    gtk_box_pack_start (GTK_BOX (paddingbox), hbox2, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (paddingbox), hbox2);
 
     label = gtk_label_new (_("Show transactions for the next: "));
-    gtk_box_pack_start (GTK_BOX (hbox2), label, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox2), label);
     entry = gsb_automem_spin_button_new (&w_etat->affichage_echeances_perso_nb_libre, NULL, NULL);
-    gtk_box_pack_start (GTK_BOX (hbox2), entry, FALSE, FALSE, MARGIN_BOX);
+    gtk_box_prepend (GTK_BOX (hbox2), entry);
 
     /* combobox for userdefined frequency */
     combobox = gtk_combo_box_text_new ();
-    gtk_box_pack_start (GTK_BOX (hbox2), combobox, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox2), combobox);
 
     for (i = 0; j_m_a_names[i]; i++)
     {
@@ -2007,7 +2007,7 @@ GtkWidget *gsb_scheduler_list_create_list (void)
 
     /* frame pour la barre d'outils */
     frame = gtk_frame_new (NULL);
-    gtk_box_pack_start (GTK_BOX (vbox), frame, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (vbox), frame);
 
     /* création de la barre d'outils */
     scheduler_toolbar = gsb_scheduler_list_create_toolbar ();
@@ -2019,7 +2019,7 @@ GtkWidget *gsb_scheduler_list_create_list (void)
 				     GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
     gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolled_window),
 					  GTK_SHADOW_IN);
-    gtk_box_pack_start (GTK_BOX (vbox), scrolled_window, TRUE, TRUE, 0);
+    gtk_box_prepend (GTK_BOX (vbox), scrolled_window);
     gtk_widget_show (scrolled_window);
 
     /* we create and set the tree_view in the page */
@@ -2995,7 +2995,7 @@ gboolean gsb_scheduler_list_delete_scheduled_transaction (gint scheduled_number,
 								  "toggled",
 								  G_CALLBACK (dialogue_update_struct_message),
 								  (warning+msg_no));
-				gtk_box_pack_start (GTK_BOX (vbox), checkbox, TRUE, TRUE, MARGIN_BOX);
+				gtk_box_prepend (GTK_BOX (vbox), checkbox);
 				gtk_widget_show_all (dialog);
 
 				result = gtk_dialog_run (GTK_DIALOG (dialog));

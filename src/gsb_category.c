@@ -220,15 +220,14 @@ GtkWidget *gsb_category_assistant_create_choice_page ( GtkWidget *assistant )
 						      cell, "markup",
 						      BUILTIN_CATEGORY_MODEL_NAME,
 						      NULL );
-    gtk_box_pack_start ( GTK_BOX ( page ), GTK_WIDGET ( sw ),
-			 TRUE, TRUE, 0 );
+    gtk_box_prepend ( GTK_BOX ( page ), GTK_WIDGET ( sw ) );
 
     gsb_category_fill_sets ( builtin_category_view, builtin_category_model, FALSE );
 
     g_object_set_data ( G_OBJECT (assistant), "builtin_category_view", builtin_category_view );
 
     radiobutton = gtk_check_button_new_with_label ( _("Display foreign category sets") );
-    gtk_box_pack_start ( GTK_BOX ( page ), radiobutton, FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX ( page ), radiobutton );
     g_object_set_data ( G_OBJECT(radiobutton), "model", builtin_category_model );
     g_object_set_data ( G_OBJECT(radiobutton), "view", builtin_category_view );
     g_signal_connect ( radiobutton, "toggled", G_CALLBACK(gsb_category_display_foreign_toggled), NULL );
@@ -237,7 +236,7 @@ GtkWidget *gsb_category_assistant_create_choice_page ( GtkWidget *assistant )
 											   &w_etat->metatree_assoc_mode,
 											   NULL,
 											   NULL);
-    gtk_box_pack_start (GTK_BOX (page), checkbutton, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (page), checkbutton);
     g_object_set_data (G_OBJECT (checkbutton), "model", builtin_category_model);
     g_object_set_data (G_OBJECT (checkbutton), "view", builtin_category_view );
 

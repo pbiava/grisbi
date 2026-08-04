@@ -1214,13 +1214,13 @@ void gsb_form_create_widgets (void)
     /* the scheduled part is a table of SCHEDULED_WIDTH col x SCHEDULED_HEIGHT rows */
     form_scheduled_part = gtk_grid_new ();
     gtk_grid_set_column_spacing (GTK_GRID (form_scheduled_part), MARGIN_BOX);
-    gtk_box_pack_start (GTK_BOX (transaction_form), form_scheduled_part, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (transaction_form), form_scheduled_part);
 
     gsb_form_scheduler_create (form_scheduled_part);
 
     /* add a separator between the scheduled and transaction part */
     separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-    gtk_box_pack_start (GTK_BOX (transaction_form), separator, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (transaction_form), separator);
 
     /* the transactions part is a variable table,
      * so set to 1x1 for now, it will change when we show it */
@@ -1228,7 +1228,7 @@ void gsb_form_create_widgets (void)
      * so use an event box */
     event_box = gtk_event_box_new ();
     gtk_event_box_set_above_child (GTK_EVENT_BOX (event_box), FALSE);
-    gtk_box_pack_start (GTK_BOX (transaction_form), event_box, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (transaction_form), event_box);
     g_signal_connect (G_OBJECT (event_box),
 					  "button-press-event",
 					  G_CALLBACK (gsb_form_button_press),
@@ -1244,23 +1244,23 @@ void gsb_form_create_widgets (void)
     /* the buttons part is a hbox, with the recuperate child split
      * on the left and valid/cancel on the right */
     form_button_part = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-    gtk_box_pack_start (GTK_BOX (transaction_form), form_button_part, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (transaction_form), form_button_part);
 
     /* add a separator between the transaction and button part */
     separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-    gtk_box_pack_start (GTK_BOX (form_button_part), separator, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (form_button_part), separator);
 
     /* Hbox containing buttons */
     hbox_buttons = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-    gtk_box_pack_start (GTK_BOX (form_button_part), hbox_buttons, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (form_button_part), hbox_buttons);
 
     hbox_buttons_inner = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
     gtk_box_set_homogeneous (GTK_BOX (hbox_buttons_inner), TRUE);
-    gtk_box_pack_end (GTK_BOX (hbox_buttons), hbox_buttons_inner, FALSE, FALSE, 0);
+    gtk_box_append (GTK_BOX (hbox_buttons), hbox_buttons_inner);
 
     /* create the check button to recover the children of splits */
     form_button_recover_split = gtk_check_button_new_with_label (_("Recover the children"));
-    gtk_box_pack_start (GTK_BOX (hbox_buttons_inner), form_button_recover_split, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox_buttons_inner), form_button_recover_split);
 
     /* create the valid/cancel buttons */
     form_button_valid = utils_buttons_button_new_from_icon_name ("gtk-ok", _("V_alidate"));

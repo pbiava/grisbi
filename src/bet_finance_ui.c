@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*     Copyright (C) 2010-2018 Pierre Biava (grisbi@pierre.biava.name)        */
-/*          https://www.grisbi.org/                                            */
+/*          https://www.grisbi.org/                                           */
 /*                                                                            */
 /*  This program is free software; you can redistribute it and/or modify      */
 /*  it under the terms of the GNU General Public License as published by      */
@@ -973,51 +973,51 @@ static GtkWidget *bet_finance_ui_create_amortization_page (void)
 
     /* frame pour la barre d'outils */
     frame = gtk_frame_new (NULL);
-    gtk_box_pack_start (GTK_BOX (page), frame, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (page), frame);
 
     /* titre de la page */
     label_title = gtk_label_new (_("Amortization Table"));
 	gtk_widget_set_halign (label_title, GTK_ALIGN_CENTER);
-    gtk_box_pack_start (GTK_BOX (page), label_title, FALSE, FALSE, MARGIN_BOX);
+    gtk_box_prepend (GTK_BOX (page), label_title);
 
     /* Choix des données sources */
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
 	gtk_widget_set_halign (hbox, GTK_ALIGN_CENTER);
-    gtk_box_pack_start (GTK_BOX (page), hbox, FALSE, FALSE, 5);
+    gtk_box_prepend (GTK_BOX (page), hbox);
 
     /* capital */
     label = gtk_label_new (_("Loan amount: "));
     utils_labels_set_alignment (GTK_LABEL (label), GSB_LEFT, GSB_CENTER);
     gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, MARGIN_BOX);
+    gtk_box_prepend (GTK_BOX (hbox), label);
 
     label = gtk_label_new (NULL);
     g_object_set_data (G_OBJECT (page), "capital", label);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, MARGIN_BOX);
+    gtk_box_prepend (GTK_BOX (hbox), label);
 
     /* taux */
     label = gtk_label_new (_("Annuel rate interest: "));
     utils_labels_set_alignment (GTK_LABEL (label), GSB_LEFT, GSB_CENTER);
     gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, MARGIN_BOX);
+    gtk_box_prepend (GTK_BOX (hbox), label);
 
     label = gtk_label_new (NULL);
     g_object_set_data (G_OBJECT (page), "bet_finance_taux", label);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), label);
 
     label = gtk_label_new (_("%"));
     gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 5);
+    gtk_box_prepend (GTK_BOX (hbox), label);
 
     /* Duration */
     label = gtk_label_new (_("Duration: "));
     utils_labels_set_alignment (GTK_LABEL (label), GSB_LEFT, GSB_CENTER);
     gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, MARGIN_BOX);
+    gtk_box_prepend (GTK_BOX (hbox), label);
 
     label = gtk_label_new (NULL);
     g_object_set_data (G_OBJECT (page), "duree", label);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), label);
 
     /* création de la liste des données */
     tree_view = bet_finance_ui_create_amortization_tree_view (page, SPP_ORIGIN_SIMULATOR);
@@ -1229,7 +1229,7 @@ static GtkWidget *bet_finance_ui_create_data_tree_view (GtkWidget *container)
 									GTK_POLICY_AUTOMATIC);
     gtk_widget_set_size_request (scrolled_window, -1, 250);
     gtk_container_add (GTK_CONTAINER (scrolled_window), tree_view);
-    gtk_box_pack_start (GTK_BOX (container), scrolled_window, TRUE, TRUE, 15);
+    gtk_box_prepend (GTK_BOX (container), scrolled_window);
 
     gtk_widget_show_all (scrolled_window);
 
@@ -1412,7 +1412,7 @@ static void bet_finance_ui_create_saisie_widget (GtkWidget *page,
     label = gtk_label_new (_("Rate Type: "));
     utils_labels_set_alignment (GTK_LABEL (label), GSB_LEFT, GSB_CENTER);
     gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, MARGIN_BOX);
+    gtk_box_prepend (GTK_BOX (hbox), label);
     button_1 = gtk_radio_button_new_with_label (NULL, _("CAGR"));
 
     button_2 = gtk_radio_button_new_with_label_from_widget (GTK_RADIO_BUTTON (button_1),
@@ -1424,8 +1424,8 @@ static void bet_finance_ui_create_saisie_widget (GtkWidget *page,
     else
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button_1), TRUE);
 
-    gtk_box_pack_start (GTK_BOX (hbox), button_1, FALSE, FALSE, MARGIN_BOX) ;
-    gtk_box_pack_start (GTK_BOX (hbox), button_2, FALSE, FALSE, MARGIN_BOX) ;
+    gtk_box_prepend (GTK_BOX (hbox), button_1) ;
+    gtk_box_prepend (GTK_BOX (hbox), button_2) ;
     g_signal_connect (button_1,
 					  "button-release-event",
 					  G_CALLBACK (bet_finance_ui_type_taux_changed),
@@ -1478,19 +1478,19 @@ static GtkWidget *bet_finance_ui_create_simulator_page (void)
 
     /* frame pour la barre d'outils */
     frame = gtk_frame_new (NULL);
-    gtk_box_pack_start (GTK_BOX (page), frame, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (page), frame);
 
     /* titre de la page */
     label_title = gtk_label_new (_("Credits simulator"));
 	gtk_widget_set_halign (label_title, GTK_ALIGN_CENTER);
-    gtk_box_pack_start (GTK_BOX (page), label_title, FALSE, FALSE, MARGIN_BOX);
+    gtk_box_prepend (GTK_BOX (page), label_title);
 
     /* Choix des données sources */
 	grid = gtk_grid_new ();
 	gtk_grid_set_column_spacing (GTK_GRID (grid), MARGIN_BOX);
 	gtk_grid_set_row_spacing (GTK_GRID (grid), MARGIN_BOX);
 	gtk_widget_set_margin_start (grid, MARGIN_BOX);
-    gtk_box_pack_start (GTK_BOX (page), grid, FALSE, FALSE, MARGIN_BOX);
+    gtk_box_prepend (GTK_BOX (page), grid);
 
     /* capital */
     label = gtk_label_new (_("Loan capital: "));
@@ -1744,12 +1744,12 @@ GtkWidget *bet_finance_ui_create_amortization_heading (GtkWidget *parent)
 
     /* frame pour la barre d'outils */
     frame = gtk_frame_new (NULL);
-    gtk_box_pack_start (GTK_BOX (heading), frame, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (heading), frame);
 
     /* titre de la heading */
     label_title = gtk_label_new (_("Amortization Table"));
 	gtk_widget_set_halign (label_title, GTK_ALIGN_CENTER);
-    gtk_box_pack_start (GTK_BOX (heading), label_title, FALSE, FALSE, 5);
+    gtk_box_prepend (GTK_BOX (heading), label_title);
     g_object_set_data (G_OBJECT (parent),
 					   "bet_finance_amortization_title",
 					   label_title);
@@ -1757,41 +1757,41 @@ GtkWidget *bet_finance_ui_create_amortization_heading (GtkWidget *parent)
     /* Choix des données sources */
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
 	gtk_widget_set_halign (hbox, GTK_ALIGN_CENTER);
-    gtk_box_pack_start (GTK_BOX (heading), hbox, FALSE, FALSE, 5);
+    gtk_box_prepend (GTK_BOX (heading), hbox);
 
     /* capital */
     label = gtk_label_new (_("Loan amount: "));
     utils_labels_set_alignment (GTK_LABEL (label), 0, 0.5);
     gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 5);
+    gtk_box_prepend (GTK_BOX (hbox), label);
 
     label = gtk_label_new (NULL);
     g_object_set_data (G_OBJECT (parent), "bet_finance_capital", label);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 5);
+    gtk_box_prepend (GTK_BOX (hbox), label);
 
     /* taux */
     label = gtk_label_new (_("Annuel rate interest: "));
     utils_labels_set_alignment (GTK_LABEL (label), 0, 0.5);
     gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 5);
+    gtk_box_prepend (GTK_BOX (hbox), label);
 
     label = gtk_label_new (NULL);
     g_object_set_data (G_OBJECT (parent), "bet_finance_taux", label);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), label);
 
     label = gtk_label_new (_("%"));
     gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 5);
+    gtk_box_prepend (GTK_BOX (hbox), label);
 
     /* Duration */
     label = gtk_label_new (_("Duration: "));
     utils_labels_set_alignment (GTK_LABEL (label), 0, 0.5);
     gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 5);
+    gtk_box_prepend (GTK_BOX (hbox), label);
 
     label = gtk_label_new (NULL);
     g_object_set_data (G_OBJECT (parent), "bet_finance_duree", label);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), label);
 
 	g_object_set_data (G_OBJECT (parent), "frame", frame);
 	g_object_set_data (G_OBJECT (parent), "label_title", label_title);
@@ -2025,7 +2025,7 @@ GtkWidget *bet_finance_ui_create_amortization_tree_view (GtkWidget *container,
 									GTK_POLICY_AUTOMATIC);
     gtk_widget_set_size_request (scrolled_window, -1, 250);
     gtk_container_add (GTK_CONTAINER (scrolled_window), tree_view);
-    gtk_box_pack_start (GTK_BOX (container), scrolled_window, TRUE, TRUE, MARGIN_PADDING_BOX);
+    gtk_box_prepend (GTK_BOX (container), scrolled_window);
 
     gtk_widget_show_all (scrolled_window);
 

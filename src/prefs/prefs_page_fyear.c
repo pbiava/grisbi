@@ -680,8 +680,7 @@ static void prefs_page_fyear_setup_page (PrefsPageFyear *page)
 
 	/* On récupère le nom de la page */
 	head_page = utils_prefs_head_page_new_with_title_and_icon (_("Financial years"), "gsb-financial-years-32.png");
-	gtk_box_pack_start (GTK_BOX (priv->vbox_fyear), head_page, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->vbox_fyear), head_page, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_fyear), head_page);
 
     /* set the checkbutton_fyear_sort_order  */
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->checkbutton_fyear_sort_order),

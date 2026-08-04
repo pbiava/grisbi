@@ -536,8 +536,7 @@ static void prefs_page_display_fonts_setup_page (PrefsPageDisplayFonts *page)
 
 	/* On récupère le nom de la page */
 	head_page = utils_prefs_head_page_new_with_title_and_icon (_("Fonts & logo"), "gsb-fonts-32.png");
-	gtk_box_pack_start (GTK_BOX (priv->vbox_display_fonts), head_page, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->vbox_display_fonts), head_page, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_display_fonts), head_page);
 
     /* set the elements for logo */
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->checkbutton_display_logo), w_etat->utilise_logo);
@@ -622,7 +621,7 @@ static void prefs_page_display_fonts_setup_page (PrefsPageDisplayFonts *page)
 
 	/* set css rules */
 	priv->w_css_rules = GTK_WIDGET (widget_css_rules_new (GTK_WIDGET (page)));
-	gtk_box_pack_start (GTK_BOX (priv->box_css_rules), priv->w_css_rules, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (priv->box_css_rules), priv->w_css_rules);
 
 	/* set memorisation de l'onglet selectionne si 1 fichier chargé */
 	is_loading = grisbi_win_file_is_loading ();

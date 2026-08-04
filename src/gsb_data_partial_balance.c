@@ -1791,7 +1791,7 @@ GtkWidget *gsb_partial_balance_create_list_accounts ( GtkWidget *entry )
                         (GtkTreeSelectionFunc) gsb_partial_balance_select_account,
                         entry, NULL );
     gtk_container_add ( GTK_CONTAINER ( sw ), treeview );
-    gtk_box_pack_start ( GTK_BOX ( vbox ), sw, FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX ( vbox ), sw);
     g_object_set_data ( G_OBJECT (vbox), "account_treeview", treeview );
 
      /* account name */
@@ -1853,7 +1853,7 @@ GtkWidget *gsb_partial_balance_create_dialog ( gint action, gint spin_value )
     gtk_window_set_position ( GTK_WINDOW ( dialog ), GTK_WIN_POS_CENTER_ON_PARENT );
 
     main_vbox = new_vbox_with_title_and_icon ( _("Partial balance details"), "gsb-payment-32.png" );
-    gtk_box_pack_start ( GTK_BOX ( dialog_get_content_area ( dialog ) ), main_vbox, TRUE, TRUE, 0 );
+    gtk_box_prepend ( GTK_BOX ( dialog_get_content_area ( dialog ) ), main_vbox);
 
     /* Create paddinggrid */
     paddinggrid = utils_prefs_paddinggrid_new_with_title ( main_vbox, _("Details") );
@@ -1940,15 +1940,15 @@ gint gsb_partial_balance_request_currency ( GtkWidget *parent )
     gtk_window_set_position ( GTK_WINDOW ( dialog ), GTK_WIN_POS_CENTER_ON_PARENT );
 
     hbox = gtk_box_new ( GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX );
-    gtk_box_pack_start ( GTK_BOX ( dialog_get_content_area( dialog ) ), hbox, TRUE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX ( dialog_get_content_area( dialog ) ), hbox);
 
     label = gtk_label_new ( _("Select the currency of the partial balance: ") );
     utils_labels_set_alignment ( GTK_LABEL  ( label ), 0, 1 );
     gtk_label_set_justify ( GTK_LABEL ( label ), GTK_JUSTIFY_LEFT );
-    gtk_box_pack_start ( GTK_BOX ( hbox ), label, TRUE, TRUE, 0 );
+    gtk_box_prepend ( GTK_BOX ( hbox ), label);
 
     combo_devise = gsb_currency_combobox_new ( &currency_nb, NULL );
-    gtk_box_pack_start ( GTK_BOX ( hbox ), combo_devise, FALSE, FALSE, 10 );
+    gtk_box_prepend ( GTK_BOX ( hbox ), combo_devise);
 
     gtk_widget_show_all ( GTK_WIDGET ( dialog ) );
 

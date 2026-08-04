@@ -81,12 +81,11 @@ static void etats_page_budget_setup_page (EtatsPageBudget *page,
 
 	/* set head page */
 	head_page = utils_prefs_head_page_new_with_title_and_icon (_("Budgetary lines"), "gsb-budgetary_lines-32.png");
-	gtk_box_pack_start (GTK_BOX (priv->vbox_etats_page_budget), head_page, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->vbox_etats_page_budget), head_page, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_etats_page_budget), head_page);
 
 	/* init widget list */
 	priv->widget_list_metatree = GTK_WIDGET (widget_list_metatree_new (GTK_WIDGET (page), BUDGET_PAGE_TYPE));
-	gtk_box_pack_start (GTK_BOX (priv->vbox_detaille_budget), priv->widget_list_metatree, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_detaille_budget), priv->widget_list_metatree);
 
 	/* on met la connection pour changer le style de la ligne du panneau de gauche */
 	g_object_set_data (G_OBJECT (priv->bouton_detaille_budget), "etats_prefs", etats_prefs);

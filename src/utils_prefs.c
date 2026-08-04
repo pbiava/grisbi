@@ -279,7 +279,7 @@ GtkWidget *utils_prefs_head_page_new_with_title_and_icon (const gchar *title,
 		tmp_str = g_build_filename (gsb_dirs_get_pixmaps_dir (), image_filename, NULL);
 		image = gtk_image_new_from_file (tmp_str);
 		g_free (tmp_str);
-		gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
+		gtk_box_prepend (GTK_BOX (hbox), image);
 		gtk_widget_show (image);
     }
 
@@ -293,7 +293,7 @@ GtkWidget *utils_prefs_head_page_new_with_title_and_icon (const gchar *title,
     gtk_label_set_markup (GTK_LABEL (label), tmp_str2);
     g_free(tmp_str1);
     g_free(tmp_str2);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), label);
     gtk_widget_show (label);
 
     return eb;
@@ -492,7 +492,7 @@ GtkWidget *utils_prefs_paddinggrid_new_with_title (GtkWidget *parent,
     vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, MARGIN_BOX);
 
     if (GTK_IS_BOX (parent))
-        gtk_box_pack_start (GTK_BOX (parent), vbox, FALSE, FALSE, 0);
+        gtk_box_prepend (GTK_BOX (parent), vbox);
 
     /* Creating label */
     label = gtk_label_new (NULL);
@@ -504,7 +504,7 @@ GtkWidget *utils_prefs_paddinggrid_new_with_title (GtkWidget *parent,
     gtk_label_set_markup (GTK_LABEL (label), tmp_str);
     g_free (tmp_str);
 
-    gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (vbox), label);
     gtk_widget_show (label);
 
     /* Then make the grid itself */
@@ -513,7 +513,7 @@ GtkWidget *utils_prefs_paddinggrid_new_with_title (GtkWidget *parent,
     gtk_grid_set_column_spacing (GTK_GRID (paddinggrid), 5);
     gtk_grid_set_row_spacing (GTK_GRID (paddinggrid), 5);
 
-    gtk_box_pack_start (GTK_BOX (vbox), paddinggrid, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (vbox), paddinggrid);
 
     if (GTK_IS_BOX (parent))
         gtk_box_set_spacing (GTK_BOX (parent), 18);
@@ -670,12 +670,12 @@ GtkWidget *utils_prefs_fonts_create_button (gchar **fontname,
     font_name_label = gtk_label_new (NULL);
 	if (settings)
 		gtk_widget_set_name (font_name_label, "label_gsetting_option");
-    gtk_box_pack_start (GTK_BOX (hbox_font), font_name_label, TRUE, TRUE, 5);
+    gtk_box_prepend (GTK_BOX (hbox_font), font_name_label);
 
     font_size_label = gtk_label_new (NULL);
 	if (settings)
 		gtk_widget_set_name (font_size_label, "label_gsetting_option");
-    gtk_box_pack_start (GTK_BOX (hbox_font), font_size_label, FALSE, FALSE, 5);
+    gtk_box_prepend (GTK_BOX (hbox_font), font_size_label);
     g_object_set_data (G_OBJECT (font_button), "hook", hook);
     g_object_set_data (G_OBJECT (font_button), "data", data);
     g_object_set_data (G_OBJECT (font_button), "name_label", font_name_label);

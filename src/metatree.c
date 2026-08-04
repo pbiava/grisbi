@@ -1746,8 +1746,7 @@ gboolean find_destination_blob (MetatreeInterface *iface,
 	g_free (text);
 
 	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
-	gtk_box_pack_start (GTK_BOX (dialog_get_content_area (dialog)), hbox,
-			 FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (dialog_get_content_area (dialog)), hbox);
 
 	if (iface->content == METATREE_PAYEE)
 		tmpstr = g_strdup_printf (_("Transfer transactions to payee"));
@@ -1756,8 +1755,7 @@ gboolean find_destination_blob (MetatreeInterface *iface,
 
 	button_move = gtk_radio_button_new_with_label (NULL, tmpstr);
 	g_free (tmpstr);
-	gtk_box_pack_start (GTK_BOX (hbox), button_move,
-			 FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (hbox), button_move);
 
 	/* create the list containing division and sub-division
 	 * without the current division to delete */
@@ -1842,12 +1840,11 @@ gboolean find_destination_blob (MetatreeInterface *iface,
 
 	combofix = gtk_combofix_new (liste_combofix, iface->content);
 	gtk_combofix_set_force_text (GTK_COMBOFIX (combofix), TRUE);
-	gtk_box_pack_start (GTK_BOX (hbox), combofix, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (hbox), combofix);
 
 	/* other choice, just remove the division */
 	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
-	gtk_box_pack_start (GTK_BOX (dialog_get_content_area (dialog)), hbox,
-			 FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (dialog_get_content_area (dialog)), hbox);
 
 	if (iface->content == METATREE_PAYEE)
 		tmpstr = g_strdup_printf(_("Just remove this payee."));
@@ -1860,7 +1857,7 @@ gboolean find_destination_blob (MetatreeInterface *iface,
 						gtk_radio_button_get_group (GTK_RADIO_BUTTON (button_move)),
 						tmpstr);
 	g_free (tmpstr);
-	gtk_box_pack_start (GTK_BOX (hbox), button_delete, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (hbox), button_delete);
 
 	if (button_move_selected == 1)
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button_delete), TRUE);
@@ -2873,22 +2870,22 @@ gboolean metatree_find_destination_blob (MetatreeInterface *iface,
 		g_free (tmp_str_2);
 		g_free (tmp_str_3);
 
-		gtk_box_pack_start (GTK_BOX (dialog_get_content_area (dialog)), button, FALSE, FALSE, 0);
+		gtk_box_prepend (GTK_BOX (dialog_get_content_area (dialog)), button);
 
 		/* create the list containing division and sub-division without the current division */
 		hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
-		gtk_box_pack_start (GTK_BOX (dialog_get_content_area (dialog)), hbox, FALSE, FALSE, 0);
+		gtk_box_prepend (GTK_BOX (dialog_get_content_area (dialog)), hbox);
 
 		label = gtk_label_new (_("Select the destination: "));
 		utils_labels_set_alignment (GTK_LABEL (label), 0, 0);
-		gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
+		gtk_box_prepend (GTK_BOX (hbox), label);
 
 		vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-		gtk_box_pack_start (GTK_BOX (hbox), vbox, TRUE, TRUE, 0);
+		gtk_box_prepend (GTK_BOX (hbox), vbox);
 
 		combofix = metatree_get_combofix (iface, division, sub_division, type_division);
 		gtk_combofix_set_force_text (GTK_COMBOFIX (combofix), FALSE);
-		gtk_box_pack_start (GTK_BOX (vbox), combofix, TRUE, TRUE, 0);
+		gtk_box_prepend (GTK_BOX (vbox), combofix);
 		g_object_set_data (G_OBJECT (button), "label", label);
 		g_object_set_data (G_OBJECT (button), "combofix", combofix);
 	}
@@ -2898,15 +2895,15 @@ gboolean metatree_find_destination_blob (MetatreeInterface *iface,
 		button_action_selected = 0;
 
 		hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
-		gtk_box_pack_start (GTK_BOX (dialog_get_content_area (dialog)), hbox, FALSE, FALSE, 0);
+		gtk_box_prepend (GTK_BOX (dialog_get_content_area (dialog)), hbox);
 
 		label = gtk_label_new (_("Select the destination: "));
 		utils_labels_set_alignment (GTK_LABEL (label), 0, 0);
-		gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
+		gtk_box_prepend (GTK_BOX (hbox), label);
 
 		combofix = metatree_get_combofix (iface, division, sub_division,  type_division);
 		gtk_combofix_set_force_text (GTK_COMBOFIX (combofix), FALSE);
-		gtk_box_pack_start (GTK_BOX (hbox), combofix, TRUE, TRUE, 0);
+		gtk_box_prepend (GTK_BOX (hbox), combofix);
 	}
 
 	gtk_widget_show_all (dialog);
@@ -3781,7 +3778,7 @@ static gboolean metatree_select_transactions_destination (MetatreeInterface *ifa
 						NULL);
 
 	g_free (tmp_str_1);
-	gtk_box_pack_start (GTK_BOX (dialog_get_content_area (dialog)), button_1, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (dialog_get_content_area (dialog)), button_1);
 
 	tmp_str_2 = g_strdup (gsb_data_transaction_get_notes (transaction_number));
 	if (tmp_str_2)
@@ -3794,23 +3791,23 @@ static gboolean metatree_select_transactions_destination (MetatreeInterface *ifa
 
 		g_free (tmp_str_1);
 		g_free (tmp_str_2);
-		gtk_box_pack_start (GTK_BOX (dialog_get_content_area (dialog)), button_2, FALSE, FALSE, 0);
+		gtk_box_prepend (GTK_BOX (dialog_get_content_area (dialog)), button_2);
 	}
 
 	/* create the list containing division and sub-division without the current division */
 	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
-	gtk_box_pack_start (GTK_BOX (dialog_get_content_area (dialog)), hbox, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (dialog_get_content_area (dialog)), hbox);
 
 	label = gtk_label_new (_("Select the destination: "));
 	utils_labels_set_alignment (GTK_LABEL (label), 0, 0);
-	gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (hbox), label);
 
 	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-	gtk_box_pack_start (GTK_BOX (hbox), vbox, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (hbox), vbox);
 
 	combofix = metatree_get_combofix (iface, division, sub_division, META_TREE_TRANSACTION);
 	gtk_combofix_set_force_text (GTK_COMBOFIX (combofix), FALSE);
-	gtk_box_pack_start (GTK_BOX (vbox), combofix, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (vbox), combofix);
 
 	gtk_widget_show_all (dialog);
 	entry = gtk_combofix_get_entry (GTK_COMBOFIX (combofix));

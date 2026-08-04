@@ -267,7 +267,7 @@ static GtkWidget *gsb_calendar_entry_popup (GtkWidget *entry)
 					  "key-press-event",
 					  G_CALLBACK (gsb_calendar_entry_calendar_key_press),
 					  entry);
-	gtk_box_pack_start (GTK_BOX (pVBox), pCalendar, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (pVBox), pCalendar);
 	gtk_widget_show (pCalendar);
 
 	/* cancel button */
@@ -276,7 +276,7 @@ static GtkWidget *gsb_calendar_entry_popup (GtkWidget *entry)
 							  "clicked",
 							  G_CALLBACK (gtk_widget_destroy),
 							  G_OBJECT (popup));
-	gtk_box_pack_start (GTK_BOX (pVBox), button, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (pVBox), button);
 	gtk_widget_show (button);
 
 	/* set the position */

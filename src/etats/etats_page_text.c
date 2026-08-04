@@ -113,7 +113,7 @@ static void etats_page_text_ajoute_ligne_liste_comparaisons (gint last_text_comp
 	widget = GTK_WIDGET (widget_cmp_text_new (GTK_WIDGET (page), text_comparison_number, first_cmp_line));
 	widget_cmp_text_show_button_add (widget, TRUE);
 	widget_cmp_text_show_button_remove (widget, TRUE);
-	gtk_box_pack_start (GTK_BOX (priv->vbox_rows_text), widget, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_rows_text), widget);
 	gsb_data_report_text_comparison_set_widget (text_comparison_number, widget);
 
 	/* on met la structure dans la liste à la position demandée */
@@ -238,7 +238,7 @@ static void etats_page_text_remplit_liste_comparaisons (gint report_number,
 
 		/* on crée la row et on l'ajoute dans la fenêtre */
 		widget = GTK_WIDGET (widget_cmp_text_new (GTK_WIDGET (page), text_comparison_number, first_cmp_line));
-		gtk_box_pack_start (GTK_BOX (priv->vbox_rows_text), widget, FALSE, FALSE, 0);
+		gtk_box_prepend (GTK_BOX (priv->vbox_rows_text), widget);
 		gsb_data_report_text_comparison_set_widget (text_comparison_number, widget);
 
 		/* on remplit le widget de la structure */
@@ -273,8 +273,7 @@ static void etats_page_text_setup_page (EtatsPageText *page,
 
 	/* set head page */
 	head_page = utils_prefs_head_page_new_with_title_and_icon (_("Transaction content"), "gsb-text-32.png");
-	gtk_box_pack_start (GTK_BOX (priv->vbox_etats_page_text), head_page, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->vbox_etats_page_text), head_page, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_etats_page_text), head_page);
 
 	/* set signals */
 	g_object_set_data (G_OBJECT (priv->button_detaille_text), "etats_prefs", etats_prefs);

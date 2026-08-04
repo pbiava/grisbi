@@ -296,13 +296,13 @@ static gboolean edit_payee (GtkTreeView * view)
 
     /* Ugly dance to avoid side effects on dialog's vbox. */
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-    gtk_box_pack_start (GTK_BOX (dialog_get_content_area (dialog)), hbox, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (dialog_get_content_area (dialog)), hbox);
     paddingbox = new_paddingbox_with_title (hbox, TRUE, title);
     gtk_container_set_border_width (GTK_CONTAINER(hbox), MARGIN_BOX);
     gtk_container_set_border_width (GTK_CONTAINER(paddingbox), MARGIN_BOX);
 
     table = gtk_grid_new ();
-    gtk_box_pack_start (GTK_BOX (paddingbox), table, FALSE, FALSE, 6);
+    gtk_box_prepend (GTK_BOX (paddingbox), table);
     gtk_grid_set_column_spacing (GTK_GRID (table), MARGIN_BOX);
     gtk_grid_set_row_spacing (GTK_GRID (table), MARGIN_BOX);
 
@@ -765,7 +765,7 @@ GtkWidget *payees_create_list (void)
 
     /* frame pour la barre d'outils */
     frame = gtk_frame_new (NULL);
-    gtk_box_pack_start (GTK_BOX (onglet), frame, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (onglet), frame);
 
     /* We create the gtktreeview and model early so that they can be referenced. */
     payee_tree = gtk_tree_view_new();
@@ -785,7 +785,7 @@ GtkWidget *payees_create_list (void)
 									GTK_POLICY_AUTOMATIC,
 									GTK_POLICY_AUTOMATIC);
     gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW(scroll_window), GTK_SHADOW_IN);
-    gtk_box_pack_start (GTK_BOX (onglet), scroll_window, TRUE, TRUE, 0);
+    gtk_box_prepend (GTK_BOX (onglet), scroll_window);
     gtk_widget_show (scroll_window);
 
     /* Create model */
@@ -1319,7 +1319,7 @@ static GtkWidget *gsb_assistant_payees_page_2 (GtkWidget *assistant)
 	utils_labels_set_alignment (GTK_LABEL (label), 0, 0);
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
 	g_free (texte);
-	gtk_box_pack_start (GTK_BOX (paddingbox), label, FALSE, FALSE, MARGIN_BOX);
+	gtk_box_prepend (GTK_BOX (paddingbox), label);
 
 	/* On sauvegarde w_etat->metatree_unarchived_payees le temps de prendre la liste totale des tiers */
 	if (w_etat->metatree_unarchived_payees)
@@ -1333,7 +1333,7 @@ static GtkWidget *gsb_assistant_payees_page_2 (GtkWidget *assistant)
 											  !w_run->import_asso_case_sensitive,
 											  FALSE,
 											  METATREE_PAYEE);
-    gtk_box_pack_start (GTK_BOX (paddingbox), combo, FALSE, FALSE, MARGIN_BOX);
+    gtk_box_prepend (GTK_BOX (paddingbox), combo);
     g_object_set_data (G_OBJECT (assistant), "payee", combo);
 
 	data = g_object_get_data (G_OBJECT (assistant), "rule");
@@ -1343,14 +1343,14 @@ static GtkWidget *gsb_assistant_payees_page_2 (GtkWidget *assistant)
 	/* get new payee */
 	paddingbox = new_paddingbox_with_title (page, TRUE, _("Enter the new payee"));
 	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
-    gtk_box_pack_start (GTK_BOX (paddingbox), hbox, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (paddingbox), hbox);
 
     texte = g_strdup (_("Enter the name of the new payee: "));
     label = gtk_label_new (texte);
 	utils_labels_set_alignment (GTK_LABEL (label), 0, 0);
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
     g_free (texte);
-    gtk_box_pack_start (GTK_BOX(hbox), label, FALSE, FALSE, MARGIN_BOX);
+    gtk_box_prepend (GTK_BOX(hbox), label);
 
     combo = gtk_combofix_new_with_properties (tmp_list,
 											  w_etat->combofix_force_payee,
@@ -1368,7 +1368,7 @@ static GtkWidget *gsb_assistant_payees_page_2 (GtkWidget *assistant)
                       "changed",
                       G_CALLBACK (gsb_assistant_payees_entry_changed),
                       assistant);
-    gtk_box_pack_start (GTK_BOX(hbox), combo, TRUE, TRUE, MARGIN_BOX);
+    gtk_box_prepend (GTK_BOX(hbox), combo);
     g_object_set_data (G_OBJECT (assistant), "new_payee", combo);
 
 	/* set options */
@@ -1376,22 +1376,22 @@ static GtkWidget *gsb_assistant_payees_page_2 (GtkWidget *assistant)
     check_option = gtk_check_button_new_with_label (_("Extracting a number and save it "
 													  "in the field No Cheque/Virement"));
 
-    gtk_box_pack_start (GTK_BOX(paddingbox), check_option, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX(paddingbox), check_option);
     g_object_set_data (G_OBJECT (assistant), "check_option_1", check_option);
 
     check_option = gtk_check_button_new_with_label (_("Save the payees in the notes"));
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check_option), TRUE);
-    gtk_box_pack_start (GTK_BOX(paddingbox), check_option, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX(paddingbox), check_option);
     g_object_set_data (G_OBJECT (assistant), "check_option_2", check_option);
 
 	check_option = gtk_check_button_new_with_label (_("Ignoring case sensitive"));
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check_option), w_run->import_asso_case_sensitive);
-    gtk_box_pack_start (GTK_BOX (paddingbox), check_option, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (paddingbox), check_option);
     g_object_set_data (G_OBJECT (assistant), "check_option_3", check_option);
 
     check_option = gtk_check_button_new_with_label (_("Use the regular expressions"));
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check_option), w_run->import_asso_use_regex);
-    gtk_box_pack_start (GTK_BOX (paddingbox), check_option, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (paddingbox), check_option);
     g_object_set_data (G_OBJECT (assistant), "check_option_4", check_option);
 	gtk_widget_set_sensitive (check_option, FALSE);
 
@@ -1575,33 +1575,33 @@ static GtkWidget *gsb_assistant_payees_page_3 (GtkWidget *assistant)
     label = gtk_label_new ("");
 	utils_labels_set_alignment (GTK_LABEL (label), 0, 0);
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-    gtk_box_pack_start (GTK_BOX (paddingbox), label, FALSE, FALSE, MARGIN_BOX);
+    gtk_box_prepend (GTK_BOX (paddingbox), label);
     g_object_set_data (G_OBJECT (assistant), "payee_search_label", label);
 
     label = gtk_label_new ("");
 	utils_labels_set_alignment (GTK_LABEL (label), 0, 0);
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-    gtk_box_pack_start (GTK_BOX (paddingbox), label, FALSE, FALSE, MARGIN_BOX);
+    gtk_box_prepend (GTK_BOX (paddingbox), label);
     g_object_set_data (G_OBJECT (assistant), "new_payee_label", label);
 
 	/* set rule if necessary */
 	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
 	gtk_widget_set_no_show_all (hbox, TRUE);
-    gtk_box_pack_start (GTK_BOX (paddingbox), hbox, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (paddingbox), hbox);
 	g_object_set_data (G_OBJECT (assistant), "old_rule_hbox", hbox);
 
 	image = gtk_image_new_from_icon_name ("gtk-dialog-warning", GTK_ICON_SIZE_BUTTON);
-    gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), image);
 
     label = gtk_label_new ("");
 	utils_labels_set_alignment (GTK_LABEL (label), 0, 0);
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, MARGIN_BOX);
+    gtk_box_prepend (GTK_BOX (hbox), label);
     g_object_set_data (G_OBJECT (assistant), "old_rule_label", label);
 
     button = gtk_check_button_new_with_label (_("Do you want replace the current rule?"));
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), w_run->import_asso_replace_rule);
-    gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, MARGIN_BOX);
+    gtk_box_prepend (GTK_BOX (hbox), button);
     g_object_set_data (G_OBJECT (assistant), "check_option_5", button);
 
 	/* set scrolled window */
@@ -1624,7 +1624,7 @@ static GtkWidget *gsb_assistant_payees_page_3 (GtkWidget *assistant)
 
     gtk_widget_set_size_request (treeview, -1, 300);
     gtk_container_add (GTK_CONTAINER (sw), treeview);
-    gtk_box_pack_start (GTK_BOX (paddingbox), sw, TRUE, TRUE, MARGIN_BOX);
+    gtk_box_prepend (GTK_BOX (paddingbox), sw, TRUE, TRUE, MARGIN_BOX);
     g_object_set_data (G_OBJECT (assistant), "treeview", treeview);
 
     /* select payee */
@@ -1666,7 +1666,7 @@ static GtkWidget *gsb_assistant_payees_page_3 (GtkWidget *assistant)
     gtk_grid_set_column_spacing (GTK_GRID (table), MARGIN_BOX);
     gtk_grid_set_row_spacing (GTK_GRID (table), MARGIN_BOX);
 
-    gtk_box_pack_start (GTK_BOX (page), table, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (page), table);
 
     label = gtk_label_new (_("Total number of payees: "));
     utils_labels_set_alignment (GTK_LABEL (label), 0, 0.5);
@@ -1717,7 +1717,7 @@ static GtkWidget *gsb_assistant_payees_page_finish (GtkWidget *assistant)
 
     label = gtk_label_new (NULL);
     utils_labels_set_alignment (GTK_LABEL (label), 0.0, 0.0);
-    gtk_box_pack_start (GTK_BOX (page), label, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (page), label);
     g_object_set_data (G_OBJECT (assistant), "finish_label", label);
 
     gtk_widget_show_all (page);

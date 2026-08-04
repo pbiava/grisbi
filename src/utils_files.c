@@ -768,10 +768,10 @@ gchar *utils_files_create_sel_charset (GtkWidget *assistant,
 
     /* Warning label */
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
-    gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (vbox), hbox);
 
     warn = gtk_image_new_from_icon_name ("gtk-dialog-warning", GTK_ICON_SIZE_BUTTON);
-    gtk_box_pack_start (GTK_BOX (hbox), warn, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), warn);
 
     label = gtk_label_new (NULL);
     tmpstr = g_strdup_printf (_("You are here because your file"
@@ -781,7 +781,7 @@ gchar *utils_files_create_sel_charset (GtkWidget *assistant,
                         dialogue_make_pango_attribut ("weight=\"bold\"",tmpstr));
     utils_labels_set_alignment (GTK_LABEL (label), 0, 0.5);
     gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-    gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), label);
     g_free (tmpstr);
 
     /*scrolled windows */
@@ -790,7 +790,7 @@ gchar *utils_files_create_sel_charset (GtkWidget *assistant,
     gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw), GTK_SHADOW_ETCHED_IN);
     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), GTK_POLICY_AUTOMATIC,
                         GTK_POLICY_AUTOMATIC);
-    gtk_box_pack_start (GTK_BOX (vbox), sw, TRUE, TRUE, 6);
+    gtk_box_prepend (GTK_BOX (vbox), sw);
 
     /* Tree view and model. */
     model = GTK_TREE_MODEL (gtk_list_store_new (IMPORT_CHARMAP_NB, G_TYPE_BOOLEAN,
@@ -832,10 +832,10 @@ gchar *utils_files_create_sel_charset (GtkWidget *assistant,
                         "different charset."));
     utils_labels_set_alignment (GTK_LABEL (label), 0, 0.5);
     gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-    gtk_box_pack_start (GTK_BOX (vbox), label, TRUE, TRUE, 0);
+    gtk_box_prepend (GTK_BOX (vbox), label);
 
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
-    gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (vbox), hbox);
 
     go_charmap_sel = go_charmap_sel_new (GO_CHARMAP_SEL_TO_UTF8);
     g_signal_connect (go_charmap_sel,
@@ -843,13 +843,13 @@ gchar *utils_files_create_sel_charset (GtkWidget *assistant,
                         G_CALLBACK (utils_files_go_charmap_sel_changed),
                         dialog);
     g_object_set_data (G_OBJECT (dialog), "charset_cs", go_charmap_sel);
-    gtk_box_pack_start (GTK_BOX (hbox), go_charmap_sel, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), go_charmap_sel);
 
     label = gtk_label_new (_("Select a charset"));
     utils_labels_set_alignment (GTK_LABEL (label), 0, 0.5);
 	gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
     gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-    gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), label);
     g_object_set_data (G_OBJECT (dialog), "charset_label", label);
 
     /* on remplit le model */

@@ -397,15 +397,14 @@ static void prefs_page_bank_setup_page (PrefsPageBank *page)
 
 	/* On récupère le nom de la page */
 	head_page = utils_prefs_head_page_new_with_title_and_icon (_("Banks"), "gsb-banks-32.png");
-	gtk_box_pack_start (GTK_BOX (priv->vbox_bank), head_page, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->vbox_bank), head_page, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_bank), head_page);
 
 	/* set the list of banks */
 	prefs_page_bank_setup_tree_view (page);
 
 	/* set détails of bank */
 	priv->w_bank_details = GTK_WIDGET (widget_bank_details_new (page, NULL));
-	gtk_box_pack_start (GTK_BOX (priv->box_bank_details), priv->w_bank_details, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (priv->box_bank_details), priv->w_bank_details);
 
 	/* set selection signal to update first bank */
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (priv->treeview_bank));

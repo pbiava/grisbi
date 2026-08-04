@@ -560,8 +560,7 @@ static void etats_page_payee_setup_page (EtatsPagePayee *page,
 
 	/* set head page */
 	head_page = utils_prefs_head_page_new_with_title_and_icon (_("Payees"), "gsb-payees-32.png");
-	gtk_box_pack_start (GTK_BOX (priv->vbox_etats_page_payee), head_page, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->vbox_etats_page_payee), head_page, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_etats_page_payee), head_page);
 
 	/* on adapte le label pour Mac_OSX */
 #ifdef OS_OSX

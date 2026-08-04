@@ -79,12 +79,11 @@ static void etats_page_category_setup_page (EtatsPageCategory *page,
 
 	/* set head page */
 	head_page = utils_prefs_head_page_new_with_title_and_icon (_("Categories"), "gsb-categories-32.png");
-	gtk_box_pack_start (GTK_BOX (priv->vbox_etats_page_category), head_page, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->vbox_etats_page_category), head_page, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_etats_page_category), head_page);
 
 	/* init widget list */
 	priv->widget_list_metatree = GTK_WIDGET (widget_list_metatree_new (GTK_WIDGET (page), CATEGORY_PAGE_TYPE));
-	gtk_box_pack_start (GTK_BOX (priv->vbox_detaille_category), priv->widget_list_metatree, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_detaille_category), priv->widget_list_metatree);
 
 	/* on met la connection pour changer le style de la ligne du panneau de gauche */
 	g_object_set_data (G_OBJECT (priv->bouton_detaille_category), "etats_prefs", etats_prefs);

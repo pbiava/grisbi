@@ -154,7 +154,7 @@ GtkWidget * gsb_assistant_new ( const gchar * title, const gchar * explanation,
     tmpstr = g_markup_printf_escaped ("<b><span size=\"x-large\">%s</span></b>", title);
     gtk_label_set_markup ( GTK_LABEL(label), tmpstr );
     g_free ( tmpstr );
-    gtk_box_pack_start ( GTK_BOX(hbox), label, TRUE, TRUE, 0 );
+    gtk_box_prepend ( GTK_BOX(hbox), label);
 
     if (!image_filename)
 	{
@@ -167,15 +167,15 @@ GtkWidget * gsb_assistant_new ( const gchar * title, const gchar * explanation,
 		g_free (tmpstr);
 	}
 	image = gtk_image_new_from_pixbuf (pixbuf);
-    gtk_box_pack_start ( GTK_BOX(hbox), image, FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX(hbox), image);
 	g_object_unref (pixbuf);
 
-    gtk_box_pack_start ( GTK_BOX ( dialog_get_content_area ( assistant ) ), eb, FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX ( dialog_get_content_area ( assistant ) ), eb);
 
     notebook = gtk_notebook_new ();
     gtk_notebook_set_show_tabs ( GTK_NOTEBOOK(notebook), FALSE );
     gtk_notebook_set_show_border ( GTK_NOTEBOOK(notebook), FALSE );
-    gtk_box_pack_start ( GTK_BOX ( dialog_get_content_area ( assistant ) ), notebook, TRUE, TRUE, 0 );
+    gtk_box_prepend ( GTK_BOX ( dialog_get_content_area ( assistant ) ), notebook);
 
     view = gtk_text_view_new ();
     gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (view), GTK_WRAP_WORD);

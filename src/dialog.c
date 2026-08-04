@@ -279,7 +279,7 @@ static GtkDialog *dialogue_conditional_new (const gchar *text,
 					  "toggled",
 					  G_CALLBACK (dialogue_update_var),
 					  GINT_TO_POINTER (i));
-    gtk_box_pack_start (GTK_BOX (vbox), checkbox, TRUE, TRUE, MARGIN_BOX);
+    gtk_box_prepend (GTK_BOX (vbox), checkbox);
     gtk_widget_show_all (checkbox);
 
     gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
@@ -650,7 +650,7 @@ gboolean dialogue_conditional_yes_no_with_items (const gchar *tab_name,
 					  "toggled",
                       G_CALLBACK (dialogue_update_struct_message),
                       &tab_delete_msg[msg_no]);
-    gtk_box_pack_start (GTK_BOX (vbox), checkbox, TRUE, TRUE, MARGIN_BOX);
+    gtk_box_prepend (GTK_BOX (vbox), checkbox);
     gtk_widget_show_all (checkbox);
 
     response = gtk_dialog_run (GTK_DIALOG (dialog));
@@ -702,7 +702,7 @@ gboolean dialogue_conditional_yes_no_with_struct (ConditionalMsg *msg)
 					  "toggled",
                       G_CALLBACK (dialogue_update_struct_message),
                       msg);
-    gtk_box_pack_start (GTK_BOX (vbox), checkbox, TRUE, TRUE, MARGIN_BOX);
+    gtk_box_prepend (GTK_BOX (vbox), checkbox);
     gtk_widget_show_all (checkbox);
 
     response = gtk_dialog_run (GTK_DIALOG (dialog));
@@ -928,13 +928,13 @@ gchar *dialogue_hint_with_entry (const gchar *text,
         gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), "%s", text);
 
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
-    gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), hbox, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), hbox);
 
     label = gtk_label_new (entry_description);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), label);
 
     entry = gtk_entry_new ();
-    gtk_box_pack_start (GTK_BOX (hbox), entry, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), entry);
 
     gtk_widget_show_all (dialog);
 

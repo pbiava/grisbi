@@ -462,12 +462,12 @@ static GtkWidget *gsb_assistant_archive_page_menu (GtkWidget *assistant)
 	gtk_container_set_border_width (GTK_CONTAINER (page), BOX_BORDER_WIDTH);
 
 	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, MARGIN_BOX);
-	gtk_box_pack_start (GTK_BOX (page), vbox, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (page), vbox);
 
 	/* set up the menu */
 	label = gtk_label_new (_("Please select a way to select transactions for this archive"));
 	utils_labels_set_alignment (GTK_LABEL (label), GSB_LEFT, GSB_CENTER);
-	gtk_box_pack_start (GTK_BOX (vbox), label,  FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (vbox), label);
 
 	/* archive by date */
 	button = gtk_radio_button_new_with_label (NULL, _("Archive by date"));
@@ -476,24 +476,24 @@ static GtkWidget *gsb_assistant_archive_page_menu (GtkWidget *assistant)
 							 G_CALLBACK (gsb_assistant_archive_update_labels),
 							 G_OBJECT (assistant),
 							 G_CONNECT_AFTER | G_CONNECT_SWAPPED);
-	gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (vbox), button);
 
 	label = gtk_label_new (_("Grisbi will archive all transactions between initial and "
 							 "final dates."));
 	utils_labels_set_alignment (GTK_LABEL (label), GSB_LEFT, GSB_CENTER);
 	utils_widget_set_padding (GTK_WIDGET (label), 2*MARGIN_START, 0);
-	gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (vbox), label);
 
 	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
 	g_signal_connect (G_OBJECT (button),
 					  "toggled",
 					  G_CALLBACK  (sens_desensitive_pointeur),
 					  G_OBJECT (hbox));
-	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (vbox), hbox);
 
 	label = gtk_label_new (_("Initial date: "));
 	utils_widget_set_padding (GTK_WIDGET (label), 2*MARGIN_START, 0);
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (hbox), label);
 
 	initial_date = gsb_calendar_entry_new (FALSE);
 	g_signal_connect_object (G_OBJECT (initial_date),
@@ -501,11 +501,11 @@ static GtkWidget *gsb_assistant_archive_page_menu (GtkWidget *assistant)
 							 G_CALLBACK (gsb_assistant_archive_update_labels),
 							 G_OBJECT (assistant),
 							 G_CONNECT_AFTER | G_CONNECT_SWAPPED);
-	gtk_box_pack_start (GTK_BOX (hbox), initial_date, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (hbox), initial_date);
 
 	label = gtk_label_new (_("Final date: "));
 	utils_widget_set_padding (GTK_WIDGET (label), 2*MARGIN_START, 0);
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (hbox), label);
 
 	final_date = gsb_calendar_entry_new (FALSE);
 	g_signal_connect_object (G_OBJECT (final_date),
@@ -513,7 +513,7 @@ static GtkWidget *gsb_assistant_archive_page_menu (GtkWidget *assistant)
 							 G_CALLBACK (gsb_assistant_archive_update_labels),
 							 G_OBJECT (assistant),
 							 G_CONNECT_AFTER | G_CONNECT_SWAPPED);
-	gtk_box_pack_start (GTK_BOX (hbox), final_date, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (hbox), final_date);
 
 	/* archive by financial year */
 	button = gtk_radio_button_new_with_label (gtk_radio_button_get_group (GTK_RADIO_BUTTON (button)),
@@ -523,24 +523,24 @@ static GtkWidget *gsb_assistant_archive_page_menu (GtkWidget *assistant)
 							 G_CALLBACK (gsb_assistant_archive_update_labels),
 							 G_OBJECT (assistant),
 							 G_CONNECT_AFTER | G_CONNECT_SWAPPED);
-	gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (vbox), button);
 
 	label = gtk_label_new (_("Grisbi will archive all transactions belonging to a "
 							 "financial year."));
 	utils_widget_set_padding (GTK_WIDGET (label), 2*MARGIN_START, 0);
 	utils_labels_set_alignment (GTK_LABEL (label), 0, 0.5);
-	gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (vbox), label);
 
 	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
 	g_signal_connect (G_OBJECT (button),
 					  "toggled",
 					  G_CALLBACK  (sens_desensitive_pointeur),
 					  G_OBJECT (hbox));
-	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (vbox), hbox);
 
 	label = gtk_label_new (_("Financial year: "));
 	utils_widget_set_padding (GTK_WIDGET (label), 2*MARGIN_START, 0);
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (hbox), label);
 
 	financial_year_button = gsb_fyear_make_combobox (FALSE);
 	g_signal_connect_object (G_OBJECT (financial_year_button),
@@ -548,7 +548,7 @@ static GtkWidget *gsb_assistant_archive_page_menu (GtkWidget *assistant)
 							 G_CALLBACK (gsb_assistant_archive_update_labels),
 							 G_OBJECT (assistant),
 							 G_CONNECT_AFTER | G_CONNECT_SWAPPED);
-	gtk_box_pack_start (GTK_BOX (hbox), financial_year_button, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (hbox), financial_year_button);
 	gtk_widget_set_sensitive (hbox, FALSE);
 
 	/* archive by report */
@@ -559,35 +559,35 @@ static GtkWidget *gsb_assistant_archive_page_menu (GtkWidget *assistant)
 							 G_CALLBACK (gsb_assistant_archive_update_labels),
 							 G_OBJECT (assistant),
 							 G_CONNECT_AFTER | G_CONNECT_SWAPPED);
-	gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (vbox), button);
 
 	label = gtk_label_new (_("Grisbi will archive transactions selected by a report."));
 	utils_widget_set_padding (GTK_WIDGET (label), 2*MARGIN_START, 0);
 	utils_labels_set_alignment (GTK_LABEL (label), 0, 0.5);
-	gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (vbox), label);
 
 	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
 	g_signal_connect (G_OBJECT (button),
 					  "toggled",
 					  G_CALLBACK  (sens_desensitive_pointeur),
 					  G_OBJECT (hbox));
-	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (vbox), hbox);
 
 	label = gtk_label_new (_("Report: "));
 	utils_widget_set_padding (GTK_WIDGET (label), 2*MARGIN_START, 0);
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (hbox), label);
 	report_button = gsb_report_make_combobox ();
 	g_signal_connect_object (G_OBJECT (report_button),
 							 "changed",
 							 G_CALLBACK (gsb_assistant_archive_update_labels),
 							 G_OBJECT (assistant),
 							 G_CONNECT_AFTER | G_CONNECT_SWAPPED);
-	gtk_box_pack_start (GTK_BOX (hbox), report_button, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (hbox), report_button);
 	gtk_widget_set_sensitive (hbox, FALSE);
 
 	label_archived = gtk_label_new (NULL);
 	utils_labels_set_alignment (GTK_LABEL (label_archived), 0, 0);
-	gtk_box_pack_start (GTK_BOX (vbox), label_archived, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (vbox), label_archived);
 
 	gsb_assistant_sensitive_button_next (assistant, FALSE);
 
@@ -613,12 +613,12 @@ static GtkWidget *gsb_assistant_archive_page_archive_name (GtkWidget *assistant)
 	gtk_container_set_border_width (GTK_CONTAINER (page), BOX_BORDER_WIDTH);
 
 	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, MARGIN_BOX);
-	gtk_box_pack_start (GTK_BOX (page), vbox, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (page), vbox);
 
 	/* set up the menu */
 	label = gtk_label_new (_("Please choose a name for archive: "));
 	utils_labels_set_alignment (GTK_LABEL (label), GSB_LEFT, GSB_CENTER);
-	gtk_box_pack_start (GTK_BOX (vbox), label,  FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (vbox), label);
 
 	name_entry = gtk_entry_new ();
 	gtk_widget_set_size_request (name_entry, 400, -1);
@@ -627,7 +627,7 @@ static GtkWidget *gsb_assistant_archive_page_archive_name (GtkWidget *assistant)
 							 G_CALLBACK (gsb_assistant_archive_update_labels),
 							 G_OBJECT (assistant),
 							 G_CONNECT_AFTER | G_CONNECT_SWAPPED);
-	gtk_box_pack_start (GTK_BOX (vbox),
+	gtk_box_prepend (GTK_BOX (vbox),
 			 name_entry,
 			 FALSE, FALSE, 0);
 
@@ -656,7 +656,7 @@ static GtkWidget *gsb_assistant_archive_page_success (void)
 	/* we create 2 vbox, one for congratulation, one for failed,
 	 * only one will be showed */
 	vbox_congratulation = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-	gtk_box_pack_start (GTK_BOX (page), vbox_congratulation, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (page), vbox_congratulation);
 
 	congratulations_view = gtk_text_view_new ();
 	gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (congratulations_view), GTK_WRAP_WORD);
@@ -675,7 +675,7 @@ static GtkWidget *gsb_assistant_archive_page_success (void)
 	gtk_text_buffer_insert_with_tags_by_name (buffer, &iter, _("Congratulations!"), -1, "x-large", "bold", NULL);
 	gtk_text_buffer_insert (buffer, &iter, "\n\n", -1);
 
-	gtk_box_pack_start (GTK_BOX (vbox_congratulation), congratulations_view, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (vbox_congratulation), congratulations_view);
 	gtk_text_buffer_get_end_iter (buffer, &iter);
 	gtk_text_buffer_create_mark (buffer, "status", &iter, TRUE);
 
@@ -690,7 +690,7 @@ static GtkWidget *gsb_assistant_archive_page_success (void)
 
 	/* make the failed box */
 	vbox_failed = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-	gtk_box_pack_start (GTK_BOX (page), vbox_failed, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (page), vbox_failed);
 
 	failed_view = gtk_text_view_new ();
 	gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (failed_view), GTK_WRAP_WORD);
@@ -709,7 +709,7 @@ static GtkWidget *gsb_assistant_archive_page_success (void)
 	gtk_text_buffer_insert_with_tags_by_name (buffer, &iter, _("Failed!"), -1, "x-large", "bold", NULL);
 	gtk_text_buffer_insert (buffer, &iter, "\n\n", -1);
 
-	gtk_box_pack_start (GTK_BOX (vbox_failed), failed_view, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (vbox_failed), failed_view);
 	gtk_text_buffer_get_end_iter (buffer, &iter);
 	gtk_text_buffer_create_mark (buffer, "status", &iter, TRUE);
 

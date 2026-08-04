@@ -268,7 +268,7 @@ void debug_traitement_sigsegv ( gint signal_nb )
     scrolled_window = gtk_scrolled_window_new (NULL, NULL);
     gtk_scrolled_window_set_min_content_height(GTK_SCROLLED_WINDOW(scrolled_window), 400);
     gtk_container_add (GTK_CONTAINER (scrolled_window), expander);
-    gtk_box_pack_start ( GTK_BOX ( dialog_get_content_area ( dialog ) ), scrolled_window, FALSE, FALSE, 6 );
+    gtk_box_prepend ( GTK_BOX ( dialog_get_content_area ( dialog ) ), scrolled_window, FALSE, FALSE, 6 );
 
     gtk_widget_show_all ( dialog );
 #endif

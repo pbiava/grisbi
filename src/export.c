@@ -221,14 +221,14 @@ static GtkWidget *export_options_widget_new (GtkWidget *assistant)
 										  &w_etat->export_force_US_dates,
 										  NULL,
 										  NULL);
-    gtk_box_pack_start (GTK_BOX (hbox1), button, FALSE, FALSE, MARGIN_BOX);
+    gtk_box_prepend (GTK_BOX (hbox1), button);
 	gtk_size_group_add_widget (size_group, button);
 
     button = gsb_automem_checkbutton_new (_("Force US numbers"),
 										  &w_etat->export_force_US_numbers,
 										  NULL,
 										  NULL);
-    gtk_box_pack_start (GTK_BOX (hbox1), button, FALSE, FALSE, MARGIN_BOX);
+    gtk_box_prepend (GTK_BOX (hbox1), button);
 	gtk_size_group_add_widget (size_group, button);
 	gtk_grid_attach (GTK_GRID (grid), hbox1, 2, 0, 1, 1);
 
@@ -258,7 +258,7 @@ static GtkWidget *export_options_widget_new (GtkWidget *assistant)
 					  G_CALLBACK (export_account_radiobutton_format_changed),
 					  &w_etat->export_file_format);
 
-	gtk_box_pack_start (GTK_BOX(vbox), grid, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX(vbox), grid);
 
 	gtk_widget_show_all (vbox);
 
@@ -489,7 +489,7 @@ static GtkWidget *export_create_selection_page (GtkWidget *assistant)
 
     /* Scroll for tree view. */
     sw = gtk_scrolled_window_new (NULL, NULL);
-    gtk_box_pack_start (GTK_BOX (padding_box), sw, TRUE, TRUE, 0);
+    gtk_box_prepend (GTK_BOX (padding_box), sw);
     gtk_widget_set_size_request (sw, 480, 200);
     gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw), GTK_SHADOW_ETCHED_IN);
     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
@@ -540,12 +540,12 @@ static GtkWidget *export_create_selection_page (GtkWidget *assistant)
 					  "toggled",
 					  G_CALLBACK (export_account_all_toggled),
 					  view);
-	gtk_box_pack_start (GTK_BOX (padding_box), button_select, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (padding_box), button_select);
 
 	/* set options for export */
 	padding_box = new_paddingbox_with_title (vbox, TRUE, _("Select options to export"));
 	options_box = export_options_widget_new (assistant);
-    gtk_box_pack_start (GTK_BOX(padding_box), options_box, TRUE, TRUE, 0);
+    gtk_box_prepend (GTK_BOX(padding_box), options_box);
 
 	entry = g_object_get_data (G_OBJECT(assistant), "entry");
 	gtk_entry_set_text (GTK_ENTRY (entry), w_etat->csv_separator);
@@ -557,7 +557,7 @@ static GtkWidget *export_create_selection_page (GtkWidget *assistant)
 										  NULL,
 										  NULL);
 	gtk_widget_set_tooltip_text (button, _("The generated files will be named as follows:\n[accounting entity]-[account name].[extension]\n\nThe save folder will be the Grisbi file folder"));
-    gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (vbox), button);
 
     /* return */
     return vbox;
@@ -668,17 +668,17 @@ static GtkWidget *create_export_account_resume_page (struct ExportedAccount *acc
     gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
     gtk_label_set_markup (GTK_LABEL (label), tmpstr);
     g_free (tmpstr);
-    gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (vbox), label);
 
     /* Layout */
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
-    gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_("Export format: ")), FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), gtk_label_new (_("Export format: ")));
 
     /* Combo box */
     combo = gtk_combo_box_text_new ();
     gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), _("QIF format"));
     gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), _("CSV format"));
-    gtk_box_pack_start (GTK_BOX (hbox), combo, TRUE, TRUE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), combo);
     g_signal_connect (G_OBJECT(combo),
 					  "changed",
 					  G_CALLBACK (export_account_change_format),
@@ -686,7 +686,7 @@ static GtkWidget *create_export_account_resume_page (struct ExportedAccount *acc
 
     account->chooser = gtk_file_chooser_widget_new (GTK_FILE_CHOOSER_ACTION_SAVE);
     gtk_file_chooser_set_extra_widget (GTK_FILE_CHOOSER(account->chooser), hbox);
-    gtk_box_pack_start (GTK_BOX (vbox), account->chooser, TRUE, TRUE, 0);
+    gtk_box_prepend (GTK_BOX (vbox), account->chooser);
 	g_signal_connect (account->chooser,
 					  "current-folder-changed",
 					  G_CALLBACK (export_account_file_chooser_dir_changed),

@@ -86,8 +86,7 @@ static void prefs_page_form_options_setup_form_options_page (PrefsPageFormOption
 
 	/* On récupère le nom de la page */
 	head_page = utils_prefs_head_page_new_with_title_and_icon (_("Form behavior"), "gsb-form-32.png");
-	gtk_box_pack_start (GTK_BOX (priv->vbox_form_options), head_page, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->vbox_form_options), head_page, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_form_options), head_page);
 
 	/* set the form_enter_key variable */
 	button = gsb_automem_radiobutton_gsettings_new (_("selects next field"),
@@ -95,15 +94,14 @@ static void prefs_page_form_options_setup_form_options_page (PrefsPageFormOption
 													&a_conf->form_enter_key,
 													NULL,
 													NULL);
-	gtk_box_pack_start (GTK_BOX (priv->box_form_enter_key), button, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (priv->box_form_enter_key), button);
 
 	/* set the form_date_force_prev_year variable */
 	button = gsb_automem_checkbutton_new (_("Replace the year of future dates with the previous year"),
 										  &w_etat->form_date_force_prev_year,
 										  NULL,
 										  NULL);
-	gtk_box_pack_start (GTK_BOX (priv->box_form_date_force_prev_year), button, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->box_form_date_force_prev_year), button, 0);
+	gtk_box_prepend (GTK_BOX (priv->box_form_date_force_prev_year), button);
 
     /* set the affichage_exercice_automatique variable */
     button = gsb_automem_radiobutton_gsettings_new (_("according to transaction date"),
@@ -111,14 +109,14 @@ static void prefs_page_form_options_setup_form_options_page (PrefsPageFormOption
 												    &a_conf->affichage_exercice_automatique,
 												    NULL,
 												    NULL);
-	gtk_box_pack_start (GTK_BOX (priv->box_affichage_exercice_automatique), button, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (priv->box_affichage_exercice_automatique), button);
 
     /* set the fyear_combobox_sort_order variable */
 	button = gsb_automem_checkbutton_gsettings_new (_("Sorting descending of the exercises"),
 													&a_conf->fyear_combobox_sort_order,
 													NULL,
 													a_conf);
-	gtk_box_pack_start (GTK_BOX (priv->box_fyear_combobox_sort_order), button, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (priv->box_fyear_combobox_sort_order), button);
 
 	/* set automatic_separator variable */
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->checkbutton_automatic_separator),
@@ -130,7 +128,7 @@ static void prefs_page_form_options_setup_form_options_page (PrefsPageFormOption
 													&a_conf->form_validate_split,
 													NULL,
 													NULL);
-	gtk_box_pack_start (GTK_BOX (priv->box_form_validate_split), button, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (priv->box_form_validate_split), button);
 
 	if (!is_loading)
 	{

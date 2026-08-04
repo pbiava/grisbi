@@ -142,9 +142,7 @@ GtkWidget * print_transactions_list_layout_config ( GtkPrintOperation * operatio
     /* set up the title and dates, this is never saved, so ask each time */
     /* title line */
     hbox = gtk_box_new ( GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX );
-    gtk_box_pack_start (GTK_BOX (paddingbox),
-			hbox,
-			FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (paddingbox), hbox);
 
     entry = gsb_automem_entry_new (&title_string, NULL, NULL);
 
@@ -152,14 +150,10 @@ GtkWidget * print_transactions_list_layout_config ( GtkPrintOperation * operatio
 						 gsb_data_print_config_get_draw_title (),
 						 G_CALLBACK (sens_desensitive_pointeur), entry,
 						 G_CALLBACK (gsb_data_print_config_set_draw_title), 0);
-    gtk_box_pack_start (GTK_BOX (hbox),
-			check_button,
-			FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), check_button);
 
     gtk_widget_set_sensitive (entry, gsb_data_print_config_get_draw_title ());
-    gtk_box_pack_start (GTK_BOX (hbox),
-			entry,
-			TRUE, TRUE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), entry);
 
     /* add the dates interval */
     hbox = gtk_box_new ( GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX );
@@ -168,38 +162,25 @@ GtkWidget * print_transactions_list_layout_config ( GtkPrintOperation * operatio
 						 gsb_data_print_config_get_draw_interval_dates (),
 						 G_CALLBACK (sens_desensitive_pointeur), hbox,
 						 G_CALLBACK (gsb_data_print_config_set_draw_interval_dates), 0);
-    gtk_box_pack_start (GTK_BOX (paddingbox),
-			check_button,
-			FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (paddingbox), check_button);
 
-
-    gtk_box_pack_start (GTK_BOX (paddingbox),
-			hbox,
-			FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (paddingbox), hbox);
 
     label = gtk_label_new (_("Initial date: "));
-    gtk_box_pack_start (GTK_BOX (hbox),
-			label,
-			FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), label);
 
     init_date_entry = gsb_calendar_entry_new (FALSE);
     if (draw_initial_date)
 	gsb_calendar_entry_set_date (init_date_entry, draw_initial_date);
-    gtk_box_pack_start (GTK_BOX (hbox),
-			init_date_entry,
-			FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), init_date_entry);
 
     label = gtk_label_new (_("Final date: "));
-    gtk_box_pack_start (GTK_BOX (hbox),
-			label,
-			FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), label);
 
     final_date_entry = gsb_calendar_entry_new (FALSE);
     if (draw_final_date)
 	gsb_calendar_entry_set_date (final_date_entry, draw_final_date);
-    gtk_box_pack_start (GTK_BOX (hbox),
-			final_date_entry,
-			FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), final_date_entry);
 
     g_object_set_data ( G_OBJECT ( operation ), "init_date_entry", init_date_entry );
     g_object_set_data ( G_OBJECT ( operation ), "final_date_entry", final_date_entry );
@@ -208,9 +189,7 @@ GtkWidget * print_transactions_list_layout_config ( GtkPrintOperation * operatio
 						 gsb_data_print_config_get_draw_dates_are_value_dates (),
 						 NULL, NULL,
 						 G_CALLBACK (gsb_data_print_config_set_draw_dates_are_value_dates), 0);
-    gtk_box_pack_start (GTK_BOX (hbox),
-			check_button,
-			FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), check_button);
 
     if (!gsb_data_print_config_get_draw_interval_dates ())
 	gtk_widget_set_sensitive (hbox, FALSE);
@@ -220,89 +199,67 @@ GtkWidget * print_transactions_list_layout_config ( GtkPrintOperation * operatio
 						 gsb_data_print_config_get_draw_lines (),
 						 NULL, NULL,
 						 G_CALLBACK (gsb_data_print_config_set_draw_lines), 0);
-    gtk_box_pack_start (GTK_BOX (paddingbox),
-			check_button,
-			FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (paddingbox), check_button);
     check_button = gsb_autofunc_checkbutton_new (_("Draw the lines between the columns"),
 						 gsb_data_print_config_get_draw_column (),
 						 NULL, NULL,
 						 G_CALLBACK (gsb_data_print_config_set_draw_column), 0);
-    gtk_box_pack_start (GTK_BOX (paddingbox),
-			check_button,
-			FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (paddingbox), check_button);
 
     check_button = gsb_autofunc_checkbutton_new (_("Fill the background as the transactions list"),
 						 gsb_data_print_config_get_draw_background (),
 						 NULL, NULL,
 						 G_CALLBACK (gsb_data_print_config_set_draw_background), 0);
-    gtk_box_pack_start (GTK_BOX (paddingbox),
-			check_button,
-			FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (paddingbox), check_button);
 
     check_button = gsb_autofunc_checkbutton_new (_("Print the archives lines"),
 						 gsb_data_print_config_get_draw_archives (),
 						 NULL, NULL,
 						 G_CALLBACK (gsb_data_print_config_set_draw_archives), 0);
-    gtk_box_pack_start (GTK_BOX (paddingbox),
-			check_button,
-			FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (paddingbox), check_button);
 
     check_button = gsb_autofunc_checkbutton_new (_("Print the names of the columns"),
 						 gsb_data_print_config_get_draw_columns_name (),
 						 NULL, NULL,
 						 G_CALLBACK (gsb_data_print_config_set_draw_columns_name), 0);
-    gtk_box_pack_start (GTK_BOX (paddingbox),
-			check_button,
-			FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (paddingbox), check_button);
 
     paddingbox = new_paddingbox_with_title ( vbox, FALSE, _("Fonts") );
 
     /* set up the font of the transactions,
      * by default use the font of the lists */
     hbox = gtk_box_new ( GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX );
-    gtk_box_pack_start (GTK_BOX (paddingbox),
-			hbox,
-			FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (paddingbox), hbox);
 
     label = gtk_label_new (_("Transactions font"));
     gtk_label_set_justify ( GTK_LABEL (label), GTK_JUSTIFY_LEFT );
     utils_labels_set_alignment ( GTK_LABEL ( label ), 0, 0.5);
     gtk_size_group_add_widget ( size_group, label );
-    gtk_box_pack_start (GTK_BOX (hbox),
-			label,
-			FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), label);
 
     fontname_transactions = pango_font_description_to_string (gsb_data_print_config_get_font_transactions ());
     font_button_transactions = gtk_font_button_new_with_font ( fontname_transactions );
     gtk_font_button_set_use_font ( GTK_FONT_BUTTON(font_button_transactions), TRUE );
     gtk_font_button_set_use_size ( GTK_FONT_BUTTON(font_button_transactions), TRUE );
     gtk_font_button_set_title ( GTK_FONT_BUTTON(font_button_transactions), _("Choosing font") );
-    gtk_box_pack_start (GTK_BOX (hbox),
-			font_button_transactions,
-			TRUE, TRUE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), font_button_transactions);
 
     /* set up the font for the title */
     hbox = gtk_box_new ( GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX );
-    gtk_box_pack_start (GTK_BOX (paddingbox),
-			hbox,
-			FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (paddingbox), hbox);
 
     label = gtk_label_new (_("Title font"));
     gtk_label_set_justify ( GTK_LABEL (label), GTK_JUSTIFY_LEFT );
     utils_labels_set_alignment ( GTK_LABEL ( label ), 0, 0.5);
     gtk_size_group_add_widget ( size_group, label );
-    gtk_box_pack_start (GTK_BOX (hbox),
-			label,
-			FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), label);
 
     fontname_title = pango_font_description_to_string (gsb_data_print_config_get_font_title ());
     font_button_title =  gtk_font_button_new_with_font ( fontname_title );
     gtk_font_button_set_use_font ( GTK_FONT_BUTTON(font_button_title), TRUE );
     gtk_font_button_set_use_size ( GTK_FONT_BUTTON(font_button_title), TRUE );
     gtk_font_button_set_title ( GTK_FONT_BUTTON(font_button_title), _("Choosing font") );
-    gtk_box_pack_start (GTK_BOX (hbox),
-			font_button_title,
-			TRUE, TRUE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), font_button_title);
 
 
     /* save what we have done in all cases, so if we cancel and come back, our values

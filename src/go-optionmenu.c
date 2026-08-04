@@ -385,7 +385,7 @@ go_option_menu_init (GOOptionMenu *option_menu, gpointer g_class)
 	option_menu->selected = NULL;
 
 	option_menu->button_label = GTK_LABEL (gtk_label_new (""));
-	gtk_box_pack_start (box, GTK_WIDGET (option_menu->button_label),
+	gtk_box_prepend (box, GTK_WIDGET (option_menu->button_label),
 			    FALSE, TRUE, 0);
 
     tmp_filename = g_build_filename (gsb_dirs_get_pixmaps_dir (), "gsb-arrow-down-16.png", NULL);

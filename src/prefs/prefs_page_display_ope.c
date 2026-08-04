@@ -683,8 +683,7 @@ static void prefs_page_display_ope_setup_page (PrefsPageDisplayOpe *page)
 	/* On récupère le nom de la page */
 	head_page = utils_prefs_head_page_new_with_title_and_icon (_("Transactions list cells"),
 															   "gsb-transaction-list-32.png");
-	gtk_box_pack_start (GTK_BOX (priv->vbox_display_ope), head_page, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->vbox_display_ope), head_page, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_display_ope), head_page);
 
 	if (!is_loading)
 	    gsb_transactions_list_init_tab_affichage_ope (NULL);

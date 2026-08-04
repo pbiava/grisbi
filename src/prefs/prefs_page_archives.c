@@ -558,8 +558,7 @@ static void prefs_page_archives_setup_page (PrefsPageArchives *page)
 
 	/* On récupère le nom de la page */
 	head_page = utils_prefs_head_page_new_with_title_and_icon (_("Archives"), "gsb-archive-32.png");
-	gtk_box_pack_start (GTK_BOX (priv->vbox_archives), head_page, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->vbox_archives), head_page, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_archives), head_page);
 
 	/* set the entry widget entry_archives_name */
 	gsb_autofunc_entry_new_from_ui (priv->entry_archives_name,

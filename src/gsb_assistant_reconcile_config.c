@@ -329,22 +329,16 @@ static GtkWidget *gsb_assistant_reconcile_config_page_menu ( GtkWidget *assistan
     utils_labels_set_alignment ( GTK_LABEL (label_transactions_to_link_1),
 			     0, 0.5 );
 
-    gtk_box_pack_start ( GTK_BOX (page),
-			 label_transactions_to_link_1,
-			 FALSE, FALSE, 0 );
+    gtk_box_prepend (GTK_BOX (page), label_transactions_to_link_1);
 
     separator = gtk_separator_new ( GTK_ORIENTATION_HORIZONTAL );
-    gtk_box_pack_start ( GTK_BOX (page),
-			 separator,
-			 FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX (page), separator);
 
     /* set up the menu */
     label = gtk_label_new (_("Choose the next operation to do: "));
     utils_labels_set_alignment ( GTK_LABEL (label),
 			     0, 0.5 );
-    gtk_box_pack_start ( GTK_BOX (page),
-			 label,
-			 FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX (page), label);
 
     /* create a new reconcile */
     button = gtk_radio_button_new_with_label ( NULL,
@@ -355,17 +349,13 @@ static GtkWidget *gsb_assistant_reconcile_config_page_menu ( GtkWidget *assistan
 		       "toggled",
 		       G_CALLBACK (gsb_assistant_reconcile_config_page_menu_toggled),
 		       assistant );
-    gtk_box_pack_start ( GTK_BOX (page),
-			 button,
-			 FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX (page), button);
 
     label = gtk_label_new (_("	After a long use, some transactions may be before the first known reconciliation.\n"
 			     "	You can create all the previous needed reconciliations here."));
     utils_labels_set_alignment ( GTK_LABEL (label),
 			     0, 0.5 );
-    gtk_box_pack_start ( GTK_BOX (page),
-			 label,
-			 FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX (page), label);
 
     /* automatically associate the transactions without reconcile number */
     button = gtk_radio_button_new_with_label ( gtk_radio_button_get_group (GTK_RADIO_BUTTON (button)),
@@ -376,18 +366,14 @@ static GtkWidget *gsb_assistant_reconcile_config_page_menu ( GtkWidget *assistan
 		       "toggled",
 		       G_CALLBACK (gsb_assistant_reconcile_config_page_menu_toggled),
 		       assistant );
-    gtk_box_pack_start ( GTK_BOX (page),
-			 button,
-			 FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX (page), button);
 
     label = gtk_label_new (_("	This will make all the work for you if you create "
                         "previously all the needed reconciliations\n"
                         "	and adjust the date of the known reconciliations."));
     utils_labels_set_alignment ( GTK_LABEL (label),
 			     0, 0.5 );
-    gtk_box_pack_start ( GTK_BOX (page),
-			 label,
-			 FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX (page), label);
 
     /* associate the transactions without reconcile number by hand */
     button = gtk_radio_button_new_with_label ( gtk_radio_button_get_group (GTK_RADIO_BUTTON (button)),
@@ -399,23 +385,17 @@ static GtkWidget *gsb_assistant_reconcile_config_page_menu ( GtkWidget *assistan
 		       "toggled",
 		       G_CALLBACK (gsb_assistant_reconcile_config_page_menu_toggled),
 		       assistant );
-    gtk_box_pack_start ( GTK_BOX (page),
-			 button,
-			 FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX (page), button);
 
     label = gtk_label_new (_("	You control all and have a lot of time to spend on your computer !\n"
 			     "	(you will be able to choose a reconciliation for each orphan transaction)."));
     utils_labels_set_alignment ( GTK_LABEL (label),
 			     0, 0.5 );
-    gtk_box_pack_start ( GTK_BOX (page),
-			 label,
-			 FALSE, FALSE, 0 );
-
-
-
+    gtk_box_prepend ( GTK_BOX (page), label );
 
     gtk_widget_show_all (page);
-    return page;
+
+	return page;
 }
 
 
@@ -446,7 +426,7 @@ static GtkWidget *gsb_assistant_reconcile_config_page_new_reconcile (GtkWidget *
 	table = gtk_grid_new ();
 	gtk_grid_set_row_spacing (GTK_GRID (table), 6);
 	gtk_grid_set_column_spacing (GTK_GRID (table), 6);
-	gtk_box_pack_start ( GTK_BOX (paddingbox), table, FALSE, FALSE, 0 );
+	gtk_box_prepend ( GTK_BOX (paddingbox), table);
 
 	/* set the name */
 	label = gtk_label_new ( _("Reconciliation reference: ") );
@@ -508,23 +488,14 @@ static GtkWidget *gsb_assistant_reconcile_config_page_new_reconcile (GtkWidget *
     /* create the button */
     hbox = gtk_box_new ( GTK_ORIENTATION_HORIZONTAL, 0 );
     gtk_box_set_homogeneous ( GTK_BOX ( hbox ), TRUE );
-    gtk_box_pack_start ( GTK_BOX (page),
-			 hbox,
-			 FALSE, FALSE,
-			 0 );
+    gtk_box_prepend ( GTK_BOX (page), hbox );
 
     button = gtk_button_new_with_label (_("Create the new reconciliation"));
     gtk_box_append ( GTK_BOX (hbox), button);
-		       button,
-		       FALSE, FALSE,
-		       0 );
 
     /* create the label */
     label = gtk_label_new (NULL);
-    gtk_box_pack_start ( GTK_BOX (page),
-			 label,
-			 TRUE, TRUE,
-			 0 );
+    gtk_box_prepend ( GTK_BOX (page), label );
 	g_object_set_data (G_OBJECT (assistant), "label_new_reconcile", label);
 
     /* if we change anything in the entries, hide the label */
@@ -581,14 +552,10 @@ static GtkWidget *gsb_assistant_reconcile_config_page_automatically_associate ( 
      * we will fill when the user come to that page */
     /* first show the total of transactions to link, same as in the menu assistant */
     label_transactions_to_link_2 = gtk_label_new (NULL);
-    gtk_box_pack_start ( GTK_BOX (page),
-			 label_transactions_to_link_2,
-			 FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX (page), label_transactions_to_link_2 );
 
     separator = gtk_separator_new ( GTK_ORIENTATION_HORIZONTAL );
-    gtk_box_pack_start ( GTK_BOX (page),
-			 separator,
-			 FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX (page), separator );
 
     label = gtk_label_new ( _("This assistant try to find a bank reconciliation to each orphan transaction,\n"
 			     "according to the date of the transaction and the dates of the reconciliations.\n"
@@ -597,32 +564,22 @@ static GtkWidget *gsb_assistant_reconcile_config_page_automatically_associate ( 
 			     "menu page) or check the transactions themselves."));
     utils_labels_set_alignment ( GTK_LABEL (label),
 			     0, 0.5 );
-    gtk_box_pack_start ( GTK_BOX (page),
-			 label,
-			 FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX (page), label );
 
     /* set the number of possible association, filled when come in that page */
     label_possible_association = gtk_label_new (NULL);
-    gtk_box_pack_start ( GTK_BOX (page),
-			 label_possible_association,
-			 FALSE, FALSE, 12 );
+    gtk_box_prepend ( GTK_BOX (page), label_possible_association, );
 
     /* set the button to run the association */
     hbox = gtk_box_new ( GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX );
     gtk_box_set_homogeneous ( GTK_BOX ( hbox ), TRUE );
-    gtk_box_pack_start ( GTK_BOX (page),
-			 hbox,
-			 FALSE, FALSE,
-			 0 );
+    gtk_box_prepend ( GTK_BOX (page), hbox );
     button_run_association = gtk_button_new_with_label ( _("Launch automatic association"));
     g_signal_connect ( G_OBJECT (button_run_association),
 		       "clicked",
 		       G_CALLBACK (gsb_assistant_reconcile_config_lauch_auto_asso),
 		       assistant );
-    gtk_box_pack_start ( GTK_BOX (hbox),
-			 button_run_association,
-			 FALSE, FALSE,
-			 0 );
+    gtk_box_prepend ( GTK_BOX (hbox), button_run_association );
 
     gtk_widget_show_all (page);
     return page;
@@ -662,29 +619,21 @@ static GtkWidget *gsb_assistant_reconcile_config_page_manually_associate ( GtkWi
 
     /* the number of transactions to link */
     label_transactions_to_link_3 = gtk_label_new (NULL);
-    gtk_box_pack_start ( GTK_BOX (page),
-			 label_transactions_to_link_3,
-			 FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX (page), label_transactions_to_link_3 );
 
     separator = gtk_separator_new ( GTK_ORIENTATION_HORIZONTAL );
-    gtk_box_pack_start ( GTK_BOX (page),
-			 separator,
-			 FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX (page), separator );
 
     /* now we can show the list of orphans transactions */
     label = gtk_label_new (_("Select the transaction(s) you want to associate with a reconciliation: "));
     utils_labels_set_alignment ( GTK_LABEL ( label ), 0.0, 0.0 );
-    gtk_box_pack_start ( GTK_BOX (page),
-			 label,
-			 FALSE, FALSE, 10 );
+    gtk_box_prepend ( GTK_BOX (page), label );
 
     scrolled_window = gtk_scrolled_window_new (FALSE, FALSE);
     gtk_scrolled_window_set_policy ( GTK_SCROLLED_WINDOW (scrolled_window),
 				     GTK_POLICY_AUTOMATIC,
 				     GTK_POLICY_AUTOMATIC );
-    gtk_box_pack_start ( GTK_BOX (page),
-			 scrolled_window,
-			 TRUE, TRUE, 0 );
+    gtk_box_prepend ( GTK_BOX (page), scrolled_window );
     gtk_widget_show (scrolled_window);
 
     /* set up the tree view */
@@ -731,19 +680,13 @@ static GtkWidget *gsb_assistant_reconcile_config_page_manually_associate ( GtkWi
     /* set the button to associate */
     hbox = gtk_box_new ( GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX );
     gtk_box_set_homogeneous ( GTK_BOX ( hbox ), TRUE );
-    gtk_box_pack_start ( GTK_BOX (page),
-			 hbox,
-			 FALSE, FALSE,
-			 10 );
+    gtk_box_prepend ( GTK_BOX (page) hbox );
     button = gtk_button_new_with_label ( _("Link the selection to a reconciliation..."));
     g_signal_connect ( G_OBJECT (button),
 		       "clicked",
 		       G_CALLBACK (gsb_assistant_reconcile_config_lauch_manu_asso),
 		       assistant );
-    gtk_box_pack_start ( GTK_BOX (hbox),
-			 button,
-			 TRUE, TRUE,
-			 0 );
+    gtk_box_prepend ( GTK_BOX (hbox), button );
 
 	/* un sensitive button */
 	gtk_widget_set_sensitive (button, FALSE);
@@ -777,10 +720,7 @@ static GtkWidget *gsb_assistant_reconcile_config_page_success ( void )
 			     "You have linked all the transactions without reconciliation.\n"
 			     "Normally you needn't have to come back to that assistant ; it shouldn't have any way now\n"
 			     "	to have some transactions without reconciliation number."));
-    gtk_box_pack_start ( GTK_BOX (page),
-			 label,
-			 FALSE, FALSE,
-			 0 );
+    gtk_box_prepend ( GTK_BOX (page), label );
 
     gtk_widget_show_all (page);
     return page;
@@ -1284,20 +1224,14 @@ static gboolean gsb_assistant_reconcile_config_lauch_manu_asso ( GtkWidget *butt
 
     label = gtk_label_new ( _("Select the reconciliation to associate to the selected transactions: ") );
     utils_labels_set_alignment ( GTK_LABEL ( label ), 0.0, 0.0 );
-    gtk_box_pack_start ( GTK_BOX ( dialog_get_content_area ( dialog ) ),
-			 label,
-			 FALSE, FALSE,
-			 10 );
+    gtk_box_prepend ( GTK_BOX ( dialog_get_content_area ( dialog ) ), label );
 
     /* make the list */
     scrolled_window = gtk_scrolled_window_new (FALSE, FALSE);
     gtk_scrolled_window_set_policy ( GTK_SCROLLED_WINDOW (scrolled_window),
 				     GTK_POLICY_AUTOMATIC,
 				     GTK_POLICY_AUTOMATIC );
-    gtk_box_pack_start ( GTK_BOX ( dialog_get_content_area ( dialog ) ),
-			 scrolled_window,
-			 TRUE, TRUE,
-			 0 );
+    gtk_box_prepend ( GTK_BOX ( dialog_get_content_area ( dialog ) ), scrolled_window );
 
     dialog_store = gtk_list_store_new ( DIALOG_NB_COL,
 					G_TYPE_STRING,

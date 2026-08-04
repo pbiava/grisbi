@@ -156,12 +156,11 @@ static void etats_page_transfer_setup_page (EtatsPageTransfer *page,
 
 	/* set head page */
 	head_page = utils_prefs_head_page_new_with_title_and_icon (_("Transfers"), "gsb-transfer-32.png");
-	gtk_box_pack_start (GTK_BOX (priv->vbox_etats_page_transfer), head_page, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->vbox_etats_page_transfer), head_page, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_etats_page_transfer), head_page);
 
 	/* init widget list */
 	priv->widget_list_accounts = GTK_WIDGET (widget_list_accounts_new (GTK_WIDGET (page)));
-	gtk_box_pack_start (GTK_BOX (priv->vbox_etats_page_transfer), priv->widget_list_accounts, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_etats_page_transfer), priv->widget_list_accounts);
 	gtk_box_reorder_child (GTK_BOX (priv->vbox_etats_page_transfer), priv->widget_list_accounts, 5);
 
     /* on initialise les boutons pour sensibiliser bouton_exclure_non_virements_etat et la liste des comptes */

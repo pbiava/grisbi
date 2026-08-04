@@ -385,7 +385,7 @@ static GtkWidget *grisbi_win_form_new (GrisbiWin *win)
 	tmp_str = dialogue_make_pango_attribut ("weight=\"bold\"", _("Transaction/Scheduled _form"));
 	gtk_label_set_markup_with_mnemonic (GTK_LABEL (label), tmp_str);
 	g_free (tmp_str);
-	gtk_box_pack_start (GTK_BOX (priv->form_hbox_label), label, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (priv->form_hbox_label), label);
 
 	/* set the last statement label */
 	priv->form_label_last_statement = gtk_label_new (NULL);
@@ -595,7 +595,7 @@ static void grisbi_win_create_general_widgets (GrisbiWin *win)
 	/* chargement de headings_eb */
 	/* initialisation de headings_eb */
 	grisbi_win_create_headings_eb (GRISBI_WIN (win));
-	gtk_box_pack_start (GTK_BOX (priv->vbox_general), priv->headings_eb, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_general), priv->headings_eb);
 	if (a_conf->show_headings_bar)
 		gtk_widget_show_all (priv->headings_eb);
 	else
@@ -607,7 +607,7 @@ static void grisbi_win_create_general_widgets (GrisbiWin *win)
 					  "size-allocate",
 					  G_CALLBACK (grisbi_win_hpaned_size_allocate),
 					  a_conf);
-	gtk_box_pack_start (GTK_BOX (priv->vbox_general), priv->hpaned_general, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_general), priv->hpaned_general);
 
 	/* fill the main hpaned. */
 	gtk_paned_pack1 (GTK_PANED (priv->hpaned_general),
@@ -2025,7 +2025,7 @@ void grisbi_win_new_file_gui (void)
 	/* Create transaction list. */
 	sw_transaction_list = gsb_transactions_list_make_gui_list ();
 	vbox_transactions_list = grisbi_win_get_vbox_transactions_list (win);
-	gtk_box_pack_start (GTK_BOX (vbox_transactions_list), sw_transaction_list, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (vbox_transactions_list), sw_transaction_list);
 	gtk_widget_show (sw_transaction_list);
 
 	/* Display accounts in menus */

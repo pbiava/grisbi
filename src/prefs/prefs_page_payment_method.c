@@ -1315,8 +1315,7 @@ static void prefs_page_payment_method_setup_page (PrefsPagePaymentMethod *page,
 
 	/* On récupère le nom de la page */
 	head_page = utils_prefs_head_page_new_with_title_and_icon (_("Payment methods"), "gsb-payment-32.png");
-	gtk_box_pack_start (GTK_BOX (priv->vbox_payment_method), head_page, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->vbox_payment_method), head_page, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_payment_method), head_page);
 
 	/* set the list of payment_method */
 	prefs_page_payment_method_setup_tree_view (page);

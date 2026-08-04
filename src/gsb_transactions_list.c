@@ -1431,13 +1431,13 @@ static gint gsb_transactions_list_choose_reconcile (gint account_number,
 
 	label = gtk_label_new (_("Select the reconciliation to associate to the selected transaction: "));
     utils_labels_set_alignment (GTK_LABEL (label), 0.0, 0.0);
-    gtk_box_pack_start (GTK_BOX (content_area), label, FALSE, FALSE, MARGIN_BOX);
+    gtk_box_prepend (GTK_BOX (content_area), label);
 
     scrolled_window = gtk_scrolled_window_new (FALSE, FALSE);
     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
 									GTK_POLICY_AUTOMATIC,
 									GTK_POLICY_AUTOMATIC);
-    gtk_box_pack_start (GTK_BOX (content_area), scrolled_window, TRUE, TRUE, 0);
+    gtk_box_prepend (GTK_BOX (content_area), scrolled_window);
 
     /* set up the tree view */
     store = gtk_list_store_new (RECONCILE_NB_COL,
@@ -3113,7 +3113,7 @@ GtkWidget *gsb_transactions_list_creation_fenetre_operations (void)
 
     /* frame pour la barre d'outils */
     frame = gtk_frame_new (NULL);
-    gtk_box_pack_start (GTK_BOX (win_operations), frame, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (win_operations), frame);
 
     /* vbox inside the frame: toolbar + search info label */
     toolbar_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 2);
@@ -3121,13 +3121,13 @@ GtkWidget *gsb_transactions_list_creation_fenetre_operations (void)
 
     /* création de la barre d'outils */
     transaction_toolbar = gsb_transactions_list_new_toolbar ();
-    gtk_box_pack_start (GTK_BOX (toolbar_box), transaction_toolbar, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (toolbar_box), transaction_toolbar);
 
     /* vbox_transactions_list will contain the tree_view, we will see later to set it directly */
     vbox_transactions_list = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 	grisbi_win_set_vbox_transactions_list (NULL, vbox_transactions_list);
 
-    gtk_box_pack_start (GTK_BOX (win_operations), vbox_transactions_list, TRUE, TRUE, 0);
+    gtk_box_prepend (GTK_BOX (win_operations), vbox_transactions_list);
 
     gtk_widget_show_all (win_operations);
 

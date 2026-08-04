@@ -169,9 +169,7 @@ static GtkWidget *gsb_assistant_archive_export_page_choose ( GtkWidget *assistan
 				     GTK_POLICY_AUTOMATIC );
     gtk_scrolled_window_set_shadow_type ( GTK_SCROLLED_WINDOW ( scrolled_window ),
 					  GTK_SHADOW_IN);
-    gtk_box_pack_start ( GTK_BOX (paddingbox),
-			 scrolled_window,
-			 TRUE, TRUE, 0 );
+    gtk_box_prepend ( GTK_BOX (paddingbox), scrolled_window );
 
     /* Create tree view */
     archive_model = gtk_list_store_new (NUM_ARCHIVES_EXPORT_COLUMNS,
@@ -289,24 +287,22 @@ static GtkWidget *gsb_assistant_archive_export_page_name ( GtkWidget *assistant 
     archive_export_label = gtk_label_new ( NULL );
     utils_labels_set_alignment ( GTK_LABEL ( archive_export_label ), 0, 0.5);
     gtk_label_set_justify ( GTK_LABEL ( archive_export_label ), GTK_JUSTIFY_LEFT );
-    gtk_box_pack_start ( GTK_BOX ( vbox ), archive_export_label, FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX ( vbox ), archive_export_label );
 
     /* Layout */
     hbox = gtk_box_new ( GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX );
-    gtk_box_pack_start ( GTK_BOX ( hbox ),
-			 gtk_label_new ( _("Export format: ") ),
-			 FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX ( hbox ), gtk_label_new ( _("Export format: ") ));
 
     /* Combo box */
     archive_export_combobox = gtk_combo_box_text_new ();
     gtk_combo_box_text_append_text ( GTK_COMBO_BOX_TEXT (archive_export_combobox), _("Grisbi (GSB) format" ) );
     gtk_combo_box_text_append_text ( GTK_COMBO_BOX_TEXT (archive_export_combobox), _("QIF format" ) );
     gtk_combo_box_text_append_text ( GTK_COMBO_BOX_TEXT (archive_export_combobox), _("CSV format" ) );
-    gtk_box_pack_start ( GTK_BOX ( hbox ), archive_export_combobox, TRUE, TRUE, 0 );
+    gtk_box_prepend ( GTK_BOX ( hbox ), archive_export_combobox );
 
     archive_export_filechooser = gtk_file_chooser_widget_new ( GTK_FILE_CHOOSER_ACTION_SAVE );
     gtk_file_chooser_set_extra_widget ( GTK_FILE_CHOOSER(archive_export_filechooser), hbox );
-    gtk_box_pack_start ( GTK_BOX ( vbox ), archive_export_filechooser, TRUE, TRUE, 0 );
+    gtk_box_prepend ( GTK_BOX ( vbox ), archive_export_filechooser );
 
     gtk_combo_box_set_active ( GTK_COMBO_BOX(archive_export_combobox), 0 );
 
@@ -332,7 +328,7 @@ static GtkWidget *gsb_assistant_archive_export_page_succes ( GtkWidget *assistan
     archive_export_label_success = gtk_label_new ( NULL );
     utils_labels_set_alignment ( GTK_LABEL (archive_export_label_success), 0, 0.5);
     gtk_label_set_justify ( GTK_LABEL (archive_export_label_success), GTK_JUSTIFY_LEFT );
-    gtk_box_pack_start ( GTK_BOX ( vbox ), archive_export_label_success, FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX ( vbox ), archive_export_label_success );
 
     return vbox;
 }

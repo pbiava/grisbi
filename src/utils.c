@@ -235,8 +235,7 @@ GtkWidget *new_paddingbox_with_title (GtkWidget *parent,
     vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, MARGIN_BOX);
     if (GTK_IS_BOX(parent))
     {
-	gtk_box_pack_start (GTK_BOX (parent), vbox,
-			     fill, fill, 0);
+	gtk_box_prepend (GTK_BOX (parent), vbox);
     }
 
     /* Creating label */
@@ -246,24 +245,20 @@ GtkWidget *new_paddingbox_with_title (GtkWidget *parent,
     tmp_str = g_markup_printf_escaped ("<span weight=\"bold\">%s</span>", title);
     gtk_label_set_markup (GTK_LABEL (label), tmp_str);
     g_free(tmp_str);
-    gtk_box_pack_start (GTK_BOX (vbox), label,
-			 FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (vbox), label);
     gtk_widget_show (label);
 
     /* Creating horizontal box */
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-    gtk_box_pack_start (GTK_BOX (vbox), hbox,
-			 fill, fill, 0);
+    gtk_box_prepend (GTK_BOX (vbox), hbox);
 
     /* Some padding.  ugly but the HiG advises it this way ;-) */
     label2 = gtk_label_new ("    ");
-    gtk_box_pack_start (GTK_BOX (hbox), label2,
-			 FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), label2);
 
     /* Then make the vbox itself */
     paddingbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, MARGIN_BOX);
-    gtk_box_pack_start (GTK_BOX (hbox), paddingbox,
-			 TRUE, TRUE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), paddingbox);
 
 	/* set label as object for futur usage */
 	g_object_set_data (G_OBJECT (paddingbox), "paddingbox_label", label);
@@ -300,7 +295,7 @@ GtkWidget *new_vbox_with_title_and_icon (const gchar *title,
 
     eb = gtk_event_box_new ();
     gtk_widget_set_name (eb, "grey_box");
-    gtk_box_pack_start (GTK_BOX (vbox_pref), eb, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (vbox_pref), eb);
 
 
     /* Title hbox */
@@ -316,7 +311,7 @@ GtkWidget *new_vbox_with_title_and_icon (const gchar *title,
 					  image_filename, NULL);
 	image = gtk_image_new_from_file (tmpstr);
 	g_free(tmpstr);
-	gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (hbox), image);
 	gtk_widget_show (image);
     }
 
@@ -330,7 +325,7 @@ GtkWidget *new_vbox_with_title_and_icon (const gchar *title,
     gtk_label_set_markup (GTK_LABEL(label), tmpstr2);
     g_free(tmpstr1);
     g_free(tmpstr2);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), label);
     gtk_widget_show (label);
 
     return vbox_pref;
@@ -586,7 +581,7 @@ GtkWidget *utils_get_image_with_state (GtkMessageType msg,
     g_object_set_property (G_OBJECT (icon_0), "no-show-all", &value);
     if (tooltip_0)
         gtk_widget_set_tooltip_text (icon_0, tooltip_0);
-    gtk_box_pack_start (GTK_BOX (hbox), icon_0, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), icon_0);
     g_object_set_data (G_OBJECT (hbox), "icon_0", icon_0);
 
     icon_1 = gtk_image_new_from_icon_name ("gtk-apply", GTK_ICON_SIZE_MENU);
@@ -594,7 +589,7 @@ GtkWidget *utils_get_image_with_state (GtkMessageType msg,
 
     if (tooltip_1)
         gtk_widget_set_tooltip_text (icon_1, tooltip_1);
-    gtk_box_pack_start (GTK_BOX (hbox), icon_1, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), icon_1);
     g_object_set_data (G_OBJECT (hbox), "icon_1", icon_1);
 
     if (initial)

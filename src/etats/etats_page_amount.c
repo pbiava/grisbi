@@ -115,7 +115,7 @@ static void etats_page_amount_ajoute_ligne_liste_comparaisons (gint last_amount_
 	widget = GTK_WIDGET (widget_cmp_amount_new (GTK_WIDGET (page), amount_comparison_number, first_cmp_line));
 	widget_cmp_amount_show_button_add (widget, TRUE);
 	widget_cmp_amount_show_button_remove (widget, TRUE);
-	gtk_box_pack_start (GTK_BOX (priv->vbox_rows_amount), widget, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_rows_amount), widget);
 	gsb_data_report_amount_comparison_set_widget (amount_comparison_number, widget);
 
 	/* on met la structure dans la liste à la position demandée */
@@ -243,7 +243,7 @@ static void etats_page_amount_remplit_liste_comparaisons (gint report_number,
 
 		/* on crée la row et on l'ajoute dans la fenêtre */
 		widget = GTK_WIDGET (widget_cmp_amount_new (GTK_WIDGET (page), amount_comparison_number, first_cmp_line));
-		gtk_box_pack_start (GTK_BOX (priv->vbox_rows_amount), widget, FALSE, FALSE, 0);
+		gtk_box_prepend (GTK_BOX (priv->vbox_rows_amount), widget);
 		gsb_data_report_amount_comparison_set_widget (amount_comparison_number, widget);
 
 		/* on remplit le widget de la structure */
@@ -278,8 +278,7 @@ static void etats_page_amount_setup_page (EtatsPageAmount *page,
 
 	/* set head page */
 	head_page = utils_prefs_head_page_new_with_title_and_icon (_("Amount"), "gsb-amount-32.png");
-	gtk_box_pack_start (GTK_BOX (priv->vbox_etats_page_amount), head_page, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->vbox_etats_page_amount), head_page, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_etats_page_amount), head_page);
 
 	/* set signals */
 	g_object_set_data (G_OBJECT (priv->button_detaille_amount), "etats_prefs", etats_prefs);

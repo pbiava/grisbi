@@ -290,7 +290,7 @@ static GtkWidget *csv_template_rule_notebook_tab_label_new (const gchar *label_t
 
 	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
 	label = gtk_label_new (label_text);
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (hbox), label);
 
     image = gtk_image_new_from_icon_name ("gtk-close-16", GTK_ICON_SIZE_MENU);
     button = gtk_button_new ();
@@ -299,7 +299,7 @@ static GtkWidget *csv_template_rule_notebook_tab_label_new (const gchar *label_t
 	gtk_container_set_border_width (GTK_CONTAINER (button), 0);
 	gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
 
-	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, MARGIN_BOX);
+	gtk_box_prepend (GTK_BOX (hbox), button);
 	gtk_widget_show_all (hbox);
 
 	g_signal_connect (button,

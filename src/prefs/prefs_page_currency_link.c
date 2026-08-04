@@ -417,15 +417,14 @@ static void prefs_page_currency_link_setup_page (PrefsPageCurrencyLink *page)
 
 	/* On récupère le nom de la page */
 	head_page = utils_prefs_head_page_new_with_title_and_icon (_("Links between currencies"), "gsb-currencies-32.png");
-	gtk_box_pack_start (GTK_BOX (priv->vbox_currency_link), head_page, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->vbox_currency_link), head_page, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_currency_link), head_page);
 
 	/* set currency_link_list */
 	prefs_page_currency_link_setup_treeview (page);
 
 	/* set currency combo exchange */
 	priv->w_currency_link = GTK_WIDGET (widget_currency_link_new (GTK_WIDGET (page)));
-	gtk_box_pack_start (GTK_BOX (priv->vbox_currency_link), priv->w_currency_link, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_currency_link), priv->w_currency_link);
 
 	/* set selection signal to update first currency */
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (priv->treeview_currency_link));

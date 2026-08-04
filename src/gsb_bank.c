@@ -153,7 +153,7 @@ static gboolean gsb_bank_edit_bank (gint bank_number,
 
 	/* set bank details */
 	bank_details = GTK_WIDGET (widget_bank_details_new (NULL, combobox));
-	gtk_box_pack_start (GTK_BOX (vbox), bank_details, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (vbox), bank_details);
 
 	/* affiche le widget bank_details */
 	if (gtk_widget_get_no_show_all (bank_details))

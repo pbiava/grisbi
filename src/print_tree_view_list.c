@@ -975,7 +975,7 @@ GtkWidget *print_tree_view_list_layout_config ( GtkPrintOperation *operation, gp
     /* set up the title, this is never saved, so ask each time */
     /* title line */
     hbox = gtk_box_new ( GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX );
-    gtk_box_pack_start ( GTK_BOX ( paddingbox ), hbox, FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX ( paddingbox ), hbox);
 
     entry = gsb_automem_entry_new ( &title_string, NULL, NULL);
 
@@ -984,10 +984,10 @@ GtkWidget *print_tree_view_list_layout_config ( GtkPrintOperation *operation, gp
                         G_CALLBACK ( sens_desensitive_pointeur ), entry,
                         G_CALLBACK ( gsb_data_print_config_set_draw_title ),
                         0 );
-    gtk_box_pack_start ( GTK_BOX ( hbox ), check_button, FALSE, FALSE, 0);
+    gtk_box_prepend ( GTK_BOX ( hbox ), check_button);
 
     gtk_widget_set_sensitive ( entry, gsb_data_print_config_get_draw_title () );
-    gtk_box_pack_start ( GTK_BOX ( hbox ), entry, TRUE, TRUE, 0 );
+    gtk_box_prepend ( GTK_BOX ( hbox ), entry);
 
     /* set up all the checkbuttons */
     check_button = gsb_autofunc_checkbutton_new ( _("Draw the lines between transactions"),
@@ -995,58 +995,58 @@ GtkWidget *print_tree_view_list_layout_config ( GtkPrintOperation *operation, gp
                         NULL, NULL,
                         G_CALLBACK ( gsb_data_print_config_set_draw_lines ),
                         0 );
-    gtk_box_pack_start ( GTK_BOX ( paddingbox ), check_button, FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX ( paddingbox ), check_button);
 
     check_button = gsb_autofunc_checkbutton_new ( _("Draw the lines between the columns"),
                         gsb_data_print_config_get_draw_column ( ),
                         NULL, NULL,
                         G_CALLBACK ( gsb_data_print_config_set_draw_column ),
                         0 );
-    gtk_box_pack_start ( GTK_BOX ( paddingbox ), check_button, FALSE, FALSE, 0);
+    gtk_box_prepend ( GTK_BOX ( paddingbox ), check_button);
 
     check_button = gsb_autofunc_checkbutton_new ( _("Print the names of the columns"),
                         gsb_data_print_config_get_draw_columns_name (),
                         NULL, NULL,
                         G_CALLBACK ( gsb_data_print_config_set_draw_columns_name ),
                         0 );
-    gtk_box_pack_start ( GTK_BOX ( paddingbox ), check_button, FALSE, FALSE, 0);
+    gtk_box_prepend ( GTK_BOX ( paddingbox ), check_button);
 
     paddingbox = new_paddingbox_with_title ( vbox, FALSE, _("Fonts") );
 
     /* set up the font of the transactions,
      * by default use the font of the lists */
     hbox = gtk_box_new ( GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX );
-    gtk_box_pack_start ( GTK_BOX ( paddingbox ), hbox, FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX ( paddingbox ), hbox);
 
     label = gtk_label_new ( _("Transactions font") );
     gtk_label_set_justify ( GTK_LABEL ( label ), GTK_JUSTIFY_LEFT );
     utils_labels_set_alignment ( GTK_LABEL ( label ), 0, 0.5 );
     gtk_size_group_add_widget ( size_group, label );
-    gtk_box_pack_start ( GTK_BOX ( hbox ), label, FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX ( hbox ), label);
 
     fontname_transactions = pango_font_description_to_string ( gsb_data_print_config_get_font_transactions () );
     font_button_transactions = gtk_font_button_new_with_font ( fontname_transactions );
     gtk_font_button_set_use_font ( GTK_FONT_BUTTON ( font_button_transactions ), TRUE );
     gtk_font_button_set_use_size ( GTK_FONT_BUTTON ( font_button_transactions ), TRUE );
     gtk_font_button_set_title ( GTK_FONT_BUTTON ( font_button_transactions ), _("Choosing font") );
-    gtk_box_pack_start ( GTK_BOX ( hbox ), font_button_transactions, TRUE, TRUE, 0 );
+    gtk_box_prepend ( GTK_BOX ( hbox ), font_button_transactions);
 
     /* set up the font for the title */
     hbox = gtk_box_new ( GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX );
-    gtk_box_pack_start ( GTK_BOX ( paddingbox ), hbox, FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX ( paddingbox ), hbox);
 
     label = gtk_label_new ( _("Title font") );
     gtk_label_set_justify ( GTK_LABEL ( label ), GTK_JUSTIFY_LEFT );
     utils_labels_set_alignment ( GTK_LABEL ( label ), 0, 0.5);
     gtk_size_group_add_widget ( size_group, label );
-    gtk_box_pack_start ( GTK_BOX ( hbox ), label, FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX ( hbox ), label);
 
     fontname_title = pango_font_description_to_string ( gsb_data_print_config_get_font_title () );
     font_button_title =  gtk_font_button_new_with_font ( fontname_title );
     gtk_font_button_set_use_font ( GTK_FONT_BUTTON ( font_button_title ), TRUE );
     gtk_font_button_set_use_size ( GTK_FONT_BUTTON ( font_button_title ), TRUE );
     gtk_font_button_set_title ( GTK_FONT_BUTTON ( font_button_title ), _("Choosing font") );
-    gtk_box_pack_start ( GTK_BOX ( hbox ), font_button_title, TRUE, TRUE, 0);
+    gtk_box_prepend ( GTK_BOX ( hbox ), font_button_title);
 
 
     /* save what we have done in all cases, so if we cancel and come back, our values

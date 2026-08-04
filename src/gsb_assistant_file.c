@@ -303,9 +303,7 @@ static GtkWidget *gsb_assistant_file_page_2 ( GtkWidget *assistant )
 
     vbox = new_vbox_with_title_and_icon ( _("General configuration"),
 					  "gsb-payees-32.png" );
-    gtk_box_pack_start ( GTK_BOX (page),
-			 vbox,
-			 TRUE, TRUE, 0 );
+    gtk_box_prepend ( GTK_BOX (page), vbox );
 
 	/* table 2x3 for layout */
     table = gtk_grid_new ();
@@ -314,7 +312,7 @@ static GtkWidget *gsb_assistant_file_page_2 ( GtkWidget *assistant )
 
 	/* Account file title */
 	paddingbox = new_paddingbox_with_title ( vbox, FALSE, _("Titles and filenames") );
-	gtk_box_pack_start ( GTK_BOX ( paddingbox ), table, FALSE, FALSE, 0);
+	gtk_box_prepend ( GTK_BOX ( paddingbox ), table);
 
 	/* label account name */
 	label = gtk_label_new ( _("Name of accounting entity: ") );
@@ -366,8 +364,7 @@ static GtkWidget *gsb_assistant_file_page_2 ( GtkWidget *assistant )
 											  &w_etat->crypt_file,
 											  G_CALLBACK (utils_prefs_encryption_toggled),
 											  NULL);
-        gtk_box_pack_start ( GTK_BOX ( paddingbox ), button,
-                             FALSE, FALSE, 0 );
+        gtk_box_prepend ( GTK_BOX ( paddingbox ), button );
 
         if (w_etat->crypt_file )
             w_run->new_crypted_file = TRUE;
@@ -392,8 +389,7 @@ static GtkWidget *gsb_assistant_file_page_2 ( GtkWidget *assistant )
     gtk_scrolled_window_set_policy ( GTK_SCROLLED_WINDOW ( scrolled_window ),
 				     GTK_POLICY_AUTOMATIC,
 				     GTK_POLICY_AUTOMATIC );
-    gtk_box_pack_start ( GTK_BOX ( paddingbox ), scrolled_window,
-			 FALSE, FALSE, 0);
+    gtk_box_prepend ( GTK_BOX ( paddingbox ), scrolled_window);
     gtk_scrolled_window_set_shadow_type ( GTK_SCROLLED_WINDOW(scrolled_window),
 					  GTK_SHADOW_IN );
     textview = gsb_automem_textview_new ( &w_etat->adr_common, NULL, NULL );
@@ -460,14 +456,10 @@ static GtkWidget *gsb_assistant_file_page_4 ( GtkWidget *assistant )
 
     vbox = new_vbox_with_title_and_icon ( _("Select the list of categories you will use"),
 					  "gsb-categories-32.png" );
-    gtk_box_pack_start ( GTK_BOX (page),
-			 vbox,
-			 TRUE, TRUE, 0 );
+    gtk_box_prepend ( GTK_BOX (page), vbox );
 
     button_list = gsb_category_assistant_create_choice_page (assistant);
-    gtk_box_pack_start ( GTK_BOX (vbox),
-			 button_list,
-			 TRUE, TRUE, 0 );
+    gtk_box_prepend ( GTK_BOX (vbox), button_list );
 
     gtk_widget_show_all (page);
     return page;
@@ -491,7 +483,7 @@ static GtkWidget *gsb_assistant_file_page_5 ( GtkWidget *assistant )
 
     /* the configuration page is very good, keep it */
     bank_page = GTK_WIDGET (prefs_page_bank_new (NULL));
-    gtk_box_pack_start (GTK_BOX (page), bank_page, TRUE, TRUE, 0);
+    gtk_box_prepend (GTK_BOX (page), bank_page);
 
     gtk_widget_show_all (page);
     return page;
@@ -519,9 +511,7 @@ static GtkWidget *gsb_assistant_file_page_finish ( GtkWidget *assistant,
 
     vbox = new_vbox_with_title_and_icon ( _("Configuration finished!"),
 					  "gsb-reconciliation-32.png" );
-    gtk_box_pack_start ( GTK_BOX (page),
-			 vbox,
-			 TRUE, TRUE, 0 );
+    gtk_box_prepend ( GTK_BOX (page), vbox );
 
     /* set up the menu */
     label = gtk_label_new (_("Default values are now configured for your account file. "
@@ -530,24 +520,18 @@ static GtkWidget *gsb_assistant_file_page_finish ( GtkWidget *assistant,
 			     "Select a way to populate your account file and press the 'Close' button."));
     utils_labels_set_alignment ( GTK_LABEL (label),
 			     0, 0.5 );
-    gtk_box_pack_start ( GTK_BOX (vbox),
-			 label,
-			 FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX (vbox), label );
 
     button_create_account_next = gtk_radio_button_new_with_label ( NULL,
 								   _("Create a new account from scratch"));
-    gtk_box_pack_start ( GTK_BOX (vbox),
-			 button_create_account_next,
-			 FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX (vbox), button_create_account_next );
 
     button = gtk_radio_button_new_with_label ( gtk_radio_button_get_group (GTK_RADIO_BUTTON (button_create_account_next)),
 					       _("Import data from online bank services or from accounting software"));
     if (import)
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button),
 				      TRUE );
-    gtk_box_pack_start ( GTK_BOX (vbox),
-			 button,
-			 FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX (vbox), button);
 
     gtk_widget_show_all (page);
     return page;

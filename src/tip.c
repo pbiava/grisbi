@@ -140,7 +140,7 @@ void display_tip ( gboolean force )
 
     checkbox = gsb_automem_checkbutton_new ( _("Display tips at next start"),
                         &(a_conf->show_tip), NULL, NULL );
-    gtk_box_pack_start ( GTK_BOX ( dialog_get_content_area ( dialog )  ), checkbox, FALSE, FALSE, 6 );
+    gtk_box_prepend ( GTK_BOX ( dialog_get_content_area ( dialog )  ), checkbox, FALSE, FALSE, 6 );
     gtk_widget_show ( checkbox );
 
 	btn_back = gtk_button_new_with_label (_("Prévious"));

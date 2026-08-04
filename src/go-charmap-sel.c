@@ -376,7 +376,7 @@ cs_init (GOCharmapSel *cs, void *ptr)
 
 	g_signal_connect (G_OBJECT (cs->encodings), "changed",
                           G_CALLBACK (encodings_changed_cb), cs);
-        gtk_box_pack_start (GTK_BOX (cs), GTK_WIDGET (cs->encodings),
+        gtk_box_prepend (GTK_BOX (cs), GTK_WIDGET (cs->encodings),
                             TRUE, TRUE, 0);
 }
 

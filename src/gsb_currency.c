@@ -947,7 +947,7 @@ void gsb_currency_exchange_dialog (gint account_currency_number,
 
     /* Ugly dance to avoid side effects on dialog's vbox. */
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-    gtk_box_pack_start (GTK_BOX (dialog_get_content_area (dialog)), hbox, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (dialog_get_content_area (dialog)), hbox);
     paddingbox = new_paddingbox_with_title (hbox, TRUE, tmpstr);
     gtk_container_set_border_width (GTK_CONTAINER(hbox), 6);
     gtk_container_set_border_width (GTK_CONTAINER(paddingbox), 6);
@@ -955,7 +955,7 @@ void gsb_currency_exchange_dialog (gint account_currency_number,
 
     /* table for layout */
     table = gtk_grid_new ();
-    gtk_box_pack_start (GTK_BOX (paddingbox), table, FALSE, FALSE, 6);
+    gtk_box_prepend (GTK_BOX (paddingbox), table);
     gtk_grid_set_column_spacing (GTK_GRID (table), 6);
     gtk_grid_set_row_spacing (GTK_GRID (table), 6);
 
@@ -1334,18 +1334,18 @@ gint gsb_currency_dialog_list_iso_4217_new (GtkWidget *page_currency,
 
 	content_area = dialog_get_content_area (dialog);
 	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-    gtk_box_pack_start (GTK_BOX (content_area), vbox, TRUE, TRUE, 0);
+    gtk_box_prepend (GTK_BOX (content_area), vbox);
 	utils_widget_set_padding (vbox, MARGIN_BOX, MARGIN_BOX);
 
 	/* get currency_popup */
 	popup = gsb_popup_list_iso_4217_new (NULL, NULL);
 	tree_view = g_object_get_data (G_OBJECT (popup), "tree_view" );
-    gtk_box_pack_start (GTK_BOX (vbox), popup, TRUE, TRUE, MARGIN_BOX);
+    gtk_box_prepend (GTK_BOX (vbox), popup, TRUE, TRUE, MARGIN_BOX);
 
 	/* get currentcy_details */
 	details = GTK_WIDGET (widget_currency_details_new (page_currency, no_callback));
 	widget_currency_details_set_entry_editable (details, FALSE);
-    gtk_box_pack_start (GTK_BOX (vbox), details, FALSE, FALSE, MARGIN_BOX);
+    gtk_box_prepend (GTK_BOX (vbox), details);
 
 	/* set selection signal to update first currency */
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree_view));

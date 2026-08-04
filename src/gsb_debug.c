@@ -165,7 +165,7 @@ static void gsb_debug_add_report_page (GtkWidget *assistant,
 	utils_labels_set_alignment (GTK_LABEL (label), GSB_LEFT, GSB_BOTTOM);
 	g_free (tmp_str);
 
-	gtk_box_pack_start (GTK_BOX(vbox), label, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX(vbox), label);
 	gtk_container_set_border_width (GTK_CONTAINER(vbox), BOX_BORDER_WIDTH);
 
 	if (account_nbre == 1)
@@ -184,13 +184,13 @@ static void gsb_debug_add_report_page (GtkWidget *assistant,
 			gtk_label_set_markup (GTK_LABEL(label), _(test->instructions));
 			utils_widget_set_padding (GTK_WIDGET (label), MARGIN_START, MARGIN_BOX);
 			gtk_container_add (GTK_CONTAINER(expander), label);
-			gtk_box_pack_start (GTK_BOX(vbox), expander, FALSE, FALSE, MARGIN_BOX);
+			gtk_box_prepend (GTK_BOX(vbox), expander);
 		}
 
 		if (test->fix)
 		{
 			button = gtk_button_new_with_label (_("Try to fix this inconsistency."));
-			gtk_box_pack_start (GTK_BOX(vbox), button, FALSE, FALSE, 0);
+			gtk_box_prepend (GTK_BOX(vbox), button);
 			g_signal_connect_swapped (G_OBJECT(button),
 									  "clicked",
 									  G_CALLBACK (gsb_debug_try_fix),

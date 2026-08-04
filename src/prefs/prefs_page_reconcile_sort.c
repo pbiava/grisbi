@@ -735,8 +735,7 @@ static void prefs_page_reconcile_sort_setup_page (PrefsPageReconcileSort *page)
 
 	/* On récupère le nom de la page */
 	head_page = utils_prefs_head_page_new_with_title_and_icon (_("Sort for reconciliation"), "gsb-reconciliation-32.png");
-	gtk_box_pack_start (GTK_BOX (priv->vbox_reconcile_sort), head_page, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->vbox_reconcile_sort), head_page, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_reconcile_sort), head_page);
 
 	/* set the list of reconcile sort */
 	prefs_page_reconcile_sort_setup_tree_view (page);

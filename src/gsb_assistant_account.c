@@ -171,18 +171,14 @@ static GtkWidget *gsb_assistant_account_page_2 ( GtkWidget *assistant )
 
     vbox = new_vbox_with_title_and_icon ( _("Account type selection"),
 					  "gsb-ac-bank-32.png" );
-    gtk_box_pack_start ( GTK_BOX (page),
-			 vbox,
-			 TRUE, TRUE, 0 );
+    gtk_box_prepend ( GTK_BOX (page), vbox );
 
     label = gtk_label_new (_("Please select type for this account.\n"
 			     "The account will be created with default payment methods chosen according to your choice.\n"
 			     "If you are unsure and novice to accounting, we advise that you choose a bank account.\n"));
     utils_labels_set_alignment ( GTK_LABEL (label),
 			     0, 0.5 );
-    gtk_box_pack_start ( GTK_BOX (vbox),
-			 label,
-			 FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX (vbox), label );
 
     /* show the kind of accounts,
      * the current kind will be saved as g_object_set in assistant widget */
@@ -202,9 +198,7 @@ static GtkWidget *gsb_assistant_account_page_2 ( GtkWidget *assistant )
 			   "toggled",
 			   G_CALLBACK (gsb_assistant_account_toggled_kind_account),
 			   G_OBJECT (assistant));
-	gtk_box_pack_start ( GTK_BOX (vbox),
-			     button,
-			     FALSE, FALSE, 0 );
+	gtk_box_prepend ( GTK_BOX (vbox), button );
 	i++;
     }
 
@@ -236,8 +230,7 @@ static GtkWidget *gsb_assistant_account_page_3 ( GtkWidget *assistant )
     gtk_grid_set_row_spacing (GTK_GRID (table), 6);
     gtk_grid_set_column_spacing (GTK_GRID (table), 6);
 
-    gtk_box_pack_start ( GTK_BOX (page), table,
-			 FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX (page), table);
 
     /* choose the currency */
     label = gtk_label_new ( _("Currency for the account: ") );
@@ -336,9 +329,7 @@ static GtkWidget *gsb_assistant_account_page_finish ( GtkWidget *assistant )
     gtk_container_set_border_width ( GTK_CONTAINER (page), BOX_BORDER_WIDTH );
 
     vbox = gtk_box_new ( GTK_ORIENTATION_VERTICAL, MARGIN_BOX );
-    gtk_box_pack_start ( GTK_BOX (page),
-			 vbox,
-			 FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX (page), vbox );
 
     /* set up the menu */
     label = gtk_label_new (_("You are about to validate the new account.\n"
@@ -346,26 +337,18 @@ static GtkWidget *gsb_assistant_account_page_finish ( GtkWidget *assistant )
 			     "More options are available in the account configuration page once you created it.\n"));
     utils_labels_set_alignment ( GTK_LABEL (label),
 			     0.5, 0.5 );
-    gtk_box_pack_start ( GTK_BOX (vbox),
-			 label,
-			 FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX (vbox), label );
 
     /* enter the name */
     hbox = gtk_box_new ( GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
-    gtk_box_pack_start ( GTK_BOX (vbox),
-			 hbox,
-			 FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX (vbox), hbox, );
 
     label = gtk_label_new (_("Please enter the name of the new account: "));
-    gtk_box_pack_start ( GTK_BOX (hbox),
-			 label,
-			 FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX (hbox), label );
 
     account_entry_name = gtk_entry_new ();
     g_object_set_data ( G_OBJECT (assistant), "account_entry_name", account_entry_name );
-    gtk_box_pack_start ( GTK_BOX (hbox),
-			 account_entry_name,
-			 FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX (hbox), account_entry_name );
 
     gtk_widget_show_all (page);
     return page;

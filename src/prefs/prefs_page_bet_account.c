@@ -885,8 +885,7 @@ static void prefs_page_bet_account_setup_account_page (PrefsPageBetAccount *page
 
 	/* On récupère le nom de la page */
 	head_page = utils_prefs_head_page_new_with_title_and_icon (_("Accounts data"), "gsb-balance_estimate-32.png");
-	gtk_box_pack_start (GTK_BOX (priv->vbox_bet_account), head_page, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->vbox_bet_account), head_page, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_bet_account), head_page);
 
 	if (is_loading == FALSE)
 	{
@@ -909,8 +908,7 @@ static void prefs_page_bet_account_setup_account_page (PrefsPageBetAccount *page
 	else
 		gsb_account_set_combo_account_number (combo, account_number);
 
-	gtk_box_pack_start (GTK_BOX (priv->hbox_bet_select_account), combo, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->hbox_bet_select_account), combo, 1);
+	gtk_box_prepend (GTK_BOX (priv->hbox_bet_select_account), combo);
 	priv->combo_bet_account = combo;
 
     /* sélectionne un compte carte bancaire à débit différé */
@@ -918,7 +916,7 @@ static void prefs_page_bet_account_setup_account_page (PrefsPageBetAccount *page
 
 	/* set notebbok */
 	gtk_notebook_set_scrollable (GTK_NOTEBOOK (priv->notebook_bet_account), TRUE);
-	gtk_box_pack_start (GTK_BOX (priv->vbox_bet_account), priv->notebook_bet_account, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_bet_account), priv->notebook_bet_account);
 
     /* Data for the accounts of type GSB_TYPE_BANK, GSB_TYPE_CASH */
     gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook_bet_account), priv->vbox_bank_cash_account, NULL);
@@ -932,16 +930,14 @@ static void prefs_page_bet_account_setup_account_page (PrefsPageBetAccount *page
     /* Data for the forecast */
 	/* Calculation of duration */
     widget = utils_widget_get_duration_widget (SPP_ORIGIN_CONFIG);
-    gtk_box_pack_start (GTK_BOX (priv->vbox_forecast_data), widget, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->vbox_forecast_data), widget, 0);
+    gtk_box_prepend (GTK_BOX (priv->vbox_forecast_data), widget);
 
     /* Select the labels of the list */
 	prefs_page_bet_account_init_select_labels_widget (priv);
 
 	/* Sources of historical data */
 	widget = utils_widget_origin_data_new (account_page, SPP_ORIGIN_CONFIG);
-	gtk_box_pack_start (GTK_BOX (priv->vbox_hist_data), widget, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->vbox_hist_data), widget, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_hist_data), widget);
 
     /* Data for the account of type GSB_TYPE_LIABILITIES */
     gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook_bet_account), priv->vbox_liabilities_account, NULL);

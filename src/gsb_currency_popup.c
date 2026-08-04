@@ -309,14 +309,14 @@ GtkWidget *gsb_popup_list_iso_4217_new (GtkWidget *parent,
 
     vbox = new_vbox_with_title_and_icon ( _("Select base currency"), "gsb-currencies-32.png" );
 	if (parent)
-	    gtk_box_pack_start (GTK_BOX (parent), vbox, TRUE, TRUE, 0);
+	    gtk_box_prepend (GTK_BOX (parent), vbox);
 
 	/* get model */
 	model = gsb_popup_list_store_new ();
 
 	/* set popup */
 	w_currency_popup = GTK_WIDGET (widget_currency_popup_new (GTK_TREE_MODEL (model)));
-	gtk_box_pack_start (GTK_BOX (vbox), w_currency_popup, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (vbox), w_currency_popup);
 
 	/* fill model */
 	tree_view = widget_currency_popup_get_tree_view (w_currency_popup);

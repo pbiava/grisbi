@@ -889,8 +889,7 @@ static void prefs_page_display_form_setup_page (PrefsPageDisplayForm *page)
 
 	/* On récupère le nom de la page */
 	head_page = utils_prefs_head_page_new_with_title_and_icon (_("Transaction form"), "gsb-form-32.png");
-	gtk_box_pack_start (GTK_BOX (priv->vbox_display_form), head_page, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->vbox_display_form), head_page, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_display_form), head_page);
 
 	/* set tree_view */
 	priv->tree_view_list_form = prefs_page_display_form_create_tree_view (page);

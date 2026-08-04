@@ -230,8 +230,7 @@ static void prefs_page_currency_popup_init_dialog (PrefsPageCurrency *page,
 
 	head_titre = utils_prefs_head_page_new_with_title_and_icon (_("Select base currency for your account"),
 																"gsb-currencies-32.png");
-    gtk_box_pack_start (GTK_BOX (priv->box_dialog_titre), head_titre, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->box_dialog_titre), head_titre, 0);
+    gtk_box_prepend (GTK_BOX (priv->box_dialog_titre), head_titre);
 	gtk_widget_show (head_titre);
 
 	/* set model */
@@ -248,7 +247,7 @@ static void prefs_page_currency_popup_init_dialog (PrefsPageCurrency *page,
 								GDK_TYPE_RGBA);				/* CURRENCY_BACKGROUND_COLOR */
 	/* set popup */
 	w_currency_popup = GTK_WIDGET (widget_currency_popup_new (GTK_TREE_MODEL (model)));
-	gtk_box_pack_start (GTK_BOX (priv->box_for_popup), w_currency_popup, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (priv->box_for_popup), w_currency_popup);
 
 	/* fill model */
 	priv->treeview_popup = widget_currency_popup_get_tree_view (w_currency_popup);
@@ -256,7 +255,7 @@ static void prefs_page_currency_popup_init_dialog (PrefsPageCurrency *page,
 
 	/* set currency details */
 	priv->w_popup_details = GTK_WIDGET (widget_currency_details_new (GTK_WIDGET (page), TRUE));
-	gtk_box_pack_start (GTK_BOX (priv->box_dialog_titre), priv->w_popup_details, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (priv->box_dialog_titre), priv->w_popup_details);
 
 	/* set editable to FALSE */
 	widget_currency_details_set_entry_editable (priv->w_popup_details, FALSE);
@@ -715,8 +714,7 @@ static void prefs_page_currency_setup_page (PrefsPageCurrency *page,
 
 	/* On récupère le nom de la page */
 	head_page = utils_prefs_head_page_new_with_title_and_icon (_("Currencies"), "gsb-currencies-32.png");
-	gtk_box_pack_start (GTK_BOX (priv->vbox_currency), head_page, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->vbox_currency), head_page, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_currency), head_page);
 
 	/* set currency_list */
 	prefs_page_currency_setup_treeview (page);
@@ -726,7 +724,7 @@ static void prefs_page_currency_setup_page (PrefsPageCurrency *page,
 
 	/* set currency details */
 	priv->w_currency_details = GTK_WIDGET (widget_currency_details_new (GTK_WIDGET (page), FALSE));
-	gtk_box_pack_start (GTK_BOX (priv->vbox_currency), priv->w_currency_details, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_currency), priv->w_currency_details);
 
 	/* init add dialog */
 	prefs_page_currency_popup_init_dialog (page, win);

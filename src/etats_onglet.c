@@ -379,10 +379,10 @@ static void etats_onglet_exporter_etat (void)
 					   gsb_data_report_get_report_name (gsb_gui_navigation_get_current_report ()));
 
 	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
-	gtk_box_pack_start (GTK_BOX(hbox), gtk_label_new (_("File format: ")), FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX(hbox), gtk_label_new (_("File format: ")));
 
 	combo = gtk_combo_box_text_new ();
-	gtk_box_pack_start (GTK_BOX(hbox), combo, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX(hbox), combo);
 	gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), _("Grisbi report file (egsb file)"));
 	gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), _("HTML file"));
 	gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (combo), _("CSV file"));
@@ -744,7 +744,7 @@ static GtkWidget *etats_onglet_create_reports_list (void)
 	model = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_INT);					/* report_name, report_number */
 	gtk_tree_view_set_model (GTK_TREE_VIEW (tree_view), GTK_TREE_MODEL(model));
 	gtk_container_add (GTK_CONTAINER(sw), tree_view);
-	gtk_box_pack_start (GTK_BOX (vbox), sw, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (vbox), sw);
 	g_object_set_data (G_OBJECT (vbox), "tree_view", tree_view);
 
 	/* Add column */
@@ -1133,12 +1133,12 @@ gboolean etats_onglet_ajoute_etat (void)
 
 	/* combobox for predefined reports */
 	combobox = gtk_combo_box_text_new ();
-	gtk_box_pack_start (GTK_BOX(frame), combobox, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX(frame), combobox);
 
 	/* set option for displays preferences of report */
 	bouton_no_show_prefs = gtk_check_button_new_with_label (_("Do not show the report preferences"));
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (bouton_no_show_prefs), w_run->no_show_prefs);
-	gtk_box_pack_start (GTK_BOX(frame), bouton_no_show_prefs, FALSE, FALSE, MARGIN_BOX);
+	gtk_box_prepend (GTK_BOX(frame), bouton_no_show_prefs);
 
 	/* on ajoute maintenant la frame pour la description */
 	frame = new_paddingbox_with_title (dialog_get_content_area (dialog), TRUE, _("Description"));
@@ -1148,7 +1148,7 @@ gboolean etats_onglet_ajoute_etat (void)
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
 									GTK_POLICY_AUTOMATIC,
 									GTK_POLICY_AUTOMATIC);
-	gtk_box_pack_start (GTK_BOX(frame), scrolled_window, TRUE, TRUE, MARGIN_BOX);
+	gtk_box_prepend (GTK_BOX(frame), scrolled_window);
 
 	/* on ajoute maintenant le label */
 	label_description = gtk_label_new (NULL);
@@ -1467,13 +1467,13 @@ GtkWidget *etats_onglet_create_reports_tab (void)
 
 	/* frame pour la barre d'outils */
 	frame = gtk_frame_new (NULL);
-	gtk_box_pack_start (GTK_BOX (tab), frame, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (tab), frame);
 
 	/* création du notebook contenant l'état et la config */
 	notebook_etats = gtk_notebook_new ();
 	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook_etats), FALSE);
 	gtk_notebook_set_show_border (GTK_NOTEBOOK(notebook_etats), FALSE);
-	gtk_box_pack_start (GTK_BOX (tab), notebook_etats, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (tab), notebook_etats);
 
 	/* création de la partie droite */
 	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, MARGIN_BOX);
@@ -1485,7 +1485,7 @@ GtkWidget *etats_onglet_create_reports_tab (void)
 					  GTK_SHADOW_NONE);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window_etat),
 					 GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-	gtk_box_pack_start (GTK_BOX (vbox), scrolled_window_etat, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (vbox), scrolled_window_etat);
 
 	/* affichage de la liste des états */
 	vbox = etats_onglet_create_reports_list ();

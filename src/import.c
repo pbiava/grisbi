@@ -557,7 +557,7 @@ static gint gsb_import_add_currency (ImportAccount *compte)
 
 	checkbox = gtk_check_button_new_with_label (_("Use this currency for totals for the payees categories\n"
 												  "and budgetary lines"));
-	gtk_box_pack_start (GTK_BOX (vbox), checkbox, TRUE, TRUE, 6);
+	gtk_box_prepend (GTK_BOX (vbox), checkbox);
 
 	gtk_widget_show_all (checkbox);
 	gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
@@ -755,24 +755,24 @@ static GtkWidget *gsb_import_create_page_recapitulatif (ImportAccount *compte)
 	gtk_label_set_markup (GTK_LABEL (label), tmp_str);
 	g_free (tmp_str);
 	g_free (short_filename);
-	gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (vbox), label);
 
 	/* New account */
 	radio_new_account = gtk_radio_button_new_with_label (NULL, _("Create a new account"));
-	gtk_box_pack_start (GTK_BOX (vbox), radio_new_account, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (vbox), radio_new_account);
 	gtk_widget_style_get (radio_new_account, "indicator_size", &size, NULL);
 	gtk_widget_style_get (radio_new_account, "indicator_spacing", &spacing, NULL);
 
 	compte->hbox1 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
-	gtk_box_pack_start (GTK_BOX (vbox), compte->hbox1, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (vbox), compte->hbox1);
 	label = gtk_label_new (_("Account type: "));
 	gtk_widget_set_margin_start (label, 2 * spacing + size);
-	gtk_box_pack_start (GTK_BOX (compte->hbox1), label, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (compte->hbox1), label);
 
 	compte->bouton_type_compte = gsb_combo_box_new_with_index_from_list (gsb_data_bank_get_bank_type_list (),
 																		 NULL,
 																		 NULL);
-	gtk_box_pack_start (GTK_BOX (compte->hbox1), compte->bouton_type_compte, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (compte->hbox1), compte->bouton_type_compte);
 
 	/* at this level imported_account->type_de_compte was filled while importing transactions,
 	 * in qif.c or ofx.c ; but we have only 4 kind of account for now, so try to place the combobox correctly
@@ -794,41 +794,41 @@ static GtkWidget *gsb_import_create_page_recapitulatif (ImportAccount *compte)
 	/* Add to account */
 	radio_add_account = gtk_radio_button_new_with_label_from_widget (GTK_RADIO_BUTTON (radio_new_account),
 																	 _("Add transactions to an account"));
-	gtk_box_pack_start (GTK_BOX (vbox), radio_add_account, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (vbox), radio_add_account);
 	if (radio_add_account && gtk_widget_get_visible (radio_add_account))
 		gtk_widget_set_sensitive  (radio_add_account, assert_account_loaded ());
 
 	compte->hbox2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
-	gtk_box_pack_start (GTK_BOX (vbox), compte->hbox2, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (vbox), compte->hbox2);
 	label = gtk_label_new (_("Account name: "));
 	gtk_widget_set_margin_start (label, 2 * spacing + size);
-	gtk_box_pack_start (GTK_BOX (compte->hbox2), label, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (compte->hbox2), label);
 
 	compte->bouton_compte_add = gsb_account_create_combo_list (NULL, NULL, FALSE);
-	gtk_box_pack_start (GTK_BOX (compte->hbox2), compte->bouton_compte_add, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (compte->hbox2), compte->bouton_compte_add);
 	gtk_widget_set_sensitive (compte->hbox2, FALSE);
 
 	/* Mark account */
 	radio_mark_account = gtk_radio_button_new_with_label_from_widget (GTK_RADIO_BUTTON (radio_new_account),
 																	  _("Mark transactions of an account"));
-	gtk_box_pack_start (GTK_BOX (vbox), radio_mark_account, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (vbox), radio_mark_account);
 	gtk_widget_set_sensitive  (radio_mark_account, assert_account_loaded ());
 
 	compte->hbox3 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
-	gtk_box_pack_start (GTK_BOX (vbox), compte->hbox3, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (vbox), compte->hbox3);
 	label = gtk_label_new (_("Account name: "));
 	gtk_widget_set_margin_start (label, 2 * spacing + size);
-	gtk_box_pack_start (GTK_BOX (compte->hbox3), label, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (compte->hbox3), label);
 
 	compte->bouton_compte_mark = gsb_account_create_combo_list (NULL, NULL, FALSE);
-	gtk_box_pack_start (GTK_BOX (compte->hbox3), compte->bouton_compte_mark, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (compte->hbox3), compte->bouton_compte_mark);
 	gtk_widget_set_sensitive (compte->hbox3, FALSE);
 
 	/* Currency */
 	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
 	label = gtk_label_new (_("Account currency: "));
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (hbox), label);
+	gtk_box_prepend (GTK_BOX (vbox), hbox);
 
 	compte->bouton_devise = gsb_currency_make_combobox (TRUE);
 
@@ -850,20 +850,20 @@ static GtkWidget *gsb_import_create_page_recapitulatif (ImportAccount *compte)
 			gsb_currency_set_combobox_history (compte->bouton_devise, currency_number);
 	}
 
-	gtk_box_pack_start (GTK_BOX (hbox), compte->bouton_devise, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (hbox), compte->bouton_devise);
 
 	/* invert amount of transactions */
 	button = gsb_automem_checkbutton_new (_("Invert the amount of the imported transactions"),
 										  &compte->invert_transaction_amount,
 										  NULL,
 										  NULL);
-	gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (vbox), button);
 
 	/* propose to create a rule */
 	if (g_strcmp0 (compte->origine, "CSV") != 0)
 	{
 		compte->hbox_rule = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
-		gtk_box_pack_start (GTK_BOX (vbox), compte->hbox_rule, FALSE, FALSE, 0);
+		gtk_box_prepend (GTK_BOX (vbox), compte->hbox_rule);
 
 		/* set entry_name_rule */
 		compte->entry_name_rule = gtk_entry_new ();
@@ -874,13 +874,13 @@ static GtkWidget *gsb_import_create_page_recapitulatif (ImportAccount *compte)
 											  &compte->create_rule,
 											  G_CALLBACK (utils_buttons_sensitive_by_checkbutton),
 											  compte->entry_name_rule);
-		gtk_box_pack_start (GTK_BOX (compte->hbox_rule), button, FALSE, FALSE, 0);
+		gtk_box_prepend (GTK_BOX (compte->hbox_rule), button);
 
 		/* disabled for IMPORT_CREATE_ACCOUNT option */
 		gtk_widget_set_sensitive (compte->hbox_rule, FALSE);
 
 		/* pack entry_name_rule */
-		gtk_box_pack_start (GTK_BOX (compte->hbox_rule), compte->entry_name_rule, FALSE, FALSE, 0);
+		gtk_box_prepend (GTK_BOX (compte->hbox_rule), compte->entry_name_rule);
 
 		/* set signal to clear entry_name_rule */
 		g_signal_connect_after (G_OBJECT (button),
@@ -1333,12 +1333,12 @@ static GSList *gsb_import_create_file_chooser (const char *enc,
 	/* Add encoding preview */
 	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
 	gtk_file_chooser_set_extra_widget (GTK_FILE_CHOOSER (dialog), hbox);
-	gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_("Encoding: ")), FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (hbox), gtk_label_new (_("Encoding: ")));
 
 	go_charmap_sel = go_charmap_sel_new (GO_CHARMAP_SEL_TO_UTF8);
 	if (enc && strlen (enc))
 		go_charmap_sel_set_encoding ((GOCharmapSel *) go_charmap_sel, enc);
-	gtk_box_pack_start (GTK_BOX (hbox), go_charmap_sel, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (hbox), go_charmap_sel);
 
 	gtk_widget_show_all (dialog);
 
@@ -1860,7 +1860,7 @@ static GtkWidget *gsb_import_create_file_selection_page (GtkWidget *assistant)
 	gtk_button_set_always_show_image (GTK_BUTTON (chooser), TRUE);
 	gtk_button_set_image (GTK_BUTTON(chooser), gtk_image_new_from_file (tmp_str));
 	g_free (tmp_str);
-	gtk_box_pack_start (GTK_BOX(paddingbox), chooser, FALSE, FALSE, 6);
+	gtk_box_prepend (GTK_BOX(paddingbox), chooser);
 	g_signal_connect (G_OBJECT (chooser),
 					  "clicked",
 					  G_CALLBACK (gsb_import_select_file_from_chooser),
@@ -1872,7 +1872,7 @@ static GtkWidget *gsb_import_create_file_selection_page (GtkWidget *assistant)
 	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw), GTK_SHADOW_ETCHED_IN);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), GTK_POLICY_AUTOMATIC,
 						GTK_POLICY_AUTOMATIC);
-	gtk_box_pack_start (GTK_BOX(paddingbox), sw, TRUE, TRUE, 6);
+	gtk_box_prepend (GTK_BOX(paddingbox), sw);
 
 	/* Tree view and model. */
 	model = GTK_TREE_MODEL (gtk_tree_store_new (IMPORT_FILESEL_NUM_COLS,
@@ -1970,7 +1970,7 @@ static GtkWidget *gsb_import_create_file_selection_page (GtkWidget *assistant)
 											  NULL);
 	g_object_set_data (G_OBJECT (assistant), "qif_button", qif_button);
 	gtk_widget_set_sensitive (qif_button, FALSE);
-	gtk_box_pack_start (GTK_BOX (paddingbox), qif_button, FALSE, FALSE, MARGIN_BOX);
+	gtk_box_prepend (GTK_BOX (paddingbox), qif_button);
 
 	return vbox;
 }
@@ -2232,13 +2232,13 @@ static GtkWidget *gsb_import_progress_bar_affiche (ImportAccount *imported_accou
 	gtk_container_add (GTK_CONTAINER (progress), hbox);
 
 	image = gtk_image_new_from_icon_name ("gtk-dialog-info", GTK_ICON_SIZE_DIALOG);
-	gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (hbox), image);
 
 	bar = gtk_progress_bar_new ();
 	gtk_widget_set_valign (bar, GTK_ALIGN_CENTER);
 	gtk_progress_bar_set_pulse_step (GTK_PROGRESS_BAR (bar), 0.1);
 	g_object_set_data (G_OBJECT (progress), "bar", bar);
-	gtk_box_pack_start (GTK_BOX (hbox), bar, FALSE, FALSE, 6);
+	gtk_box_prepend (GTK_BOX (hbox), bar);
 
 	gtk_widget_show_all (progress);
 
@@ -2926,7 +2926,7 @@ static gint gsb_import_correct_opes_find_multiples_ope_msg (GtkWidget *parent,
 	gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (parent));
 
 	frame = gtk_frame_new (NULL);
-	gtk_box_pack_start (GTK_BOX (dialog_get_content_area (dialog)), frame, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (dialog_get_content_area (dialog)), frame);
 	gtk_widget_show (frame);
 
 	scrolled_window = gtk_scrolled_window_new (FALSE, FALSE);
@@ -2966,13 +2966,13 @@ static gint gsb_import_correct_opes_find_multiples_ope_msg (GtkWidget *parent,
 		g_free(tmp_date);
 		button = gtk_button_new_with_label (tmp_str);
 		g_object_set_data (G_OBJECT (button), "dialog", dialog);
-		gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
+		gtk_box_prepend (GTK_BOX (vbox), button);
 		gtk_widget_show (button);
 		g_free (tmp_str);
 
 		/* Add a separator */
 		separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-		gtk_box_pack_start (GTK_BOX (vbox), separator, FALSE, FALSE, 0);
+		gtk_box_prepend (GTK_BOX (vbox), separator);
 		gtk_widget_show (separator);
 
 		/* set signals */
@@ -3199,7 +3199,7 @@ static GtkWidget *gsb_import_correct_opes_import_create_box_doublons (GtkWidget 
 			label = gtk_label_new (tmp_str);
 			utils_labels_set_alignment (GTK_LABEL (label), 0.0, 0.0);
 			g_free (tmp_str);
-			gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
+			gtk_box_prepend (GTK_BOX (vbox), label);
 			gtk_widget_show (label);
 
 			/* Opération importée */
@@ -3218,18 +3218,18 @@ static GtkWidget *gsb_import_correct_opes_import_create_box_doublons (GtkWidget 
 			label = gtk_label_new (tmp_str);
 			utils_labels_set_alignment (GTK_LABEL (label), 0.0, 0.0);
 			g_free (tmp_str);
-			gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
+			gtk_box_prepend (GTK_BOX (vbox), label);
 			gtk_widget_show (label);
 
 			/* Boite de traitement */
 			hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
-			gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+			gtk_box_prepend (GTK_BOX (vbox), hbox);
 			gtk_widget_show (hbox);
 
 			/* Ajout du bouton de traitement */
 			button_change = gtk_button_new_with_label (_("Find other transaction"));
 			g_object_set_data (G_OBJECT (button_change), "dialog", parent);
-			gtk_box_pack_start (GTK_BOX (hbox), button_change, TRUE, TRUE, 0);
+			gtk_box_prepend (GTK_BOX (hbox), button_change);
 			gtk_widget_show (button_change);
 			g_signal_connect (G_OBJECT (button_change),
 							  "clicked",
@@ -3338,19 +3338,19 @@ static void gsb_import_confirmation_enregistrement_ope_import (ImportAccount *im
 	}
 	label = gtk_label_new (tmp_str);
 	utils_labels_set_alignment (GTK_LABEL (label), 0.0, 0.0);
-	gtk_box_pack_start (GTK_BOX (dialog_get_content_area (dialog)), label, FALSE, FALSE, BOX_BORDER_WIDTH);
+	gtk_box_prepend (GTK_BOX (dialog_get_content_area (dialog)), label);
 	g_free (tmp_str);
 
 	/* set the decoration */
 	frame = gtk_frame_new (NULL);
-	gtk_box_pack_start (GTK_BOX (dialog_get_content_area (dialog)), frame, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (dialog_get_content_area (dialog)), frame);
 
 	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 	gtk_container_add (GTK_CONTAINER (frame), vbox);
 
 	scrolled_window = gtk_scrolled_window_new (FALSE, FALSE);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-	gtk_box_pack_start (GTK_BOX (vbox), scrolled_window, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (vbox), scrolled_window);
 
 	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, MARGIN_BOX);
 	gtk_container_add (GTK_CONTAINER (scrolled_window), vbox);
@@ -3359,7 +3359,7 @@ static void gsb_import_confirmation_enregistrement_ope_import (ImportAccount *im
 	/* On crée la boite d'alerte quand plusieurs transactions sont fusionnées avec une transaction existante */
 	frame_alert = gtk_frame_new (NULL);
 	gtk_frame_set_shadow_type (GTK_FRAME (frame_alert), GTK_SHADOW_OUT);
-	gtk_box_pack_start (GTK_BOX (dialog_get_content_area (dialog)), frame_alert, FALSE, FALSE, MARGIN_BOX);
+	gtk_box_prepend (GTK_BOX (dialog_get_content_area (dialog)), frame_alert);
 	gtk_widget_set_no_show_all (frame_alert, TRUE);
 
 	vbox_alert = gtk_box_new (GTK_ORIENTATION_VERTICAL, MARGIN_BOX);
@@ -3367,10 +3367,10 @@ static void gsb_import_confirmation_enregistrement_ope_import (ImportAccount *im
 	gtk_container_set_border_width (GTK_CONTAINER (vbox_alert), BOX_BORDER_WIDTH);
 
 	hbox_alert = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
-	gtk_box_pack_start (GTK_BOX (vbox_alert), hbox_alert, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (vbox_alert), hbox_alert);
 
 	image = gtk_image_new_from_icon_name ("gtk-dialog-warning", GTK_ICON_SIZE_LARGE_TOOLBAR);
-	gtk_box_pack_start (GTK_BOX (hbox_alert), image, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (hbox_alert), image);
 
 	label_alert = gtk_label_new (NULL);
 	tmp_str = dialogue_make_pango_attribut ("weight=\"bold\"", _("Duplicate transactions"));
@@ -3378,7 +3378,7 @@ static void gsb_import_confirmation_enregistrement_ope_import (ImportAccount *im
 	g_free (tmp_str);
 
 	gtk_label_set_xalign (GTK_LABEL (label_alert), GSB_CENTER);
-	gtk_box_pack_start (GTK_BOX (hbox_alert), label_alert, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (hbox_alert), label_alert);
 
 	scrolled_window = gtk_scrolled_window_new (FALSE, FALSE);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
@@ -3410,7 +3410,7 @@ static void gsb_import_confirmation_enregistrement_ope_import (ImportAccount *im
 			ope_visible = TRUE;
 
 			hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
-			gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+			gtk_box_prepend (GTK_BOX (vbox), hbox);
 
 			ope_import->bouton = gtk_check_button_new ();
 			if (w_etat->fusion_import_transactions)
@@ -3420,7 +3420,7 @@ static void gsb_import_confirmation_enregistrement_ope_import (ImportAccount *im
 							  "toggled",
 							  G_CALLBACK (gsb_import_ope_import_toggled),
 							  vbox);
-			gtk_box_pack_start (GTK_BOX (hbox), ope_import->bouton, FALSE, FALSE, 0);
+			gtk_box_prepend (GTK_BOX (hbox), ope_import->bouton);
 
 			return_exponent = gsb_data_account_get_currency_floating_point (account_number);
 			tmp_str2 = utils_real_get_string (gsb_real_adjust_exponent (ope_import->montant, return_exponent));
@@ -3439,13 +3439,13 @@ static void gsb_import_confirmation_enregistrement_ope_import (ImportAccount *im
 			g_free (tmp_str2);
 			label = gtk_label_new (tmp_str);
 			g_free (tmp_str);
-			gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+			gtk_box_prepend (GTK_BOX (hbox), label);
 
 			hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
-			gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+			gtk_box_prepend (GTK_BOX (vbox), hbox);
 
 			label = gtk_label_new ("       ");
-			gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+			gtk_box_prepend (GTK_BOX (hbox), label);
 
 			/* on garde trace des opérations correspondantes pour avertir l'utilisateur d'un problème de fusion */
 			if (g_slist_find (list_ope_correspondantes, GINT_TO_POINTER (ope_import->ope_correspondante)))
@@ -3507,7 +3507,7 @@ static void gsb_import_confirmation_enregistrement_ope_import (ImportAccount *im
 				ope_import->label_ope_find = gtk_label_new (tmp_str);
 				g_free (tmp_str);
 			}
-			gtk_box_pack_start (GTK_BOX (hbox), ope_import->label_ope_find, FALSE, FALSE, 0);
+			gtk_box_prepend (GTK_BOX (hbox), ope_import->label_ope_find);
 		}
 		tmp_list = tmp_list->next;
 	}
@@ -4437,7 +4437,7 @@ static void gsb_import_show_orphan_transactions (GSList *orphan_list,
 
 	label = gtk_label_new (_("Mark transactions you want to add to the list and click the OK button"));
 	utils_labels_set_alignment (GTK_LABEL (label), 0.0, 0.0);
-	gtk_box_pack_start (GTK_BOX (dialog_get_content_area (dialog)), label, FALSE, FALSE, MARGIN_BOX);
+	gtk_box_prepend (GTK_BOX (dialog_get_content_area (dialog)), label);
 	gtk_widget_show (label);
 
 	/* on crée le model et on y associe le dialogue */
@@ -4472,11 +4472,7 @@ static void gsb_import_show_orphan_transactions (GSList *orphan_list,
 
 	scrolled_window = gtk_scrolled_window_new (FALSE, FALSE);
 	gtk_widget_set_size_request (scrolled_window, -1, 300);
-	gtk_box_pack_start (GTK_BOX (dialog_get_content_area (dialog)),
-						scrolled_window,
-						TRUE,
-						TRUE,
-						0);
+	gtk_box_prepend (GTK_BOX (dialog_get_content_area (dialog)), scrolled_window);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
 									GTK_POLICY_AUTOMATIC,
 									GTK_POLICY_AUTOMATIC);
@@ -5314,7 +5310,7 @@ static gchar **gsb_import_by_rule_ask_filename (gint rule,
 
 	/* Ugly dance to avoid side effects on dialog's vbox. */
 	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-	gtk_box_pack_start (GTK_BOX (dialog_get_content_area (dialog)), hbox, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (dialog_get_content_area (dialog)), hbox);
 	paddingbox = new_paddingbox_with_title (hbox, TRUE, tmp_str);
 	gtk_container_set_border_width (GTK_CONTAINER(hbox), BOX_BORDER_WIDTH);
 	gtk_container_set_border_width (GTK_CONTAINER(paddingbox), BOX_BORDER_WIDTH);
@@ -5322,7 +5318,7 @@ static gchar **gsb_import_by_rule_ask_filename (gint rule,
 
 	/* table for layout */
 	table = gtk_grid_new ();
-	gtk_box_pack_start (GTK_BOX (paddingbox), table, FALSE, FALSE, 6);
+	gtk_box_prepend (GTK_BOX (paddingbox), table);
 	gtk_grid_set_column_spacing (GTK_GRID (table), 6);
 	gtk_grid_set_row_spacing (GTK_GRID (table), 6);
 

@@ -478,14 +478,14 @@ GtkWidget *utils_widget_get_duration_widget (gint origin)
     label = gtk_label_new (_("Duration: "));
     utils_labels_set_alignment (GTK_LABEL (label), GSB_LEFT, GSB_CENTER);
     gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-    gtk_box_pack_start (GTK_BOX (box), label, FALSE, FALSE, MARGIN_BOX) ;
+    gtk_box_prepend (GTK_BOX (box), label) ;
 
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 5);
-    gtk_box_pack_start (GTK_BOX (box), hbox, FALSE, FALSE, 0) ;
+    gtk_box_prepend (GTK_BOX (box), hbox) ;
 
     spin_button = gtk_spin_button_new_with_range (1.0, PREV_MONTH_MAX, 1.0);
     gtk_spin_button_set_value (GTK_SPIN_BUTTON (spin_button), 1.0);
-    gtk_box_pack_start (GTK_BOX (hbox), spin_button, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), spin_button);
 
     for (iduration = 0; bet_duration_array[iduration] != NULL; iduration++)
     {
@@ -500,7 +500,7 @@ GtkWidget *utils_widget_get_duration_widget (gint origin)
                                                                   _(bet_duration_array[iduration]));
         }
         gtk_widget_set_name (widget, bet_duration_array[iduration]);
-        gtk_box_pack_start (GTK_BOX (hbox), widget, FALSE, FALSE, 0);
+        gtk_box_prepend (GTK_BOX (hbox), widget);
         g_signal_connect (G_OBJECT (widget),
                           "button-release-event",
                           G_CALLBACK (utils_widget_duration_button_released),
@@ -684,8 +684,8 @@ GtkWidget *utils_widget_origin_data_new (GtkWidget *notebook,
 		pointeur = GINT_TO_POINTER (1);
 	}
 
-	gtk_box_pack_start (GTK_BOX (hbox), button_1, FALSE, FALSE, MARGIN_BOX) ;
-	gtk_box_pack_start (GTK_BOX (hbox), button_2, FALSE, FALSE, MARGIN_BOX) ;
+	gtk_box_prepend (GTK_BOX (hbox), button_1) ;
+	gtk_box_prepend (GTK_BOX (hbox), button_2) ;
 
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button_1), TRUE);
 
@@ -710,7 +710,7 @@ GtkWidget *utils_widget_origin_data_new (GtkWidget *notebook,
 		gtk_widget_set_name (GTK_WIDGET (widget), "bet_hist_fyear_combo");
 		gtk_widget_set_tooltip_text (GTK_WIDGET (widget),
 									 _("Choose the financial year or 12 months rolling"));
-		gtk_box_pack_start (GTK_BOX (hbox), widget, FALSE, FALSE, MARGIN_BOX);
+		gtk_box_prepend (GTK_BOX (hbox), widget);
 
 		if (type == SPP_ORIGIN_CONFIG)
 		{
@@ -795,7 +795,7 @@ void utils_widget_import_csv_options_widget_new (GtkWidget *parent,
 	grid = gtk_grid_new ();
 	gtk_grid_set_column_spacing (GTK_GRID (grid), MARGIN_BOX);
 	gtk_grid_set_row_spacing (GTK_GRID (grid), MARGIN_BOX);
-	gtk_box_pack_start (GTK_BOX (parent), grid, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (parent), grid);
 
     /* on crée le size_group pour l'alignement des hbox */
     size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
@@ -842,13 +842,13 @@ void utils_widget_import_csv_options_widget_new (GtkWidget *parent,
 
 	/* set label */
 	label = gtk_label_new (_("Select new date format : "));
-	gtk_box_pack_start (GTK_BOX (hbox_format_date), label, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (hbox_format_date), label);
 
 	/* set combo date format */
 	combo_format_date = gsb_combo_box_new_with_index (import_format_date, NULL, NULL);
 	g_object_set_data (G_OBJECT (assistant), "combo-format-date", combo_format_date);
 	gtk_combo_box_set_active (GTK_COMBO_BOX (combo_format_date), 0);
-    gtk_box_pack_start (GTK_BOX (hbox_format_date), combo_format_date, TRUE, TRUE, 0);
+    gtk_box_prepend (GTK_BOX (hbox_format_date), combo_format_date);
 
 	/* set signals */
 	g_signal_connect (G_OBJECT (check_button),
@@ -930,20 +930,20 @@ GtkWidget *utils_widget_date_format_chosen (GtkWidget *parent,
 	if (sens == GTK_ORIENTATION_VERTICAL)
 	{
 		paddingbox = new_paddingbox_with_title (parent, FALSE, _("Choose the date format"));
-		gtk_box_pack_start (GTK_BOX (paddingbox), button_1, FALSE, FALSE, 0);
-		gtk_box_pack_start (GTK_BOX (paddingbox), button_2, FALSE, FALSE, 0);
-		gtk_box_pack_start (GTK_BOX (paddingbox), button_3, FALSE, FALSE, 0);
-		gtk_box_pack_start (GTK_BOX (paddingbox), button_4, FALSE, FALSE, 0);
+		gtk_box_prepend (GTK_BOX (paddingbox), button_1);
+		gtk_box_prepend (GTK_BOX (paddingbox), button_2);
+		gtk_box_prepend (GTK_BOX (paddingbox), button_3);
+		gtk_box_prepend (GTK_BOX (paddingbox), button_4);
 	}
 	else
 	{
 		paddingbox = new_paddingbox_with_title (parent, FALSE, _("Choose the date format"));
 		hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_PADDING_BOX);
-		gtk_box_pack_start (GTK_BOX (paddingbox), hbox, FALSE, FALSE, 0);
-		gtk_box_pack_start (GTK_BOX (hbox), button_1, FALSE, FALSE, 0);
-		gtk_box_pack_start (GTK_BOX (hbox), button_2, FALSE, FALSE, 0);
-		gtk_box_pack_start (GTK_BOX (hbox), button_3, FALSE, FALSE, 0);
-		gtk_box_pack_start (GTK_BOX (hbox), button_4, FALSE, FALSE, 0);
+		gtk_box_prepend (GTK_BOX (paddingbox), hbox);
+		gtk_box_prepend (GTK_BOX (hbox), button_1);
+		gtk_box_prepend (GTK_BOX (hbox), button_2);
+		gtk_box_prepend (GTK_BOX (hbox), button_3);
+		gtk_box_prepend (GTK_BOX (hbox), button_4);
 	}
 
 	format_date = gsb_date_get_format_date ();
@@ -1006,20 +1006,20 @@ GtkWidget *utils_widget_number_format_chosen (GtkWidget *parent,
 	label = gtk_label_new (_("Decimal point: "));
 	utils_labels_set_alignment (GTK_LABEL (label), GSB_LEFT, GSB_CENTER);
 	gtk_size_group_add_widget (GTK_SIZE_GROUP (size_group), label);
-	gtk_box_pack_start (GTK_BOX (dec_hbox), label, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (dec_hbox), label);
 
 	dec_sep = gtk_combo_box_text_new_with_entry ();
 	gtk_editable_set_editable (GTK_EDITABLE (gtk_bin_get_child (GTK_BIN (dec_sep))), FALSE);
 	gtk_entry_set_width_chars (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (dec_sep))), 5);
 	gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (dec_sep), ".");
 	gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (dec_sep), ",");
-	gtk_box_pack_start (GTK_BOX (dec_hbox), dec_sep, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (dec_hbox), dec_sep);
 
 	thou_hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
 	label = gtk_label_new (_("Thousands separator: "));
 	utils_labels_set_alignment (GTK_LABEL (label), GSB_LEFT, GSB_CENTER);
 	gtk_size_group_add_widget (GTK_SIZE_GROUP (size_group), label);
-	gtk_box_pack_start (GTK_BOX (thou_hbox), label, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (thou_hbox), label);
 
 	thou_sep = gtk_combo_box_text_new_with_entry ();
 	gtk_editable_set_editable (GTK_EDITABLE (gtk_bin_get_child (GTK_BIN (thou_sep))), FALSE);
@@ -1029,24 +1029,24 @@ GtkWidget *utils_widget_number_format_chosen (GtkWidget *parent,
 	gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (thou_sep), ",");
 	gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (thou_sep), "''");
 
-	gtk_box_pack_start (GTK_BOX (thou_hbox), thou_sep, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (thou_hbox), thou_sep);
 
 	if (sens == GTK_ORIENTATION_VERTICAL)
 	{
 		paddingbox = new_paddingbox_with_title (parent,
 												FALSE,
 												_("Choose the decimal and thousands separator"));
-		gtk_box_pack_start (GTK_BOX (paddingbox), dec_hbox, FALSE, FALSE, 0);
-		gtk_box_pack_start (GTK_BOX (paddingbox), thou_hbox, FALSE, FALSE, 0);
+		gtk_box_prepend (GTK_BOX (paddingbox), dec_hbox);
+		gtk_box_prepend (GTK_BOX (paddingbox), thou_hbox);
 	}
 	else
 	{
 		paddingbox = new_paddingbox_with_title (parent, FALSE, _("Decimal and thousands separator"));
 		hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
 		gtk_box_set_homogeneous (GTK_BOX (hbox), TRUE);
-		gtk_box_pack_start (GTK_BOX (paddingbox), hbox, FALSE, FALSE, 0);
-		gtk_box_pack_start (GTK_BOX (hbox), dec_hbox, FALSE, FALSE, 0);
-		gtk_box_pack_start (GTK_BOX (hbox), thou_hbox, FALSE, FALSE, 0);
+		gtk_box_prepend (GTK_BOX (paddingbox), hbox);
+		gtk_box_prepend (GTK_BOX (hbox), dec_hbox);
+		gtk_box_prepend (GTK_BOX (hbox), thou_hbox);
 	}
 
 	mon_decimal_point = gsb_locale_get_mon_decimal_point ();
@@ -1159,13 +1159,13 @@ GtkWidget *utils_widget_csv_separators_new (GtkSizeGroup *size_group,
 	{
 		gtk_size_group_add_widget (size_group, combobox);
 		gtk_size_group_add_widget (size_group, entry);
-		gtk_box_pack_start (GTK_BOX (hbox), combobox, FALSE, FALSE, 0);
-		gtk_box_pack_start (GTK_BOX (hbox), entry, FALSE, FALSE, 0);
+		gtk_box_prepend (GTK_BOX (hbox), combobox);
+		gtk_box_prepend (GTK_BOX (hbox), entry);
 	}
 	else
 	{
-		gtk_box_pack_start (GTK_BOX (hbox), combobox, TRUE, TRUE, 0);
-		gtk_box_pack_start (GTK_BOX (hbox), entry, TRUE, TRUE, 0);
+		gtk_box_prepend (GTK_BOX (hbox), combobox);
+		gtk_box_prepend (GTK_BOX (hbox), entry);
 	}
 
 	/* set signals */

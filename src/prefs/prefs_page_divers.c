@@ -599,8 +599,7 @@ static void prefs_page_divers_setup_divers_page (PrefsPageDivers *page,
 
 	/* On récupère le nom de la page */
 	head_page = utils_prefs_head_page_new_with_title_and_icon (_("Various settings"), "gsb-generalities-32.png");
-	gtk_box_pack_start (GTK_BOX (priv->vbox_divers), head_page, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->vbox_divers), head_page, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_divers), head_page);
 
 	/* page generalities */
     /* set the variables for programs */
@@ -609,8 +608,9 @@ static void prefs_page_divers_setup_divers_page (PrefsPageDivers *page,
 	/* set help display */
 	image = gtk_image_new_from_resource ("/org/gtk/grisbi/images/gsb-pdf.svg");
 	gtk_image_set_pixel_size (GTK_IMAGE (image), 16);
-	gtk_container_add (GTK_CONTAINER (priv->hbox_display_pdf), image);
-	gtk_box_reorder_child (GTK_BOX (priv->hbox_display_pdf), image, 0);
+	//~ gtk_container_add (GTK_CONTAINER (priv->hbox_display_pdf), image);
+	gtk_box_prepend (GTK_BOX (priv->hbox_display_pdf), image);
+
 
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->radiobutton_display_pdf), a_conf->display_help);
 	g_object_set_data (G_OBJECT (priv->radiobutton_display_html), "pointer", GINT_TO_POINTER (1));
@@ -629,9 +629,7 @@ static void prefs_page_divers_setup_divers_page (PrefsPageDivers *page,
 													page);
 
 	gtk_box_pack_start (GTK_BOX (vbox_button), priv->hbox_launch_scheduler_nb_days_before_scheduled, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (vbox_button), priv->hbox_launch_scheduler_nb_days_before_scheduled, 1);
-	gtk_box_pack_start (GTK_BOX (priv->vbox_launch_scheduler), vbox_button, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->vbox_launch_scheduler), vbox_button, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_launch_scheduler), vbox_button);
 
 	/* initialise le bouton nombre de jours avant alerte execution */
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (priv->spinbutton_nb_days_before_scheduled),
@@ -660,7 +658,7 @@ static void prefs_page_divers_setup_divers_page (PrefsPageDivers *page,
 		combo = utils_prefs_create_combo_list_indisponible ();
 
 	gtk_widget_set_size_request (combo, FORM_COURT_WIDTH, -1);
-	gtk_box_pack_start (GTK_BOX (priv->hbox_launch_scheduler_set_default_account), combo, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (priv->hbox_launch_scheduler_set_default_account), combo);
 	g_object_set_data (G_OBJECT (priv->checkbutton_scheduler_set_default_account), "widget", combo);
 
 	if (w_etat->scheduler_set_default_account)

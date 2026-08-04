@@ -140,7 +140,7 @@ static void widget_cmp_text_display_add_remove_buttons (gint position,
 		/* on réaffecte la boite de boutons hbox_buttons_line sur la ligne 1 de la recherche de nombre */
 		gtk_widget_unparent (priv->hbox_buttons_line);
 		gtk_container_remove (GTK_CONTAINER (priv->hbox_use_text), priv->hbox_buttons_line);
-		gtk_box_pack_start (GTK_BOX (priv->hbox_first_part), priv->hbox_buttons_line, FALSE, FALSE, 0);
+		gtk_box_prepend (GTK_BOX (priv->hbox_first_part), priv->hbox_buttons_line);
 	}
 	else if (position == TEXT_LINE)
 	{
@@ -155,7 +155,7 @@ static void widget_cmp_text_display_add_remove_buttons (gint position,
 		else
 			gtk_container_remove (GTK_CONTAINER (priv->hbox_second_part), priv->hbox_buttons_line);
 
-		gtk_box_pack_start (GTK_BOX (priv->hbox_use_text), priv->hbox_buttons_line, FALSE, FALSE, 0);
+		gtk_box_prepend (GTK_BOX (priv->hbox_use_text), priv->hbox_buttons_line);
 	}
 }
 
@@ -203,7 +203,7 @@ static void widget_cmp_text_button_link_first_to_second_part_changed (GtkComboBo
 		/* on réaffecte la boite de boutons hbox_buttons_line */
 		gtk_widget_unparent (priv->hbox_buttons_line);
 		gtk_container_remove (GTK_CONTAINER (priv->hbox_second_part), priv->hbox_buttons_line);
-		gtk_box_pack_start (GTK_BOX (priv->hbox_first_part), priv->hbox_buttons_line, FALSE, FALSE, 0);
+		gtk_box_prepend (GTK_BOX (priv->hbox_first_part), priv->hbox_buttons_line);
 	}
 	else
 	{
@@ -212,7 +212,7 @@ static void widget_cmp_text_button_link_first_to_second_part_changed (GtkComboBo
 		/* on réaffecte la boite de boutons hbox_buttons_line */
 		gtk_widget_unparent (priv->hbox_buttons_line);
 		gtk_container_remove (GTK_CONTAINER (priv->hbox_first_part), priv->hbox_buttons_line);
-		gtk_box_pack_start (GTK_BOX (priv->hbox_second_part), priv->hbox_buttons_line, FALSE, FALSE, 0);
+		gtk_box_prepend (GTK_BOX (priv->hbox_second_part), priv->hbox_buttons_line);
 	}
 }
 
@@ -278,7 +278,7 @@ static void widget_cmp_text_setup_widget (WidgetCmpText *widget,
 	priv = widget_cmp_text_get_instance_private (widget);
 
 	/* on ajoute les bouton "Ajouter" et "Enlever" */
-	gtk_box_pack_start (GTK_BOX (priv->hbox_use_text), priv->hbox_buttons_line, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (priv->hbox_use_text), priv->hbox_buttons_line);
 
 	/* select widgets */
 	if (first_cmp_line)

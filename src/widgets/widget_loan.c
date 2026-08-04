@@ -952,7 +952,7 @@ static void widget_loan_button_amortization_table_clicked (GtkButton *button,
 	/* set data of loan */
 	page = bet_finance_ui_create_amortization_heading (popup);
 	content_area = gtk_dialog_get_content_area (GTK_DIALOG (popup));
-	gtk_box_pack_start (GTK_BOX (content_area), page, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (content_area), page);
 
 	/* création de la liste des données */
 	label_title = g_object_get_data (G_OBJECT (popup), "label_title");
@@ -1065,13 +1065,13 @@ static DialogScheduled *widget_loan_dialog_scheduled_init (GtkWidget *page,
 
 	/* set associated account */
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
-	gtk_box_pack_start (GTK_BOX (paddingbox), hbox, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (paddingbox), hbox);
 
 	label = gtk_label_new (_("Associated account: "));
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (hbox), label);
 
 	s_sch_dialog->AccountListCombo = widget_loan_combo_account_list_create ();
-	gtk_box_pack_start (GTK_BOX (hbox), s_sch_dialog->AccountListCombo, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (hbox), s_sch_dialog->AccountListCombo);
 
 	if (s_loan->associated_account)
 		gsb_combo_box_set_index (s_sch_dialog->AccountListCombo, s_loan->associated_account);
@@ -1083,11 +1083,11 @@ static DialogScheduled *widget_loan_dialog_scheduled_init (GtkWidget *page,
 
 	/* set frequency */
 	label = gtk_label_new (_("Frequency: "));
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), label);
 
 	s_sch_dialog->AFreqencyCombo = gsb_combo_box_new_with_index (text_frequency, NULL, NULL);
 	gtk_widget_show (s_sch_dialog->AFreqencyCombo);
-	gtk_box_pack_start (GTK_BOX (hbox), s_sch_dialog->AFreqencyCombo, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (hbox), s_sch_dialog->AFreqencyCombo);
 
 	gsb_combo_box_set_index (s_sch_dialog->AFreqencyCombo, s_loan->associated_frequency);
 
@@ -1095,21 +1095,21 @@ static DialogScheduled *widget_loan_dialog_scheduled_init (GtkWidget *page,
 	separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
 	gtk_widget_set_margin_bottom (separator, MARGIN_BOTTOM);
 	gtk_widget_set_margin_top (separator, MARGIN_TOP);
-	gtk_box_pack_start (GTK_BOX (paddingbox), separator, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (paddingbox), separator);
 
 	/* Mother transaction */
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
-    gtk_box_pack_start (GTK_BOX (paddingbox), hbox, FALSE, TRUE, 0);
+    gtk_box_prepend (GTK_BOX (paddingbox), hbox);
 
 	label = gtk_label_new (_("Mother transaction:"));
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (hbox), label);
 
 	/* création de la boite de sélection du tiers */
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
-    gtk_box_pack_start (GTK_BOX (paddingbox), hbox, FALSE, TRUE, 0);
+    gtk_box_prepend (GTK_BOX (paddingbox), hbox);
 
     icon = utils_get_image_with_state (GTK_MESSAGE_ERROR, FALSE, _("This field is required"), NULL);
-    gtk_box_pack_start (GTK_BOX (hbox), icon, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), icon);
 
 	tmp_list = gsb_data_payee_get_name_and_report_list ();
 	s_sch_dialog->APayeeCombo = gtk_combofix_new_with_properties (tmp_list,
@@ -1118,7 +1118,7 @@ static DialogScheduled *widget_loan_dialog_scheduled_init (GtkWidget *page,
 											  FALSE,
 											  METATREE_PAYEE);
 	gsb_data_payee_free_name_and_report_list (tmp_list);
-    gtk_box_pack_start (GTK_BOX (hbox), s_sch_dialog->APayeeCombo, TRUE, TRUE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), s_sch_dialog->APayeeCombo);
     g_object_set_data (G_OBJECT (s_sch_dialog->APayeeCombo), "icon", icon);
 	g_object_set_data (G_OBJECT (s_sch_dialog->APayeeCombo), "element", GINT_TO_POINTER (TRANSACTION_FORM_PARTY));
 
@@ -1137,10 +1137,10 @@ static DialogScheduled *widget_loan_dialog_scheduled_init (GtkWidget *page,
 
 	/* set Catégorie */
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
-    gtk_box_pack_start (GTK_BOX (paddingbox), hbox, TRUE, TRUE, 0);
+    gtk_box_prepend (GTK_BOX (paddingbox), hbox);
 
     icon = utils_get_image_with_state (GTK_MESSAGE_ERROR, TRUE, _("One of the two fields is required"), NULL);
-    gtk_box_pack_start (GTK_BOX (hbox), icon, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), icon);
 
 	tmp_list = gsb_data_category_get_name_list (TRUE, TRUE, TRUE, TRUE);
 	s_sch_dialog->ACategCombo = gtk_combofix_new_with_properties (tmp_list,
@@ -1149,7 +1149,7 @@ static DialogScheduled *widget_loan_dialog_scheduled_init (GtkWidget *page,
 											  w_etat->combofix_mixed_sort,
 											  METATREE_CATEGORY);
 	gsb_data_categorie_free_name_list (tmp_list);
-    gtk_box_pack_start (GTK_BOX (hbox), s_sch_dialog->ACategCombo, TRUE, TRUE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), s_sch_dialog->ACategCombo);
 
 	gsb_form_widget_set_empty (s_sch_dialog->ACategCombo, FALSE);
 
@@ -1179,27 +1179,27 @@ static DialogScheduled *widget_loan_dialog_scheduled_init (GtkWidget *page,
     gsb_payment_method_create_combo_list (s_sch_dialog->APaymentCombo, GSB_PAYMENT_DEBIT, s_loan->associated_account, 0, FALSE);
 	gsb_payment_method_set_payment_position (s_sch_dialog->APaymentCombo, tmp_number);
     gtk_widget_set_tooltip_text (GTK_WIDGET (s_sch_dialog->APaymentCombo), _("Choose the method of payment"));
-    gtk_box_pack_start (GTK_BOX (hbox), s_sch_dialog->APaymentCombo, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), s_sch_dialog->APaymentCombo);
 
 	/* add separator */
 	separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
 	gtk_widget_set_margin_bottom (separator, MARGIN_BOTTOM);
 	gtk_widget_set_margin_top (separator, MARGIN_TOP);
-	gtk_box_pack_start (GTK_BOX (paddingbox), separator, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (paddingbox), separator);
 
 	/* First split transaction: Capital */
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
-    gtk_box_pack_start (GTK_BOX (paddingbox), hbox, FALSE, TRUE, 0);
+    gtk_box_prepend (GTK_BOX (paddingbox), hbox);
 
 	label = gtk_label_new (_("First split transaction: Capital"));
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (hbox), label);
 
 	/* set Catégorie */
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
-    gtk_box_pack_start (GTK_BOX (paddingbox), hbox, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (paddingbox), hbox);
 
     icon = utils_get_image_with_state (GTK_MESSAGE_ERROR, TRUE, _("One of the two fields is required"), NULL);
-    gtk_box_pack_start (GTK_BOX (hbox), icon, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), icon);
 
 	tmp_list = gsb_data_category_get_name_list (TRUE, TRUE, TRUE, TRUE);
 	s_sch_dialog->FCategCombo = gtk_combofix_new_with_properties (tmp_list,
@@ -1208,7 +1208,7 @@ static DialogScheduled *widget_loan_dialog_scheduled_init (GtkWidget *page,
 											  w_etat->combofix_mixed_sort,
 											  METATREE_CATEGORY);
 	gsb_data_categorie_free_name_list (tmp_list);
-    gtk_box_pack_start (GTK_BOX (hbox), s_sch_dialog->FCategCombo, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), s_sch_dialog->FCategCombo);
     g_object_set_data (G_OBJECT (s_sch_dialog->AccountListCombo), "combo", s_sch_dialog->FCategCombo);
     g_object_set_data (G_OBJECT (s_sch_dialog->FCategCombo), "icon", icon);
 	g_object_set_data (G_OBJECT (s_sch_dialog->FCategCombo), "element",
@@ -1242,7 +1242,7 @@ static DialogScheduled *widget_loan_dialog_scheduled_init (GtkWidget *page,
 											  w_etat->combofix_mixed_sort,
 											  METATREE_BUDGET);
 	gsb_data_categorie_free_name_list (tmp_list);
-    gtk_box_pack_start (GTK_BOX (hbox), s_sch_dialog->FBudgetCombo, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), s_sch_dialog->FBudgetCombo);
     g_object_set_data (G_OBJECT (s_sch_dialog->FBudgetCombo), "icon", icon);
 	g_object_set_data (G_OBJECT (s_sch_dialog->FBudgetCombo),
 					   "element",
@@ -1275,21 +1275,21 @@ static DialogScheduled *widget_loan_dialog_scheduled_init (GtkWidget *page,
 	separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
 	gtk_widget_set_margin_bottom (separator, MARGIN_BOTTOM);
 	gtk_widget_set_margin_top (separator, MARGIN_TOP);
-	gtk_box_pack_start (GTK_BOX (paddingbox), separator, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (paddingbox), separator);
 
 	/* Second split transaction: Interests */
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
-    gtk_box_pack_start (GTK_BOX (paddingbox), hbox, FALSE, TRUE, 0);
+    gtk_box_prepend (GTK_BOX (paddingbox), hbox);
 
 	label = gtk_label_new (_("Second split transaction: Interests"));
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (hbox), label);
 
 	/* Catégorie */
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
-    gtk_box_pack_start (GTK_BOX (paddingbox), hbox, FALSE, TRUE, 0);
+    gtk_box_prepend (GTK_BOX (paddingbox), hbox);
 
     icon = utils_get_image_with_state (GTK_MESSAGE_ERROR, FALSE, _("One of the two fields is required"), NULL);
-    gtk_box_pack_start (GTK_BOX (hbox), icon, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), icon);
 
 	tmp_list = gsb_data_category_get_name_list (TRUE, TRUE, TRUE, TRUE);
 	s_sch_dialog->SCategCombo = gtk_combofix_new_with_properties (tmp_list,
@@ -1298,7 +1298,7 @@ static DialogScheduled *widget_loan_dialog_scheduled_init (GtkWidget *page,
 											  w_etat->combofix_mixed_sort,
 											  METATREE_CATEGORY);
 	gsb_data_categorie_free_name_list (tmp_list);
-    gtk_box_pack_start (GTK_BOX (hbox), s_sch_dialog->SCategCombo, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), s_sch_dialog->SCategCombo);
     g_object_set_data (G_OBJECT (s_sch_dialog->SCategCombo), "icon", icon);
 	g_object_set_data (G_OBJECT (s_sch_dialog->SCategCombo),
 					   "element",
@@ -1335,7 +1335,7 @@ static DialogScheduled *widget_loan_dialog_scheduled_init (GtkWidget *page,
 											  w_etat->combofix_mixed_sort,
 											  METATREE_BUDGET);
 	gsb_data_categorie_free_name_list (tmp_list);
-    gtk_box_pack_start (GTK_BOX (hbox), s_sch_dialog->SBudgetCombo, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), s_sch_dialog->SBudgetCombo);
     g_object_set_data (G_OBJECT (s_sch_dialog->SBudgetCombo), "icon", icon);
 	g_object_set_data (G_OBJECT (s_sch_dialog->SBudgetCombo),
 					   "element",
@@ -1368,21 +1368,21 @@ static DialogScheduled *widget_loan_dialog_scheduled_init (GtkWidget *page,
 	separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
 	gtk_widget_set_margin_bottom (separator, MARGIN_BOTTOM);
 	gtk_widget_set_margin_top (separator, MARGIN_TOP);
-	gtk_box_pack_start (GTK_BOX (paddingbox), separator, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (paddingbox), separator);
 
 	/* Third split transaction : Fees */
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
-    gtk_box_pack_start (GTK_BOX (paddingbox), hbox, FALSE, TRUE, 0);
+    gtk_box_prepend (GTK_BOX (paddingbox), hbox);
 
 	label = gtk_label_new (_("Third split transaction: Fees"));
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX (hbox), label);
 
 	/* Catégorie */
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
-    gtk_box_pack_start (GTK_BOX (paddingbox), hbox, FALSE, TRUE, 0);
+    gtk_box_prepend (GTK_BOX (paddingbox), hbox);
 
     icon = utils_get_image_with_state (GTK_MESSAGE_ERROR, FALSE, _("One of the two fields is required"), NULL);
-    gtk_box_pack_start (GTK_BOX (hbox), icon, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), icon);
 
 	tmp_list = gsb_data_category_get_name_list (TRUE, TRUE, TRUE, TRUE);
 	s_sch_dialog->TCategCombo = gtk_combofix_new_with_properties (tmp_list,
@@ -1391,7 +1391,7 @@ static DialogScheduled *widget_loan_dialog_scheduled_init (GtkWidget *page,
 											  w_etat->combofix_mixed_sort,
 											  METATREE_CATEGORY);
 	gsb_data_categorie_free_name_list (tmp_list);
-    gtk_box_pack_start (GTK_BOX (hbox), s_sch_dialog->TCategCombo, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), s_sch_dialog->TCategCombo);
     g_object_set_data (G_OBJECT (s_sch_dialog->TCategCombo), "icon", icon);
 	g_object_set_data (G_OBJECT (s_sch_dialog->TCategCombo),
 					   "element",
@@ -1427,7 +1427,7 @@ static DialogScheduled *widget_loan_dialog_scheduled_init (GtkWidget *page,
 											  w_etat->combofix_mixed_sort,
 											  METATREE_BUDGET);
 	gsb_data_categorie_free_name_list (tmp_list);
-    gtk_box_pack_start (GTK_BOX (hbox), s_sch_dialog->TBudgetCombo, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), s_sch_dialog->TBudgetCombo);
     g_object_set_data (G_OBJECT (s_sch_dialog->TBudgetCombo), "icon", icon);
 	g_object_set_data (G_OBJECT (s_sch_dialog->TBudgetCombo),
 					   "element",
@@ -1600,7 +1600,7 @@ static void widget_loan_button_init_scheduled_clicked (GtkButton *button,
 
 	page = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 	content_area = gtk_dialog_get_content_area (GTK_DIALOG (popup));
-	gtk_box_pack_start (GTK_BOX (content_area), page, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (content_area), page);
 	gtk_container_set_border_width (GTK_CONTAINER (page), BOX_BORDER_WIDTH);
 
 	/* initialisation de capital du */

@@ -181,8 +181,7 @@ static void prefs_page_accueil_setup_accueil_page (PrefsPageAccueil *page)
 
 	/* On récupère le nom de la page */
 	head_page = utils_prefs_head_page_new_with_title_and_icon (_("Configuration of the main page"), "gsb-title-32.png");
-	gtk_box_pack_start (GTK_BOX (priv->vbox_accueil), head_page, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->vbox_accueil), head_page, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_accueil), head_page);
 
     /* set the box for french langage*/
 	langue = gsb_locale_get_language ();
@@ -198,7 +197,7 @@ static void prefs_page_accueil_setup_accueil_page (PrefsPageAccueil *page)
 																 &a_conf->pluriel_final,
 																 G_CALLBACK (prefs_page_accueil_checkbutton_pluriel_final_toggle),
 																 a_conf);
-			gtk_box_pack_start (GTK_BOX (priv->box_lang_fr), vbox_button, FALSE, FALSE, 0);
+			gtk_box_prepend (GTK_BOX (priv->box_lang_fr), vbox_button);
 			gtk_box_pack_start (GTK_BOX (priv->vbox_accueil), priv->hbox_paddingbox_lang_fr, FALSE, FALSE, 0);
 			gtk_box_reorder_child (GTK_BOX (priv->vbox_accueil), priv->hbox_paddingbox_lang_fr, 1);
 		}

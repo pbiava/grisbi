@@ -1506,14 +1506,14 @@ static GtkWidget *bet_future_create_dialog (gint account_number)
     gtk_window_set_resizable (GTK_WINDOW (dialog), TRUE);
 
 	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-	gtk_box_pack_start (GTK_BOX (dialog_get_content_area (dialog)), vbox, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX (dialog_get_content_area (dialog)), vbox);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), BOX_BORDER_WIDTH);
 
     /* next we fill the bet_form */
     table = gtk_grid_new ();
     gtk_grid_set_column_spacing (GTK_GRID (table), MARGIN_BOX);
     gtk_widget_show (table);
-    gtk_box_pack_start (GTK_BOX (vbox), table, FALSE, FALSE, MARGIN_BOX);
+    gtk_box_prepend (GTK_BOX (vbox), table);
 
     bet_form_create_scheduler_part (dialog, table);
     bet_form_create_current_form (dialog, table, account_number);

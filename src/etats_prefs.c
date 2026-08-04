@@ -383,8 +383,7 @@ static GtkWidget *etats_prefs_onglet_mode_paiement_create_page (EtatsPrefs *pref
 
 	vbox = new_vbox_with_title_and_icon (_("Payment methods"), "gsb-payment-32.png");
 
-	gtk_box_pack_start (GTK_BOX (priv->onglet_etat_mode_paiement), vbox, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->onglet_etat_mode_paiement), vbox, 0);
+	gtk_box_prepend (GTK_BOX (priv->onglet_etat_mode_paiement), vbox);
 
 	gtk_widget_set_sensitive (priv->vbox_mode_paiement_etat, FALSE);
 
@@ -475,8 +474,7 @@ static GtkWidget *etats_prefs_onglet_divers_create_page (EtatsPrefs *prefs,
 
 	vbox = new_vbox_with_title_and_icon (_("Miscellaneous"), "gsb-generalities-32.png");
 
-	gtk_box_pack_start (GTK_BOX (priv->onglet_etat_divers), vbox, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->onglet_etat_divers), vbox, 0);
+	gtk_box_prepend (GTK_BOX (priv->onglet_etat_divers), vbox);
 
 	/* on met la connection pour changer le style de la ligne du panneau de gauche */
 	g_object_set_data (G_OBJECT (priv->radiobutton_marked), "etats_prefs", prefs);
@@ -1026,8 +1024,7 @@ static GtkWidget *etats_prefs_onglet_data_grouping_create_page (EtatsPrefs *pref
 
 	vbox = new_vbox_with_title_and_icon (_("Data grouping"), "gsb-organization-32.png");
 
-	gtk_box_pack_start (GTK_BOX (priv->onglet_data_grouping), vbox, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->onglet_data_grouping), vbox, 0);
+	gtk_box_prepend (GTK_BOX (priv->onglet_data_grouping), vbox);
 
 	etats_prefs_onglet_data_grouping_init_tree_view (prefs);
 
@@ -1086,8 +1083,7 @@ static GtkWidget *etats_prefs_onglet_data_separation_create_page (EtatsPrefs *pr
 
 	vbox = new_vbox_with_title_and_icon (_("Data separation"), "gsb-organization-32.png");
 
-	gtk_box_pack_start (GTK_BOX (priv->onglet_data_separation), vbox, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->onglet_data_separation), vbox, 0);
+	gtk_box_prepend (GTK_BOX (priv->onglet_data_separation), vbox);
 
 	/* on met la connexion pour la séparation par exercice avec le bouton radio_button_utilise_exo */
 	radio_button_utilise_exo = etats_page_period_get_radio_button_utilise_exo (GTK_WIDGET (prefs));
@@ -1253,8 +1249,7 @@ static GtkWidget *etats_prefs_onglet_affichage_generalites_create_page (EtatsPre
 
 	vbox = new_vbox_with_title_and_icon (_("Generalities"), "gsb-generalities-32.png");
 
-	gtk_box_pack_start (GTK_BOX (priv->affichage_etat_generalites), vbox, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->affichage_etat_generalites), vbox, 0);
+	gtk_box_prepend (GTK_BOX (priv->affichage_etat_generalites), vbox);
 
 	/* on met une frame autour de entry_search_payee (pour gtk4) */
 	gtk_entry_set_has_frame (GTK_ENTRY (priv->entree_nom_etat), TRUE);
@@ -1281,8 +1276,7 @@ static GtkWidget *etats_prefs_onglet_affichage_titles_create_page (EtatsPrefs *p
 
 	vbox = new_vbox_with_title_and_icon (_("Titles"), "gsb-title-32.png");
 
-	gtk_box_pack_start (GTK_BOX (priv->affichage_etat_titles), vbox, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->affichage_etat_titles), vbox, 0);
+	gtk_box_prepend (GTK_BOX (priv->affichage_etat_titles), vbox);
 
 	/* on met les connexions pour sensibiliser désensibiliser les données associées */
 	g_signal_connect (G_OBJECT (priv->bouton_group_by_account),
@@ -1382,8 +1376,7 @@ static GtkWidget *etats_prefs_onglet_affichage_operations_create_page (EtatsPref
 
 	vbox = new_vbox_with_title_and_icon (_("Transactions display"), "gsb-transdisplay-32.png");
 
-	gtk_box_pack_start (GTK_BOX (priv->affichage_etat_operations), vbox, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->affichage_etat_operations), vbox, 0);
+	gtk_box_prepend (GTK_BOX (priv->affichage_etat_operations), vbox);
 
 	/* on met la connection pour changer le style de la ligne du panneau de gauche */
 	g_object_set_data (G_OBJECT (priv->bouton_afficher_opes), "etats_prefs", prefs);
@@ -1469,8 +1462,7 @@ static GtkWidget *etats_prefs_onglet_affichage_devises_create_page (EtatsPrefs *
 
 	vbox = new_vbox_with_title_and_icon (_("Totals currencies"), "gsb-currencies-32.png");
 
-	gtk_box_pack_start (GTK_BOX (priv->affichage_etat_devises), vbox, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->affichage_etat_devises), vbox, 0);
+	gtk_box_prepend (GTK_BOX (priv->affichage_etat_devises), vbox);
 
 	etats_prefs_onglet_affichage_devises_make_combobox (priv);
 

@@ -514,21 +514,21 @@ gchar *gsb_select_icon_create_window (const gchar *name_icon)
     /* création hbox pour GtkEntry répertoire et bouton sélection des répertoires */
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
 	gtk_container_set_border_width (GTK_CONTAINER(hbox), 6);
-    gtk_box_pack_start (GTK_BOX (content_area), hbox, FALSE, FALSE, 5);
+    gtk_box_prepend (GTK_BOX (content_area), hbox);
 
     /* création du GtkComboBoxEntry pour la saisie du répertoire */
     entry_text = gsb_select_icon_create_entry_text (name_icon);
-    gtk_box_pack_start (GTK_BOX (hbox), entry_text, TRUE, TRUE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), entry_text);
 
     /* création du bouton de sélection des répertoires */
     chooser_button = gtk_button_new_with_label (_("Browse"));
-    gtk_box_pack_start (GTK_BOX (hbox), chooser_button, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), chooser_button);
 
     /* création de la vue pour les icônes */
     scroll = gtk_scrolled_window_new (NULL, NULL);
     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scroll),
                              GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-    gtk_box_pack_start (GTK_BOX (content_area), scroll, TRUE, TRUE, 0);
+    gtk_box_prepend (GTK_BOX (content_area), scroll);
     view = gsb_select_icon_create_icon_view (name_icon);
     gtk_container_set_border_width (GTK_CONTAINER(scroll), 6);
     gtk_container_add (GTK_CONTAINER (scroll), view);

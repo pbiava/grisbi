@@ -594,8 +594,7 @@ static void prefs_page_reconcile_setup_page (PrefsPageReconcile *page)
 
 	/* On récupère le nom de la page */
 	head_page = utils_prefs_head_page_new_with_title_and_icon (_("Reconciliation"), "gsb-reconciliation-32.png");
-	gtk_box_pack_start (GTK_BOX (priv->vbox_reconcile), head_page, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->vbox_reconcile), head_page, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_reconcile), head_page);
 
 	/* set the end date of reconcile */
 	if (w_etat->reconcile_end_date)

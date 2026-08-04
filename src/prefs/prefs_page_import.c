@@ -79,8 +79,7 @@ static void prefs_page_import_setup_page (PrefsPageImport *page,
 
 	/* On récupère le nom de la page */
 	head_page = utils_prefs_head_page_new_with_title_and_icon (_("Import"), "gsb-import-32.png");
-	gtk_box_pack_start (GTK_BOX (priv->vbox_import), head_page, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (priv->vbox_import), head_page, 0);
+	gtk_box_prepend (GTK_BOX (priv->vbox_import), head_page);
 
 	vbox_import_files = GTK_WIDGET (widget_import_files_new (win));
 	gtk_widget_set_margin_top (vbox_import_files, MARGIN_TOP);

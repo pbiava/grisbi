@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*     Copyright (C)    2006 Benjamin Drieu (bdrieu@april.org)                */
-/*          https://www.grisbi.org/                                            */
+/*          https://www.grisbi.org/                                           */
 /*                                                                            */
 /*  This program is free software; you can redistribute it and/or modify      */
 /*  it under the terms of the GNU General Public License as published by      */
@@ -468,16 +468,16 @@ gchar *gsb_file_util_ask_for_crypt_key ( const gchar * file_name,
     gtk_window_set_resizable ( GTK_WINDOW ( dialog ), FALSE );
 
     hbox = gtk_box_new ( GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX );
-    gtk_box_pack_start ( GTK_BOX ( gtk_dialog_get_content_area ( GTK_DIALOG ( dialog ) ) ), hbox, TRUE, TRUE, 6 );
+    gtk_box_prepend ( GTK_BOX ( gtk_dialog_get_content_area ( GTK_DIALOG ( dialog ) ) ), hbox);
 
     /* Ugly dance to force alignement. */
     vbox = gtk_box_new ( GTK_ORIENTATION_VERTICAL, MARGIN_BOX );
-    gtk_box_pack_start ( GTK_BOX ( hbox ), vbox, FALSE, FALSE, 6 );
+    gtk_box_prepend ( GTK_BOX ( hbox ), vbox);
     icon = gtk_image_new_from_icon_name ( "gtk-dialog-authentication", GTK_ICON_SIZE_DIALOG );
-    gtk_box_pack_start ( GTK_BOX ( vbox ), icon, FALSE, FALSE, 6 );
+    gtk_box_prepend ( GTK_BOX ( vbox ), icon);
 
     vbox = gtk_box_new ( GTK_ORIENTATION_VERTICAL, MARGIN_BOX );
-    gtk_box_pack_start ( GTK_BOX ( hbox ), vbox, TRUE, TRUE, 6 );
+    gtk_box_prepend ( GTK_BOX ( hbox ), vbox);
 
     label = gtk_label_new ("");
     gtk_label_set_justify ( GTK_LABEL(label), GTK_JUSTIFY_LEFT );
@@ -510,19 +510,17 @@ gchar *gsb_file_util_ask_for_crypt_key ( const gchar * file_name,
 	}
 
 	gtk_label_set_markup ( GTK_LABEL (label), tmp_msg);
-    gtk_box_pack_start ( GTK_BOX ( vbox ), label, FALSE, FALSE, 6 );
+    gtk_box_prepend ( GTK_BOX ( vbox ), label);
 	g_free (tmp_msg);
 
     hbox2 = gtk_box_new ( GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX );
-    gtk_box_pack_start ( GTK_BOX ( vbox ), hbox2, FALSE, FALSE, 6 );
-    gtk_box_pack_start ( GTK_BOX ( hbox2 ),
-                        gtk_label_new ( _("Password: ") ),
-                        FALSE, FALSE, 0 );
+    gtk_box_prepend ( GTK_BOX ( vbox ), hbox2);
+    gtk_box_prepend ( GTK_BOX ( hbox2 ), gtk_label_new ( _("Password: ") ));
 
     entry = gtk_entry_new ();
     gtk_entry_set_activates_default ( GTK_ENTRY ( entry ), TRUE );
     gtk_entry_set_visibility ( GTK_ENTRY ( entry ), FALSE );
-    gtk_box_pack_start ( GTK_BOX ( hbox2 ), entry, TRUE, TRUE, 0 );
+    gtk_box_prepend ( GTK_BOX ( hbox2 ), entry);
 	pixbuf_1 = gdk_pixbuf_new_from_resource ("/org/gtk/grisbi/images/gtk-eye-not-looking.svg", NULL);
 	pixbuf_2 = gdk_pixbuf_new_from_resource ("/org/gtk/grisbi/images/gtk-eye-looking.svg", NULL);
 
@@ -540,7 +538,7 @@ gchar *gsb_file_util_ask_for_crypt_key ( const gchar * file_name,
 	else if (w_run->new_crypted_file)
     {
         button = gtk_check_button_new_with_label ( _("View password") );
-        gtk_box_pack_start ( GTK_BOX ( vbox ), button, FALSE, FALSE, 5 );
+        gtk_box_prepend ( GTK_BOX ( vbox ), button);
         g_signal_connect ( G_OBJECT ( button ),
 			            "toggled",
 			            G_CALLBACK ( gsb_file_util_show_hide_passwd ),
@@ -550,7 +548,7 @@ gchar *gsb_file_util_ask_for_crypt_key ( const gchar * file_name,
 	{
 		button = gtk_check_button_new_with_label ( _("Don't ask password again for this session."));
 		gtk_toggle_button_set_active ( GTK_TOGGLE_BUTTON ( button ), TRUE );
-		gtk_box_pack_start ( GTK_BOX ( vbox ), button, FALSE, FALSE, 5 );
+		gtk_box_prepend ( GTK_BOX ( vbox ), button);
 	}
 
     gtk_widget_show_all ( dialog );

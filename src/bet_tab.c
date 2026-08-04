@@ -1996,7 +1996,7 @@ static GtkWidget *bet_array_create_tree_view (GtkWidget *container)
     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
                         GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
     gtk_container_add (GTK_CONTAINER (scrolled_window), tree_view);
-    gtk_box_pack_start (GTK_BOX (container), scrolled_window, TRUE, TRUE, 5);
+    gtk_box_prepend (GTK_BOX (container), scrolled_window);
 
     /* create columns */
     i = 0;
@@ -2947,12 +2947,12 @@ GtkWidget *bet_array_create_page (void)
 
     /* frame pour la barre d'outils */
     frame = gtk_frame_new (NULL);
-    gtk_box_pack_start (GTK_BOX (page), frame, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (page), frame);
 
     /* create the title */
     label_title = gtk_label_new ("Estimate array");
 	gtk_widget_set_halign (label_title, GTK_ALIGN_CENTER);
-    gtk_box_pack_start (GTK_BOX (page), label_title, FALSE, FALSE, 5);
+    gtk_box_prepend (GTK_BOX (page), label_title);
     g_object_set_data (G_OBJECT (account_page),
                         "bet_array_title",
                         label_title);
@@ -2960,12 +2960,12 @@ GtkWidget *bet_array_create_page (void)
     /* set the duration widget */
     hbox = utils_widget_get_duration_widget (SPP_ORIGIN_ARRAY);
 	gtk_widget_set_halign (hbox, GTK_ALIGN_CENTER);
-    gtk_box_pack_start (GTK_BOX (page), hbox, FALSE, FALSE, 5);
+    gtk_box_prepend (GTK_BOX (page), hbox);
 
     /* set the start date and the automatic change of month */
     label = gtk_label_new (_("Start date: "));
     utils_widget_set_padding (GTK_WIDGET (label), 5, 0);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), label);
 
     initial_date = gsb_calendar_entry_new (FALSE);
 	gtk_widget_set_size_request (initial_date, FORM_COURT_WIDTH,-1);
@@ -2978,14 +2978,14 @@ GtkWidget *bet_array_create_page (void)
 			            G_CALLBACK (bet_array_entry_key_press),
 			            NULL);
     g_object_set_data (G_OBJECT (account_page), "bet_initial_date", initial_date);
-    gtk_box_pack_start (GTK_BOX (hbox), initial_date, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), initial_date);
 
     widget = gtk_check_button_new_with_label (_("Auto"));
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), FALSE);
     gtk_widget_set_tooltip_text (GTK_WIDGET (widget),
                         _("Check the box to automatically change start date"));
     g_object_set_data (G_OBJECT (account_page), "bet_auto_inc_month", widget);
-    gtk_box_pack_start (GTK_BOX (hbox), widget, FALSE, FALSE, 0);
+    gtk_box_prepend (GTK_BOX (hbox), widget);
     g_signal_connect (G_OBJECT (widget),
 			            "toggled",
 			            G_CALLBACK (bet_array_auto_inc_month_toggle),

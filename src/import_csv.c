@@ -1701,7 +1701,7 @@ GtkWidget *import_create_csv_preview_page (GtkWidget *assistant)
 	gtk_widget_set_size_request (sw, 480, 120);
 	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw), GTK_SHADOW_ETCHED_IN);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-	gtk_box_pack_start (GTK_BOX(paddingbox), sw, TRUE, TRUE, 6);
+	gtk_box_prepend (GTK_BOX(paddingbox), sw);
 
 	tree_preview = gtk_tree_view_new ();
 	gtk_widget_set_name (tree_preview, "tree_view");
@@ -1710,17 +1710,17 @@ GtkWidget *import_create_csv_preview_page (GtkWidget *assistant)
 	gtk_container_add (GTK_CONTAINER (sw), tree_preview);
 
 	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, MARGIN_BOX);
-	gtk_box_pack_start (GTK_BOX(paddingbox), hbox, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX(paddingbox), hbox);
 
 	warn = gtk_image_new_from_icon_name ("gtk-dialog-warning", GTK_ICON_SIZE_BUTTON);
-	gtk_box_pack_start (GTK_BOX(hbox), warn, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX(hbox), warn);
 	g_object_set_data (G_OBJECT(assistant), "validity_icon", warn);
 
 	validity_label = gtk_label_new (NULL);
 	utils_labels_set_alignment (GTK_LABEL (validity_label), 0, 0.5);
 	gtk_label_set_justify (GTK_LABEL (validity_label), GTK_JUSTIFY_LEFT);
 	g_object_set_data (G_OBJECT(assistant), "validity_label", validity_label);
-	gtk_box_pack_start (GTK_BOX(hbox), validity_label, TRUE, TRUE, 0);
+	gtk_box_prepend (GTK_BOX(hbox), validity_label);
 
 	button = gtk_button_new_with_label (_("Create a rule for this import."));
 	g_object_set_data (G_OBJECT(assistant), "button_rule", button);
@@ -1729,7 +1729,7 @@ GtkWidget *import_create_csv_preview_page (GtkWidget *assistant)
 					  G_CALLBACK (csv_import_button_rule_clicked),
 					  assistant);
 	gtk_widget_set_sensitive (button, FALSE);
-	gtk_box_pack_start (GTK_BOX(paddingbox), button, FALSE, FALSE, 0);
+	gtk_box_prepend (GTK_BOX(paddingbox), button);
 
 	return vbox;
 }
