@@ -448,7 +448,7 @@ GtkWidget *widget_bet_graph_pie_get_notebook (GtkWidget *dialog)
 					  "button-press-event",
 					  G_CALLBACK (widget_bet_graph_pie_right_button_press),
 					  self);
-	gtk_box_pack_end (GTK_BOX (child), w, TRUE, TRUE, 0);
+	gtk_box_append (GTK_BOX (child), w);
 
 	self->widget = w;
 

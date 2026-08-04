@@ -1267,13 +1267,13 @@ void gsb_form_create_widgets (void)
     gtk_button_set_relief (GTK_BUTTON (form_button_valid), GTK_RELIEF_NONE);
     g_signal_connect (G_OBJECT (form_button_valid), "clicked",
 					  G_CALLBACK (gsb_form_finish_edition), NULL);
-    gtk_box_pack_end (GTK_BOX (hbox_buttons_inner), form_button_valid, FALSE, FALSE, 0);
+    gtk_box_append (GTK_BOX (hbox_buttons_inner), form_button_valid);
 
     form_button_cancel = utils_buttons_button_new_from_icon_name ("gtk-cancel", _("_Cancel"));
     gtk_button_set_relief (GTK_BUTTON (form_button_cancel), GTK_RELIEF_NONE);
     g_signal_connect (G_OBJECT (form_button_cancel), "clicked",
 					  G_CALLBACK (gsb_form_escape_form), NULL);
-    gtk_box_pack_end (GTK_BOX (hbox_buttons_inner), form_button_cancel, FALSE, FALSE, 0);
+    gtk_box_append (GTK_BOX (hbox_buttons_inner), form_button_cancel);
 
     gtk_widget_show_all (transaction_form);
     gtk_widget_hide (form_scheduled_part);

@@ -483,10 +483,10 @@ static void widget_search_tiers_categ_ib_setup_widget (WidgetSearchTiersCategIb 
 
 	/* set button box */
 	gtk_button_box_set_layout (GTK_BUTTON_BOX (priv->box_action_area), GTK_BUTTONBOX_END);
-	gtk_box_pack_end (GTK_BOX (priv->vbox_search_tiers_categ_ib), priv->box_action_area, FALSE, TRUE, MARGIN_BOX);
+	gtk_box_append (GTK_BOX (priv->vbox_search_tiers_categ_ib), priv->box_action_area);
 
-	gtk_box_pack_end (GTK_BOX (priv->box_action_area), priv->button_cancel, FALSE, TRUE, MARGIN_BOX);
-	gtk_box_pack_end (GTK_BOX (priv->box_action_area), priv->button_search, FALSE, TRUE, MARGIN_BOX);
+	gtk_box_append (GTK_BOX (priv->box_action_area), priv->button_cancel);
+	gtk_box_append (GTK_BOX (priv->box_action_area), priv->button_search);
 
 	/* set notebook page from page */
 	switch (page_num)

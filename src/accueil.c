@@ -1817,7 +1817,7 @@ GtkWidget *creation_onglet_accueil (void)
 		gtk_widget_set_size_request (hbox_title, -1, LOGO_HEIGHT + 20);
 	}
 
-	gtk_box_pack_end (GTK_BOX (hbox_title), label_accounting_entity, TRUE, TRUE, 20);
+	gtk_box_append (GTK_BOX (hbox_title), label_accounting_entity);
 	gtk_container_set_border_width (GTK_CONTAINER (hbox_title), 6);
 	gtk_container_add (GTK_CONTAINER (eb), hbox_title);
 	gtk_box_pack_start (GTK_BOX (vbox), eb, FALSE, FALSE, 0);

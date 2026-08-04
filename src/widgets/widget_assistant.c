@@ -148,7 +148,7 @@ static void widget_assistant_setup_widget (WidgetAssistant *dialog,
 	gtk_widget_set_margin_bottom (image, MARGIN_BOX);
 	gtk_widget_set_margin_top (image, MARGIN_BOX);
 	gtk_widget_set_halign (image, GTK_ALIGN_END);
-	gtk_box_pack_end (GTK_BOX(priv->hbox_grey_box), image, FALSE, FALSE, 0);
+	gtk_box_append (GTK_BOX(priv->hbox_grey_box), image);
 	g_object_unref (pixbuf);
 
 	/* set textview */

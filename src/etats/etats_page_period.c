@@ -352,11 +352,11 @@ static void etats_page_period_setup_page (EtatsPagePeriod *page,
 	/* on ajoute les entrées pour saisir les dates personnalisées */
 	priv->entree_date_init_etat = gsb_calendar_entry_new (FALSE);
     gtk_widget_set_size_request (priv->entree_date_init_etat, ENTRY_MIN_WIDTH, -1);
-    gtk_box_pack_end (GTK_BOX (priv->hbox_date_init), priv->entree_date_init_etat, FALSE, FALSE, 0);
+    gtk_box_append (GTK_BOX (priv->hbox_date_init), priv->entree_date_init_etat);
 
 	priv->entree_date_finale_etat = gsb_calendar_entry_new (FALSE);
     gtk_widget_set_size_request (priv->entree_date_finale_etat, ENTRY_MIN_WIDTH, -1);
-    gtk_box_pack_end (GTK_BOX (priv->hbox_date_finale), priv->entree_date_finale_etat, FALSE, FALSE, 0);
+    gtk_box_append (GTK_BOX (priv->hbox_date_finale), priv->entree_date_finale_etat);
 
 	/* on traite la partie droite de l'onglet dates */
 	etats_page_period_setup_treeview_treeview_exo (page);

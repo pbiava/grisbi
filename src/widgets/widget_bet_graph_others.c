@@ -317,7 +317,7 @@ static GogPlot *widget_bet_graph_others_create_graph_page  (BetGraphDataStruct *
 					  "motion-notify-event",
 					  G_CALLBACK (widget_bet_graph_options_motion_notify_event),
 					  self);
-	gtk_box_pack_end (GTK_BOX (child), w, TRUE, TRUE, 0);
+	gtk_box_append (GTK_BOX (child), w);
 
 	self->widget = w;
 

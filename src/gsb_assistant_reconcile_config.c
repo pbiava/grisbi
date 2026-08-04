@@ -514,7 +514,7 @@ static GtkWidget *gsb_assistant_reconcile_config_page_new_reconcile (GtkWidget *
 			 0 );
 
     button = gtk_button_new_with_label (_("Create the new reconciliation"));
-    gtk_box_pack_end ( GTK_BOX (hbox),
+    gtk_box_append ( GTK_BOX (hbox), button);
 		       button,
 		       FALSE, FALSE,
 		       0 );

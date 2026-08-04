@@ -392,10 +392,10 @@ go_option_menu_init (GOOptionMenu *option_menu, gpointer g_class)
     arrow = gtk_image_new_from_file (tmp_filename);
     g_free (tmp_filename);
 
-	gtk_box_pack_end (box, arrow, FALSE, FALSE, 0);
+	gtk_box_append (box, arrow);
 
 	sep = gtk_separator_new (GTK_ORIENTATION_VERTICAL);
-	gtk_box_pack_end (box, sep, FALSE, FALSE, 0);
+	gtk_box_append (box, sep);
 
 	gtk_container_add (GTK_CONTAINER (option_menu), GTK_WIDGET (box));
 }

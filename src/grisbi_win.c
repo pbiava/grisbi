@@ -389,7 +389,7 @@ static GtkWidget *grisbi_win_form_new (GrisbiWin *win)
 
 	/* set the last statement label */
 	priv->form_label_last_statement = gtk_label_new (NULL);
-	gtk_box_pack_end (GTK_BOX (priv->form_hbox_label), priv->form_label_last_statement, FALSE, FALSE, 0);
+	gtk_box_append (GTK_BOX (priv->form_hbox_label), priv->form_label_last_statement);
 
 	gtk_widget_show_all (priv->form_hbox_label);
 
