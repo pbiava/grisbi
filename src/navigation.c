@@ -1199,7 +1199,7 @@ GtkWidget *gsb_gui_navigation_create_navigation_pane (void)
 	if (navigation_dst_iface)
 	{
 		navigation_dst_iface->drag_data_received = &gsb_gui_navigation_drag_data_received;
-		navigation_dst_iface->row_drop_possible = &gsb_gui_navigation_row_drop_possible;
+		//~ navigation_dst_iface->row_drop_possible = &gsb_gui_navigation_row_drop_possible;
 	}
 
 	navigation_src_iface = GTK_TREE_DRAG_SOURCE_GET_IFACE (navigation_model);
@@ -2340,58 +2340,58 @@ gboolean gsb_gui_navigation_drag_data_received (GtkTreeDragDest *drag_dest,
  *
  * \return
  **/
-gboolean gsb_gui_navigation_row_drop_possible (GtkTreeDragDest *drag_dest,
-											   GtkTreePath *dest_path,
-											   GtkSelectionData *selection_data)
-{
-	if (dest_path && selection_data)
-	{
-		GtkTreePath *orig_path;
-		GtkTreeModel *model;
-		GtkTreeIter iter;
-		gint src_report = -1;
-		gint src_account = -1;
-		gint src_ordre = -1;
-		gint dst_report = -1;
-		gint dst_account = -1;
-		gint dst_ordre = -1;
+//~ gboolean gsb_gui_navigation_row_drop_possible (GtkTreeDragDest *drag_dest,
+											   //~ GtkTreePath *dest_path,
+											   //~ GtkSelectionData *selection_data)
+//~ {
+	//~ if (dest_path && selection_data)
+	//~ {
+		//~ GtkTreePath *orig_path;
+		//~ GtkTreeModel *model;
+		//~ GtkTreeIter iter;
+		//~ gint src_report = -1;
+		//~ gint src_account = -1;
+		//~ gint src_ordre = -1;
+		//~ gint dst_report = -1;
+		//~ gint dst_account = -1;
+		//~ gint dst_ordre = -1;
 
-		gtk_tree_get_row_drag_data (selection_data, &model, &orig_path);
+		//~ gtk_tree_get_row_drag_data (selection_data, &model, &orig_path);
 
-		if (gtk_tree_model_get_iter (model, &iter, orig_path))
-			gtk_tree_model_get (model,
-								&iter,
-								NAVIGATION_REPORT, &src_report,
-								NAVIGATION_ACCOUNT, &src_account,
-								NAVIGATION_ORDRE, &src_ordre,
-								-1);
+		//~ if (gtk_tree_model_get_iter (model, &iter, orig_path))
+			//~ gtk_tree_model_get (model,
+								//~ &iter,
+								//~ NAVIGATION_REPORT, &src_report,
+								//~ NAVIGATION_ACCOUNT, &src_account,
+								//~ NAVIGATION_ORDRE, &src_ordre,
+								//~ -1);
 
-		if (gtk_tree_model_get_iter (model, &iter, dest_path))
-			gtk_tree_model_get (model,
-								&iter,
-								NAVIGATION_REPORT, &dst_report,
-								NAVIGATION_ACCOUNT, &dst_account,
-								NAVIGATION_ORDRE, &dst_ordre,
-								-1);
+		//~ if (gtk_tree_model_get_iter (model, &iter, dest_path))
+			//~ gtk_tree_model_get (model,
+								//~ &iter,
+								//~ NAVIGATION_REPORT, &dst_report,
+								//~ NAVIGATION_ACCOUNT, &dst_account,
+								//~ NAVIGATION_ORDRE, &dst_ordre,
+								//~ -1);
 
-		/* We handle an account */
-		if (src_account >= 0 && dst_account >= 0)
-		{
-			return TRUE;
-		}
-		/* We handle a report */
-		else if (src_report > 0 && dst_report > 0)
-		{
-			return TRUE;
-		}
-		else if (src_ordre >= 0 && dst_ordre >= 0)
-		{
-			return TRUE;
-		}
-	}
+		//~ /* We handle an account */
+		//~ if (src_account >= 0 && dst_account >= 0)
+		//~ {
+			//~ return TRUE;
+		//~ }
+		//~ /* We handle a report */
+		//~ else if (src_report > 0 && dst_report > 0)
+		//~ {
+			//~ return TRUE;
+		//~ }
+		//~ else if (src_ordre >= 0 && dst_ordre >= 0)
+		//~ {
+			//~ return TRUE;
+		//~ }
+	//~ }
 
-	return FALSE;
-}
+	//~ return FALSE;
+//~ }
 
 /**
  * Met à jour la page d'accueil immédiatement si elle est affichée sinon plus tard

@@ -53,9 +53,9 @@ void 			gsb_gui_navigation_create_account_list 			(GtkTreeModel *model);
 GtkWidget *		gsb_gui_navigation_create_navigation_pane 		(void);
 void			gsb_gui_navigation_create_report_list			(GtkTreeModel *model);
 void			gsb_gui_navigation_create_search_report_from_ctrl_f (gint page_num);
-gboolean 		gsb_gui_navigation_drag_data_received 			(GtkTreeDragDest *drag_dest,
-																 GtkTreePath *dest_path,
-																 GtkSelectionData *selection_data);
+//~ gboolean 		gsb_gui_navigation_drag_data_received 			(GtkTreeDragDest *drag_dest,
+																 //~ GtkTreePath *dest_path,
+																 //~ GtkSelectionData *selection_data);
 void 			gsb_gui_navigation_free_pages_list 				(void);
 gint			gsb_gui_navigation_get_current_account 			(void);
 gint 			gsb_gui_navigation_get_current_page 			(void);
@@ -83,9 +83,9 @@ void 			gsb_gui_navigation_update_home_page_from_theme	(void);
 void			gsb_gui_navigation_update_localisation			(gint type_maj);
 void 			gsb_gui_navigation_update_report 				(gint report_number) ;
 void 			gsb_gui_navigation_update_statement_label 		(gint account_number);
-gboolean 		gsb_gui_navigation_row_drop_possible 			(GtkTreeDragDest *drag_dest,
-																 GtkTreePath *dest_path,
-																 GtkSelectionData *selection_data);
+//~ gboolean 		gsb_gui_navigation_row_drop_possible 			(GtkTreeDragDest *drag_dest,
+																 //~ GtkTreePath *dest_path,
+																 //~ GtkSelectionData *selection_data);
 gulong 			gsb_gui_navigation_tree_view_selection_changed 	(void);
 
 void 			gsb_gui_navigation_select_reports_page			(void);
