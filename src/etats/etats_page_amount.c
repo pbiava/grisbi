@@ -127,7 +127,7 @@ static void etats_page_amount_ajoute_ligne_liste_comparaisons (gint last_amount_
 
 
 	/* on met la row à sa place dans la liste */
-	gtk_box_reorder_child (GTK_BOX (priv->vbox_rows_amount), widget, position);
+	utils_box_insert_widget_at_position (GTK_BOX (priv->vbox_rows_amount), widget, position);
 }
 
 /**

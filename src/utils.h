@@ -32,6 +32,9 @@ gboolean        sens_desensitive_pointeur                               (GtkWidg
 gboolean        sensitive_widget                                        (gpointer object,
                                                                          GtkWidget *widget);
 void            update_gui                                              (void);
+gboolean		utils_box_insert_widget_at_position						(GtkBox *box,
+																		 GtkWidget *child,
+																		 gint position);
 void			utils_cursor_set_wait_cursor							(GtkWidget *tree_view,
 																		 gpointer data);
 GtkWidget *		utils_menu_item_new_from_image_label 					(const gchar *image_name,

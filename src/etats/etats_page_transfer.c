@@ -160,8 +160,7 @@ static void etats_page_transfer_setup_page (EtatsPageTransfer *page,
 
 	/* init widget list */
 	priv->widget_list_accounts = GTK_WIDGET (widget_list_accounts_new (GTK_WIDGET (page)));
-	gtk_box_prepend (GTK_BOX (priv->vbox_etats_page_transfer), priv->widget_list_accounts);
-	gtk_box_reorder_child (GTK_BOX (priv->vbox_etats_page_transfer), priv->widget_list_accounts, 5);
+	utils_box_insert_widget_at_position (GTK_BOX (priv->vbox_etats_page_transfer), priv->widget_list_accounts, 5);
 
     /* on initialise les boutons pour sensibiliser bouton_exclure_non_virements_etat et la liste des comptes */
     etats_page_transfer_init_buttons_choix_utilisation_virements (page, TRANSFER_PAGE_TYPE, etats_prefs);

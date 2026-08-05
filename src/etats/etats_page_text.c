@@ -124,7 +124,7 @@ static void etats_page_text_ajoute_ligne_liste_comparaisons (gint last_text_comp
 															  position));
 
 	/* on met la row à sa place dans la liste */
-	gtk_box_reorder_child (GTK_BOX (priv->vbox_rows_text), widget, position);
+	utils_box_insert_widget_at_position (GTK_BOX (priv->vbox_rows_text), widget, position);
 }
 
 /**

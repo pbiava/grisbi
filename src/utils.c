@@ -956,6 +956,32 @@ void utils_gtk_widget_set_cursor_from_name (GtkWidget  *widget,
 }
 
 /**
+ * insert un widget a la position demandée
+ *
+ * \param		box
+ * \param		child
+ * \param		position
+ *
+ * \return
+ **/
+gboolean utils_box_insert_widget_at_position (GtkWidget *box,
+											  GtkWidget *child,
+											  gint position)
+{
+	if (position == 1)
+	{
+		GtkWidget *first_child = NULL;
+
+		first_child = gtk_widget_get_first_child (box);
+		gtk_box_insert_child_after (GTK_BOX (box), child, first_child);
+
+		return TRUE;
+	}
+	else
+		return_FALSE);
+}
+
+/**
  *
  *
  * \param

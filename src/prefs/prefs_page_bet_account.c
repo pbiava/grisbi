@@ -890,8 +890,7 @@ static void prefs_page_bet_account_setup_account_page (PrefsPageBetAccount *page
 	if (is_loading == FALSE)
 	{
 		combo = utils_prefs_create_combo_list_indisponible ();
-		gtk_box_pack_start (GTK_BOX (priv->hbox_bet_select_account), combo, FALSE, FALSE, 0);
-		gtk_box_reorder_child (GTK_BOX (priv->hbox_bet_select_account), combo, 1);
+		utils_box_insert_widget_at_position (priv->hbox_bet_select_account, combo, 1);
 		gtk_widget_set_sensitive (priv->vbox_bet_account, FALSE);
 		return;
 	}

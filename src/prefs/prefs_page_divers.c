@@ -628,7 +628,7 @@ static void prefs_page_divers_setup_divers_page (PrefsPageDivers *page,
 													(GCallback) prefs_page_divers_scheduler_warm_button_changed,
 													page);
 
-	gtk_box_pack_start (GTK_BOX (vbox_button), priv->hbox_launch_scheduler_nb_days_before_scheduled, FALSE, FALSE, 0);
+	utils_box_insert_widget_at_position (vbox_button, priv->hbox_launch_scheduler_nb_days_before_scheduled, 1);
 	gtk_box_prepend (GTK_BOX (priv->vbox_launch_scheduler), vbox_button);
 
 	/* initialise le bouton nombre de jours avant alerte execution */
