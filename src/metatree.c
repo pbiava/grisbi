@@ -95,7 +95,7 @@ static GtkTreeIter *get_iter_from_sub_div_zero (GtkTreeModel *model,
 static GtkTreeIter *get_iter_from_transaction (GtkTreeModel *model,
 							gint transaction_number);
 static void metatree_button_action_sub_div_clicked (GtkWidget *togglebutton,
-							GdkEventButton *event,
+							GdkEvent *event,
 							gint *pointeur);
 static gint metatree_create_division_from_sub_division (MetatreeInterface *iface,
 							gint no_division,
@@ -3198,7 +3198,7 @@ enum MetaTreeRowType metatree_get_row_type_from_tree_view (GtkWidget *tree_view)
  * \return
  **/
 void metatree_button_action_sub_div_clicked (GtkWidget *togglebutton,
-											GdkEventButton *event,
+											GdkEvent *event,
 											gint *pointeur)
 {
 	if (pointeur)

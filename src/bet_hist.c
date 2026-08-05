@@ -828,7 +828,7 @@ static void bet_hist_context_menu (GtkWidget *tree_view)
  * \return FALSE
  **/
 static gboolean bet_hist_button_press (GtkWidget *tree_view,
-									   GdkEventButton *ev)
+									   GdkEvent *ev)
 {
 	/* show the popup */
 	if (ev->button == RIGHT_BUTTON)

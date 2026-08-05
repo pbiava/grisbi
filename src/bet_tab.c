@@ -1489,7 +1489,7 @@ static void bet_array_list_context_menu (GtkWidget *tree_view,
  * \return FALSE
  **/
 static gboolean bet_array_list_button_press (GtkWidget *tree_view,
-                        					 GdkEventButton *ev)
+                        					 GdkEvent *ev)
 {
 	/* show the popup */
 	if (ev->button == RIGHT_BUTTON)

@@ -396,7 +396,7 @@ static void prefs_page_reconcile_setup_tree_view (PrefsPageReconcile *page)
  * \return FALSE
  **/
 static gboolean prefs_page_reconcile_button_end_date_toggled (GtkWidget *checkbutton,
-															  GdkEventButton *event,
+															  GdkEvent *event,
 															  gpointer null)
 {
 	gint active;

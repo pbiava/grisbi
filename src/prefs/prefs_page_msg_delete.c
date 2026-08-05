@@ -70,7 +70,7 @@ G_DEFINE_TYPE_WITH_PRIVATE (PrefsPageMsgDelete, prefs_page_msg_delete, GTK_TYPE_
  * \return FALSE
  **/
 static gboolean prefs_page_msg_delete_list_button_press (GtkWidget *tree_view,
-														 GdkEventButton *ev)
+														 GdkEvent *ev)
 {
 	if (ev->button == LEFT_BUTTON)
     {

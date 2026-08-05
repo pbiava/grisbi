@@ -255,7 +255,7 @@ static GSList *widget_list_metatree_get_selected (WidgetListMetatreePrivate *pri
  * \return
  **/
 static gboolean widget_list_metatree_select_partie_liste (GtkWidget *button,
-														  GdkEventButton *event,
+														  GdkEvent *event,
 														  GtkWidget *tree_view)
 {
 	GtkTreeModel *model;

@@ -18,7 +18,7 @@ void			utils_widget_set_padding						(GtkWidget *widget,
 /* DURATION WIDGET */
 GtkWidget *		utils_widget_get_duration_widget 				(gint origin);
 gboolean 		utils_widget_duration_button_released 			(GtkWidget *togglebutton,
-																 GdkEventButton	*event,
+																 GdkEvent *event,
 																 GtkWidget *spin_button);
 void			utils_widget_duration_number_changed			(GtkWidget *spin_button,
 																 gpointer data);

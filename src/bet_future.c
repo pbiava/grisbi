@@ -130,7 +130,7 @@ static GtkWidget *bet_form_widget_get_widget (gint element_number)
  * \return FALSE
  **/
 static gboolean bet_form_button_press_event (GtkWidget *entry,
-											 GdkEventButton *ev,
+											 GdkEvent *ev,
 											 gint *ptr_origin)
 {
     GtkWidget *date_entry;

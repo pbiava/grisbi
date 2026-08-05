@@ -278,7 +278,7 @@ static void prefs_page_divers_choose_number_format_init (PrefsPageDivers *page)
 }
 
 static gboolean prefs_page_divers_choose_date_format_toggle (GtkToggleButton *togglebutton,
-															 GdkEventButton *event,
+															 GdkEvent *event,
 															 gpointer null)
 {
     const gchar *format_date;

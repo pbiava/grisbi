@@ -322,7 +322,7 @@ static GtkWidget *gsb_calendar_entry_popup (GtkWidget *entry)
  * \return FALSE
  **/
 static gboolean gsb_calendar_entry_button_press (GtkWidget *entry,
-												 GdkEventButton *event,
+												 GdkEvent *event,
 												 gpointer null)
 {
 	if (event->type == GDK_2BUTTON_PRESS)

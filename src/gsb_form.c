@@ -137,7 +137,7 @@ static gboolean block_size_allocate = FALSE;
  * \return FALSE
  **/
 static gboolean gsb_form_button_press (GtkWidget *vbox,
-									   GdkEventButton *ev,
+									   GdkEvent *ev,
 									   gpointer null)
 {
     GtkWidget *menu;
@@ -2655,7 +2655,7 @@ void gsb_form_check_auto_separator (GtkWidget *entry)
  * \return FALSE
  **/
 gboolean gsb_form_button_press_event (GtkWidget *entry,
-									  GdkEventButton *ev,
+									  GdkEvent *ev,
 									  gint *ptr_origin)
 {
     GtkWidget *widget;

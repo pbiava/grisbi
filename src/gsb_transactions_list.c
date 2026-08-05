@@ -938,13 +938,13 @@ static gboolean gsb_transactions_list_switch_mark (gint transaction_number)
  * called when press a mouse button on the transactions list
  *
  * \param tree_view
- * \param ev a GdkEventButton
+ * \param ev a GdkEvent
   * \param
 *
  * \return normally TRUE to block the signal, if we are outside the tree_view, FALSE
  **/
 static gboolean gsb_transactions_list_button_press (GtkWidget *tree_view,
-													GdkEventButton *ev,
+													GdkEvent *ev,
 													gpointer null)
 {
     GtkTreeIter iter;
@@ -1916,7 +1916,7 @@ static gboolean gsb_transactions_list_switch_R_mark (gint transaction_number)
  * \return FALSE
  **/
 static gboolean gsb_transactions_list_title_column_button_press (GtkWidget *button,
-																 GdkEventButton *ev,
+																 GdkEvent *ev,
 																 gint *no_column)
 {
     GtkWidget *menu = NULL;

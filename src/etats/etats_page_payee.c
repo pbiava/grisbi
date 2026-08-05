@@ -231,7 +231,7 @@ static void etats_page_payee_show_hide_prev_next_buttons (gint show_left,
  * \return
  **/
 static gboolean etats_page_payee_select_prev_next_item (GtkWidget *button,
-														GdkEventButton *event,
+														GdkEvent *event,
 														EtatsPagePayeePrivate *priv)
 {
 	GtkTreePath *start_path;
@@ -361,7 +361,7 @@ static gboolean etats_page_payee_select_prev_next_item (GtkWidget *button,
  * \return
  **/
 static gboolean etats_page_payee_select_first_last_item (GtkWidget *button,
-														 GdkEventButton *event,
+														 GdkEvent *event,
 														 EtatsPagePayeePrivate *priv)
 {
 	GtkTreeSelection *selection;

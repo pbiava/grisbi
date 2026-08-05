@@ -60,7 +60,7 @@ static void appui_sur_ajout_imputation ( GtkTreeModel * model, GtkButton *button
 static gboolean budgetary_line_drag_data_get ( GtkTreeDragSource * drag_source, GtkTreePath * path,
 					GtkSelectionData * selection_data );
 static gboolean budgetary_line_list_button_press ( GtkWidget *tree_view,
-                        GdkEventButton *ev,
+                        GdkEvent *ev,
                         gpointer null );
 static void budgetary_line_list_popup_context_menu ( void );
 static GtkWidget *creation_barre_outils_ib ( void );
@@ -1095,7 +1095,7 @@ gboolean budgetary_hold_position_set_expand ( gboolean expand )
  * \return FALSE
  * */
 gboolean budgetary_line_list_button_press ( GtkWidget *tree_view,
-                        GdkEventButton *ev,
+                        GdkEvent *ev,
                         gpointer null )
 {
     if ( ev -> button == RIGHT_BUTTON )

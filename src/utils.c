@@ -64,7 +64,7 @@
  * \return FALSE
  * */
 gboolean utils_event_box_change_state (GtkWidget *event_box,
-									   GdkEventMotion *event,
+									   GdkEvent *event,
 									   GtkStyleContext *context)
 {
     GtkStateFlags state;

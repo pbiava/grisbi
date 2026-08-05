@@ -495,7 +495,7 @@ static void gsb_scheduler_list_select_line (GtkWidget *tree_view,
  * \return FALSE
  **/
 static gboolean gsb_scheduler_list_button_press (GtkWidget *tree_view,
-												 GdkEventButton *ev)
+												 GdkEvent *ev)
 {
 	if (ev->button == RIGHT_BUTTON)
 	{

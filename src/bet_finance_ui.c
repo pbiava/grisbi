@@ -938,7 +938,7 @@ static void bet_finance_ui_data_list_context_menu (GtkWidget *tree_view,
  * \return FALSE
  **/
 static gboolean bet_finance_ui_data_list_button_press (GtkWidget *tree_view,
-													   GdkEventButton *ev,
+													   GdkEvent *ev,
 													   GtkWidget *page)
 {
     /* show the popup */
@@ -1330,7 +1330,7 @@ static void bet_finance_ui_spin_button_taux_changed (GtkSpinButton *spinbutton,
  * \return
  **/
 static void bet_finance_ui_type_taux_changed (GtkWidget *togglebutton,
-											  GdkEventButton *event,
+											  GdkEvent *event,
 											  GtkWidget *widget)
 {
 	GrisbiWinEtat *w_etat;

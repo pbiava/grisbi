@@ -340,7 +340,7 @@ static gboolean grisbi_prefs_left_panel_tree_view_selection_changed (GtkTreeSele
  * \return FALSE
  **/
 static gboolean grisbi_prefs_left_treeview_button_press (GtkWidget *tree_view,
-														 GdkEventButton *ev,
+														 GdkEvent *ev,
 														 GrisbiPrefs *prefs)
 {
     if (ev->type == GDK_2BUTTON_PRESS)

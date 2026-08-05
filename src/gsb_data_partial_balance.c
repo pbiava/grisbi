@@ -609,12 +609,12 @@ gboolean gsb_partial_balance_key_press ( GtkWidget *tree_view, GdkEventKey *ev )
  * called when press a mouse button on the partial_balance_list
  *
  * \param tree_view
- * \param ev a GdkEventButton
+ * \param ev a GdkEvent
  *
  * \return TRUE if double - click else FALSE
  * */
 gboolean gsb_partial_balance_button_press ( GtkWidget *tree_view,
-                        GdkEventButton *ev,
+                        GdkEvent *ev,
                         gpointer null )
 {
     /*     if we are not in the list, go away */

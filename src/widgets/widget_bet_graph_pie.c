@@ -50,7 +50,7 @@
 
 /*START_STATIC*/
  static gboolean widget_bet_graph_pie_right_button_press (GtkWidget *dialog,
-														 GdkEventButton  *event,
+														 GdkEvent  *event,
 														 BetGraphDataStruct *self);
 /*END_STATIC*/
 
@@ -227,7 +227,7 @@ static void widget_bet_graph_pie_affiche_sub_divisions (BetGraphDataStruct *self
  * \return TRUE
  **/
 static gboolean widget_bet_graph_pie_right_button_press (GtkWidget *dialog,
-														 GdkEventButton  *event,
+														 GdkEvent  *event,
 														 BetGraphDataStruct *self)
 {
 

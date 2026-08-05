@@ -95,8 +95,8 @@ struct CsvSeparators csv_separators[] =			/* Contains all pre-defined CSV separa
  * \return
  **/
 static gboolean utils_widget_origin_data_clicked (GtkWidget *togglebutton,
-                                                     GdkEventButton *event,
-                                                     gpointer data)
+												  GdkEvent *event,
+												  gpointer data)
 {
     GtkTreeViewColumn *column;
     const gchar *name;
@@ -290,7 +290,7 @@ static void utils_widget_localisation_decimal_point_changed (GtkComboBoxText *wi
  * \return
  **/
 static gboolean utils_widget_localisation_format_date_toggle (GtkToggleButton *togglebutton,
-															  GdkEventButton *event,
+															  GdkEvent *event,
 															  gpointer user_data)
 {
 	const gchar *format_date;
@@ -547,7 +547,7 @@ GtkWidget *utils_widget_get_duration_widget (gint origin)
  * \return
  **/
 gboolean utils_widget_duration_button_released (GtkWidget *togglebutton,
-                                                GdkEventButton *event,
+                                                GdkEvent *event,
                                                 GtkWidget *spin_button)
 {
     const gchar *name;

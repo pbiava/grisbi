@@ -114,7 +114,7 @@ go_option_menu_select_item (GOOptionMenu *option_menu, GtkMenuItem *item)
 
 static gint
 go_option_menu_button_press (GtkWidget      *widget,
-			     GdkEventButton *event)
+			     GdkEvent *event)
 {
 	GOOptionMenu *option_menu;
 

@@ -57,7 +57,7 @@ static gboolean categ_drag_data_get (GtkTreeDragSource *drag_source,
                         GtkTreePath *path,
                         GtkSelectionData *selection_data);
 static gboolean category_list_button_press (GtkWidget *tree_view,
-                        GdkEventButton *ev,
+                        GdkEvent *ev,
                         gpointer null);
 static void category_list_popup_context_menu (void);
 static GtkWidget *creation_barre_outils_categ (void);
@@ -1084,7 +1084,7 @@ gboolean categories_hold_position_set_expand (gboolean expand)
  * \return FALSE
  **/
 gboolean category_list_button_press (GtkWidget *tree_view,
-                        GdkEventButton *ev,
+                        GdkEvent *ev,
                         gpointer null)
 {
     if (ev->button == RIGHT_BUTTON)

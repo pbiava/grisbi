@@ -927,7 +927,7 @@ static gboolean gtk_combofix_expose_entry (GtkComboFix *combofix)
  * \return TRUE if we are on the popup, FALSE else
  **/
 static gboolean gtk_combofix_button_press (GtkWidget *popup,
-										   GdkEventButton *ev,
+										   GdkEvent *ev,
 										   GtkComboFix *combofix)
 {
     GtkAllocation allocation;
@@ -1410,7 +1410,7 @@ static gboolean gtk_combofix_key_press_event (GtkWidget *entry,
  * \return TRUE to block the signal, FALSE else
  **/
 static gboolean gtk_combofix_button_press_event (GtkWidget *tree_view,
-												 GdkEventButton *ev,
+												 GdkEvent *ev,
 												 GtkComboFix *combofix)
 {
     if (ev->type ==  GDK_BUTTON_PRESS)

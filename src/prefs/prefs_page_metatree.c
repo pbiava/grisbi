@@ -85,7 +85,7 @@ G_DEFINE_TYPE_WITH_PRIVATE (PrefsPageMetatree, prefs_page_metatree, GTK_TYPE_BOX
  * \return FALSE
  **/
 static gboolean prefs_page_onglet_metatree_action_changed (GtkWidget *checkbutton,
-														   GdkEventButton *event,
+														   GdkEvent *event,
 														   gint *pointeur)
 {
     if (pointeur)
@@ -110,7 +110,7 @@ static gboolean prefs_page_onglet_metatree_action_changed (GtkWidget *checkbutto
  * \return TRUE if OK else FALSE
  * */
 static gboolean prefs_page_metatree_re_sort_divisions (GtkWidget *checkbutton,
-													   GdkEventButton *event,
+													   GdkEvent *event,
 													   gpointer data)
 {
     GtkWidget *division_tree;
@@ -176,7 +176,7 @@ static gboolean prefs_page_metatree_re_sort_divisions (GtkWidget *checkbutton,
  * \return FALSE
  **/
 static gboolean prefs_page_metatree_sort_transactions_changed (GtkWidget *checkbutton,
-															   GdkEventButton *event,
+															   GdkEvent *event,
 															   gint *pointeur)
 {
     if (pointeur)

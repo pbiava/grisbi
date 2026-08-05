@@ -431,7 +431,7 @@ static void gsb_gui_navigation_context_menu (GtkWidget *tree_view,
  * \return FALSE
  **/
 static gboolean gsb_gui_navigation_button_press (GtkWidget *tree_view,
-												 GdkEventButton *ev,
+												 GdkEvent *ev,
 												 gpointer null)
 {
 	/* show the popup */

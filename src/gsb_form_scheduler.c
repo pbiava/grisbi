@@ -1054,7 +1054,7 @@ GtkWidget *gsb_form_scheduler_get_element_widget (gint element_number)
  * \return FALSE
  **/
 gboolean gsb_form_scheduler_button_press_event (GtkWidget *entry,
-												GdkEventButton *ev,
+												GdkEvent *ev,
 												gint *ptr_origin)
 {
 	GtkWidget *date_entry;

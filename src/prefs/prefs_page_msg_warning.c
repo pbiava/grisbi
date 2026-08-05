@@ -71,7 +71,7 @@ G_DEFINE_TYPE_WITH_PRIVATE (PrefsPageMsgWarning, prefs_page_msg_warning, GTK_TYP
  * \return FALSE
  **/
 static gboolean prefs_page_msg_warning_list_button_press (GtkWidget *tree_view,
-														  GdkEventButton *ev)
+														  GdkEvent *ev)
 {
 	if (ev->button == LEFT_BUTTON)
     {

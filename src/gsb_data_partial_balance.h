@@ -45,7 +45,7 @@ gboolean 		gsb_data_partial_balance_set_name 					(gint partial_balance_number,
 void 			gsb_partial_balance_add 							(GtkWidget *button,
 																	 GtkWidget *main_widget);
 gboolean 		gsb_partial_balance_button_press 					(GtkWidget *tree_view,
-																	 GdkEventButton *ev,
+																	 GdkEvent *ev,
 																	 gpointer null);
 void 			gsb_partial_balance_colorise_toggled 				(GtkCellRendererToggle *cell,
 																	 gchar *path_str,

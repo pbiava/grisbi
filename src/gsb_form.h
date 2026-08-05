@@ -18,7 +18,7 @@ enum OriginValues
 
 /* START_DECLARATION */
 gboolean 	gsb_form_button_press_event 			(GtkWidget *entry,
-													 GdkEventButton *ev,
+													 GdkEvent *ev,
 													 gint *ptr_origin);
 gboolean 	gsb_form_change_sensitive_buttons 		(gboolean sensitive);
 void 		gsb_form_check_auto_separator 			(GtkWidget *entry);

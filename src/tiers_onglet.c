@@ -474,7 +474,7 @@ static gboolean payee_drag_data_get (GtkTreeDragSource *drag_source,
  * \return FALSE
  **/
 static gboolean payee_list_button_press (GtkWidget *tree_view,
-										 GdkEventButton *ev,
+										 GdkEvent *ev,
 										 gpointer null)
 {
     if (ev->type == GDK_2BUTTON_PRESS)

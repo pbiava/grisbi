@@ -27,7 +27,7 @@ enum ScheduledFormWidget {
 
 /* START_DECLARATION */
 gboolean 	gsb_form_scheduler_button_press_event 				(GtkWidget *entry,
-																 GdkEventButton *ev,
+																 GdkEvent *ev,
 																 gint *ptr_origin);
 gboolean 	gsb_form_scheduler_change_account 					(GtkWidget *button,
 																 gpointer null);

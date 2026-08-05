@@ -672,7 +672,7 @@ static void grisbi_win_no_file_page_remove_buttons (GtkWidget *button,
  * \return FALSE or TRUE, depends if need to block the signal
  **/
 static gboolean grisbi_win_account_button_press_event (GtkWidget *button,
-													   GdkEventButton *ev,
+													   GdkEvent *ev,
 													   const gchar *filename)
 {
 	if (ev->button == LEFT_BUTTON)

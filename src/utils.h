@@ -9,7 +9,7 @@
 
 /* START_DECLARATION */
 gboolean        utils_event_box_change_state                            (GtkWidget *event_box,
-                                                                         GdkEventMotion *event,
+                                                                         GdkEvent *event,
                                                                          GtkStyleContext *context);
 
 gboolean        assert_account_loaded                                   (void);
