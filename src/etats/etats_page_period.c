@@ -50,6 +50,9 @@
 /*START_EXTERN*/
 /*END_EXTERN*/
 
+/* IGNORE DEPRECATED */
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+
 typedef struct _EtatsPagePeriodPrivate   EtatsPagePeriodPrivate;
 
 struct _EtatsPagePeriodPrivate

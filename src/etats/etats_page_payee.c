@@ -49,6 +49,9 @@
 /*START_EXTERN*/
 /*END_EXTERN*/
 
+/* IGNORE DEPRECATED */
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+
 /*START_STATIC*/
 #ifdef OS_OSX
 static const gchar *label_search_help = N_("Command-click\nto add to the selection");

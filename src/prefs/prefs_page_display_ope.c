@@ -51,6 +51,9 @@ static gint start_drag_row;			/** tmp for drag'n drop */
 /*START_EXTERN*/
 /*END_EXTERN*/
 
+/* IGNORE DEPRECATED */
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+
 typedef struct _PrefsPageDisplayOpePrivate   PrefsPageDisplayOpePrivate;
 
 struct _PrefsPageDisplayOpePrivate

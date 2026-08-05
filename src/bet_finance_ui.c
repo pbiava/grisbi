@@ -25,6 +25,9 @@
 #include <glib/gprintf.h>
 #include <glib/gi18n.h>
 
+/* IGNORE DEPRECATED */
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+
 /*START_INCLUDE*/
 #include "bet_finance_ui.h"
 #include "dialog.h"

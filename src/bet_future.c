@@ -26,6 +26,9 @@
 #include <gdk/gdkkeysyms.h>
 #include <glib/gi18n.h>
 
+/* IGNORE DEPRECATED */
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+
 /*START_INCLUDE*/
 #include "bet_future.h"
 #include "bet_tab.h"

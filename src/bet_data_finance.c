@@ -23,6 +23,9 @@
 #include "include.h"
 #include <math.h>
 
+/* IGNORE DEPRECATED */
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+
 /*START_INCLUDE*/
 #include "bet_data_finance.h"
 #include "bet_finance_ui.h"
@@ -36,11 +39,9 @@
 #include "erreur.h"
 /*END_INCLUDE*/
 
-
 /*START_STATIC*/
 static GSList *bet_loan_list = NULL;
 /*END_STATIC*/
-
 /*START_EXTERN*/
 /*END_EXTERN*/
 

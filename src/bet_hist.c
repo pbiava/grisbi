@@ -25,6 +25,9 @@
 #include "include.h"
 #include <glib/gi18n.h>
 
+/* IGNORE DEPRECATED */
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+
 /*START_INCLUDE*/
 #include "bet_hist.h"
 #include "bet_data.h"
