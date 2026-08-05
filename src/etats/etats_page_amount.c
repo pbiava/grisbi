@@ -218,7 +218,7 @@ static void etats_page_amount_remplit_liste_comparaisons (gint report_number,
 
 	/* on commence par effacer les anciennes lignes */
 	gtk_container_foreach (GTK_CONTAINER (priv->vbox_rows_amount),
-						   (GtkCallback) utils_widget_gtk_callback,
+						   (GCallback) utils_widget_gtk_callback,
 						   NULL);
 
 	tmp_list = gsb_data_report_get_amount_comparison_list (report_number);

@@ -2763,7 +2763,7 @@ static void gsb_import_check_ope_import (GtkWidget *widget,
 	if (GTK_IS_BOX (widget))
 	{
 		gtk_container_foreach (GTK_CONTAINER (widget),
-							   (GtkCallback) gsb_import_check_ope_import,
+							   (GCallback) gsb_import_check_ope_import,
 							   data);
 	}
 
@@ -3530,7 +3530,7 @@ static void gsb_import_confirmation_enregistrement_ope_import (ImportAccount *im
 	if (result <= -12)
 	{
 		gtk_container_foreach (GTK_CONTAINER (vbox),
-							   (GtkCallback) gsb_import_check_ope_import,
+							   (GCallback) gsb_import_check_ope_import,
 							   GINT_TO_POINTER (result));
 		goto dialog_return;
 	}

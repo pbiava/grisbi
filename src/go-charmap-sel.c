@@ -628,7 +628,7 @@ CbFindEntry (GtkMenuItem *w, struct CbFindEntry *cl)
 		GSList *tmp = cl->path = g_slist_prepend (cl->path, GINT_TO_POINTER (cl->i));
 		cl->i = 0;
 
-		gtk_container_foreach (GTK_CONTAINER (sub), (GtkCallback)CbFindEntry, cl);
+		gtk_container_foreach (GTK_CONTAINER (sub), (GCallback)CbFindEntry, cl);
 		if (cl->found)
 			return;
 
@@ -671,7 +671,7 @@ go_charmap_sel_set_encoding (GOCharmapSel *cs, const char *enc)
 	cl.path = NULL;
 
 	gtk_container_foreach (GTK_CONTAINER (cs->encodings_menu),
-			       (GtkCallback)CbFindEntry,
+			       (GCallback)CbFindEntry,
 			       &cl);
 	if (!cl.found)
 		return FALSE;

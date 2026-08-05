@@ -1790,7 +1790,7 @@ void grisbi_win_no_file_page_update (GrisbiWin *win)
 
 	/* Suppression des boutons */
 	gtk_container_foreach (GTK_CONTAINER (priv->no_file_grid),
-						   (GtkCallback) grisbi_win_no_file_page_remove_buttons,
+						   (GCallback) grisbi_win_no_file_page_remove_buttons,
 						   NULL);
 
 	/* ajout des boutons restants */
