@@ -99,6 +99,9 @@
 #define CUSTOM_MODEL_VISIBLE_COLUMNS	7		/* number of visible columns */
 #define TRANSACTION_LIST_ROWS_NB 		4		/* definition of the number of max rows for a line, for now limit to 4 */
 
+/* replace GSB_LEFTBUTTON and GSB_RIGHTBUTTON */
+#define GSB_LEFTBUTTON			1
+#define GSB_RIGHTBUTTON			2
 /*START_EXTERN*/
 /*END_EXTERN*/
 

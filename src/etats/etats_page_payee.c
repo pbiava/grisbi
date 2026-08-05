@@ -165,7 +165,7 @@ static void etats_page_payee_entry_insert_text (GtkEditable *editable,
 
 	/* on lance la recherche de la chaine */
 	text = gtk_editable_get_chars (editable, 0, -1);
-	etats_page_payee_search_iter_from_entry (text, GTK_TREE_VIEW (tree_view), GDK_RIGHTBUTTON);
+	etats_page_payee_search_iter_from_entry (text, GTK_TREE_VIEW (tree_view), GSB_RIGHTBUTTON);
 
 	/* on débloque l'appel de la fonction */
 	g_signal_handlers_unblock_by_func (G_OBJECT (editable),
@@ -194,7 +194,7 @@ static void etats_page_payee_entry_delete_text (GtkEditable *editable,
 	gchar *text;
 
 	text = gtk_editable_get_chars (editable, 0, start_pos);
-	etats_page_payee_search_iter_from_entry (text, GTK_TREE_VIEW (tree_view), GDK_LEFTBUTTON);
+	etats_page_payee_search_iter_from_entry (text, GTK_TREE_VIEW (tree_view), GSB_LEFTBUTTON);
 }
 
 /**
@@ -275,7 +275,7 @@ static gboolean etats_page_payee_select_prev_next_item (GtkWidget *button,
 
 			if (gtk_tree_selection_path_is_selected (selection, path))
 			{
-				if (sens == GDK_LEFTBUTTON)
+				if (sens == GSB_LEFTBUTTON)
 				{
 					if (gtk_tree_path_compare (start_path, path) <= 0)
 					{
@@ -307,7 +307,7 @@ static gboolean etats_page_payee_select_prev_next_item (GtkWidget *button,
 				}
 			}
 
-			if (sens == GDK_LEFTBUTTON)
+			if (sens == GSB_LEFTBUTTON)
 				liste = liste->prev;
 			else
 				liste = liste->next;
@@ -326,7 +326,7 @@ static gboolean etats_page_payee_select_prev_next_item (GtkWidget *button,
 		if (liste == NULL)
 			return FALSE;
 
-		if (sens == GDK_LEFTBUTTON)
+		if (sens == GSB_LEFTBUTTON)
 			liste = g_list_first (liste);
 		else
 			liste = g_list_last (liste);
@@ -388,7 +388,7 @@ static gboolean etats_page_payee_select_first_last_item (GtkWidget *button,
 	first_path = g_list_nth_data (liste, 0);
 	last_path = g_list_nth_data (liste, nbre_selections - 1);
 
-	if (sens == GDK_LEFTBUTTON)
+	if (sens == GSB_LEFTBUTTON)
 	{
 		gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (priv->treeview_payee), first_path, NULL, FALSE, 0., 0.);
 		payee_selected = first_path;
@@ -578,25 +578,25 @@ static void etats_page_payee_setup_page (EtatsPagePayee *page,
 	gtk_entry_set_has_frame (GTK_ENTRY (priv->entry_search_payee), TRUE);
 
 	/* on rend les boutons premier, précédent, suivant et dernier actifs */
-	g_object_set_data (G_OBJECT (priv->button_first_payee), "ptr_sens", GINT_TO_POINTER (GDK_LEFTBUTTON));
+	g_object_set_data (G_OBJECT (priv->button_first_payee), "ptr_sens", GINT_TO_POINTER (GSB_LEFTBUTTON));
 	g_signal_connect (G_OBJECT (priv->button_first_payee),
 					  "button-press-event",
 					  G_CALLBACK (etats_page_payee_select_first_last_item),
 					  priv);
 
-	g_object_set_data (G_OBJECT (priv->button_previous_payee), "ptr_sens", GINT_TO_POINTER (GDK_LEFTBUTTON));
+	g_object_set_data (G_OBJECT (priv->button_previous_payee), "ptr_sens", GINT_TO_POINTER (GSB_LEFTBUTTON));
 	g_signal_connect (G_OBJECT (priv->button_previous_payee),
 					  "button-press-event",
 					  G_CALLBACK (etats_page_payee_select_prev_next_item),
 					  priv);
 
-	g_object_set_data (G_OBJECT (priv->button_next_payee), "ptr_sens", GINT_TO_POINTER (GDK_RIGHTBUTTON));
+	g_object_set_data (G_OBJECT (priv->button_next_payee), "ptr_sens", GINT_TO_POINTER (GSB_RIGHTBUTTON));
 	g_signal_connect (G_OBJECT (priv->button_next_payee),
 					  "button-press-event",
 					  G_CALLBACK (etats_page_payee_select_prev_next_item),
 					  priv);
 
-	g_object_set_data (G_OBJECT (priv->button_last_payee), "ptr_sens",GINT_TO_POINTER (GDK_RIGHTBUTTON));
+	g_object_set_data (G_OBJECT (priv->button_last_payee), "ptr_sens",GINT_TO_POINTER (GSB_RIGHTBUTTON));
 	g_signal_connect (G_OBJECT (priv->button_last_payee),
 					  "button-press-event",
 					  G_CALLBACK (etats_page_payee_select_first_last_item),
