@@ -50,14 +50,10 @@ struct _PrefsPageDisplayGuiPrivate
 {
 	GtkWidget *			vbox_display_gui;
 
-    GtkWidget *			checkbutton_show_headings_bar;
+	GtkWidget *			checkbutton_show_headings_bar;
 
 	GtkWidget *			checkbutton_active_scrolling_left_pane;
 	GtkWidget *			checkbutton_low_definition_screen;
-
-    GtkWidget *			radiobutton_display_both;
-    GtkWidget *			radiobutton_display_icon;
-    GtkWidget *			radiobutton_display_text;
 
 	GtkWidget *			text_view_display_shorcuts;
 };
@@ -90,33 +86,6 @@ static gboolean prefs_page_display_gui_active_scrolling_left_pane (GtkWidget *to
 
 	return FALSE;
 }
-/**
- * Signal triggered when user configure display mode of toolbar
- * buttons.
- *
- * \param button	Radio button that triggered event.
- *
- * \return FALSE
- **/
-static gboolean prefs_page_display_gui_change_toolbar_display_mode (GtkRadioButton *button,
-																	GrisbiAppConf *a_conf)
-{
-    /* Do not execute this callback twice,
-     * as it is triggered for both unselected button and newly selected one.
-     * We keep the call for the newly selected radio button */
-    if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)))
-        return FALSE;
-
-    /* save the new parameter */
-    a_conf->display_toolbar = GPOINTER_TO_INT (g_object_get_data (G_OBJECT(button), "display"));
-
-    /* update toolbars */
-	if (grisbi_win_file_is_loading ())
-    	grisbi_win_update_all_toolbars ();
-
-    return FALSE;
-}
-
 /**
  * called when check the preference low resoltion screen button
  *
@@ -247,7 +216,8 @@ static void prefs_page_display_gui_setup_page (PrefsPageDisplayGui *page,
     /* set the variables for active_scrolling_left_pane */
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->checkbutton_active_scrolling_left_pane),
 								  a_conf->active_scrolling_left_pane);
-    /* Connect signal */
+
+	/* Connect signal */
     g_signal_connect (priv->checkbutton_active_scrolling_left_pane,
 					  "toggled",
 					  G_CALLBACK (utils_prefs_page_checkbutton_changed),
@@ -257,49 +227,6 @@ static void prefs_page_display_gui_setup_page (PrefsPageDisplayGui *page,
 							"toggled",
 							G_CALLBACK (prefs_page_display_gui_active_scrolling_left_pane),
 							a_conf);
-
-    /* set the variables for display toolbar */
-	switch (a_conf->display_toolbar)
-	{
-		case GTK_TOOLBAR_BOTH:
-			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->radiobutton_display_both), TRUE);
-			break;
-
-		case GTK_TOOLBAR_ICONS:
-			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->radiobutton_display_icon), TRUE);
-			break;
-
-		case GTK_TOOLBAR_TEXT:
-			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->radiobutton_display_text), TRUE);
-			break;
-	}
-
-	/* set data for each widget */
-	g_object_set_data (G_OBJECT (priv->radiobutton_display_both),
-					   "display",
-					   GINT_TO_POINTER (GTK_TOOLBAR_BOTH));
-	g_object_set_data (G_OBJECT (priv->radiobutton_display_icon),
-					   "display",
-					   GINT_TO_POINTER (GTK_TOOLBAR_ICONS));
-	g_object_set_data (G_OBJECT (priv->radiobutton_display_text),
-					   "display",
-					   GINT_TO_POINTER (GTK_TOOLBAR_TEXT));
-
-	/* Connect signal */
-	g_signal_connect (G_OBJECT (priv->radiobutton_display_both),
-					  "toggled",
-					  G_CALLBACK (prefs_page_display_gui_change_toolbar_display_mode),
-					  a_conf);
-
-	g_signal_connect (G_OBJECT (priv->radiobutton_display_icon),
-					  "toggled",
-					  G_CALLBACK (prefs_page_display_gui_change_toolbar_display_mode),
-					  a_conf);
-
-	g_signal_connect (G_OBJECT (priv->radiobutton_display_text),
-					  "toggled",
-					  G_CALLBACK (prefs_page_display_gui_change_toolbar_display_mode),
-					  a_conf);
 
 	/* set shortcuts text_view */
 	tabs = pango_tab_array_new (3, TRUE);
@@ -338,9 +265,6 @@ static void prefs_page_display_gui_class_init (PrefsPageDisplayGuiClass *klass)
 	gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), PrefsPageDisplayGui, checkbutton_show_headings_bar);
 	gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), PrefsPageDisplayGui, checkbutton_active_scrolling_left_pane);
 	gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), PrefsPageDisplayGui, checkbutton_low_definition_screen);
-	gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), PrefsPageDisplayGui, radiobutton_display_both);
-	gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), PrefsPageDisplayGui, radiobutton_display_icon);
-	gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), PrefsPageDisplayGui, radiobutton_display_text);
 	gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), PrefsPageDisplayGui, text_view_display_shorcuts);
 }
 

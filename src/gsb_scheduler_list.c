@@ -280,16 +280,10 @@ static gboolean gsb_scheduler_list_show_notes (GtkWidget *item)
 	w_etat = grisbi_win_get_w_etat ();
 	if (scheduler_display_hide_notes)
 	{
-		GrisbiAppConf *a_conf;
-
-		a_conf = (GrisbiAppConf *) grisbi_app_get_a_conf ();
-		if (a_conf->display_toolbar != GTK_TOOLBAR_ICONS)
-        {
-            if (w_etat->affichage_commentaire_echeancier)
-                gtk_tool_button_set_label (GTK_TOOL_BUTTON (item), _("Frequency/Mode"));
-            else
-                gtk_tool_button_set_label (GTK_TOOL_BUTTON (item), _("Notes"));
-        }
+		if (w_etat->affichage_commentaire_echeancier)
+			gtk_tool_button_set_label (GTK_TOOL_BUTTON (item), _("Frequency/Mode"));
+		else
+			gtk_tool_button_set_label (GTK_TOOL_BUTTON (item), _("Notes"));
 
         if (w_etat->affichage_commentaire_echeancier)
             gtk_widget_set_tooltip_text (GTK_WIDGET (item),

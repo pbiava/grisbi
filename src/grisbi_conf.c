@@ -85,7 +85,6 @@ static void grisbi_conf_clean_config (GrisbiAppConf *a_conf)
 
 	/* priv->settings_display */
 	a_conf->display_help = 0;								/* Html */
-    a_conf->display_toolbar = GTK_TOOLBAR_BOTH;				/* "Text + Icons" */
 	a_conf->display_window_title = 0;						/* "Entity name" */
 	a_conf->formulaire_toujours_affiche = TRUE;
 	a_conf->group_partial_balance_under_accounts = TRUE;
@@ -278,18 +277,6 @@ gboolean grisbi_conf_load_app_config (void)
 		a_conf->display_help = 0;
 	else
 		a_conf->display_help = 1;
-    g_free (tmp_str);
-
-	tmp_str = g_key_file_get_string (config,
-								     "Display",
-								     "display-toolbar",
-								     NULL);
-    if (g_strcmp0 (tmp_str, "Text") == 0)
-        a_conf->display_toolbar = GTK_TOOLBAR_TEXT;
-    else if (g_strcmp0 (tmp_str, "Icons") == 0)
-        a_conf->display_toolbar = GTK_TOOLBAR_ICONS;
-    else
-        a_conf->display_toolbar = GTK_TOOLBAR_BOTH;
     g_free (tmp_str);
 
 	tmp_str = g_key_file_get_string (config,
@@ -794,21 +781,6 @@ gboolean grisbi_conf_save_app_config (void)
 							   "display-help",
 							   "Html");
 
-	switch (a_conf->display_toolbar)
-    {
-        case GTK_TOOLBAR_TEXT:
-            tmp_str = "Text";
-            break;
-        case GTK_TOOLBAR_ICONS:
-            tmp_str = "Icons";
-            break;
-        default:
-            tmp_str = (gchar*)"Text + Icons";
-    }
-    g_key_file_set_string (config,
-						   "Display",
-						   "display-toolbar",
-						   tmp_str);
     switch (a_conf->display_window_title)
     {
         case 1:

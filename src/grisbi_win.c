@@ -2535,38 +2535,38 @@ void grisbi_win_status_bar_set_font_size (gint font_size)
  *
  * \return
  **/
-void grisbi_win_update_all_toolbars (void)
-{
-	gint toolbar_style = 0;
-	GrisbiAppConf *a_conf;
+//~ void grisbi_win_update_all_toolbars (void)
+//~ {
+	//~ gint toolbar_style = 0;
+	//~ GrisbiAppConf *a_conf;
 
-	a_conf = grisbi_app_get_a_conf ();
-	switch (a_conf->display_toolbar)
-	{
-		case GTK_TOOLBAR_TEXT:
-			toolbar_style = GTK_TOOLBAR_TEXT;
-			break;
-		case GTK_TOOLBAR_ICONS:
-			toolbar_style = GTK_TOOLBAR_ICONS;
-			break;
-		case GTK_TOOLBAR_BOTH:
-			toolbar_style = GTK_TOOLBAR_BOTH;
-			break;
-		case GTK_TOOLBAR_BOTH_HORIZ:
-			toolbar_style = GTK_TOOLBAR_BOTH_HORIZ;
-			break;
-	}
+	//~ a_conf = grisbi_app_get_a_conf ();
+	//~ switch (a_conf->display_toolbar)
+	//~ {
+		//~ case GTK_TOOLBAR_TEXT:
+			//~ toolbar_style = GTK_TOOLBAR_TEXT;
+			//~ break;
+		//~ case GTK_TOOLBAR_ICONS:
+			//~ toolbar_style = GTK_TOOLBAR_ICONS;
+			//~ break;
+		//~ case GTK_TOOLBAR_BOTH:
+			//~ toolbar_style = GTK_TOOLBAR_BOTH;
+			//~ break;
+		//~ case GTK_TOOLBAR_BOTH_HORIZ:
+			//~ toolbar_style = GTK_TOOLBAR_BOTH_HORIZ;
+			//~ break;
+	//~ }
 
-	gsb_gui_transaction_toolbar_set_style (toolbar_style);
-	gsb_gui_scheduler_toolbar_set_style (toolbar_style);
-	gsb_gui_payees_toolbar_set_style (toolbar_style);
-	gsb_gui_categories_toolbar_set_style (toolbar_style);
-	gsb_gui_budgetary_lines_toolbar_set_style (toolbar_style);
-	etats_onglet_reports_toolbar_set_style (toolbar_style);
-	bet_array_update_toolbar (toolbar_style);
-	bet_hist_update_toolbar (toolbar_style);
-	bet_finance_ui_update_all_finance_toolbars (toolbar_style);
-}
+	//~ gsb_gui_transaction_toolbar_set_style (toolbar_style);
+	//~ gsb_gui_scheduler_toolbar_set_style (toolbar_style);
+	//~ gsb_gui_payees_toolbar_set_style (toolbar_style);
+	//~ gsb_gui_categories_toolbar_set_style (toolbar_style);
+	//~ gsb_gui_budgetary_lines_toolbar_set_style (toolbar_style);
+	//~ etats_onglet_reports_toolbar_set_style (toolbar_style);
+	//~ bet_array_update_toolbar (toolbar_style);
+	//~ bet_hist_update_toolbar (toolbar_style);
+	//~ bet_finance_ui_update_all_finance_toolbars (toolbar_style);
+//~ }
 
 /**
  *

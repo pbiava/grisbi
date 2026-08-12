@@ -752,13 +752,10 @@ static void bet_finance_ui_switch_amortization_initial_date (GtkWidget *widget,
 	else
 		tmp_button = g_object_get_data (G_OBJECT (tree_view), "amortization_initial_date_button");
 
-    if (a_conf->display_toolbar != GTK_TOOLBAR_ICONS)
-    {
-		if (amortization_initial_date)
-			gtk_tool_button_set_label (GTK_TOOL_BUTTON (tmp_button), _("At today"));
-		else
-			gtk_tool_button_set_label (GTK_TOOL_BUTTON (tmp_button), _("Start date"));
-    }
+	if (amortization_initial_date)
+		gtk_tool_button_set_label (GTK_TOOL_BUTTON (tmp_button), _("At today"));
+	else
+		gtk_tool_button_set_label (GTK_TOOL_BUTTON (tmp_button), _("Start date"));
 
 	if (amortization_initial_date)
 		gtk_widget_set_tooltip_text (GTK_WIDGET (tmp_button), _("Show amortization schedule to date"));
