@@ -6,7 +6,7 @@
 /*     Copyright (C)    2000-2008 Cédric Auger (cedric@grisbi.org)               */
 /*                      2003-2008 Benjamin Drieu (bdrieu@april.org)              */
 /*          2008-2021 Pierre Biava (grisbi@pierre.biava.name)                    */
-/*          https://www.grisbi.org                                                */
+/*          https://www.grisbi.org                                               */
 /*                                                                               */
 /*     This program is free software; you can redistribute it and/or modify      */
 /*     it under the terms of the GNU General Public License as published by      */
@@ -60,25 +60,25 @@ struct _EtatsPagePeriodPrivate
 	GtkWidget *			vbox_etats_page_period;
 
 	/* dates part */
-	GtkWidget *         radio_button_utilise_dates;
+	GtkWidget *		 radio_button_utilise_dates;
 
-	GtkWidget *         entree_date_finale_etat;
-	GtkWidget *         entree_date_init_etat;
-	GtkWidget *         hbox_date_finale;
+	GtkWidget *		 entree_date_finale_etat;
+	GtkWidget *		 entree_date_init_etat;
+	GtkWidget *		 hbox_date_finale;
 	GtkWidget *			hbox_date_init;
 	GtkWidget *			treeview_dates;
-	GtkWidget *         vbox_utilisation_date;
+	GtkWidget *		 vbox_utilisation_date;
 
 	/* exo part */
-	GtkWidget *         radio_button_utilise_exo;
+	GtkWidget *		 radio_button_utilise_exo;
 
-	GtkWidget *         bouton_exo_courant;
-	GtkWidget *         bouton_exo_detaille;
-	GtkWidget *         bouton_exo_precedent;
-	GtkWidget *         bouton_exo_tous;
-	GtkWidget *         sw_exo;
-	GtkWidget *         treeview_exo;
-	GtkWidget *         vbox_utilisation_exo;
+	GtkWidget *		 bouton_exo_courant;
+	GtkWidget *		 bouton_exo_detaille;
+	GtkWidget *		 bouton_exo_precedent;
+	GtkWidget *		 bouton_exo_tous;
+	GtkWidget *		 sw_exo;
+	GtkWidget *		 treeview_exo;
+	GtkWidget *		 vbox_utilisation_exo;
 
 	/* parent */
 	GtkWidget *			etats_prefs;
@@ -89,20 +89,20 @@ G_DEFINE_TYPE_WITH_PRIVATE (EtatsPagePeriod, etats_page_period, GTK_TYPE_BOX)
 /* liste des plages de date possibles */
 static const gchar *etat_period_liste_plages_dates[] =
 {
-    N_("All"),
-    N_("Custom"),
-    N_("Total to now"),
-    N_("Current month"),
-    N_("Current year"),
-    N_("Current month to now"),
-    N_("Current year to now"),
-    N_("Previous month"),
-    N_("Previous year"),
-    N_("Last 30 days"),
-    N_("Last 3 months"),
-    N_("Last 6 months"),
-    N_("Last 12 months"),
-    NULL,
+	N_("All"),
+	N_("Custom"),
+	N_("Total to now"),
+	N_("Current month"),
+	N_("Current year"),
+	N_("Current month to now"),
+	N_("Current year to now"),
+	N_("Previous month"),
+	N_("Previous year"),
+	N_("Last 30 days"),
+	N_("Last 3 months"),
+	N_("Last 6 months"),
+	N_("Last 12 months"),
+	NULL,
 };
 
 /******************************************************************************/
@@ -117,11 +117,11 @@ static const gchar *etat_period_liste_plages_dates[] =
  **/
 static GtkTreeModel *etats_page_period_get_model_dates (void)
 {
-    GtkListStore *list_store;
+	GtkListStore *list_store;
 
-    list_store = utils_list_store_create_from_string_array (etat_period_liste_plages_dates);
+	list_store = utils_list_store_create_from_string_array (etat_period_liste_plages_dates);
 
-    return GTK_TREE_MODEL (list_store);
+	return GTK_TREE_MODEL (list_store);
 }
 
 /**
@@ -133,33 +133,33 @@ static GtkTreeModel *etats_page_period_get_model_dates (void)
  **/
 static GtkTreeModel *etats_page_period_get_model_exercices (void)
 {
-    GtkListStore *list_store;
-    GSList *list_tmp;
+	GtkListStore *list_store;
+	GSList *list_tmp;
 
-    list_store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_INT);
-    gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (list_store), 0, GTK_SORT_DESCENDING);
+	list_store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_INT);
+	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (list_store), 0, GTK_SORT_DESCENDING);
 
-    /* on remplit la liste des exercices */
-    list_tmp = gsb_data_fyear_get_fyears_list ();
-    while (list_tmp)
-    {
-        GtkTreeIter iter;
-        gchar *name;
+	/* on remplit la liste des exercices */
+	list_tmp = gsb_data_fyear_get_fyears_list ();
+	while (list_tmp)
+	{
+		GtkTreeIter iter;
+		gchar *name;
 		FyearStruct *fyear_struct;
 
-        fyear_struct = list_tmp->data;
-        name = my_strdup (fyear_struct->fyear_name);
+		fyear_struct = list_tmp->data;
+		name = my_strdup (fyear_struct->fyear_name);
 
-        gtk_list_store_append (list_store, &iter);
-        gtk_list_store_set (list_store, &iter, 0, name, 1, fyear_struct->fyear_number, -1);
+		gtk_list_store_append (list_store, &iter);
+		gtk_list_store_set (list_store, &iter, 0, name, 1, fyear_struct->fyear_number, -1);
 
-        if (name)
-            g_free (name);
+		if (name)
+			g_free (name);
 
-        list_tmp = list_tmp->next;
-    }
+		list_tmp = list_tmp->next;
+	}
 
-    return GTK_TREE_MODEL (list_store);
+	return GTK_TREE_MODEL (list_store);
 }
 
 /**
@@ -188,7 +188,7 @@ static void etats_page_period_date_interval_sensitive (EtatsPagePeriod *page,
  * pages have been changed.
  *
  * \param page Page that contained an interface element just
- *                      changed that triggered this event.
+ *					  changed that triggered this event.
  * \param
  *
  * \return
@@ -196,29 +196,29 @@ static void etats_page_period_date_interval_sensitive (EtatsPagePeriod *page,
 static void etats_page_period_update_style_left_panel (GtkWidget *button,
 													   EtatsPagePeriod *page)
 {
-    GtkTreeModel *model;
-    GtkTreeIter iter;
+	GtkTreeModel *model;
+	GtkTreeIter iter;
 	GtkWidget *tree_view;
-    gint index;
+	gint index;
 	EtatsPagePeriodPrivate *priv;
 
 	priv = etats_page_period_get_instance_private (page);
-    index = utils_radiobutton_get_active_index (priv->radio_button_utilise_exo);
-    if (index == 0)
-    {
-        if (etats_prefs_tree_view_get_single_row_selected (priv->treeview_dates) == 1)
-        index = 1;
-    }
+	index = utils_radiobutton_get_active_index (priv->radio_button_utilise_exo);
+	if (index == 0)
+	{
+		if (etats_prefs_tree_view_get_single_row_selected (priv->treeview_dates) == 1)
+		index = 1;
+	}
 
 	tree_view = etats_prefs_get_widget_by_name ("treeview_left_panel", priv->etats_prefs);
-    model = gtk_tree_view_get_model (GTK_TREE_VIEW (tree_view));
-    if (gtk_tree_model_get_iter_from_string (GTK_TREE_MODEL (model), &iter, "0:0"))
-    {
-        gtk_tree_store_set (GTK_TREE_STORE (model),
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (tree_view));
+	if (gtk_tree_model_get_iter_from_string (GTK_TREE_MODEL (model), &iter, "0:0"))
+	{
+		gtk_tree_store_set (GTK_TREE_STORE (model),
 							&iter,
 							LEFT_PANEL_TREE_ITALIC_COLUMN, index,
 							-1);
-    }
+	}
 }
 
 /**
@@ -232,18 +232,18 @@ static void etats_page_period_update_style_left_panel (GtkWidget *button,
 static void etats_page_period_selection_dates_changed (GtkTreeSelection *selection,
 													   EtatsPagePeriod *page)
 {
-    GtkTreeModel *model;
-    GtkTreeIter iter;
-    gint selected;
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+	gint selected;
 
-    if (!gtk_tree_selection_get_selected (selection, &model, &iter))
-        return;
+	if (!gtk_tree_selection_get_selected (selection, &model, &iter))
+		return;
 
-    gtk_tree_model_get (model, &iter, 1, &selected, -1);
-    etats_page_period_date_interval_sensitive (page, selected);
+	gtk_tree_model_get (model, &iter, 1, &selected, -1);
+	etats_page_period_date_interval_sensitive (page, selected);
 
-    /* on regarde si on utilise des dates personalisées */
-    etats_page_period_update_style_left_panel (NULL, page);
+	/* on regarde si on utilise des dates personalisées */
+	etats_page_period_update_style_left_panel (NULL, page);
 }
 
 /**
@@ -255,10 +255,10 @@ static void etats_page_period_selection_dates_changed (GtkTreeSelection *selecti
  **/
 static void etats_page_period_setup_treeview_treeview_exo (EtatsPagePeriod *page)
 {
-    GtkCellRenderer *cell;
+	GtkCellRenderer *cell;
 	GtkTreeModel *model;
-    GtkTreeSelection *selection;
-    GtkTreeViewColumn *column;
+	GtkTreeSelection *selection;
+	GtkTreeViewColumn *column;
 	EtatsPagePeriodPrivate *priv;
 
 	priv = etats_page_period_get_instance_private (page);
@@ -266,21 +266,21 @@ static void etats_page_period_setup_treeview_treeview_exo (EtatsPagePeriod *page
 	/* set model */
 	model = etats_page_period_get_model_exercices ();
 	gtk_tree_view_set_model (GTK_TREE_VIEW (priv->treeview_exo), model);
-    g_object_unref (G_OBJECT (model));
+	g_object_unref (G_OBJECT (model));
 
 	/* set the color of selected row */
 	gtk_widget_set_name (priv->treeview_exo, "tree_view");
 
-    /* set the column */
-    cell = gtk_cell_renderer_text_new ();
-    column = gtk_tree_view_column_new_with_attributes (NULL, cell, "text", 0, NULL);
-    gtk_tree_view_column_set_sizing (GTK_TREE_VIEW_COLUMN (column), GTK_TREE_VIEW_COLUMN_FIXED);
-    gtk_tree_view_append_column (GTK_TREE_VIEW (priv->treeview_exo), GTK_TREE_VIEW_COLUMN (column));
-    gtk_tree_view_column_set_resizable (column, TRUE);
+	/* set the column */
+	cell = gtk_cell_renderer_text_new ();
+	column = gtk_tree_view_column_new_with_attributes (NULL, cell, "text", 0, NULL);
+	gtk_tree_view_column_set_sizing (GTK_TREE_VIEW_COLUMN (column), GTK_TREE_VIEW_COLUMN_FIXED);
+	gtk_tree_view_append_column (GTK_TREE_VIEW (priv->treeview_exo), GTK_TREE_VIEW_COLUMN (column));
+	gtk_tree_view_column_set_resizable (column, TRUE);
 
 	/* set selection */
-    selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (priv->treeview_exo));
-    gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (priv->treeview_exo));
+	gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
 }
 
 /**
@@ -292,10 +292,10 @@ static void etats_page_period_setup_treeview_treeview_exo (EtatsPagePeriod *page
  **/
 static void etats_page_period_setup_treeview_dates (EtatsPagePeriod *page)
 {
-    GtkCellRenderer *cell;
+	GtkCellRenderer *cell;
 	GtkTreeModel *model;
-    GtkTreeSelection *selection;
-    GtkTreeViewColumn *column;
+	GtkTreeSelection *selection;
+	GtkTreeViewColumn *column;
 	EtatsPagePeriodPrivate *priv;
 
 	priv = etats_page_period_get_instance_private (page);
@@ -303,21 +303,21 @@ static void etats_page_period_setup_treeview_dates (EtatsPagePeriod *page)
 	/* set model */
 	model = etats_page_period_get_model_dates ();
 	gtk_tree_view_set_model (GTK_TREE_VIEW (priv->treeview_dates), model);
-    g_object_unref (G_OBJECT (model));
+	g_object_unref (G_OBJECT (model));
 
-    /* set the color of selected row */
+	/* set the color of selected row */
 	gtk_widget_set_name (priv->treeview_dates, "tree_view");
 
-    /* set the column */
-    cell = gtk_cell_renderer_text_new ();
-    column = gtk_tree_view_column_new_with_attributes (NULL, cell, "text", 0, NULL);
-    gtk_tree_view_column_set_sizing (GTK_TREE_VIEW_COLUMN (column), GTK_TREE_VIEW_COLUMN_FIXED);
-    gtk_tree_view_append_column (GTK_TREE_VIEW (priv->treeview_dates), GTK_TREE_VIEW_COLUMN (column));
-    gtk_tree_view_column_set_resizable (column, TRUE);
+	/* set the column */
+	cell = gtk_cell_renderer_text_new ();
+	column = gtk_tree_view_column_new_with_attributes (NULL, cell, "text", 0, NULL);
+	gtk_tree_view_column_set_sizing (GTK_TREE_VIEW_COLUMN (column), GTK_TREE_VIEW_COLUMN_FIXED);
+	gtk_tree_view_append_column (GTK_TREE_VIEW (priv->treeview_dates), GTK_TREE_VIEW_COLUMN (column));
+	gtk_tree_view_column_set_resizable (column, TRUE);
 
 	/* set selection */
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (priv->treeview_dates));
-    gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
+	gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
 	g_signal_connect (G_OBJECT (selection),
 					  "changed",
 					  G_CALLBACK (etats_page_period_selection_dates_changed),
@@ -346,50 +346,50 @@ static void etats_page_period_setup_page (EtatsPagePeriod *page,
 
 	/* set head page */
 	head_page = utils_prefs_head_page_new_with_title_and_icon (_("Date selection"), "gsb-scheduler-32.png");
-    gtk_box_prepend (GTK_BOX (priv->vbox_etats_page_period), head_page);
+	gtk_box_prepend (GTK_BOX (priv->vbox_etats_page_period), head_page);
 
-    /* on traite la partie gauche de l'onglet dates */
+	/* on traite la partie gauche de l'onglet dates */
 	etats_page_period_setup_treeview_dates (page);
 
 	/* on ajoute les entrées pour saisir les dates personnalisées */
 	priv->entree_date_init_etat = gsb_calendar_entry_new (FALSE);
-    gtk_widget_set_size_request (priv->entree_date_init_etat, ENTRY_MIN_WIDTH, -1);
-    gtk_box_append (GTK_BOX (priv->hbox_date_init), priv->entree_date_init_etat);
+	gtk_widget_set_size_request (priv->entree_date_init_etat, ENTRY_MIN_WIDTH, -1);
+	gtk_box_append (GTK_BOX (priv->hbox_date_init), priv->entree_date_init_etat);
 
 	priv->entree_date_finale_etat = gsb_calendar_entry_new (FALSE);
-    gtk_widget_set_size_request (priv->entree_date_finale_etat, ENTRY_MIN_WIDTH, -1);
-    gtk_box_append (GTK_BOX (priv->hbox_date_finale), priv->entree_date_finale_etat);
+	gtk_widget_set_size_request (priv->entree_date_finale_etat, ENTRY_MIN_WIDTH, -1);
+	gtk_box_append (GTK_BOX (priv->hbox_date_finale), priv->entree_date_finale_etat);
 
 	/* on traite la partie droite de l'onglet dates */
 	etats_page_period_setup_treeview_treeview_exo (page);
 
 	/* on met la connection pour changer le style de la ligne du panneau de gauche */
-    g_signal_connect (G_OBJECT (priv->radio_button_utilise_dates),
-                      "toggled",
-                      G_CALLBACK (etats_page_period_update_style_left_panel),
-                      page);
+	g_signal_connect (G_OBJECT (priv->radio_button_utilise_dates),
+					  "toggled",
+					  G_CALLBACK (etats_page_period_update_style_left_panel),
+					  page);
 
-    /* on met la connection pour rendre sensitif la frame vbox_utilisation_date */
-    g_signal_connect (G_OBJECT (priv->radio_button_utilise_dates),
-                      "toggled",
-                      G_CALLBACK (sens_desensitive_pointeur),
-                      priv->vbox_utilisation_date);
+	/* on met la connection pour rendre sensitif la frame vbox_utilisation_date */
+	g_signal_connect (G_OBJECT (priv->radio_button_utilise_dates),
+					  "toggled",
+					  G_CALLBACK (sens_desensitive_pointeur),
+					  priv->vbox_utilisation_date);
 
 	/* on met la connection pour changer le style de la ligne du panneau de droite */
-    g_signal_connect (G_OBJECT (priv->radio_button_utilise_exo),
-                      "toggled",
-                      G_CALLBACK (etats_page_period_update_style_left_panel),
-                      page);
+	g_signal_connect (G_OBJECT (priv->radio_button_utilise_exo),
+					  "toggled",
+					  G_CALLBACK (etats_page_period_update_style_left_panel),
+					  page);
 
-    /* on met la connection pour rendre sensitif la frame vbox_utilisation_exo */
-    g_signal_connect (G_OBJECT (priv->radio_button_utilise_exo),
-                        "toggled",
-                        G_CALLBACK (sens_desensitive_pointeur),
-                        priv->vbox_utilisation_exo);
+	/* on met la connection pour rendre sensitif la frame vbox_utilisation_exo */
+	g_signal_connect (G_OBJECT (priv->radio_button_utilise_exo),
+					  "toggled",
+					  G_CALLBACK (sens_desensitive_pointeur),
+					  priv->vbox_utilisation_exo);
 
-    /* on connecte les signaux nécessaires pour gérer la sélection de l'exercice */
-    g_signal_connect (G_OBJECT (priv->bouton_exo_detaille),
-                   	 "toggled",
+	/* on connecte les signaux nécessaires pour gérer la sélection de l'exercice */
+	g_signal_connect (G_OBJECT (priv->bouton_exo_detaille),
+				   	  "toggled",
 					  G_CALLBACK (sens_desensitive_pointeur),
 					  priv->sw_exo);
 }
@@ -470,18 +470,18 @@ void etats_page_period_initialise_onglet (GtkWidget *etats_prefs,
 	page = ETATS_PAGE_PERIOD (etats_prefs_get_page_by_number (etats_prefs, DATE_PAGE_TYPE));
 	priv = etats_page_period_get_instance_private (page);
 
-    if (gsb_data_report_get_use_financial_year (report_number))
-    {
-        gint financial_year_type;
+	if (gsb_data_report_get_use_financial_year (report_number))
+	{
+		gint financial_year_type;
 
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->radio_button_utilise_exo), TRUE);
 
-        financial_year_type = gsb_data_report_get_financial_year_type (report_number);
-        utils_radiobutton_set_active_index (priv->bouton_exo_tous, financial_year_type);
+		financial_year_type = gsb_data_report_get_financial_year_type (report_number);
+		utils_radiobutton_set_active_index (priv->bouton_exo_tous, financial_year_type);
 
-        if (financial_year_type == 3)
+		if (financial_year_type == 3)
 		{
-            etats_prefs_tree_view_select_rows_from_list (gsb_data_report_get_financial_year_list
+			etats_prefs_tree_view_select_rows_from_list (gsb_data_report_get_financial_year_list
 															 (report_number),
 															 priv->treeview_exo,
 															 1);
@@ -490,18 +490,18 @@ void etats_page_period_initialise_onglet (GtkWidget *etats_prefs,
 		else
 			gtk_widget_set_sensitive (priv->sw_exo, FALSE);
 
-        /* on initialise le tree_view des dates avec une valeur par défaut (mois en cours) */
-        etats_prefs_tree_view_select_single_row (priv->treeview_dates, 3);
+		/* on initialise le tree_view des dates avec une valeur par défaut (mois en cours) */
+		etats_prefs_tree_view_select_single_row (priv->treeview_dates, 3);
 
 		/* on sensibilise les widgets contenant les datas */
 		gtk_widget_set_sensitive (priv->vbox_utilisation_date, FALSE);
 		gtk_widget_set_sensitive (priv->vbox_utilisation_exo, TRUE);
-    }
-    else
-    {
+	}
+	else
+	{
 		gint date_type;
 
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->radio_button_utilise_dates), TRUE);
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->radio_button_utilise_dates), TRUE);
 		date_type = gsb_data_report_get_date_type (report_number);
 		etats_prefs_tree_view_select_single_row (priv->treeview_dates, date_type);
 
@@ -510,23 +510,23 @@ void etats_page_period_initialise_onglet (GtkWidget *etats_prefs,
 		gtk_widget_set_sensitive (priv->vbox_utilisation_exo, FALSE);
 
 		/* on active le choix du type de date */
-        if (date_type == 1)
-        {
-            GDate *date;
+		if (date_type == 1)
+		{
+			GDate *date;
 
 			/* sensiitive date entries */
 			etats_page_period_date_interval_sensitive (page, TRUE);
 
 			/* on remplit les dates perso si elles existent */
 			date = gsb_data_report_get_personal_date_start (report_number);
-            if (date && g_date_valid (date))
-                gsb_calendar_entry_set_date (priv->entree_date_init_etat, date);
+			if (date && g_date_valid (date))
+				gsb_calendar_entry_set_date (priv->entree_date_init_etat, date);
 
 			date = gsb_data_report_get_personal_date_end (report_number);
-            if (date && g_date_valid (date))
-            	gsb_calendar_entry_set_date (priv->entree_date_finale_etat, date);
-        }
-    }
+			if (date && g_date_valid (date))
+				gsb_calendar_entry_set_date (priv->entree_date_finale_etat, date);
+		}
+	}
 }
 
 /**
@@ -540,7 +540,7 @@ void etats_page_period_initialise_onglet (GtkWidget *etats_prefs,
 void etats_page_period_get_info (GtkWidget *etats_prefs,
 								 gint report_number)
 {
-    gint active;
+	gint active;
 	EtatsPagePeriod *page;
 	EtatsPagePeriodPrivate *priv;
 
@@ -549,86 +549,86 @@ void etats_page_period_get_info (GtkWidget *etats_prefs,
 
 	/* get datas */
 	active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->radio_button_utilise_exo));
-    gsb_data_report_set_use_financial_year (report_number, active);
-    if (active)
-    {
-        gint index;
+	gsb_data_report_set_use_financial_year (report_number, active);
+	if (active)
+	{
+		gint index;
 
-        index = utils_radiobutton_get_active_index (priv->bouton_exo_tous);
-        gsb_data_report_set_financial_year_type (report_number, index);
-        if (index == 3)
-        {
-            gsb_data_report_free_financial_year_list (report_number);
-            gsb_data_report_set_financial_year_list (report_number,
+		index = utils_radiobutton_get_active_index (priv->bouton_exo_tous);
+		gsb_data_report_set_financial_year_type (report_number, index);
+		if (index == 3)
+		{
+			gsb_data_report_free_financial_year_list (report_number);
+			gsb_data_report_set_financial_year_list (report_number,
 													 etats_prefs_tree_view_get_list_rows_selected
 													 (priv->treeview_exo));
-            if (utils_tree_view_all_rows_are_selected (GTK_TREE_VIEW (priv->treeview_exo)))
-            {
-                gchar *text;
-                gchar *hint;
+			if (utils_tree_view_all_rows_are_selected (GTK_TREE_VIEW (priv->treeview_exo)))
+			{
+				gchar *text;
+				gchar *hint;
 
-                hint = g_strdup (_("Performance issue."));
-                text = g_strdup (_("All financial years have been selected.  Grisbi will run "
-                                "faster without the \"Detail financial years\" option activated."));
+				hint = g_strdup (_("Performance issue."));
+				text = g_strdup (_("All financial years have been selected.  Grisbi will run "
+								   "faster without the \"Detail financial years\" option activated."));
 
-                dialogue_hint (text, hint);
-                gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->bouton_exo_tous), FALSE);
-                gsb_data_report_set_financial_year_type (report_number, 0);
+				dialogue_hint (text, hint);
+				gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->bouton_exo_tous), FALSE);
+				gsb_data_report_set_financial_year_type (report_number, 0);
 
-                g_free (text);
-                g_free (hint);
-            }
-        }
-    }
-    else
-    {
-        gint item_selected;
+				g_free (text);
+				g_free (hint);
+			}
+		}
+	}
+	else
+	{
+		gint item_selected;
 
-        /* Check that custom dates are OK, but only if custom date range
-         * has been selected. */
+		/* Check that custom dates are OK, but only if custom date range
+		 * has been selected. */
 		item_selected = etats_prefs_tree_view_get_single_row_selected (priv->treeview_dates);
-        if (item_selected == 1)
-        {
-            if (!gsb_date_check_entry (priv->entree_date_init_etat))
-            {
-                gchar *text;
-                gchar *hint;
+		if (item_selected == 1)
+		{
+			if (!gsb_date_check_entry (priv->entree_date_init_etat))
+			{
+				gchar *text;
+				gchar *hint;
 
-                text = g_strdup (_("Grisbi can't parse date.  For a list of date formats"
-                                   " that Grisbi can use, refer to Grisbi manual."));
-                hint = g_strdup_printf (_("Invalid initial date '%s'"),
+				text = g_strdup (_("Grisbi can't parse date.  For a list of date formats"
+								   " that Grisbi can use, refer to Grisbi manual."));
+				hint = g_strdup_printf (_("Invalid initial date '%s'"),
 										gtk_entry_get_text (GTK_ENTRY (priv->entree_date_init_etat)));
-                dialogue_error_hint (text, hint);
-                g_free (text);
-                g_free (hint);
+				dialogue_error_hint (text, hint);
+				g_free (text);
+				g_free (hint);
 
-                return;
-            }
-            else
-                gsb_data_report_set_personal_date_start (report_number,
+				return;
+			}
+			else
+				gsb_data_report_set_personal_date_start (report_number,
 														 gsb_calendar_entry_get_date (priv->entree_date_init_etat));
 
-            if (!gsb_date_check_entry (priv->entree_date_finale_etat))
+			if (!gsb_date_check_entry (priv->entree_date_finale_etat))
 			{
-                gchar *text;
-                gchar *hint;
+				gchar *text;
+				gchar *hint;
 
-                text = g_strdup (_("Grisbi can't parse date.  For a list of date formats"
+				text = g_strdup (_("Grisbi can't parse date.  For a list of date formats"
 								   " that Grisbi can use, refer to Grisbi manual."));
-                hint = g_strdup_printf (_("Invalid final date '%s'"),
+				hint = g_strdup_printf (_("Invalid final date '%s'"),
 										gtk_entry_get_text (GTK_ENTRY (priv->entree_date_finale_etat)));
-                dialogue_error_hint (text, hint);
-                g_free (text);
-                g_free (hint);
+				dialogue_error_hint (text, hint);
+				g_free (text);
+				g_free (hint);
 
-                return;
-            }
-            else
-                gsb_data_report_set_personal_date_end (report_number,
+				return;
+			}
+			else
+				gsb_data_report_set_personal_date_end (report_number,
 													   gsb_calendar_entry_get_date (priv->entree_date_finale_etat));
-        }
-        gsb_data_report_set_date_type (report_number, item_selected);
-    }
+		}
+		gsb_data_report_set_date_type (report_number, item_selected);
+	}
 }
 
 /**
