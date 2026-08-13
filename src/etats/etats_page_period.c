@@ -42,6 +42,7 @@
 #include "utils.h"
 #include "utils_buttons.h"
 #include "utils_dates.h"
+#include "utils_editables.h"
 #include "utils_prefs.h"
 #include "utils_str.h"
 #include "erreur.h"
@@ -597,7 +598,7 @@ void etats_page_period_get_info (GtkWidget *etats_prefs,
 				text = g_strdup (_("Grisbi can't parse date.  For a list of date formats"
 								   " that Grisbi can use, refer to Grisbi manual."));
 				hint = g_strdup_printf (_("Invalid initial date '%s'"),
-										gtk_entry_get_text (GTK_ENTRY (priv->entree_date_init_etat)));
+										gtk_editable_get_text (GTK_EDITABLE (priv->entree_date_init_etat)));
 				dialogue_error_hint (text, hint);
 				g_free (text);
 				g_free (hint);
@@ -616,7 +617,7 @@ void etats_page_period_get_info (GtkWidget *etats_prefs,
 				text = g_strdup (_("Grisbi can't parse date.  For a list of date formats"
 								   " that Grisbi can use, refer to Grisbi manual."));
 				hint = g_strdup_printf (_("Invalid final date '%s'"),
-										gtk_entry_get_text (GTK_ENTRY (priv->entree_date_finale_etat)));
+										gtk_editable_get_text (GTK_EDITABLE (priv->entree_date_finale_etat)));
 				dialogue_error_hint (text, hint);
 				g_free (text);
 				g_free (hint);
