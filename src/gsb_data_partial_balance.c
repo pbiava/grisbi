@@ -583,23 +583,29 @@ void gsb_partial_balance_selectionne_cptes ( GtkWidget *tree_view,
  * gère le clavier sur la liste des soldes partiels
  *
 **/
-gboolean gsb_partial_balance_key_press ( GtkWidget *tree_view, GdkEventKey *ev )
+gboolean gsb_partial_balance_key_press ( GtkWidget *tree_view, GdkEvent *ev )
 {
-    switch ( ev -> keyval )
-    {
-    case GDK_KEY_Return :   /* entrée */
-    case GDK_KEY_KP_Enter :
-    case GDK_KEY_Tab :
-        g_object_set_data ( G_OBJECT ( tree_view ), "treeview", tree_view );
-        gsb_partial_balance_edit ( NULL, tree_view );
-        return TRUE;
-        break;
-    case GDK_KEY_Delete:    /*  del  */
-        g_object_set_data ( G_OBJECT ( tree_view ), "treeview", tree_view );
-        gsb_partial_balance_remove ( NULL, tree_view );
-        return TRUE;
-        break;
-    }
+	if (gdk_event_get_event_type == GDK_KEY_PRESS)
+	{
+		guint keyval;
+
+		keyval = gdk_key_event_get_keyval (ev);
+		switch (keyval)
+		{
+			case GDK_KEY_Return :   /* entrée */
+			case GDK_KEY_KP_Enter :
+			case GDK_KEY_Tab :
+				g_object_set_data ( G_OBJECT ( tree_view ), "treeview", tree_view );
+				gsb_partial_balance_edit ( NULL, tree_view );
+				return TRUE;
+				break;
+			case GDK_KEY_Delete:    /*  del  */
+				g_object_set_data ( G_OBJECT ( tree_view ), "treeview", tree_view );
+				gsb_partial_balance_remove ( NULL, tree_view );
+				return TRUE;
+				break;
+		}
+	}
 
     return FALSE;
 }

@@ -58,7 +58,7 @@ void 			gsb_partial_balance_edit 							(GtkWidget *button,
 																	 GtkWidget *main_widget);
 void 			gsb_partial_balance_fill_model 						(GtkListStore *list_store);
 gboolean 		gsb_partial_balance_key_press 						(GtkWidget *tree_view,
-																	 GdkEventKey *ev);
+																	 GdkEvent *ev);
 gint 			gsb_partial_balance_new_at_position 				(const gchar *name, gint pos);
 gboolean 		gsb_partial_balance_select_func 					(GtkTreeSelection *selection,
 																	 GtkTreeModel *model,
