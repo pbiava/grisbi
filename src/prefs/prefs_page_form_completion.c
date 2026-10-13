@@ -29,6 +29,10 @@
 #include <glib/gstdio.h>
 #include <glib/gi18n.h>
 
+
+/* IGNORE DEPRECATED */
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+
 /*START_INCLUDE*/
 #include "prefs_page_form_completion.h"
 #include "grisbi_app.h"

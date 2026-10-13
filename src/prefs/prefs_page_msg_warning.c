@@ -29,7 +29,10 @@
 #include <glib/gstdio.h>
 #include <glib/gi18n.h>
 
-/*START_INCLUDE*/
+/* IGNORE DEPRECATED */
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+
+  /*START_INCLUDE*/
 #include "prefs_page_msg_warning.h"
 #include "dialog.h"
 #include "grisbi_app.h"
