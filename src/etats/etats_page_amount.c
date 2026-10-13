@@ -150,7 +150,7 @@ static void etats_page_amount_retire_ligne_liste_comparaisons (gint last_amount_
 		return;
 
 	/* on commence par supprimer la row dans la liste */
-	gtk_widget_destroy (gsb_data_report_amount_comparison_get_widget (last_amount_comparison_number));
+	gtk_window_destroy (GTK_WINDOW (gsb_data_report_amount_comparison_get_widget (last_amount_comparison_number)));
 
 	/* si la structure qu'on retire est la 1ère, on vire le widget de lien */
 	if (!g_slist_index (gsb_data_report_get_amount_comparison_list (report_number),

@@ -413,7 +413,7 @@ static gboolean utils_widget_csv_separators_combo_changed (GtkComboBox *combo,
 void utils_widget_gtk_callback (GtkWidget *widget,
 								gpointer null)
 {
-	gtk_widget_destroy (widget);
+	gtk_window_destroy (GTK_WINDOW (widget));
 }
 
 /**

@@ -147,7 +147,7 @@ static void etats_page_text_retire_ligne_liste_comparaisons (gint last_text_comp
 		return;
 
 	/* on commence par supprimer la row dans la liste */
-	gtk_widget_destroy (gsb_data_report_text_comparison_get_widget (last_text_comparison_number));
+	gtk_window_destroy (GTK_WINDOW (gsb_data_report_text_comparison_get_widget (last_text_comparison_number)));
 
 	/* si la structure qu'on retire est la 1ère, on vire le widget de lien */
 	if (!g_slist_index (gsb_data_report_get_text_comparison_list (report_number),
