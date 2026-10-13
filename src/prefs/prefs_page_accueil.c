@@ -250,7 +250,7 @@ static void prefs_page_accueil_setup_accueil_page (PrefsPageAccueil *page)
 		GtkTreeSelection *selection;
 		GtkTreeDragDestIface * dst_iface;
 		GtkTreeDragSourceIface * src_iface;
-		static GtkTargetEntry row_targets[] = {{(gchar*)"GTK_TREE_MODEL_ROW", GTK_TARGET_SAME_WIDGET, 0}};
+		//~ static GtkTargetEntry row_targets[] = {{(gchar*)"GTK_TREE_MODEL_ROW", GTK_TARGET_SAME_WIDGET, 0}};
 
 		/* create the model */
 		list_store = gsb_partial_balance_create_model ();
@@ -266,15 +266,15 @@ static void prefs_page_accueil_setup_accueil_page (PrefsPageAccueil *page)
 		g_object_set_data (G_OBJECT (priv->vbox_accueil), "treeview", treeview);
 
 		/* Enable drag & drop */
-		gtk_tree_view_enable_model_drag_source (GTK_TREE_VIEW (treeview),
-												GDK_BUTTON1_MASK,
-												row_targets,
-												1,
-												GDK_ACTION_MOVE);
-		gtk_tree_view_enable_model_drag_dest (GTK_TREE_VIEW (treeview),
-											  row_targets,
-											  1,
-											  GDK_ACTION_MOVE);
+		//~ gtk_tree_view_enable_model_drag_source (GTK_TREE_VIEW (treeview),
+												//~ GDK_BUTTON1_MASK,
+												//~ row_targets,
+												//~ 1,
+												//~ GDK_ACTION_MOVE);
+		//~ gtk_tree_view_enable_model_drag_dest (GTK_TREE_VIEW (treeview),
+											  //~ row_targets,
+											  //~ 1,
+											  //~ GDK_ACTION_MOVE);
 		gtk_tree_view_set_reorderable (GTK_TREE_VIEW (treeview), TRUE);
 
 		selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));

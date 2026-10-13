@@ -12,12 +12,12 @@
 /* START_DECLARATION */
 GPtrArray *		gsb_data_partial_balance_calculate_balances_at_date	(gint partial_balance_number,
 																	 GDate *date);
-gboolean 		gsb_data_partial_balance_drag_data_get 				(GtkTreeDragSource *drag_source,
-																	 GtkTreePath * path,
-																	 GtkSelectionData *selection_data);
-gboolean 		gsb_data_partial_balance_drag_data_received 		(GtkTreeDragDest *drag_dest,
-																	 GtkTreePath * path,
-																	 GtkSelectionData *selection_data);
+//~ gboolean 		gsb_data_partial_balance_drag_data_get 				(GtkTreeDragSource *drag_source,
+																	 //~ GtkTreePath * path,
+																	 //~ GtkSelectionData *selection_data);
+//~ gboolean 		gsb_data_partial_balance_drag_data_received 		(GtkTreeDragDest *drag_dest,
+																	 //~ GtkTreePath * path,
+																	 //~ GtkSelectionData *selection_data);
 GsbReal 		gsb_data_partial_balance_get_balance_at_date 		(gint partial_balance_number,
 																	 GDate *date);
 gboolean 		gsb_data_partial_balance_get_colorise 				(gint partial_balance_number);
