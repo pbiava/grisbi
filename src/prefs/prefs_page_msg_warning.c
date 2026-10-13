@@ -76,34 +76,41 @@ G_DEFINE_TYPE_WITH_PRIVATE (PrefsPageMsgWarning, prefs_page_msg_warning, GTK_TYP
 static gboolean prefs_page_msg_warning_list_button_press (GtkWidget *tree_view,
 														  GdkEvent *ev)
 {
-	if (ev->button == LEFT_BUTTON)
-    {
-		GtkTreePath *path = NULL;
+	if (gdk_event_get_event_type (ev) == GDK_BUTTON_PRESS)
+	{
+		guint *button;
 
-		g_signal_handlers_block_by_func (tree_view, prefs_page_msg_warning_list_button_press, NULL);
-		if (gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (tree_view), ev->x, ev->y, &path, NULL, NULL, NULL))
-        {
-			GtkTreeModel *model;
-			GtkTreeIter iter;
-			gint position;
-			ConditionalMsg *warning;
+		button = gdk_button_event_get_button (ev);
+		if (button == LEFT_BUTTON)
+		{
+			GtkTreePath *path = NULL;
 
-			warning = (ConditionalMsg*) dialogue_get_tab_warning_msg ();
+			g_signal_handlers_block_by_func (tree_view, prefs_page_msg_warning_list_button_press, NULL);
+			if (gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (tree_view), ev->x, ev->y, &path, NULL, NULL, NULL))
+			{
+				GtkTreeModel *model;
+				GtkTreeIter iter;
+				gint position;
+				ConditionalMsg *warning;
 
-			/* Get toggled iter */
-			model = gtk_tree_view_get_model (GTK_TREE_VIEW (tree_view));
-			gtk_tree_model_get_iter (model, &iter, path);
+				warning = (ConditionalMsg*) dialogue_get_tab_warning_msg ();
 
-			gtk_tree_model_get (GTK_TREE_MODEL(model), &iter, 2, &position, -1);
-			(warning+position)->hidden = !(warning+position)->hidden;
+				/* Get toggled iter */
+				model = gtk_tree_view_get_model (GTK_TREE_VIEW (tree_view));
+				gtk_tree_model_get_iter (model, &iter, path);
 
-			/* Set new value */
-			gtk_tree_store_set (GTK_TREE_STORE (model), &iter, 0, !(warning+position)->hidden, -1);
+				gtk_tree_model_get (GTK_TREE_MODEL(model), &iter, 2, &position, -1);
+				(warning+position)->hidden = !(warning+position)->hidden;
+
+				/* Set new value */
+				gtk_tree_store_set (GTK_TREE_STORE (model), &iter, 0, !(warning+position)->hidden, -1);
+			}
+			gtk_tree_path_free (path);
+			g_signal_handlers_unblock_by_func (tree_view, prefs_page_msg_warning_list_button_press, NULL);
 		}
-		gtk_tree_path_free (path);
-		g_signal_handlers_unblock_by_func (tree_view, prefs_page_msg_warning_list_button_press, NULL);
 	}
-    return FALSE;
+
+return FALSE;
 }
 
 /**
