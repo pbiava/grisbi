@@ -237,7 +237,7 @@ static gboolean prefs_page_display_ope_button_set_active_from_string (PrefsPageD
 
     for (i = 0 ; i < 18 ; i++)
 	{
-        gchar *tmp_str;
+		const gchar *tmp_str;
 
         tmp_str = gtk_widget_get_tooltip_text (priv->tab_list_buttons[i]);
 
@@ -250,8 +250,6 @@ static gboolean prefs_page_display_ope_button_set_active_from_string (PrefsPageD
             g_signal_handlers_unblock_by_func (G_OBJECT (priv->tab_list_buttons[i]),
 											   G_CALLBACK (prefs_page_display_ope_toggle_element_button),
 											   priv->tree_view_list_ope);
-
-            g_free (tmp_str);
 
             return TRUE;
         }
