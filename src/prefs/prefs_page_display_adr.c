@@ -99,7 +99,7 @@ static void prefs_page_display_adr_accounting_entity_changed (GtkEditable *entry
 	GrisbiWinEtat *w_etat;
 	const gchar *text;
 
-	text = gtk_entry_get_text (GTK_ENTRY (entry));
+	text = gtk_editable_get_text (GTK_EDITABLE (entry));
 	w_etat = (GrisbiWinEtat *) grisbi_win_get_w_etat ();
 	if (text && strlen (text))
 		w_etat->accounting_entity = my_strdup (text);
@@ -121,7 +121,7 @@ static void prefs_page_display_adr_accounting_entity_changed (GtkEditable *entry
  *
  * \return FALSE
  */
-static gboolean prefs_page_display_adr_window_title_toggled (GtkRadioButton *button,
+static gboolean prefs_page_display_adr_window_title_toggled (GtkToggleButton *button,
 															 GtkWidget *entry)
 {
 	GrisbiAppConf *a_conf;
