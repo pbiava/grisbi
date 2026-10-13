@@ -3,7 +3,7 @@
 /*     Copyright (C)    2000-2008 Cedric Auger (cedric@grisbi.org)            */
 /*          2003-2008 Benjamin Drieu (bdrieu@april.org)                       */
 /*          2008-2010 Pierre Biava (grisbi@pierre.biava.name)                 */
-/*          https://www.grisbi.org/                                            */
+/*          https://www.grisbi.org/                                           */
 /*                                                                            */
 /*  This program is free software; you can redistribute it and/or modify      */
 /*  it under the terms of the GNU General Public License as published by      */
@@ -45,24 +45,24 @@
  * \param value a pointer to a string
  *
  * \return a GtkWidget which is a text_view with the string inside
- * */
-GtkWidget *gsb_editable_text_view_new ( const gchar *value )
+ **/
+GtkWidget *gsb_editable_text_view_new (const gchar *value)
 {
-    GtkWidget * text_view;
-    GtkTextBuffer *buffer;
+	GtkWidget * text_view;
+	GtkTextBuffer *buffer;
 
-    text_view = gtk_text_view_new ();
-    buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
-    gtk_text_view_set_pixels_above_lines (GTK_TEXT_VIEW (text_view), 3);
-    gtk_text_view_set_pixels_below_lines (GTK_TEXT_VIEW (text_view), 3);
-    gtk_text_view_set_left_margin (GTK_TEXT_VIEW (text_view), 3);
-    gtk_text_view_set_right_margin (GTK_TEXT_VIEW (text_view), 3);
-    gtk_text_view_set_wrap_mode ( GTK_TEXT_VIEW (text_view), GTK_WRAP_WORD );
+	text_view = gtk_text_view_new ();
+	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
+	gtk_text_view_set_pixels_above_lines (GTK_TEXT_VIEW (text_view), 3);
+	gtk_text_view_set_pixels_below_lines (GTK_TEXT_VIEW (text_view), 3);
+	gtk_text_view_set_left_margin (GTK_TEXT_VIEW (text_view), 3);
+	gtk_text_view_set_right_margin (GTK_TEXT_VIEW (text_view), 3);
+	gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (text_view), GTK_WRAP_WORD);
 
-    if (value)
-	gtk_text_buffer_set_text (buffer, value, -1);
+	if (value)
+		gtk_text_buffer_set_text (buffer, value, -1);
 
-    return text_view;
+	return text_view;
 }
 
 /**
@@ -71,24 +71,22 @@ GtkWidget *gsb_editable_text_view_new ( const gchar *value )
  * \param the text_view
  *
  * \return a gchar which is the content of the text view
- * */
-gchar *gsb_editable_text_view_get_content ( GtkWidget *text_view )
+ **/
+gchar *gsb_editable_text_view_get_content (GtkWidget *text_view)
 {
-    GtkTextIter start, end;
-    GtkTextBuffer *buffer;
+	GtkTextIter end;
+	GtkTextIter start;
+	GtkTextBuffer *buffer;
 
-    g_return_val_if_fail (text_view,
-			  NULL);
-    g_return_val_if_fail (GTK_IS_TEXT_VIEW (text_view),
-			  NULL);
+	g_return_val_if_fail (text_view, NULL);
+	g_return_val_if_fail (GTK_IS_TEXT_VIEW (text_view), NULL);
 
-    buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
-    gtk_text_buffer_get_iter_at_offset ( buffer, &start, 0 );
-    gtk_text_buffer_get_iter_at_offset ( buffer, &end, -1 );
+	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
+	gtk_text_buffer_get_iter_at_offset (buffer, &start, 0);
+	gtk_text_buffer_get_iter_at_offset (buffer, &end, -1);
 
-    return (gtk_text_buffer_get_text (buffer, &start, &end, 0));
+	return (gtk_text_buffer_get_text (buffer, &start, &end, 0));
 }
-
 
 /**
  * erase the text view given in param
@@ -97,23 +95,20 @@ gchar *gsb_editable_text_view_get_content ( GtkWidget *text_view )
  * \param text_view the text_view to erase
  *
  * \return FALSE
- * */
-gboolean gsb_editable_erase_text_view ( GtkWidget *button,
-					GtkWidget *text_view )
+ **/
+gboolean gsb_editable_erase_text_view (GtkWidget *button,
+									   GtkWidget *text_view)
 {
-    GtkTextBuffer *buffer;
-    GtkTextIter start_iter;
-    GtkTextIter end_iter;
+	GtkTextBuffer *buffer;
+	GtkTextIter start_iter;
+	GtkTextIter end_iter;
 
-    buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
-    gtk_text_buffer_get_start_iter ( GTK_TEXT_BUFFER (buffer),
-				     &start_iter );
-    gtk_text_buffer_get_end_iter ( GTK_TEXT_BUFFER (buffer),
-				   &end_iter );
-    gtk_text_buffer_delete ( GTK_TEXT_BUFFER (buffer),
-			     &start_iter,
-			     &end_iter );
-    return FALSE;
+	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
+	gtk_text_buffer_get_start_iter (GTK_TEXT_BUFFER (buffer), &start_iter);
+	gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (buffer), &end_iter);
+	gtk_text_buffer_delete (GTK_TEXT_BUFFER (buffer), &start_iter, &end_iter);
+
+	return FALSE;
 }
 
 /**
@@ -122,17 +117,25 @@ gboolean gsb_editable_erase_text_view ( GtkWidget *button,
  * \param entry Entry to change the value of.
  * \param increment Value to add or substract from the numerical value of entry.
  */
-void increment_decrement_champ ( GtkWidget *entry, gint increment )
+void increment_decrement_champ (GtkWidget *entry, gint increment)
 {
-	gchar* tmpstr;
+	const gchar *text = NULL;
+	gchar* tmp_str;
 
-    tmpstr = utils_str_incremente_number_from_str ( gtk_entry_get_text ( GTK_ENTRY ( entry ) ), increment );
-    gtk_entry_set_text ( GTK_ENTRY ( entry ), tmpstr );
+	text = gtk_editable_get_text (GTK_EDITABLE (entry));
+	tmp_str = utils_str_incremente_number_from_str (text, increment);
+	gtk_entry_buffer_set_text (GTK_ENTRY (entry), tmp_str);
 
-    g_free ( tmpstr );
+	g_free (tmpstr);
 }
 
-
+/**
+ *
+ *
+ * \param
+ *
+ * \return
+ **/
 /* Local Variables: */
 /* c-basic-offset: 4 */
 /* End: */
