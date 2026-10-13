@@ -120,7 +120,7 @@ static gboolean prefs_page_display_gui_definition_screen_toggled (GtkWidget *tog
 		a_conf->main_width = WIN_MIN_WIDTH;
 		a_conf->panel_width = PANEL_MIN_WIDTH;
 
-		gtk_window_resize (GTK_WINDOW (grisbi_app_get_active_window (NULL)), a_conf->main_width, a_conf->main_height);
+		gtk_window_set_default_size (GTK_WINDOW (grisbi_app_get_active_window (NULL)), a_conf->main_width, a_conf->main_height);
 		gtk_paned_set_position (GTK_PANED (hpaned), a_conf->panel_width);
 	}
 
