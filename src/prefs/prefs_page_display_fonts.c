@@ -329,7 +329,7 @@ static gboolean prefs_page_display_fonts_update_preview_logo (GtkFileChooser *fi
  * */
 static gboolean prefs_page_display_fonts_logo_accueil_changed (PrefsPageDisplayFonts *page)
 {
-	GtkWidget *prefs_dialog;
+	GtkFileDialog *prefs_dialog;
 	GtkWidget *button_cancel;
 	GtkWidget *button_open;
     GtkWidget *file_selector;
@@ -340,11 +340,14 @@ static gboolean prefs_page_display_fonts_logo_accueil_changed (PrefsPageDisplayF
 	w_etat = (GrisbiWinEtat *) grisbi_win_get_w_etat ();
 
 	prefs_dialog = grisbi_win_get_prefs_dialog (NULL);
-    file_selector = gtk_file_chooser_dialog_new (_("Select a new logo"),
-												 GTK_WINDOW (prefs_dialog),
-												 GTK_FILE_CHOOSER_ACTION_OPEN,
-												 NULL, NULL,
-												 NULL);
+    //~ file_selector = gtk_file_chooser_dialog_new (_("Select a new logo"),
+												 //~ GTK_WINDOW (prefs_dialog),
+												 //~ GTK_FILE_CHOOSER_ACTION_OPEN,
+												 //~ NULL, NULL,
+												 //~ NULL);
+
+	prefs_dialog = gtk_file_dialog_new ();
+	gtk_file_dialog_set_modal (prefs_dialog, TRUE);
 
 	button_cancel = gtk_button_new_with_label (_("Cancel"));
 	gtk_dialog_add_action_widget (GTK_DIALOG (file_selector), button_cancel, GTK_RESPONSE_CANCEL);
@@ -368,7 +371,7 @@ static gboolean prefs_page_display_fonts_logo_accueil_changed (PrefsPageDisplayF
 											 gsb_dirs_get_pixmaps_dir ());
 	}
 
-    gtk_window_set_position (GTK_WINDOW (file_selector), GTK_WIN_POS_CENTER_ON_PARENT);
+    //~ gtk_window_set_position (GTK_WINDOW (file_selector), GTK_WIN_POS_CENTER_ON_PARENT);
 
     /* create the preview */
     preview = gtk_image_new ();

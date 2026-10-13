@@ -337,15 +337,17 @@ static void prefs_page_files_setup_files_page (PrefsPageFiles *page)
 							   a_conf->remove_backup_months);
 
     /* set current folder for backup files */
-    gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (priv->filechooserbutton_backup),
-										 gsb_file_get_backup_path ());
+    //~ gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (priv->filechooserbutton_backup),
+										 //~ gsb_file_get_backup_path (),
+										 //~ NULL);
 
     /* set current folder for import files */
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->checkbutton_force_import_directory),
 								  a_conf->force_import_directory);
 	if (a_conf->import_directory)
 		gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (priv->filechooserbutton_force_import_directory),
-											 a_conf->import_directory);
+											 a_conf->import_directory,
+											 NULL);
 	else
 		gtk_widget_set_sensitive (GTK_WIDGET (priv->filechooserbutton_force_import_directory), FALSE);
 
